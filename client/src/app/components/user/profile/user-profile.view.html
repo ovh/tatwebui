@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="user-profile">
+            <div>
+                <label>{{ 'components_user_name' | translate }}</label><span>{{user.fullname}}</span>
+            </div>
+            <div>
+                <label>{{ 'components_user_username' | translate }}</label><span>{{user.username}}</span>
+            </div>
+            <div>
+                <label>{{ 'components_user_email' | translate }}</label><span>{{user.email}}</span>
+            </div>
+            <div>
+                <button type="button" class="btn btn-default" data-ng-click="resetPassword()">{{ 'components_user_reset' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

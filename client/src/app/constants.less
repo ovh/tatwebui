@@ -1,0 +1,35 @@
+@menu-bg:               #30426a;
+@menu-header-bg:        #2d3e63;
+@topics-border:         #bbbbbb;
+@topics-selected:       #ffbf00;
+@messages-bg:           #e9eaee;
+@messages-border:       #bbbbbb;
+@messages-selected:     #ffbf00;
+@messages-tag-bg:       #ffffff;
+@messages-tag-color:    lighten(@menu-bg,40%);
+@message-action-color:  lighten(@menu-bg,20%);
+@topic-title:           #738bc0;
+@topic-vertical-line:   darken(@topic-title,20%);
+@message-date:          gray;
+@dialog-border:         @topic-vertical-line;
+@topic-sep:             #aaaaaa;
+
+@message-header-height: 100px;
+@application-header-height: 75px;
+@wrapper-padding : 10px;
+@menu-width:       250px;
+
+.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+  -webkit-border-top-right-radius: @topright;
+  -webkit-border-bottom-right-radius: @bottomright;
+  -webkit-border-bottom-left-radius: @bottomleft;
+  -webkit-border-top-left-radius: @topleft;
+  -moz-border-radius-topright: @topright;
+  -moz-border-radius-bottomright: @bottomright;
+  -moz-border-radius-bottomleft: @bottomleft;
+  -moz-border-radius-topleft: @topleft;
+  border-top-right-radius: @topright;
+  border-bottom-right-radius: @bottomright;
+  border-bottom-left-radius: @bottomleft;
+  border-top-left-radius: @topleft;
+}

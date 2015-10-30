@@ -1,0 +1,66 @@
+<div class="wrapper" data-ng-controller="GroupsListCtrl">
+
+    <div data-ng-if="data.count==0" class="alert alert-warning">
+      {{ 'groups-nogroup' | translate }}
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+      <a data-ng-if="isAdmin()" class="btn btn-defaut btn-primary" ui-sref="groups-new">
+        <i class="fa fa-plus"></i>
+        {{ 'components_groups_new_group' | translate}}
+      </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <rd-widget>
+          <rd-widget-header icon="fa-group" title="{{data.groups.length}} Groups on total of {{data.count}}">
+          <form data-ng-submit="init()">
+              <input data-ng-model="data.filtername" type="text" placeholder="Search by Group Name" class="form-control">
+          </form>
+          </rd-widget-header>
+          <rd-widget-body classes="no-padding">
+            <div class="table-responsive">
+              <table class="table groups-list">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Users in group</th>
+                    <th>{{ 'shared_common_created_at' | translate}}</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-ng-repeat="groupItem in data.groups">
+                        <td class="groups-name">{{ groupItem.name }}</td>
+                        <td class="groups-description">{{ groupItem.description }}</td>
+                        <td class="groups-groups">
+                          <span data-ng-if="groupItem.users">
+                            Users:{{groupItem.users.length}}
+                          </span>
+                          <span data-ng-if="groupItem.adminUsers">
+                            Admins:{{groupItem.adminUsers.length}}
+                          </span>
+                        </td>
+                        <td class="groups-date" data-ng-if="groupItem.dateCreation">
+                          {{groupItem.dateCreation * 1000 | date:'yyyy-MM-dd'}}
+                        </td>
+                        <td class="groups-edit" data-ng-if="isAdmin()">
+                          <a ui-sref="groups-edit({groupId:groupItem._id})">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </rd-widget-body>
+        </rd-widget>
+      </div>
+    </div>
+
+
+</div>

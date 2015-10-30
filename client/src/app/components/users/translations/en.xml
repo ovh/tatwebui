@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+  <translation id="users-nouser">No Users</translation>
+  <translation id="components_user_groups">Attached Groups</translation>
+  <translation id="components_users_add_to_group">Add user to group</translation>
+  <translation id="components_users_dont_want_remove_group">No, I don't want to remove user from this group.</translation>
+
+  <translation id="components_users_archive">Archive</translation>
+  <translation id="components_users_convert_to_system">Convert to system user</translation>
+  <translation id="components_users_convert_to_admin">Convert to administrator</translation>
+  <translation id="components_users_rename">Rename username</translation>
+  <translation id="components_users_update">Update Fullname and Email</translation>
+
+  <translation id="components_users_dont_want_archive">No, I don't want to archive user</translation>
+  <translation id="components_users_dont_want_convert_system">No, I don't want to convert user as system user</translation>
+  <translation id="components_users_dont_want_convert_admin">No, I don't want to grant user as admin</translation>
+  <translation id="components_users_dont_want_rename">No, I don't want to rename user</translation>
+  <translation id="components_users_dont_want_update">No, I don't want to update user</translation>
+  <translation id="components_users_with_write_notifications">with the right to write on Notifications Topics of users</translation>
+  <translation id="components_users_without_write_notifications">without the right to write on Notifications Topics of users</translation>
+  <translation id="components_users_new_username">New Username</translation>
+  <translation id="components_users_new_fullname">New Fullname</translation>
+  <translation id="components_users_new_email">New Email</translation>
+
+</translations>

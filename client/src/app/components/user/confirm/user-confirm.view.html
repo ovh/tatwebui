@@ -1,0 +1,10 @@
+<div class="signup" data-ng-controller="UserConfirmCtrl">
+    <div class="signup-box">
+        <h2>{{ 'components_user_confirming' | translate }}</h2>
+        <h3><b>{{ 'shared_common_username' | translate}}: </b>{{username}}</h3>
+        <p><b>{{ 'shared_common_password' | translate}}: </b>{{password ? password : ('shared_common_waiting' | translate)}}</p>
+        <h2 data-ng-show="password">{{'shared_common_success' | translate}}</h2>
+        <h2 data-ng-show="err">{{'shared_common_fail' | translate}}</h2>
+        <a data-ng-show="err" data-ng-click="back()" role="button">{{ 'shared_common_back' | translate}}</a>
+    </div>
+</div>

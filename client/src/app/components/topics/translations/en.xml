@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+  <translation id="components_topics_add_ro_user">Add user to Read Only topic</translation>
+  <translation id="components_topics_add_rw_user">Add user to Read Write topic</translation>
+  <translation id="components_topics_add_user_admin">Add user to admins on this topic</translation>
+  <translation id="components_topics_add_ro_gropu">Add group to Read Only topic</translation>
+  <translation id="components_topics_add_rw_gropu">Add group to Read Write topic</translation>
+  <translation id="components_topics_add_gropu_admin">Add group to admins on this topic</translation>
+  <translation id="components_topics_dont_want_remove_topic">No, I don't want to remove user from this topic.</translation>
+  <translation id="components_topics_dont_want_remove_group">No, I don't want to remove group from this topic.</translation>
+  <translation id="components_topics_only_topic">Only on this topic</translation>
+  <translation id="components_topics_new_topic">New Topic</translation>
+  <translation id="components_topics_can_force_date">System User can force dateCreation of message ? Check if yes.</translation>
+  <translation id="components_topics_can_update_msg">User can update a message ? Check if yes.</translation>
+  <translation id="components_topics_can_delete_msg">User can delete one of his message ? Check if yes.</translation>
+  <translation id="components_topics_can_update_all_msg">User can update all messages ? Check if yes.</translation>
+  <translation id="components_topics_can_delete_all_msg">User can delete all messages ? Check if yes.</translation>
+  <translation id="components_topics_is_ro_public">Anonymous User can read (only) this topic ? Check if yes.</translation>
+</translations>

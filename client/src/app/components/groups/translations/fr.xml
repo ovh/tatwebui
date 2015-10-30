@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+  <translation id="components_groups-nogroup">Aucun groupe</translation>
+  <translation id="components_groups_add_user">Ajouter l'utilisateur au groupe</translation>
+  <translation id="components_groups_add_admin">Ajouter l'utilisateur aux administrateurs du groupe</translation>
+  <translation id="components_groups_dont_want_remove_group">Non, je ne souhaite pas supprimer l'utilisateur sur ce groupe</translation>
+  <translation id="components_groups_new_group">Nouveau groupe</translation>
+</translations>

@@ -1,0 +1,73 @@
+@import "constants.less";
+
+body {
+    font-size:10px;
+    overflow-y: hidden;
+    background: #f3f3f3;
+}
+
+div.row.header {
+    height:65px;
+    margin:0;
+}
+
+div.single {
+    background-color: @menu-bg;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    div.signup {
+        padding-top: 100px;
+        text-align: center;
+        color: #b2bfdc;
+        a {
+            font-size: 16px;
+        }
+        h1 {
+            font-weight: bold;
+            padding: 0 0 20px 0;
+        }
+    }
+}
+
+div.wrapper {
+    padding: @wrapper-padding 0px 0px @wrapper-padding;
+    font-size: 14px;
+}
+
+button.btn-water {
+    border: 1px solid rgba(145, 225, 255, 0.9);
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    color:#444444;
+    background: -webkit-linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
+    background: -o-linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
+    background: -moz-linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
+    background: linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
+}
+
+div.input-group {
+    margin-bottom:10px;
+}
+
+div.page {
+    i {
+        color: @topic-sep;
+    }
+}
+
+div.notification {
+    height: 0px;
+    width: 100%;
+    z-index:99999;
+    position:absolute;
+}
+
+#page-wrapper {
+  min-height: 300px;
+}
+
+#sidebar-wrapper {
+    width: @menu-width;
+}

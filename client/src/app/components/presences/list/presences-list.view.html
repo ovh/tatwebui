@@ -1,0 +1,17 @@
+<div class="wrapper" data-ng-controller="PresencesListCtrl">
+
+  <div data-ng-if="!presences" class="alert alert-warning">
+    {{ 'presences-nopresence' | translate }} /{{topic}}
+  </div>
+
+  <table class="presences-list">
+    <tbody>
+      <tr data-ng-repeat="presenceItem in presences" presence-item="presence">
+          <td class="presences-spacer"></td>
+          <td class="presences-username">{{ presenceItem.username }}</td>
+          <td class="presences-status">{{ presenceItem.status }}</td>
+          <td class="presences-date">{{ presenceItem.dateCreation * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      </tr>
+      <tbody>
+  </table>
+</div>

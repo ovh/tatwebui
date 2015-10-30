@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+  <translation id="components_topics_add_ro_user">Ajouter l'utilisateur en lecture seule sur le topic</translation>
+  <translation id="components_topics_add_rw_user">Ajouter l'utilisateur en lecture / écriture sur le topic</translation>
+  <translation id="components_topics_add_user_admin">Ajouter l'utilisateur aux administrateurs du topic</translation>
+  <translation id="components_topics_add_ro_group">Ajouter le groupe en lecture seule sur le topic</translation>
+  <translation id="components_topics_add_rw_group">Ajouter le groupe en lecture / écriture sur le topic</translation>
+  <translation id="components_topics_add_group_admin">Ajouter le groupe aux administrateurs du topic</translation>
+  <translation id="components_topics_dont_want_remove_topic">Non, je ne souhaite pas supprimer l'utilisateur sur ce topic</translation>
+  <translation id="components_topics_dont_want_remove_group">Non, je ne souhaite pas supprimer le groupe sur ce topic</translation>
+  <translation id="components_topics_only_topic">Seulement sur ce topic</translation>
+  <translation id="components_topics_new_topic">Nouveau Topic</translation>
+  <translation id="components_topics_can_force_date">Les utilisateurs système peuvent forcer la date de création d'un messsage ? Cocher si oui.</translation>
+  <translation id="components_topics_can_update_msg">Les utilisateurs peuvent modifier les messages ? Cocher si oui.</translation>
+  <translation id="components_topics_can_delete_msg">Les utilisateurs peuvent supprimer leurs propres messages ? Cocher si oui.</translation>
+  <translation id="components_topics_can_update_all_msg">Les utilisateurs peuvent modifier tous les messages ? Cocher si oui.</translation>
+  <translation id="components_topics_can_delete_all_msg">Les utilisateurs peuvent supprimer tous les messages ? Cocher si oui.</translation>
+  <translation id="components_topics_is_ro_public">Un utilisateur non authentifié peut lire ce topic ? Cocher si oui.</translation>
+</translations>

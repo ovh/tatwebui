@@ -1,0 +1,81 @@
+<div class="wrapper" data-ng-controller="TopicsListCtrl">
+
+    <div data-ng-if="data.count==0" class="alert alert-warning">
+      {{ 'topics-notopic' | translate }}
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <a data-ng-if="isAdmin()" class="btn btn-defaut btn-primary" ui-sref="topics-new">
+          <i class="fa fa-plus"></i>
+          {{ 'components_topics_new_topic' | translate}}
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <rd-widget>
+          <rd-widget-header icon="fa-group" title="{{data.topics.length}} Topics on total of {{data.count}}">
+          <form data-ng-submit="init()">
+              <input data-ng-model="data.filtertopic" type="text" placeholder="Search by Topic Name" class="form-control">
+          </form>
+          </rd-widget-header>
+          <rd-widget-body classes="no-padding">
+            <div class="table-responsive">
+              <table class="table groups-list">
+                <thead>
+                  <tr>
+                    <th>{{ 'shared_common_topic' | translate}}</th>
+                    <th>{{ 'shared_common_description' | translate}}</th>
+                    <th>Presences</th>
+                    <th></th>
+                    <th>{{ 'shared_common_created_at' | translate}}</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-ng-repeat="topicItem in data.topics" class="topic-first-row">
+                        <td class="topics-name">{{ topicItem.topic }}</td>
+                        <td class="topics-description">{{ topicItem.description }}</td>
+                        <td class="topics-presences">
+                          <!-- FIXME <a ui-sref="presences-list({topic:topicItem.topic})"><i class="fa fa-eye"></i></a>-->
+                          <a href="/presences/list{{topicItem.topic}}"><i class="fa fa-eye"></i></a>
+                        </td>
+
+                        <td class="topics-users">
+                          <span data-ng-if="topicItem.roGroups" title="Read Only Groups">
+                            ROG:{{topicItem.roGroups.length}}
+                          </span>
+                          <span data-ng-if="topicItem.rwGroups" title="Read Write Groups">
+                            RWG:{{topicItem.rwGroups.length}}
+                          </span>
+                          <span data-ng-if="topicItem.roUsers" title="Read Only Users">
+                            ROU:{{topicItem.roUsers.length}}
+                          </span>
+                          <span data-ng-if="topicItem.rwUsers" title="Read Write Users">
+                            RWU:{{topicItem.rwUsers.length}}
+                          </span>
+                          <span data-ng-if="topicItem.adminUsers" title="Admin Users">
+                            AU:{{topicItem.adminUsers.length}}
+                          </span>
+                          <span data-ng-if="topicItem.adminGroups" title="Admin Group">
+                            AG:{{topicItem.adminGroups.length}}
+                          </span>
+                        </td>
+
+                        <td class="topics-date" data-ng-if="topicItem.dateCreation">{{topicItem.dateCreation * 1000 | date:'yyyy-MM-dd'}}</td>
+                        <td class="topics-edit" data-ng-if="isAdmin()">
+                          <a ui-sref="topics-edit({topicId:topicItem._id})">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </rd-widget-body>
+        </rd-widget>
+      </div>
+    </div>
+</div>

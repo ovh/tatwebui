@@ -1,0 +1,54 @@
+{
+    "name": "tatwebui",
+    "version": "1.0.0",
+    "description": "Web client for Tat",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "ssh://git@github.com/ovh/tatwebui.git"
+    },
+    "author": "",
+    "devDependencies": {
+        "matchdep": "0.3.0",
+        "grunt": "~0.4.0",
+        "grunt-contrib-watch": "0.6.1",
+        "grunt-contrib-livereload":"0.1.2",
+        "grunt-contrib-jshint": "0.10.0",
+        "grunt-contrib-clean": "0.6.0",
+        "grunt-contrib-copy": "0.7.0",
+        "grunt-wiredep": "1.8.0",
+        "grunt-contrib-less": "1.0.1",
+        "grunt-contrib-cssmin": "0.12.3",
+        "grunt-contrib-uglify": "0.7.0",
+        "grunt-contrib-concat": "0.5.0",
+        "grunt-injector": "~0.5.4",
+        "grunt-ng-annotate": "1.0.1",
+        "grunt-ng-constant": "1.1.0",
+        "grunt-angular-templates": "0.5.7",
+        "grunt-usemin": "3.0.0",
+        "grunt-filerev": "2.3.1",
+        "grunt-karma": "0.10.1",
+        "karma": "0.12.31",
+        "karma-jasmine": "0.3.5",
+        "karma-phantomjs-launcher": "0.1.4",
+        "jasmine-core": "^2.1.2",
+        "lodash": "3.10.0",
+        "moment": "2.10.6",
+        "connect-modrewrite": "0.8.1",
+        "grunt-contrib-connect": "0.10.1",
+        "grunt-ngdocs": "git+https://github.com/landru29/grunt-ngdocs.git",
+        "deep-extend": "0.4.0"
+    },
+    "dependencies": {
+        "chalk": "1.1.0"
+    },
+    "moment": {
+        "locale": [
+            "fr.js",
+            "en-gb.js"
+        ]
+    }
+}

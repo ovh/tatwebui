@@ -1,0 +1,28 @@
+{
+  "name": "tatwebui",
+  "version": "1.0.0",
+  "description": "Web server for tatwebui",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/ovh/tatwebui.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "extend": "3.0.0",
+    "express":"4.13.1",
+    "body-parser": "1.13.2"
+  },
+  "devDependencies": {
+    "matchdep": "0.3.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-contrib-clean": "0.6.0",
+    "grunt-contrib-copy": "0.7.0"
+  }
+}

@@ -1,0 +1,47 @@
+<div class="wrapper" data-ng-controller="UsersListCtrl">
+
+    <div data-ng-if="data.count==0" class="alert alert-warning">
+      {{ 'users-nouser' | translate }}
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <rd-widget>
+          <rd-widget-header icon="fa-group" title="{{data.users.length}} Users on total of {{data.count}}">
+          <form data-ng-submit="init()">
+              <input data-ng-model="data.filterusername" type="text" placeholder="Search by Username" class="form-control">
+          </form>
+          </rd-widget-header>
+          <rd-widget-body classes="no-padding">
+            <div class="table-responsive">
+              <table class="table users-list">
+                <thead>
+                  <tr>
+                    <th>Fullname</th>
+                    <th>Username</th>
+                    <th>{{ 'shared_common_created_at' | translate}}</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-ng-repeat="userItem in data.users" class="users-first-row">
+                        <td class="users-author">
+                          <user-display username="userItem.username" fullname="userItem.fullname">
+                          <i class="fa fa-user-md" data-ng-if="userItem.isAdmin" title="Admin"></i>
+                        </td>
+                        <td class="users-username"><user-display username="userItem.username"></td>
+                        <td class="users-date" data-ng-if="isAdmin()">{{ userItem.dateCreation  * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                        <td class="users-action" data-ng-if="isAdmin()">
+                          <a ui-sref="users-edit({username:userItem.username})">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </rd-widget-body>
+        </rd-widget>
+      </div>
+    </div>
+</div>

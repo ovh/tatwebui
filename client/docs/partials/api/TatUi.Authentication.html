@@ -1,0 +1,58 @@
+<a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#52" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">Authentication</code>
+<div><span class="hint">service in module <code ng:non-bindable="">TatUi</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="tatui-authentication-page"><p>Manage the authentication</p>
+</div></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#115" class="view-source icon-eye-open"> </a><h3 id="methods_connect">connect(user)</h3>
+<div class="connect"><div class="connect-page"><p>Connect a user</p>
+</div><h5 id="methods_connect_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>user</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="connect-page"><p>User to connect</p>
+</div></td></tr></tbody></table><h5 id="methods_connect_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="connect-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#82" class="view-source icon-eye-open"> </a><h3 id="methods_disconnect">disconnect()</h3>
+<div class="disconnect"><div class="disconnect-page"><p>Disconnect the user</p>
+</div></div>
+</li>
+<li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#98" class="view-source icon-eye-open"> </a><h3 id="methods_getidentity">getIdentity()</h3>
+<div class="getidentity"><div class="getidentity-page"><p>Get information about the connected user</p>
+</div><h5 id="methods_getidentity_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="getidentity-page"><p>Connected user</p>
+</div></td></tr></table></div>
+</li>
+<li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#65" class="view-source icon-eye-open"> </a><h3 id="methods_isconnected">isConnected()</h3>
+<div class="isconnected"><div class="isconnected-page"><p>Check if the user is connected</p>
+</div><h5 id="methods_isconnected_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-bool">bool</a></td><td><div class="isconnected-page"><p>true if connected</p>
+</div></td></tr></table></div>
+</li>
+<li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#207" class="view-source icon-eye-open"> </a><h3 id="methods_refreshidentity">refreshIdentity()</h3>
+<div class="refreshidentity"><div class="refreshidentity-page"><p>Sync identity with the api</p>
+</div></div>
+</li>
+<li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#190" class="view-source icon-eye-open"> </a><h3 id="methods_reset">reset(username, email)</h3>
+<div class="reset"><div class="reset-page"><p>Reset the password of a user</p>
+</div><h5 id="methods_reset_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>username</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="reset-page"><p>Username</p>
+</div></td></tr><tr><td>email</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="reset-page"><p>User email</p>
+</div></td></tr></tbody></table><h5 id="methods_reset_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="reset-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#136" class="view-source icon-eye-open"> </a><h3 id="methods_signup">signup(username, fullname, email)</h3>
+<div class="signup"><div class="signup-page"><p>Signup a new user</p>
+</div><h5 id="methods_signup_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>username</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="signup-page"><p>Username</p>
+</div></td></tr><tr><td>fullname</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="signup-page"><p>User fullname</p>
+</div></td></tr><tr><td>email</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="signup-page"><p>User email</p>
+</div></td></tr></tbody></table><h5 id="methods_signup_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="signup-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><a href="https://github.com/ovh/tatwebui/browse/client/src/app/shared/authentication/authentication.provider.js#158" class="view-source icon-eye-open"> </a><h3 id="methods_verify">verify(username, token)</h3>
+<div class="verify"><div class="verify-page"><p>Verify the token that was provided by email</p>
+</div><h5 id="methods_verify_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>username</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="verify-page"><p>Username</p>
+</div></td></tr><tr><td>token</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="verify-page"><p>Token that was provided by email</p>
+</div></td></tr></tbody></table><h5 id="methods_verify_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="verify-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>

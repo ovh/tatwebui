@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en" data-ng-app="TatUi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <base href="/">
+
+    <title>Tat - TextAndTags</title>
+
+    <!-- build:css(.) styles/vendor.min.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
+    <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.css" />
+    <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.min.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" href="bower_components/spectrum/spectrum.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(.) styles/main.min.css -->
+    <link rel="stylesheet" href="build/main.css" />
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.min.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+    <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="bower_components/ng-websocket/ng-websocket.js"></script>
+    <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/ngDraggable/ngDraggable.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="bower_components/spectrum/spectrum.js"></script>
+    <script src="bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/main.min.js -->
+    <script src="src/app/app.js"></script>
+     <!-- injector:js -->
+
+     <!-- endinjector -->
+    <script src="src/app/components/dashboard/dashboard.route.js"></script>
+    <script src="src/app/components/tables/tables.route.js"></script>
+    <script src="src/app/components/user/confirm/user-confirm.route.js"></script>
+    <script src="src/app/components/user/confirm/user-confirm.controller.js"></script>
+    <script src="src/app/components/user/login/user-login.route.js"></script>
+    <script src="src/app/components/user/login/user-login.controller.js"></script>
+    <script src="src/app/components/user/logout/user-logout.route.js"></script>
+    <script src="src/app/components/user/logout/user-logout.controller.js"></script>
+    <script src="src/app/components/user/profile/user-profile.route.js"></script>
+    <script src="src/app/components/user/profile/user-profile.controller.js"></script>
+    <script src="src/app/components/user/reset/user-reset.route.js"></script>
+    <script src="src/app/components/user/reset/user-reset.controller.js"></script>
+    <script src="src/app/components/user/signup/user-signup.route.js"></script>
+    <script src="src/app/components/user/signup/user-signup.controller.js"></script>
+    <script src="src/app/components/user/signup/done/user-signup-done.route.js"></script>
+    <script src="src/app/components/presences/list/presences-list.controller.js"></script>
+    <script src="src/app/components/presences/list/presences-list.route.js"></script>
+    <script src="src/app/components/groups/edit/groups-edit.controller.js"></script>
+    <script src="src/app/components/groups/edit/groups-edit.route.js"></script>
+    <script src="src/app/components/groups/new/groups-new.controller.js"></script>
+    <script src="src/app/components/groups/new/groups-new.route.js"></script>
+    <script src="src/app/components/groups/list/groups-list.controller.js"></script>
+    <script src="src/app/components/groups/list/groups-list.route.js"></script>
+    <script src="src/app/components/topics/edit/topics-edit.controller.js"></script>
+    <script src="src/app/components/topics/edit/topics-edit.route.js"></script>
+    <script src="src/app/components/topics/new/topics-new.controller.js"></script>
+    <script src="src/app/components/topics/new/topics-new.route.js"></script>
+    <script src="src/app/components/topics/list/topics-list.controller.js"></script>
+    <script src="src/app/components/topics/list/topics-list.route.js"></script>
+    <script src="src/app/components/users/edit/users-edit.controller.js"></script>
+    <script src="src/app/components/users/edit/users-edit.route.js"></script>
+    <script src="src/app/components/users/list/users-list.controller.js"></script>
+    <script src="src/app/components/users/list/users-list.route.js"></script>
+    <script src="src/app/components/sockets/admin/sockets-admin.controller.js"></script>
+    <script src="src/app/components/sockets/admin/sockets-admin.route.js"></script>
+    <script src="src/app/shared/authentication/authentication.provider.js"></script>
+    <script src="src/app/shared/authentication/authentication.resource.js"></script>
+    <script src="src/app/shared/identity/identity.provider.js"></script>
+    <script src="src/app/shared/loading/loading.directive.js"></script>
+    <script src="src/app/shared/master/master.controller.js"></script>
+    <script src="src/app/shared/movable-dialog/movable-dialog.directive.js"></script>
+    <script src="src/app/shared/nl2br/nl2br.filter.js"></script>
+    <script src="src/app/shared/shortener/shortener.filter.js"></script>
+    <script src="src/app/shared/ng-enter/ng-enter.directive.js"></script>
+    <script src="src/app/shared/config-urls/config-urls.directive.js"></script>
+    <script src="src/app/shared/parseTags/parseTags.filter.js"></script>
+    <script src="src/app/shared/plugin/plugin.provider.js"></script>
+    <script src="src/app/shared/color-picker/color-picker.directive.js"></script>
+    <script src="src/app/shared/tat-engine/tat-engine.provider.js"></script>
+    <script src="src/app/shared/tat-engine/tat-engine.interceptor.js"></script>
+    <script src="src/app/shared/tat-engine/resources/groups.resource.js"></script>
+    <script src="src/app/shared/tat-engine/resources/messages.resource.js"></script>
+    <script src="src/app/shared/tat-engine/resources/presences.resource.js"></script>
+    <script src="src/app/shared/tat-engine/resources/topics.resource.js"></script>
+    <script src="src/app/shared/tat-engine/resources/users.resource.js"></script>
+    <script src="src/app/shared/tat-engine/resources/sockets.resource.js"></script>
+    <script src="src/app/shared/tat-engine/resources/system.resource.js"></script>
+    <script src="src/app/shared/topic/topic.controller.js"></script>
+    <script src="src/app/shared/topic/topic.directive.js"></script>
+    <script src="src/app/shared/user-display/user-display.directive.js"></script>
+    <script src="src/app/shared/web-socket/web-socket.provider.js"></script>
+    <script src="src/app/shared/widget/widget-header.directive.js"></script>
+    <script src="src/app/shared/widget/widget.directive.js"></script>
+    <script src="src/app/shared/widget/widget-body.directive.js"></script>
+    <script src="src/app/shared/widget/widget-footer.directive.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- injectorplugins:js -->
+
+    <!-- endinjectorplugins -->
+
+    <script src="scripts/config.js"></script>
+    <script src="scripts/moment.js"></script>
+
+</head>
+<body data-ng-controller="MasterCtrl as ctrl">
+  <div id="page-wrapper" data-ng-class="{'open': toggle}" data-ng-cloak data-ng-if="isConnected()">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a data-ng-click="toggleSidebar()" class="text-center">
+            <i class="fa fa-comments"></i> TAT
+            <span class="menu-icon glyphicon glyphicon-transfer"></span>
+          </a>
+        </li>
+        <li data-ng-controller="TopicCtrl as sideBarCtrl" class="sidebar-section">
+            <span class="sidebar-section-title">{{ 'master-topics' | translate }}</span>
+            <div topic-list="sideBarCtrl.favoritesTopics"></div>
+            <div topic-list="sideBarCtrl.treeTopics"></div>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <div class="col-xs-4" data-ng-repeat="menuItem in bottomMenu">
+          <a href="{{menuItem.url}}">
+            {{ menuItem.caption | translate}}
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+        <div class="row header">
+          <div class="col-xs-12">
+            <div class="user pull-right">
+              <div class="item dropdown" dropdown>
+                <a role="button" class="dropdown-toggle" dropdown-toggle>
+                  <img src="assets/img/avatar.jpg">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    {{getUser('fullname')}}
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a ui-sref="user-profile">
+                      {{ 'master-profile' | translate }}
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a ui-sref="user-logout">
+                      {{ 'master-logout' | translate }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="item dropdown" data-ng-if="isAdmin()" dropdown>
+                <a role="button" class="dropdown-toggle" dropdown-toggle>
+                  <i class="fa fa-cogs"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Configuration
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a ui-sref="users-list">
+                      {{ 'master-users' | translate }}
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a ui-sref="groups-list">
+                      {{ 'master-groups' | translate }}
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a ui-sref="sockets-admin">
+                      {{ 'master-sockets' | translate }}
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a ui-sref="topics-list">
+                      {{ 'master-topics' | translate }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="item dropdown" data-ng-if="isMessagesView(ctrl.data.state)" dropdown>
+               <a role="button" class="dropdown-toggle" dropdown-toggle>
+                  <i class="fa fa-eye"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    {{ 'master-views' | translate }}
+                  </li>
+                  <li class="divider"></li>
+                  <li ng-repeat="v in getViews() | orderBy:'name'">
+                    <a role="button" ng-click="switchView(v.route)">{{v.name}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="meta">
+              <div class="page" data-ng-if="!isMessagesView(ctrl.data.state)">
+                {{ title | translate }}
+              </div>
+              <div class="page" data-ng-if="isMessagesView(ctrl.data.state)">
+                <span>
+                  {{getTitle(ctrl.data.state)}}
+                </span>
+                <span data-ng-repeat="sub in title">
+                  <i class="fa fa-caret-right"></i>
+                  {{sub}}
+                </span>
+                <a role="button"
+                   data-ng-click="ctrl.toggleTopicFavorite()">
+                  <i class="fa"
+                     data-ng-class="{'fa-star-o':!ctrl.data.isFavoriteTopic, 'fa-star': ctrl.data.isFavoriteTopic}">
+                  </i>
+                </a>
+                <a role="button"
+                  title="Enable or disable messages unread notifications on left menu"
+                   data-ng-click="ctrl.toggleNotificationsTopic()">
+                  <i class="fa"
+                     data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
+                  </i>
+                </a>
+                <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Header Bar -->
+
+        <!-- Flash messages -->
+        <div class="notification">
+          <div flash-message="5000" ></div>
+        </div>
+
+        <!-- Main Content -->
+        <div ui-view></div>
+
+      </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
+  <div data-ng-if="!isConnected()" ui-view class="single"></div>
+</body>
+</html>

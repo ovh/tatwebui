@@ -1,0 +1,5 @@
+{
+    "dependencies": {
+      "tatwebui-plugin-standardview": "git+https://github.com/ovh/tatwebui-plugin-standardview.git"
+    }
+}
