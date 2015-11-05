@@ -15,5 +15,5 @@
     <translation id="components_user_name">Nom</translation>
     <translation id="components_user_email">Email</translation>
     <translation id="components_user_username">Utilisateur</translation>
-    <translation id="components_user_reset">Renvoyer un mot de passe</translation>
+    <translation id="components_user_reset">Demande de réinitialisation de mot de passe</translation>
 </translations>
