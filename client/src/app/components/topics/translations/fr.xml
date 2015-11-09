@@ -16,4 +16,7 @@
   <translation id="components_topics_can_update_all_msg">Les utilisateurs peuvent modifier tous les messages ? Cocher si oui.</translation>
   <translation id="components_topics_can_delete_all_msg">Les utilisateurs peuvent supprimer tous les messages ? Cocher si oui.</translation>
   <translation id="components_topics_is_ro_public">Un utilisateur non authentifié peut lire ce topic ? Cocher si oui.</translation>
+  <translation id="components_topics_list_admin_mode">Lister tous les topics (Admin Mode)</translation>
+  <translation id="components_topics_list_non_admin_mode">Lister que vos topics</translation>
+  <translation id="components_topics_list_admin_mode_info">Admin mode : liste de tous les topics, sauf les topics /Private/*</translation>
 </translations>

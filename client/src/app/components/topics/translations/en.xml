@@ -16,4 +16,7 @@
   <translation id="components_topics_can_update_all_msg">User can update all messages ? Check if yes.</translation>
   <translation id="components_topics_can_delete_all_msg">User can delete all messages ? Check if yes.</translation>
   <translation id="components_topics_is_ro_public">Anonymous User can read (only) this topic ? Check if yes.</translation>
+  <translation id="components_topics_list_admin_mode">List all topics (Admin Mode)</translation>
+  <translation id="components_topics_list_non_admin_mode">List your topics only</translation>
+  <translation id="components_topics_list_admin_mode_info">Admin mode : all topics, except /Private/*</translation>
 </translations>

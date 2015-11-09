@@ -12,7 +12,8 @@ angular.module('TatUi')
     'use strict';
 
     $scope.data = {
-      filtertopic : ""
+      filtertopic : "",
+      getForTatAdmin: false
     };
 
     /**
@@ -23,7 +24,8 @@ angular.module('TatUi')
      */
     $scope.init = function() {
       var criteria = {
-        "topic" : $scope.data.filtertopic
+        "topic" : $scope.data.filtertopic,
+        "getForTatAdmin": $scope.data.getForTatAdmin
       };
       TatEngineTopicsRsc.list(criteria).$promise.then(function(data){
         $scope.data.topics = data.topics;
@@ -31,6 +33,11 @@ angular.module('TatUi')
       }, function(err) {
           TatEngine.displayReturn(err);
       });
+    };
+
+    $scope.topicsAdminMode = function(isAdminMode) {
+      $scope.data.getForTatAdmin = isAdminMode;
+      $scope.init();
     };
 
     $scope.init();
