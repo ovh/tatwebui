@@ -2,6 +2,7 @@
     "name": "tatwebui",
     "version": "1.0.0",
     "description": "Web client for Tat",
+    "licence": "BSD-3-Clause",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

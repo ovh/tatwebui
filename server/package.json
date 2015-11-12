@@ -2,6 +2,7 @@
   "name": "tatwebui",
   "version": "1.0.0",
   "description": "Web server for tatwebui",
+  "licence": "BSD-3-Clause",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
