@@ -1,6 +1,6 @@
 /*global angular */
 angular.module('TatUi')
-    .controller('MasterCtrl', function MasterCtrl($scope, $rootScope, Authentication, $cookieStore, $state, appConfiguration, TatEngineUserRsc, TatEngineTopicsRsc, Plugin, $localStorage, $stateParams) {
+    .controller('MasterCtrl', function MasterCtrl($scope, $rootScope, Authentication, $cookieStore, $state, appConfiguration, TatEngineUserRsc, TatEngineTopicRsc, Flash, Plugin, $localStorage, $stateParams, $translate) {
     'use strict';
     /**
      * Sidebar Toggle & Cookie Control
@@ -12,7 +12,8 @@ angular.module('TatUi')
     this.loading = false;
     this.data = {
         isFavoriteTopic: false,
-        isNotificationsOffTopic: false
+        isNotificationsOffTopic: false,
+        topic: {}
     };
 
     var views = [];
@@ -100,16 +101,16 @@ angular.module('TatUi')
             TatEngineUserRsc.removeFavoriteTopic({
                 'topic': '/' + self.topic
             }).$promise.then(function () {
-                    self.data.isFavoriteTopic = false;
-                    // TODO Call refresh user/me
-                });
+                self.data.isFavoriteTopic = false;
+                // TODO Call refresh user/me
+            });
         } else {
             TatEngineUserRsc.addFavoriteTopic({
                 'topic': '/' + self.topic
             }).$promise.then(function () {
-                    self.data.isFavoriteTopic = true;
-                    // TODO Call refresh user/me
-                });
+                self.data.isFavoriteTopic = true;
+                // TODO Call refresh user/me
+            });
         }
     };
 
@@ -118,16 +119,16 @@ angular.module('TatUi')
             TatEngineUserRsc.enableNotificationsTopic({
                 'topic': '/' + self.topic
             }).$promise.then(function () {
-                    self.data.isNotificationsOffTopic = false;
-                    // TODO Call refresh user/me
-                });
+                self.data.isNotificationsOffTopic = false;
+                // TODO Call refresh user/me
+            });
         } else {
             TatEngineUserRsc.disableNotificationsTopic({
                 'topic': '/' + self.topic
             }).$promise.then(function () {
-                    self.data.isNotificationsOffTopic = true;
-                    // TODO Call refresh user/me
-                });
+                self.data.isNotificationsOffTopic = true;
+                // TODO Call refresh user/me
+            });
         }
     };
 
@@ -168,6 +169,18 @@ angular.module('TatUi')
                       self.data.isNotificationsOffTopic = true;
                   }
               }
+
+              TatEngineTopicRsc.oneTopic({
+                  action: self.topic
+              }).$promise.then(function (data) {
+                    if (!data.topic) {
+                        Flash.create('danger', $translate.instant('topics_notopic'));
+                        return;
+                    }
+                    self.data.topic = data.topic;
+              }, function (err) {
+                  TatEngine.displayReturn(err);
+              });
         } else {
           $scope.title = toState.name;
         }

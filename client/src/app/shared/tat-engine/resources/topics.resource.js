@@ -55,6 +55,21 @@ angular.module('TatUi').service('TatEngineTopicRsc', function($resource) {
 
         /**
          * @ngdoc function
+         * @name oneTopic
+         * @methodOf TatUi.resource:TatEngineTopicRsc
+         * @restMethod GET
+         * @description Return only OneTopic
+         *
+         * @return {object} Promise
+         */
+        oneTopic: {
+            method: 'GET',
+            isArray: false
+        },
+
+
+        /**
+         * @ngdoc function
          * @name addRoUser
          * @methodOf TatUi.resource:TatEngineTopicRsc
          * @restMethod PUT
