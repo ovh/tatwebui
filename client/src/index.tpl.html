@@ -268,7 +268,9 @@
                 </a>
                 <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
               </div>
-              {{ctrl.data.topic.description}}
+              <p data-ng-if="isMessagesView(ctrl.data.state)">
+                {{ctrl.data.topic.description}}
+              </p>
             </div>
           </div>
         </div>
