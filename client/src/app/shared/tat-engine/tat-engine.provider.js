@@ -78,9 +78,9 @@ angular.module('TatUi')
                     Flash.create('danger', resp.error);
                   } else if (resp && resp.info) {
                     Flash.create('info', resp.info);
-                  } else if (resp && resp.data.info) {
+                  } else if (resp && resp.data && resp.data.info) {
                     Flash.create('info', resp.data.info);
-                  } else if (resp && resp.data.error) {
+                  } else if (resp && resp.data && resp.data.error) {
                     Flash.create('danger', resp.data.error);
                   } else {
                     Flash.create('danger', $translate.instant('shared_common_an_error_occured'));
