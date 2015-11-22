@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ovh/tatwebui.svg?branch=master)](https://travis-ci.org/ovh/tatwebui)
+
 # Tat WebUI
 
 Tat Command Line Interface.

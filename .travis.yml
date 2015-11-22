@@ -1,6 +1,7 @@
 language: node_js
 node_js:
     - '0.12'
+install:
+   - make copy-samples
 script:
    - make release
-
