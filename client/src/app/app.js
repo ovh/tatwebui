@@ -2,6 +2,7 @@
 angular.module('TatUi', [
     'tat.config',
     'ui.bootstrap',
+    'ui.bootstrap.modal',
     'ui.bootstrap.datetimepicker',
     'ui.router',
     'ui.select',
