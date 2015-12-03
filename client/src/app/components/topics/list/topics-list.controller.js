@@ -13,7 +13,8 @@ angular.module('TatUi')
 
     $scope.data = {
       filtertopic : "",
-      getForTatAdmin: false
+      getForTatAdmin: false,
+      adminOfOneTopic: false
     };
 
     /**
@@ -28,6 +29,12 @@ angular.module('TatUi')
         "getForTatAdmin": $scope.data.getForTatAdmin
       };
       TatEngineTopicsRsc.list(criteria).$promise.then(function(data){
+        for (var i = 0; i < data.topics.length; i++) {
+          if (data.topics[i].adminUsers || data.topics[i].adminGroups) {
+            $scope.data.adminOfOneTopic = true;
+            break;
+          }
+        }
         $scope.data.topics = data.topics;
         $scope.data.count = data.count;
       }, function(err) {
@@ -38,6 +45,17 @@ angular.module('TatUi')
     $scope.topicsAdminMode = function(isAdminMode) {
       $scope.data.getForTatAdmin = isAdminMode;
       $scope.init();
+    };
+
+    $scope.canView = function(topic) {
+      if (topic.topic.indexOf("/Private") === 0) {
+        return false;
+      }
+      return topic.adminUsers || topic.adminGroups ||
+      topic.roUsers ||
+      topic.rwUsers ||
+      topic.roGroups ||
+      topic.rwGroups;
     };
 
     $scope.init();

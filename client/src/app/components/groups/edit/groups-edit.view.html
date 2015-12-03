@@ -12,7 +12,7 @@
           </div>
       </div>
   </div>
-  <div class="row">
+  <div class="row" ng-if="data.isAdminOnGroup">
     <div class="col-lg-6">
       <ui-select data-ng-model="user.selected" theme="bootstrap">
           <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
@@ -31,15 +31,15 @@
         <li data-ng-repeat="(k, v) in group.users">
           {{v}}
 
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
+          <button ng-if="data.isAdminOnGroup" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
+          <button ng-if="data.isAdminOnGroup" data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_groups_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <button data-ng-click="removeUser(v);" data-ng-show="askRemoveUser"
+          <button ng-if="data.isAdminOnGroup" data-ng-click="removeUser(v);" data-ng-show="askRemoveUser"
                     class="btn btn-xs btn-default btn-warning">
              {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
           </button>
@@ -51,16 +51,15 @@
       <ul>
         <li data-ng-repeat="(k, v) in group.adminUsers">
           {{v}}
-
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdmin=true" data-ng-hide="askRemoveAdmin">
+          <button ng-if="data.isAdminOnGroup" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdmin=true" data-ng-hide="askRemoveAdmin">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveAdmin=false" data-ng-show="askRemoveAdmin"
+          <button ng-if="data.isAdminOnGroup" data-ng-click="askRemoveAdmin=false" data-ng-show="askRemoveAdmin"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_groups_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <button data-ng-click="removeAdmin(v);" data-ng-show="askRemoveAdmin"
+          <button ng-if="data.isAdminOnGroup" data-ng-click="removeAdmin(v);" data-ng-show="askRemoveAdmin"
                     class="btn btn-xs btn-default btn-warning">
              {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
           </button>

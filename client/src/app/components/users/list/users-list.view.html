@@ -19,8 +19,8 @@
                   <tr>
                     <th>Fullname</th>
                     <th>Username</th>
-                    <th>{{ 'shared_common_created_at' | translate}}</th>
-                    <th></th>
+                    <th data-ng-if="isAdmin()">{{ 'shared_common_created_at' | translate}}</th>
+                    <th data-ng-if="isAdmin()"></th>
                   </tr>
                   </thead>
                   <tbody>

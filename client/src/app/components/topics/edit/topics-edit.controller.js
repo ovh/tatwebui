@@ -20,6 +20,10 @@ angular.module('TatUi')
     $scope.user = {};
     $scope.group = {};
 
+    $scope.data = {
+      isAdminOnTopic: false
+    };
+
     var _self = this;
 
     /**
@@ -33,6 +37,10 @@ angular.module('TatUi')
       TatEngineTopicsRsc.list({idTopic : $stateParams.topicId}).$promise.then(function(data){
         if (data.count === 1) {
           $scope.topic = data.topics[0];
+          if (_.contains($scope.topic.adminUsers, Authentication.getIdentity().username)) {
+            // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
+            $scope.data.isAdminOnTopic = true;
+          }
         }
       }, function(err) {
           TatEngine.displayReturn(err);

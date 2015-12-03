@@ -19,22 +19,32 @@ angular.module('TatUi')
 
     $scope.group = {};
     $scope.user = {};
+
+    $scope.data = {
+      isAdminOnGroup: false
+    };
+
     var _self = this;
     this.init = function() {
       TatEngineGroupsRsc.list({idGroup : $stateParams.groupId}).$promise.then(function(data){
         if (data.count === 1) {
           $scope.group = data.groups[0];
+          if (_.contains($scope.group.adminUsers, Authentication.getIdentity().username)) {
+            $scope.data.isAdminOnGroup = true;
+
+            // fetch users list, only for admin
+            TatEngineUsersRsc.list().$promise.then(function(data){
+              $scope.users = data.users;
+            }, function(err) {
+                TatEngine.displayReturn(err);
+            });
+          }
         }
       }, function(err) {
           TatEngine.displayReturn(err);
       });
-
-      TatEngineUsersRsc.list().$promise.then(function(data){
-        $scope.users = data.users;
-      }, function(err) {
-          TatEngine.displayReturn(err);
-      });
     };
+
 
     this.initRequest = function(username) {
         return {'groupname': $scope.group.name, 'username': username};

@@ -42,9 +42,9 @@
                   <tr>
                     <th>{{ 'shared_common_topic' | translate}}</th>
                     <th>{{ 'shared_common_description' | translate}}</th>
-                    <th>Presences</th>
+                    <th data-ng-if="isAdmin()">Presences</th>
                     <th></th>
-                    <th>{{ 'shared_common_created_at' | translate}}</th>
+                    <th data-ng-if="data.adminOfOneTopic">{{ 'shared_common_created_at' | translate}}</th>
                     <th></th>
                   </tr>
                   </thead>
@@ -52,7 +52,7 @@
                     <tr data-ng-repeat="topicItem in data.topics" class="topic-first-row">
                         <td class="topics-name">{{ topicItem.topic }}</td>
                         <td class="topics-description">{{ topicItem.description }}</td>
-                        <td class="topics-presences">
+                        <td class="topics-presences" data-ng-if="isAdmin()">
                           <!-- FIXME <a ui-sref="presences-list({topic:topicItem.topic})"><i class="fa fa-eye"></i></a>-->
                           <a href="/presences/list{{topicItem.topic}}"><i class="fa fa-eye"></i></a>
                         </td>
@@ -77,9 +77,8 @@
                             AG:{{topicItem.adminGroups.length}}
                           </span>
                         </td>
-
                         <td class="topics-date" data-ng-if="topicItem.dateCreation">{{topicItem.dateCreation * 1000 | date:'yyyy-MM-dd'}}</td>
-                        <td class="topics-edit" data-ng-if="isAdmin()">
+                        <td class="topics-edit" data-ng-if="isAdmin() || canView(topicItem)">
                           <a ui-sref="topics-edit({topicId:topicItem._id})">
                             <i class="fa fa-edit"></i>
                           </a>

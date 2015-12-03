@@ -57,10 +57,10 @@
              {{ 'components_topics_is_ro_public' | translate}}
            </label>
         </div>
-        <button type="submit" class="btn btn-default" data-ng-click="updateParam(false)">
+        <button data-ng-if="data.isAdminOnTopic" type="submit" class="btn btn-default" data-ng-click="updateParam(false)">
           {{ 'shared_common_validate' | translate}}
         </button>
-        <button type="submit" class="btn btn-default" data-ng-click="updateParam(true)">
+        <button data-ng-if="data.isAdminOnTopic" type="submit" class="btn btn-default" data-ng-click="updateParam(true)">
           {{ 'shared_common_validate' | translate}} {{ 'shared_common_recursively' | translate}}
         </button>
       </form>
@@ -69,7 +69,7 @@
 
   <div class="row" data-ng-if="topic._id">
     <h4>{{ 'shared_common_users' | translate }}</h4>
-    <div class="col-lg-6">
+    <div class="col-lg-6" data-ng-if="data.isAdminOnTopic" >
       <ui-select data-ng-model="user.selected" theme="bootstrap">
           <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
           <ui-select-choices repeat="item in users | filter: $select.search">
@@ -116,16 +116,15 @@
       <ul>
         <li data-ng-repeat="(k, v) in topic.roUsers">
           {{v}}
-
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRoUser=true" data-ng-hide="askRemoveRoUser">
+          <button data-ng-if="data.isAdminOnTopic" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRoUser=true" data-ng-hide="askRemoveRoUser">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveRoUser=false" data-ng-show="askRemoveRoUser"
+          <button data-ng-if="data.isAdminOnTopic" data-ng-click="askRemoveRoUser=false" data-ng-show="askRemoveRoUser"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_topics_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <div class="btn-group" role="group" data-ng-show="askRemoveRoUser">
+          <div data-ng-if="data.isAdminOnTopic" class="btn-group" role="group" data-ng-show="askRemoveRoUser">
             <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
               <span class="caret"></span>
@@ -143,16 +142,15 @@
       <ul>
         <li data-ng-repeat="(k, v) in topic.rwUsers">
           {{v}}
-
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRwUser=true" data-ng-hide="askRemoveRwUser">
+          <button data-ng-if="data.isAdminOnTopic" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRwUser=true" data-ng-hide="askRemoveRwUser">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveRwUser=false" data-ng-show="askRemoveRwUser"
+          <button data-ng-if="data.isAdminOnTopic" data-ng-click="askRemoveRwUser=false" data-ng-show="askRemoveRwUser"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_topics_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <div class="btn-group" role="group" data-ng-show="askRemoveRwUser">
+          <div data-ng-if="data.isAdminOnTopic" class="btn-group" role="group" data-ng-show="askRemoveRwUser">
             <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
               <span class="caret"></span>
@@ -170,16 +168,15 @@
       <ul>
         <li data-ng-repeat="(k, v) in topic.adminUsers">
           {{v}}
-
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdminUser=true" data-ng-hide="askRemoveAdminUser">
+          <button data-ng-if="data.isAdminOnTopic" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdminUser=true" data-ng-hide="askRemoveAdminUser">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveAdminUser=false" data-ng-show="askRemoveAdminUser"
+          <button data-ng-if="data.isAdminOnTopic" data-ng-click="askRemoveAdminUser=false" data-ng-show="askRemoveAdminUser"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_topics_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <div class="btn-group" role="group" data-ng-show="askRemoveAdminUser">
+          <div data-ng-if="data.isAdminOnTopic" class="btn-group" role="group" data-ng-show="askRemoveAdminUser">
             <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
               <span class="caret"></span>
@@ -196,7 +193,7 @@
 
   <div class="row" data-ng-if="topic._id">
     <h4>{{ 'shared_common_groups' | translate }}</h4>
-    <div class="col-lg-6">
+    <div class="col-lg-6" data-ng-if="data.isAdminOnTopic">
       <ui-select data-ng-model="group.selected" theme="bootstrap">
           <ui-select-match placeholder="Select or search a group in the list...">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices repeat="item in groups | filter: $select.search">
@@ -244,15 +241,15 @@
       <ul>
         <li data-ng-repeat="(k, v) in topic.roGroups">
           {{v}}
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRoGroup=true" data-ng-hide="askRemoveRoGroup">
+          <button data-ng-if="data.isAdminOnTopic" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRoGroup=true" data-ng-hide="askRemoveRoGroup">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveRoGroup=false" data-ng-show="askRemoveRoGroup"
+          <button data-ng-if="data.isAdminOnTopic" data-ng-click="askRemoveRoGroup=false" data-ng-show="askRemoveRoGroup"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_topics_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <div class="btn-group" role="group" data-ng-show="askRemoveRoGroup">
+          <div data-ng-if="data.isAdminOnTopic" class="btn-group" role="group" data-ng-show="askRemoveRoGroup">
             <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
               <span class="caret"></span>
@@ -270,16 +267,15 @@
       <ul>
         <li data-ng-repeat="(k, v) in topic.rwGroups">
           {{v}}
-
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRwGroup=true" data-ng-hide="askRemoveRwGroup">
+          <button data-ng-if="data.isAdminOnTopic" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRwGroup=true" data-ng-hide="askRemoveRwGroup">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveRwGroup=false" data-ng-show="askRemoveRwGroup"
+          <button data-ng-if="data.isAdminOnTopic" data-ng-click="askRemoveRwGroup=false" data-ng-show="askRemoveRwGroup"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_topics_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <div class="btn-group" role="group" data-ng-show="askRemoveRwGroup">
+          <div data-ng-if="data.isAdminOnTopic" class="btn-group" role="group" data-ng-show="askRemoveRwGroup">
             <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
               <span class="caret"></span>
@@ -297,16 +293,15 @@
       <ul>
         <li data-ng-repeat="(k, v) in topic.adminGroups">
           {{v}}
-
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdminGroup=true" data-ng-hide="askRemoveAdminGroup">
+          <button data-ng-if="data.isAdminOnTopic" class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdminGroup=true" data-ng-hide="askRemoveAdminGroup">
              <i class="fa fa-trash-o"></i>
           </button>
-          <button data-ng-click="askRemoveAdminGroup=false" data-ng-show="askRemoveAdminGroup"
+          <button data-ng-if="data.isAdminOnTopic" data-ng-click="askRemoveAdminGroup=false" data-ng-show="askRemoveAdminGroup"
                     class="btn btn-xs btn-default btn-info">
                     {{ 'components_topics_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <div class="btn-group" role="group" data-ng-show="askRemoveAdminGroup">
+          <div data-ng-if="data.isAdminOnTopic" class="btn-group" role="group" data-ng-show="askRemoveAdminGroup">
             <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
               <span class="caret"></span>

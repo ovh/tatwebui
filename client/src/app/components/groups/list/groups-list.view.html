@@ -28,27 +28,27 @@
                   <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Users in group</th>
-                    <th>{{ 'shared_common_created_at' | translate}}</th>
-                    <th></th>
+                    <th data-ng-if="isAdmin() || data.adminOfOneGroup">Users in group</th>
+                    <th data-ng-if="isAdmin() || data.adminOfOneGroup">{{ 'shared_common_created_at' | translate}}</th>
+                    <th data-ng-if="isAdmin() || data.adminOfOneGroup"></th>
                   </tr>
                   </thead>
                   <tbody>
                     <tr data-ng-repeat="groupItem in data.groups">
                         <td class="groups-name">{{ groupItem.name }}</td>
                         <td class="groups-description">{{ groupItem.description }}</td>
-                        <td class="groups-groups">
-                          <span data-ng-if="groupItem.users">
+                        <td class="groups-groups" data-ng-if="isAdmin() || groupItem.users || groupItem.adminUsers">
+                          <span data-ng-if="isAdmin() || groupItem.users">
                             Users:{{groupItem.users.length}}
                           </span>
-                          <span data-ng-if="groupItem.adminUsers">
+                          <span data-ng-if="isAdmin() || groupItem.adminUsers">
                             Admins:{{groupItem.adminUsers.length}}
                           </span>
                         </td>
-                        <td class="groups-date" data-ng-if="groupItem.dateCreation">
+                        <td class="groups-date" data-ng-if="isAdmin() || groupItem.dateCreation">
                           {{groupItem.dateCreation * 1000 | date:'yyyy-MM-dd'}}
                         </td>
-                        <td class="groups-edit" data-ng-if="isAdmin()">
+                        <td class="groups-edit" data-ng-if="isAdmin() || groupItem.adminUsers || groupItem.users">
                           <a ui-sref="groups-edit({groupId:groupItem._id})">
                             <i class="fa fa-edit"></i>
                           </a>
@@ -61,6 +61,4 @@
         </rd-widget>
       </div>
     </div>
-
-
 </div>
