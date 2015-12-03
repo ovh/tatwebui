@@ -29,7 +29,7 @@ angular.module('TatUi')
       TatEngineGroupsRsc.list({idGroup : $stateParams.groupId}).$promise.then(function(data){
         if (data.count === 1) {
           $scope.group = data.groups[0];
-          if (_.contains($scope.group.adminUsers, Authentication.getIdentity().username)) {
+          if ($scope.isAdmin() || _.contains($scope.group.adminUsers, Authentication.getIdentity().username)) {
             $scope.data.isAdminOnGroup = true;
 
             // fetch users list, only for admin
