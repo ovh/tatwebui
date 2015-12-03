@@ -49,8 +49,8 @@ angular.module('TatUi')
         }
     };
 
-    this.addUnRead = function(topic,listUnread){
-        if (listUnread !== undefined && listUnread[topic.topic] !== undefined){
+    this.addUnRead = function(topic, listUnread) {
+        if (listUnread !== undefined && listUnread[topic.topic] !== undefined) {
             topic.unRead=listUnread[topic.topic];
         }
     };
@@ -58,7 +58,7 @@ angular.module('TatUi')
     this.refresh = function() {
         if (!self.data.inRefresh) {
           self.data.inRefresh = true;
-          TatEngineTopicsRsc.list({'getNbMsgUnread':true}).$promise.then(function(data){
+          TatEngineTopicsRsc.list({'getNbMsgUnread':true}).$promise.then(function(data) {
               var tree = {
                   fullname: '',
                   name: '',
@@ -89,34 +89,34 @@ angular.module('TatUi')
         self.changeMenuState(topicName);
     });
 
-    $scope.$on('sidebar-change', function(event,data){
-        if(data.topic !== undefined){
+    $scope.$on('sidebar-change', function(event, data) {
+        if (data.topic !== undefined) {
             self.changeMenuState(data.topic);
         }
     });
 
-    this.refreshMenu = function(){
-        for(var i=0;i<self.menuState.length;i++){
+    this.refreshMenu = function() {
+        for (var i=0;i<self.menuState.length;i++) {
             // remove first /
             var topicArray = self.menuState[i].split('/');
-            if(topicArray[0] === ''){
+            if (topicArray[0] === '') {
                 topicArray.splice(0, 1);
             }
             self.changeTopicsVisibility(self.treeTopics, topicArray,true);
         }
     };
 
-    this.changeMenuState = function(topic){
-        if(topic !== undefined && topic.visible){
+    this.changeMenuState = function(topic) {
+        if (topic !== undefined && topic.visible) {
             // add in menu state
-            if(!self.menuState[topic.fullname]){
+            if (!self.menuState[topic.fullname]) {
                 self.menuState.push(topic.fullname);
             }
         } else if (topic !== undefined) {
-            for(var i=0;i<self.menuState.length;i++){
-                if(self.menuState[i].indexOf(topic.fullname) === 0){
+            for (var i=0;i<self.menuState.length;i++) {
+                if (self.menuState[i].indexOf(topic.fullname) === 0) {
                     var topicArray = self.menuState[i].split('/');
-                    if(topicArray[0] === ''){
+                    if (topicArray[0] === '') {
                         topicArray.splice(0, 1);
                     }
                     self.changeTopicsVisibility(self.treeTopics, topicArray,false);
@@ -128,7 +128,7 @@ angular.module('TatUi')
         self.refreshMenu();
     };
 
-    this.changeTopicsVisibility = function(tree, expansion,visible) {
+    this.changeTopicsVisibility = function(tree, expansion, visible) {
         var topic = tree;
         if (('[object Array]' === Object.prototype.toString.call(tree)) && ('[object Array]' === Object.prototype.toString.call(expansion))) {
             for (var i=0; i<expansion.length; i++) {
@@ -165,7 +165,7 @@ angular.module('TatUi')
 
         $scope.$on('topic', function(event, data) {
             self.currentTopic = data;
-            for(var key in self.topics) {
+            for (var key in self.topics) {
                 if (self.topics.hasOwnProperty(key)) {
                     self.topics[key].active = false;
                 }

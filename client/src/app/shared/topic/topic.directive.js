@@ -44,7 +44,7 @@ angular.module('TatUi').directive('topicList', function() {
  * display a sub topic
  */
 .directive('topicListItem', function($compile) {
-        'use strict';
+    'use strict';
     return {
         retrict: 'AE',
         templateUrl: 'app/shared/topic/topic-item.directive.html',

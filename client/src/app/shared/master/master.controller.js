@@ -25,6 +25,15 @@ angular.module('TatUi')
       }
     }
 
+    $scope.topicClick = function(topic) {
+        $rootScope.$broadcast('topic-change', {topic:topic});
+        //$rootScope.$broadcast('sidebar-change', {topic:topic});
+    };
+
+    $scope.getFavoritesTopics = function() {
+      return Authentication.getIdentity().favoritesTopics;
+    };
+
     $scope.getTitle = function(route) {
       var p = Plugin.getPluginByRoute(route);
       if (p) {
@@ -102,14 +111,14 @@ angular.module('TatUi')
                 'topic': '/' + self.topic
             }).$promise.then(function () {
                 self.data.isFavoriteTopic = false;
-                // TODO Call refresh user/me
+                Authentication.refreshIdentity();
             });
         } else {
             TatEngineUserRsc.addFavoriteTopic({
                 'topic': '/' + self.topic
             }).$promise.then(function () {
                 self.data.isFavoriteTopic = true;
-                // TODO Call refresh user/me
+                Authentication.refreshIdentity();
             });
         }
     };
@@ -120,14 +129,14 @@ angular.module('TatUi')
                 'topic': '/' + self.topic
             }).$promise.then(function () {
                 self.data.isNotificationsOffTopic = false;
-                // TODO Call refresh user/me
+                Authentication.refreshIdentity();
             });
         } else {
             TatEngineUserRsc.disableNotificationsTopic({
                 'topic': '/' + self.topic
             }).$promise.then(function () {
                 self.data.isNotificationsOffTopic = true;
-                // TODO Call refresh user/me
+                Authentication.refreshIdentity();
             });
         }
     };
