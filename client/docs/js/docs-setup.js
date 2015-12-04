@@ -280,7 +280,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "TatUi",
       "shortDescription": "Manage the plugins",
-      "keywords": "addplugin api description elements fileds filter function getplugin getpluginbyroute getpluginsmessagesviews list manage messages-views object plugin plugindata pluginprovider plugins register registered route service tatui type"
+      "keywords": "addplugin api default description elements fileds filter function getdefaultplugin getplugin getpluginbyroute getpluginsmessagesviews list manage messages-views object plugin plugindata pluginprovider plugins register registered restriction returns route service tatui topic type view"
     },
     {
       "section": "api",

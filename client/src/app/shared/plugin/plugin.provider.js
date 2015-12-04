@@ -35,7 +35,50 @@ angular.module('TatUi').provider('Plugin', function() {
      * @description get list of registered plugins of messages-views
      */
     this.getPluginsMessagesViews = function() {
-        return _.filter(plugins, {"type": "messages-views"});
+        return _.filter(plugins, {'type': 'messages-views'});
+    };
+
+    // Internal method
+    this.getPluginByTopicParam = function(topic, param) {
+      var views = _.filter(plugins, {'type': 'messages-views'});
+      var defaultView = {};
+      for (var i = 0; i < views.length; i++) {
+          if (views[i].default === true) {
+            defaultView = views[i];
+          }
+          if (views[i].topic && views[i].topic[param]) {
+              var re = new RegExp(views[i].topic[param]);
+              if (topic.match(re)) {
+                  return views[i];
+              }
+          }
+      }
+      if (param === 'default') {
+          return defaultView;
+      }
+      return undefined;
+    };
+
+    /**
+     * @ngdoc function
+     * @name getDefaultPlugin
+     * @methodOf TatUi.PluginProvider
+     * @module TatUi
+     * @description returns view if there's a view restriction on topic
+     */
+    this.getPluginByRestriction = function(topic) {
+        return self.getPluginByTopicParam(topic, 'restricted');
+    };
+
+    /**
+     * @ngdoc function
+     * @name getDefaultPlugin
+     * @methodOf TatUi.PluginProvider
+     * @module TatUi
+     * @description returns default view for topic
+     */
+    this.getDefaultPlugin = function(topic) {
+        return self.getPluginByTopicParam(topic, 'default');
     };
 
     /**
@@ -46,7 +89,7 @@ angular.module('TatUi').provider('Plugin', function() {
      * @description get a registered plugin by route name
      */
     this.getPluginByRoute = function(route) {
-        var r = _.filter(plugins, {"route": route});
+        var r = _.filter(plugins, {'route': route});
         if (r.length < 1) {
           return null;
         } else {
@@ -100,6 +143,24 @@ angular.module('TatUi').provider('Plugin', function() {
              * @return {object} plugin description
              */
             getPlugin: self.getPlugin,
+
+            /**
+             * @ngdoc function
+             * @name getDefaultPlugin
+             * @methodOf TatUi.PluginProvider
+             * @module TatUi
+             * @description returns view if there's a view restriction on topic
+             */
+            getPluginByRestriction: self.getPluginByRestriction,
+
+            /**
+             * @ngdoc function
+             * @name getDefaultPlugin
+             * @methodOf TatUi.PluginProvider
+             * @module TatUi
+             * @description returns default view for topic
+             */
+            getDefaultPlugin: self.getDefaultPlugin,
 
             /**
              * @ngdoc function
