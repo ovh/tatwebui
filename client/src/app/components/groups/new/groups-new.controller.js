@@ -9,7 +9,8 @@
  *
  */
 angular.module('TatUi')
-    .controller('GroupsNewCtrl', function($scope, $stateParams, $state, TatEngineGroupRsc, TatEngine) {
+  .controller('GroupsNewCtrl', function($scope, $stateParams, $state,
+    TatEngineGroupRsc, TatEngine) {
     'use strict';
 
     $scope.group = {
@@ -24,13 +25,16 @@ angular.module('TatUi')
      * @description Create group with name and description. Calling Tat Engine Resource Group
      */
     $scope.createGroup = function() {
-      TatEngineGroupRsc.create(
-        { 'name' : $scope.group.name, 'description' : $scope.group.description }
-      ).$promise.then(function(data){
-        $state.go('groups-edit', {groupId: data._id});
+      TatEngineGroupRsc.create({
+        'name': $scope.group.name,
+        'description': $scope.group.description
+      }).$promise.then(function(data) {
+        $state.go('groups-edit', {
+          groupId: data._id
+        });
       }, function(err) {
         TatEngine.displayReturn(err);
       });
     };
 
-});
+  });

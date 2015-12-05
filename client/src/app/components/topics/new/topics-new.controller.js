@@ -10,7 +10,8 @@
  * @description Controller of Create a new Topic page
  */
 angular.module('TatUi')
-    .controller('TopicsNewCtrl', function($scope, $stateParams, $state, TatEngineTopicRsc, TatEngine) {
+  .controller('TopicsNewCtrl', function($scope, $stateParams, $state,
+    TatEngineTopicRsc, TatEngine) {
     'use strict';
 
     $scope.topic = {
@@ -25,13 +26,16 @@ angular.module('TatUi')
      * @description Creates a new topic with a description
      */
     $scope.createTopic = function() {
-      TatEngineTopicRsc.create(
-        { 'topic' : $scope.topic.topic, 'description' : $scope.topic.description }
-      ).$promise.then(function(data){
-        $state.go('topics-edit', {topicId: data._id});
+      TatEngineTopicRsc.create({
+        'topic': $scope.topic.topic,
+        'description': $scope.topic.description
+      }).$promise.then(function(data) {
+        $state.go('topics-edit', {
+          topicId: data._id
+        });
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
-});
+  });

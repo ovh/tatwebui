@@ -10,184 +10,190 @@
  *
  */
 angular.module('TatUi').provider('Plugin', function() {
-    'use strict';
+  'use strict';
 
-    var plugins = [];
-    var self = this;
+  var plugins = [];
+  var self = this;
 
-    /**
-     * @ngdoc function
-     * @name addPlugin
-     * @methodOf TatUi.PluginProvider
-     * @module TatUi
-     * @description register a new plugin
-     * @param {object} pluginData Plugin description with fileds {name, type, description}
-     */
-    this.addPlugin = function(pluginData) {
-        plugins.push(pluginData);
-    };
+  /**
+   * @ngdoc function
+   * @name addPlugin
+   * @methodOf TatUi.PluginProvider
+   * @module TatUi
+   * @description register a new plugin
+   * @param {object} pluginData Plugin description with fileds {name, type, description}
+   */
+  this.addPlugin = function(pluginData) {
+    plugins.push(pluginData);
+  };
 
-    /**
-     * @ngdoc function
-     * @name getPluginsMessagesViews
-     * @methodOf TatUi.PluginProvider
-     * @module TatUi
-     * @description get list of registered plugins of messages-views
-     */
-    this.getPluginsMessagesViews = function() {
-        return _.filter(plugins, {'type': 'messages-views'});
-    };
+  /**
+   * @ngdoc function
+   * @name getPluginsMessagesViews 
+   * @methodOf TatUi.PluginProvider
+   * @module TatUi
+   * @description get list of registered plugins of messages-views
+   */
+  this.getPluginsMessagesViews = function() {
+    return _.filter(plugins, {
+      'type': 'messages-views'
+    });
+  };
 
-    // Internal method
-    this.getPluginByTopicParam = function(topic, param) {
-      var views = _.filter(plugins, {'type': 'messages-views'});
-      var defaultView = {};
-      for (var i = 0; i < views.length; i++) {
-          if (views[i].default === true) {
-            defaultView = views[i];
-          }
-          if (views[i].topic && views[i].topic[param]) {
-              var re = new RegExp(views[i].topic[param]);
-              if (topic.match(re)) {
-                  return views[i];
-              }
-          }
+  // Internal method
+  this.getPluginByTopicParam = function(topic, param) {
+    var views = _.filter(plugins, {
+      'type': 'messages-views'
+    });
+    var defaultView = {};
+    for (var i = 0; i < views.length; i++) {
+      if (views[i].default === true) {
+        defaultView = views[i];
       }
-      if (param === 'default') {
-          return defaultView;
-      }
-      return undefined;
-    };
-
-    /**
-     * @ngdoc function
-     * @name getDefaultPlugin
-     * @methodOf TatUi.PluginProvider
-     * @module TatUi
-     * @description returns view if there's a view restriction on topic
-     */
-    this.getPluginByRestriction = function(topic) {
-        return self.getPluginByTopicParam(topic, 'restricted');
-    };
-
-    /**
-     * @ngdoc function
-     * @name getDefaultPlugin
-     * @methodOf TatUi.PluginProvider
-     * @module TatUi
-     * @description returns default view for topic
-     */
-    this.getDefaultPlugin = function(topic) {
-        return self.getPluginByTopicParam(topic, 'default');
-    };
-
-    /**
-     * @ngdoc function
-     * @name getPluginByRoute
-     * @methodOf TatUi.PluginProvider
-     * @module TatUi
-     * @description get a registered plugin by route name
-     */
-    this.getPluginByRoute = function(route) {
-        var r = _.filter(plugins, {'route': route});
-        if (r.length < 1) {
-          return null;
-        } else {
-          return r[0];
+      if (views[i].topic && views[i].topic[param]) {
+        var re = new RegExp(views[i].topic[param]);
+        if (topic.match(re)) {
+          return views[i];
         }
-    };
+      }
+    }
+    if (param === 'default') {
+      return defaultView;
+    }
+    return undefined;
+  };
 
+  /**
+   * @ngdoc function
+   * @name getDefaultPlugin
+   * @methodOf TatUi.PluginProvider
+   * @module TatUi
+   * @description returns view if there's a view restriction on topic
+   */
+  this.getPluginByRestriction = function(topic) {
+    return self.getPluginByTopicParam(topic, 'restricted');
+  };
+
+  /**
+   * @ngdoc function
+   * @name getDefaultPlugin
+   * @methodOf TatUi.PluginProvider
+   * @module TatUi
+   * @description returns default view for topic
+   */
+  this.getDefaultPlugin = function(topic) {
+    return self.getPluginByTopicParam(topic, 'default');
+  };
+
+  /**
+   * @ngdoc function
+   * @name getPluginByRoute
+   * @methodOf TatUi.PluginProvider
+   * @module TatUi
+   * @description get a registered plugin by route name
+   */
+  this.getPluginByRoute = function(route) {
+    var r = _.filter(plugins, {
+      'route': route
+    });
+    if (r.length < 1) {
+      return null;
+    } else {
+      return r[0];
+    }
+  };
+
+  /**
+   * @ngdoc function
+   * @name getPlugin
+   * @methodOf TatUi.PluginProvider
+   * @module TatUi
+   * @description register a new plugin
+   * @param {object} filter Object to filter elements
+   * @return {object} plugin description
+   */
+  this.getPlugin = function(filter) {
+    return _.find(plugins, filter);
+  };
+
+
+  this.$get = function() {
     /**
-     * @ngdoc function
-     * @name getPlugin
-     * @methodOf TatUi.PluginProvider
+     * @ngdoc service
+     * @name TatUi.Plugin
      * @module TatUi
-     * @description register a new plugin
-     * @param {object} filter Object to filter elements
-     * @return {object} plugin description
+     * @description
+     *
+     * Manage the plugins
+     *
      */
-    this.getPlugin = function(filter) {
-        return _.find(plugins, filter);
+    return {
+
+      /**
+       * @ngdoc function
+       * @name addPlugin
+       * @methodOf TatUi.Plugin
+       * @module TatUi
+       * @description register a new plugin
+       * @param {object} pluginData Plugin description with fileds {name, type, description}
+       */
+      addPlugin: self.addPlugin,
+
+      /**
+       * @ngdoc function
+       * @name getPlugin
+       * @methodOf TatUi.Plugin
+       * @module TatUi
+       * @description get a plugin
+       * @param {object} filter Object to filter elements
+       * @return {object} plugin description
+       */
+      getPlugin: self.getPlugin,
+
+      /**
+       * @ngdoc function
+       * @name getDefaultPlugin
+       * @methodOf TatUi.PluginProvider
+       * @module TatUi
+       * @description returns view if there's a view restriction on topic
+       */
+      getPluginByRestriction: self.getPluginByRestriction,
+
+      /**
+       * @ngdoc function
+       * @name getDefaultPlugin
+       * @methodOf TatUi.PluginProvider
+       * @module TatUi
+       * @description returns default view for topic
+       */
+      getDefaultPlugin: self.getDefaultPlugin,
+
+      /**
+       * @ngdoc function
+       * @name getPlugins
+       * @methodOf TatUi.Plugin
+       * @module TatUi
+       * @description get list of plugins
+       */
+      getPlugins: self.getPlugins,
+
+      /**
+       * @ngdoc function
+       * @name getPluginsMessagesViews
+       * @methodOf TatUi.Plugin
+       * @module TatUi
+       * @description get list of plugins messages views
+       */
+      getPluginsMessagesViews: self.getPluginsMessagesViews,
+
+      /**
+       * @ngdoc function
+       * @name getPluginByRoute
+       * @methodOf TatUi.Plugin
+       * @module TatUi
+       * @description get a registered plugin by route name
+       */
+      getPluginByRoute: self.getPluginByRoute
     };
-
-
-    this.$get = function() {
-        /**
-         * @ngdoc service
-         * @name TatUi.Plugin
-         * @module TatUi
-         * @description
-         *
-         * Manage the plugins
-         *
-         */
-        return {
-
-            /**
-             * @ngdoc function
-             * @name addPlugin
-             * @methodOf TatUi.Plugin
-             * @module TatUi
-             * @description register a new plugin
-             * @param {object} pluginData Plugin description with fileds {name, type, description}
-             */
-            addPlugin: self.addPlugin,
-
-            /**
-             * @ngdoc function
-             * @name getPlugin
-             * @methodOf TatUi.Plugin
-             * @module TatUi
-             * @description get a plugin
-             * @param {object} filter Object to filter elements
-             * @return {object} plugin description
-             */
-            getPlugin: self.getPlugin,
-
-            /**
-             * @ngdoc function
-             * @name getDefaultPlugin
-             * @methodOf TatUi.PluginProvider
-             * @module TatUi
-             * @description returns view if there's a view restriction on topic
-             */
-            getPluginByRestriction: self.getPluginByRestriction,
-
-            /**
-             * @ngdoc function
-             * @name getDefaultPlugin
-             * @methodOf TatUi.PluginProvider
-             * @module TatUi
-             * @description returns default view for topic
-             */
-            getDefaultPlugin: self.getDefaultPlugin,
-
-            /**
-             * @ngdoc function
-             * @name getPlugins
-             * @methodOf TatUi.Plugin
-             * @module TatUi
-             * @description get list of plugins
-             */
-            getPlugins: self.getPlugins,
-
-            /**
-             * @ngdoc function
-             * @name getPluginsMessagesViews
-             * @methodOf TatUi.Plugin
-             * @module TatUi
-             * @description get list of plugins messages views
-             */
-            getPluginsMessagesViews: self.getPluginsMessagesViews,
-
-            /**
-             * @ngdoc function
-             * @name getPluginByRoute
-             * @methodOf TatUi.Plugin
-             * @module TatUi
-             * @description get a registered plugin by route name
-             */
-            getPluginByRoute : self.getPluginByRoute
-        };
-    };
+  };
 });

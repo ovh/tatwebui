@@ -1,6 +1,9 @@
 /*global angular */
 angular.module('TatUi')
-    .controller('MasterCtrl', function MasterCtrl($scope, $rootScope, Authentication, $cookieStore, $state, appConfiguration, TatEngineUserRsc, TatEngineTopicRsc, Flash, Plugin, $localStorage, $stateParams, $translate) {
+  .controller('MasterCtrl', function MasterCtrl($scope, $rootScope,
+    Authentication, $cookieStore, $state, appConfiguration, TatEngineUserRsc,
+    TatEngineTopicRsc, Flash, Plugin, $localStorage, $stateParams, $translate
+  ) {
     'use strict';
     /**
      * Sidebar Toggle & Cookie Control
@@ -11,9 +14,9 @@ angular.module('TatUi')
 
     this.loading = false;
     this.data = {
-        isFavoriteTopic: false,
-        isNotificationsOffTopic: false,
-        topic: {}
+      isFavoriteTopic: false,
+      isNotificationsOffTopic: false,
+      topic: {}
     };
 
     var views = [];
@@ -26,8 +29,10 @@ angular.module('TatUi')
     }
 
     $scope.topicClick = function(topic) {
-        $rootScope.$broadcast('topic-change', {topic:topic});
-        //$rootScope.$broadcast('sidebar-change', {topic:topic});
+      $rootScope.$broadcast('topic-change', {
+        topic: topic
+      });
+      //$rootScope.$broadcast('sidebar-change', {topic:topic});
     };
 
     $scope.getFavoritesTopics = function() {
@@ -52,50 +57,52 @@ angular.module('TatUi')
     }
 
     $scope.getWidth = function() {
-        return window.innerWidth;
+      return window.innerWidth;
     };
 
     $scope.$watch($scope.getWidth, function(newValue) {
-        if (newValue >= mobileView) {
-            if (angular.isDefined($cookieStore.get('toggle'))) {
-                $scope.toggle = ! $cookieStore.get('toggle') ? false : true;
-            } else {
-                $scope.toggle = true;
-            }
+      if (newValue >= mobileView) {
+        if (angular.isDefined($cookieStore.get('toggle'))) {
+          $scope.toggle = !$cookieStore.get('toggle') ? false : true;
         } else {
-            $scope.toggle = false;
+          $scope.toggle = true;
         }
+      } else {
+        $scope.toggle = false;
+      }
 
     });
 
     $scope.toggleSidebar = function() {
-        $scope.toggle = !$scope.toggle;
-        $cookieStore.put('toggle', $scope.toggle);
+      $scope.toggle = !$scope.toggle;
+      $cookieStore.put('toggle', $scope.toggle);
     };
 
     $scope.getViews = function() {
-        return views;
+      return views;
     };
 
     $scope.switchView = function(route) {
-        if (!$localStorage.views) {
-          $localStorage.views = {};
-        }
-        $localStorage.views[$stateParams.topic] = route;
-        $rootScope.$broadcast('topic-change', {topic:$stateParams.topic});
+      if (!$localStorage.views) {
+        $localStorage.views = {};
+      }
+      $localStorage.views[$stateParams.topic] = route;
+      $rootScope.$broadcast('topic-change', {
+        topic: $stateParams.topic
+      });
     };
 
     $scope.isConnected = function() {
-        return Authentication.isConnected();
+      return Authentication.isConnected();
     };
 
     window.onresize = function() {
-        $scope.$apply();
+      $scope.$apply();
     };
 
     $scope.getUser = function(field) {
-        var identity = Authentication.getIdentity();
-        return identity[field] ? identity[field] : '';
+      var identity = Authentication.getIdentity();
+      return identity[field] ? identity[field] : '';
     };
 
     $scope.isAdmin = function() {
@@ -105,49 +112,49 @@ angular.module('TatUi')
       return false;
     };
 
-    this.toggleTopicFavorite = function () {
-        if (self.data.isFavoriteTopic) {
-            TatEngineUserRsc.removeFavoriteTopic({
-                'topic': '/' + self.topic
-            }).$promise.then(function () {
-                self.data.isFavoriteTopic = false;
-                Authentication.refreshIdentity();
-            });
-        } else {
-            TatEngineUserRsc.addFavoriteTopic({
-                'topic': '/' + self.topic
-            }).$promise.then(function () {
-                self.data.isFavoriteTopic = true;
-                Authentication.refreshIdentity();
-            });
-        }
+    this.toggleTopicFavorite = function() {
+      if (self.data.isFavoriteTopic) {
+        TatEngineUserRsc.removeFavoriteTopic({
+          'topic': '/' + self.topic
+        }).$promise.then(function() {
+          self.data.isFavoriteTopic = false;
+          Authentication.refreshIdentity();
+        });
+      } else {
+        TatEngineUserRsc.addFavoriteTopic({
+          'topic': '/' + self.topic
+        }).$promise.then(function() {
+          self.data.isFavoriteTopic = true;
+          Authentication.refreshIdentity();
+        });
+      }
     };
 
-    this.toggleNotificationsTopic = function () {
-        if (self.data.isNotificationsOffTopic) {
-            TatEngineUserRsc.enableNotificationsTopic({
-                'topic': '/' + self.topic
-            }).$promise.then(function () {
-                self.data.isNotificationsOffTopic = false;
-                Authentication.refreshIdentity();
-            });
-        } else {
-            TatEngineUserRsc.disableNotificationsTopic({
-                'topic': '/' + self.topic
-            }).$promise.then(function () {
-                self.data.isNotificationsOffTopic = true;
-                Authentication.refreshIdentity();
-            });
-        }
+    this.toggleNotificationsTopic = function() {
+      if (self.data.isNotificationsOffTopic) {
+        TatEngineUserRsc.enableNotificationsTopic({
+          'topic': '/' + self.topic
+        }).$promise.then(function() {
+          self.data.isNotificationsOffTopic = false;
+          Authentication.refreshIdentity();
+        });
+      } else {
+        TatEngineUserRsc.disableNotificationsTopic({
+          'topic': '/' + self.topic
+        }).$promise.then(function() {
+          self.data.isNotificationsOffTopic = true;
+          Authentication.refreshIdentity();
+        });
+      }
     };
 
     this.isPluginViewRoute = function(route) {
-        for (var i = 0; i < views.length; i++) {
-          if (views[i].route == route) {
-            return true;
-          }
+      for (var i = 0; i < views.length; i++) {
+        if (views[i].route == route) {
+          return true;
         }
-        return false;
+      }
+      return false;
     };
 
     $rootScope.$on('$stateChangeSuccess',
@@ -157,46 +164,52 @@ angular.module('TatUi')
 
         var restrictedPlugin = Plugin.getPluginByRestriction('/' + params.topic);
         if (restrictedPlugin && restrictedPlugin.route != toState.name) {
-            $state.go(restrictedPlugin.route, {topic: params.topic}, {inherit:false, reload:false});
-            return;
+          $state.go(restrictedPlugin.route, {
+            topic: params.topic
+          }, {
+            inherit: false,
+            reload: false
+          });
+          return;
         }
 
         if (self.isPluginViewRoute(toState.name)) {
-              $rootScope.$broadcast('topic', params.topic);
-              self.topic = params.topic;
-              $scope.title = params.topic.split('/');
-              self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
-              self.data.offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
-              self.data.isFavoriteTopic = false;
-              self.data.isNotificationsOffTopic = false;
-              if (!self.data.favoriteTopics) {
-                  self.data.favoriteTopics = [];
-              }
-              if (!self.data.offNotificationsTopics) {
-                  self.data.offNotificationsTopics = [];
-              }
-              for (var i=0; i<self.data.favoriteTopics.length; i++) {
-                  if (self.data.favoriteTopics[i] === '/' + params.topic) {
-                      self.data.isFavoriteTopic = true;
-                  }
-              }
-              for (i=0; i<self.data.offNotificationsTopics.length; i++) {
-                  if (self.data.offNotificationsTopics[i] === '/' + params.topic) {
-                      self.data.isNotificationsOffTopic = true;
-                  }
-              }
+          $rootScope.$broadcast('topic', params.topic);
+          self.topic = params.topic;
+          $scope.title = params.topic.split('/');
+          self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
+          self.data.offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
+          self.data.isFavoriteTopic = false;
+          self.data.isNotificationsOffTopic = false;
+          if (!self.data.favoriteTopics) {
+            self.data.favoriteTopics = [];
+          }
+          if (!self.data.offNotificationsTopics) {
+            self.data.offNotificationsTopics = [];
+          }
+          for (var i = 0; i < self.data.favoriteTopics.length; i++) {
+            if (self.data.favoriteTopics[i] === '/' + params.topic) {
+              self.data.isFavoriteTopic = true;
+            }
+          }
+          for (i = 0; i < self.data.offNotificationsTopics.length; i++) {
+            if (self.data.offNotificationsTopics[i] === '/' + params.topic) {
+              self.data.isNotificationsOffTopic = true;
+            }
+          }
 
-              TatEngineTopicRsc.oneTopic({
-                  action: self.topic
-              }).$promise.then(function (data) {
-                  if (!data.topic) {
-                      Flash.create('danger', $translate.instant('topics_notopic'));
-                      return;
-                  }
-                  self.data.topic = data.topic;
-              }, function (err) {
-                  TatEngine.displayReturn(err);
-              });
+          TatEngineTopicRsc.oneTopic({
+            action: self.topic
+          }).$promise.then(function(data) {
+            if (!data.topic) {
+              Flash.create('danger', $translate.instant(
+                'topics_notopic'));
+              return;
+            }
+            self.data.topic = data.topic;
+          }, function(err) {
+            TatEngine.displayReturn(err);
+          });
         } else {
           $scope.title = toState.name;
         }
@@ -204,29 +217,49 @@ angular.module('TatUi')
     );
 
     $scope.$on('topic-change', function(event, meta) {
-        var topic = meta.topic.replace(/^\//, '');
-        var idMessage = meta.idMessage;
-        var reload = false;
-        if (meta.reload) {
-          reload = true;
-        }
+      var topic = meta.topic.replace(/^\//, '');
+      var idMessage = meta.idMessage;
+      var reload = false;
+      if (meta.reload) {
+        reload = true;
+      }
 
-        var restrictedPlugin = Plugin.getPluginByRestriction(meta.topic);
-        if (restrictedPlugin) {
-          $state.go(restrictedPlugin.route, {topic: topic, idMessage:idMessage}, {inherit:false, reload:reload});
-          return;
+      var restrictedPlugin = Plugin.getPluginByRestriction(meta.topic);
+      if (restrictedPlugin) {
+        $state.go(restrictedPlugin.route, {
+          topic: topic,
+          idMessage: idMessage
+        }, {
+          inherit: false,
+          reload: reload
+        });
+        return;
+      }
+      if ($localStorage && $localStorage.views && $localStorage.views[
+          topic]) {
+        if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
+          $localStorage.views[topic] = Plugin.getDefaultPlugin(meta.topic)
+            .route;
         }
-        if ($localStorage && $localStorage.views && $localStorage.views[topic]) {
-          if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
-            $localStorage.views[topic] = Plugin.getDefaultPlugin(meta.topic).route;
-          }
-          $state.go($localStorage.views[topic], {topic: topic, idMessage:idMessage}, {inherit:false, reload:reload});
-        } else {
-          $state.go(Plugin.getDefaultPlugin(meta.topic).route, {topic: topic, idMessage:idMessage}, {inherit:false, reload:reload});
-        }
+        $state.go($localStorage.views[topic], {
+          topic: topic,
+          idMessage: idMessage
+        }, {
+          inherit: false,
+          reload: reload
+        });
+      } else {
+        $state.go(Plugin.getDefaultPlugin(meta.topic).route, {
+          topic: topic,
+          idMessage: idMessage
+        }, {
+          inherit: false,
+          reload: reload
+        });
+      }
     });
 
     $scope.$on('loading', function(event, status) {
-        self.loading = status;
+      self.loading = status;
     });
-});
+  });

@@ -8,7 +8,8 @@
  * @description Socket Admin controller
  */
 angular.module('TatUi')
-    .controller('SocketsAdminCtrl', function($scope, TatEngineSocketsRsc, TatEngine) {
+  .controller('SocketsAdminCtrl', function($scope, TatEngineSocketsRsc,
+    TatEngine) {
     'use strict';
 
     /**
@@ -18,12 +19,12 @@ angular.module('TatUi')
      * @description Initialize socket admin page
      */
     this.init = function() {
-      TatEngineSocketsRsc.actionDump({}).$promise.then(function(data){
-          $scope.socketsDump = data;
+      TatEngineSocketsRsc.actionDump({}).$promise.then(function(data) {
+        $scope.socketsDump = data;
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
     this.init();
-});
+  });

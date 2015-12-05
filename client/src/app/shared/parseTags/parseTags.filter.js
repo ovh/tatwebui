@@ -14,8 +14,9 @@ angular.module('TatUi').filter('parseTags', function() {
     if (!tags) {
       return text;
     }
-    for (var i=0; i< tags.length; i++) {
-      text = text.replace("#" + tags[i], "<span class='badge'>"+tags[i]+"</span>");
+    for (var i = 0; i < tags.length; i++) {
+      text = text.replace("#" + tags[i], "<span class='badge'>" + tags[i] +
+        "</span>");
     }
     return text;
   };

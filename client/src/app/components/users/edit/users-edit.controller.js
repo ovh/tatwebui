@@ -11,7 +11,9 @@
  * @description User Edit Controller
  */
 angular.module('TatUi')
-    .controller('UsersEditCtrl', function($scope, $state, $stateParams, TatEngineUsersRsc, TatEngineUserRsc, TatEngineGroupsRsc, TatEngineGroupRsc, TatEngine) {
+  .controller('UsersEditCtrl', function($scope, $state, $stateParams,
+    TatEngineUsersRsc, TatEngineUserRsc, TatEngineGroupsRsc,
+    TatEngineGroupRsc, TatEngine) {
     'use strict';
 
     $scope.group = {};
@@ -22,7 +24,7 @@ angular.module('TatUi')
     /**
      * @ngdoc function
      * @name init
-     * @methodOf TatUi.controller:UsersEditCtrl
+     * @methodOf TatUi.controller:UsersEditCtrl 
      * @description Initialize User Edit page
      */
     this.init = function() {
@@ -32,7 +34,10 @@ angular.module('TatUi')
       $scope.askRenameUser = false;
       $scope.askUpdateUser = false;
 
-      TatEngineUsersRsc.list({username : $stateParams.username, withGroups:true}).$promise.then(function(data){
+      TatEngineUsersRsc.list({
+        username: $stateParams.username,
+        withGroups: true
+      }).$promise.then(function(data) {
         if (data.count == 1) {
           $scope.user = data.users[0];
 
@@ -40,13 +45,13 @@ angular.module('TatUi')
           $scope.newEmail = $scope.user.email;
         }
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
 
-      TatEngineGroupsRsc.list().$promise.then(function(data){
+      TatEngineGroupsRsc.list().$promise.then(function(data) {
         $scope.groups = data.groups;
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -57,7 +62,10 @@ angular.module('TatUi')
      * @description Init Request (Body Json) with groupname and username
      */
     this.initRequest = function(groupname) {
-        return {'groupname': groupname, 'username': $scope.user.username};
+      return {
+        'groupname': groupname,
+        'username': $scope.user.username
+      };
     };
 
     /**
@@ -68,10 +76,10 @@ angular.module('TatUi')
      */
     $scope.addUserInGroup = function() {
       var r = _self.initRequest($scope.group.selected.name);
-      TatEngineGroupRsc.addUser(r).$promise.then(function(data){
+      TatEngineGroupRsc.addUser(r).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -83,11 +91,13 @@ angular.module('TatUi')
      * @description Remove a user from a group
      */
     $scope.removeUserFromGroup = function(groupname) {
-      TatEngineGroupRsc.removeUser(_self.initRequest(groupname)).$promise.then(function(data){
-        _self.init();
-      }, function(err) {
+      TatEngineGroupRsc.removeUser(_self.initRequest(groupname)).$promise.then(
+        function(data) {
+          _self.init();
+        },
+        function(err) {
           TatEngine.displayReturn(err);
-      });
+        });
     };
 
     /**
@@ -97,10 +107,12 @@ angular.module('TatUi')
      * @description Archive current user
      */
     $scope.archiveUser = function() {
-      TatEngineUserRsc.archive({'username': $scope.user.username}).$promise.then(function(data){
+      TatEngineUserRsc.archive({
+        'username': $scope.user.username
+      }).$promise.then(function(data) {
         $state.go('users-list');
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -112,10 +124,13 @@ angular.module('TatUi')
      * @description Convert a user to a system user
      */
     $scope.convertSystemUser = function(canWriteNotifications) {
-      TatEngineUserRsc.convert({'username': $scope.user.username, 'canWriteNotifications': canWriteNotifications}).$promise.then(function(data){
+      TatEngineUserRsc.convert({
+        'username': $scope.user.username,
+        'canWriteNotifications': canWriteNotifications
+      }).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -126,10 +141,12 @@ angular.module('TatUi')
      * @description Grant a user to admin rights
      */
     $scope.convertAdminUser = function() {
-      TatEngineUserRsc.setAdmin({'username': $scope.user.username}).$promise.then(function(data){
+      TatEngineUserRsc.setAdmin({
+        'username': $scope.user.username
+      }).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -140,10 +157,15 @@ angular.module('TatUi')
      * @description Rename username of user
      */
     $scope.renameUser = function() {
-      TatEngineUserRsc.rename({'username': $scope.user.username, 'newUsername': $scope.newUsername}).$promise.then(function(data){
-        $state.go('users-edit', {username: $scope.newUsername});
+      TatEngineUserRsc.rename({
+        'username': $scope.user.username,
+        'newUsername': $scope.newUsername
+      }).$promise.then(function(data) {
+        $state.go('users-edit', {
+          username: $scope.newUsername
+        });
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -155,12 +177,16 @@ angular.module('TatUi')
      * @description Update fullname and email of user
      */
     $scope.updateUser = function() {
-      TatEngineUserRsc.update({'username': $scope.user.username, 'newFullname': $scope.newFullname, 'newEmail': $scope.newEmail}).$promise.then(function(data){
+      TatEngineUserRsc.update({
+        'username': $scope.user.username,
+        'newFullname': $scope.newFullname,
+        'newEmail': $scope.newEmail
+      }).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
     this.init();
-});
+  });

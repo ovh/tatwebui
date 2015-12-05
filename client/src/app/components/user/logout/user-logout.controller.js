@@ -10,9 +10,10 @@
  *
  */
 
-angular.module('TatUi').controller('UserLogoutCtrl', function ($scope, $state, Authentication) {
-    'use strict';
+angular.module('TatUi').controller('UserLogoutCtrl', function($scope, $state,
+  Authentication) {
+  'use strict';
 
-    Authentication.disconnect();
-    $state.go('user-login');
+  Authentication.disconnect();
+  $state.go('user-login');
 });

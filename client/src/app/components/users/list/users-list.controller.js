@@ -8,11 +8,11 @@
  * @description Users List Controller
  */
 angular.module('TatUi')
-    .controller('UsersListCtrl', function($scope, TatEngineUsersRsc, TatEngine) {
+  .controller('UsersListCtrl', function($scope, TatEngineUsersRsc, TatEngine) {
     'use strict';
 
     $scope.data = {
-      filterusername : ""
+      filterusername: ""
     };
 
     /**
@@ -23,15 +23,15 @@ angular.module('TatUi')
      */
     $scope.init = function() {
       var criteria = {
-        "username" : $scope.data.filterusername
+        "username": $scope.data.filterusername
       };
-      TatEngineUsersRsc.list(criteria).$promise.then(function(data){
+      TatEngineUsersRsc.list(criteria).$promise.then(function(data) {
         $scope.data.users = data.users;
         $scope.data.count = data.count;
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
     $scope.init();
-});
+  });

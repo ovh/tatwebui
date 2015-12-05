@@ -10,11 +10,11 @@
  *
  */
 angular.module('TatUi')
-    .controller('GroupsListCtrl', function($scope, TatEngineGroupsRsc, TatEngine) {
+  .controller('GroupsListCtrl', function($scope, TatEngineGroupsRsc, TatEngine) {
     'use strict';
 
     $scope.data = {
-      filtername : "",
+      filtername: "",
       adminOfOneGroup: false
     };
 
@@ -26,21 +26,21 @@ angular.module('TatUi')
      */
     $scope.init = function() {
       var criteria = {
-        "name" : $scope.data.filtername
+        "name": $scope.data.filtername
       };
-      TatEngineGroupsRsc.list(criteria).$promise.then(function(data){
-          for (var i = 0; i < data.groups.length; i++) {
-            if (data.groups[i].adminUsers) {
-              $scope.data.adminOfOneGroup = true;
-              break;
-            }
+      TatEngineGroupsRsc.list(criteria).$promise.then(function(data) {
+        for (var i = 0; i < data.groups.length; i++) {
+          if (data.groups[i].adminUsers) {
+            $scope.data.adminOfOneGroup = true;
+            break;
           }
-          $scope.data.groups = data.groups;
-          $scope.data.count = data.count;
+        }
+        $scope.data.groups = data.groups;
+        $scope.data.count = data.count;
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
     $scope.init();
-});
+  });

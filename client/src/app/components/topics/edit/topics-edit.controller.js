@@ -13,7 +13,9 @@
  *
  */
 angular.module('TatUi')
-    .controller('TopicsEditCtrl', function($scope, $stateParams, Authentication, TatEngineUsersRsc, TatEngineGroupsRsc, TatEngineTopicsRsc, TatEngineTopicRsc, TatEngine) {
+  .controller('TopicsEditCtrl', function($scope, $stateParams, Authentication,
+    TatEngineUsersRsc, TatEngineGroupsRsc, TatEngineTopicsRsc,
+    TatEngineTopicRsc, TatEngine) {
     'use strict';
 
     $scope.topic = {};
@@ -26,7 +28,7 @@ angular.module('TatUi')
 
     var _self = this;
 
-    /**
+    /** 
      * @ngdoc function
      * @name init
      * @methodOf TatUi.controller:TopicsEditCtrl
@@ -34,28 +36,31 @@ angular.module('TatUi')
      *
      */
     this.init = function() {
-      TatEngineTopicsRsc.list({idTopic : $stateParams.topicId}).$promise.then(function(data){
+      TatEngineTopicsRsc.list({
+        idTopic: $stateParams.topicId
+      }).$promise.then(function(data) {
         if (data.count === 1) {
           $scope.topic = data.topics[0];
-          if ($scope.isAdmin() || _.contains($scope.topic.adminUsers, Authentication.getIdentity().username)) {
+          if ($scope.isAdmin() || _.contains($scope.topic.adminUsers,
+              Authentication.getIdentity().username)) {
             // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
             $scope.data.isAdminOnTopic = true;
           }
         }
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
 
-      TatEngineUsersRsc.list().$promise.then(function(data){
+      TatEngineUsersRsc.list().$promise.then(function(data) {
         $scope.users = data.users;
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
 
-      TatEngineGroupsRsc.list().$promise.then(function(data){
+      TatEngineGroupsRsc.list().$promise.then(function(data) {
         $scope.groups = data.groups;
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -69,7 +74,11 @@ angular.module('TatUi')
      *
      */
     this.initRequestUser = function(username, recursive) {
-        return {'topic': $scope.topic.topic, 'username': username, 'recursive': recursive};
+      return {
+        'topic': $scope.topic.topic,
+        'username': username,
+        'recursive': recursive
+      };
     };
 
     /**
@@ -81,7 +90,11 @@ angular.module('TatUi')
      * @description initialize body of request with topic & groupname
      */
     this.initRequestGroup = function(groupname, recursive) {
-        return {'topic': $scope.topic.topic, 'groupname': groupname, 'recursive': recursive};
+      return {
+        'topic': $scope.topic.topic,
+        'groupname': groupname,
+        'recursive': recursive
+      };
     };
 
     /**
@@ -92,10 +105,11 @@ angular.module('TatUi')
      * @description Add a read only user on topic
      */
     $scope.addRoUser = function(recursive) {
-      TatEngineTopicRsc.addRoUser(_self.initRequestUser($scope.user.selected.username, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.addRoUser(_self.initRequestUser($scope.user.selected
+        .username, recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -108,10 +122,11 @@ angular.module('TatUi')
      * @description Remove a read only user from topic
      */
     $scope.removeRoUser = function(username, recursive) {
-      TatEngineTopicRsc.removeRoUser(_self.initRequestUser(username, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.removeRoUser(_self.initRequestUser(username,
+        recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -123,10 +138,11 @@ angular.module('TatUi')
      * @description Add a Read Write user on topic
      */
     $scope.addRwUser = function(recursive) {
-      TatEngineTopicRsc.addRwUser(_self.initRequestUser($scope.user.selected.username, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.addRwUser(_self.initRequestUser($scope.user.selected
+        .username, recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -139,10 +155,11 @@ angular.module('TatUi')
      * @description Removed a Read Write user on topic
      */
     $scope.removeRwUser = function(username, recursive) {
-      TatEngineTopicRsc.removeRwUser(_self.initRequestUser(username, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.removeRwUser(_self.initRequestUser(username,
+        recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -154,10 +171,11 @@ angular.module('TatUi')
      * @description Add an admin user on topic
      */
     $scope.addAdminUser = function(recursive) {
-      TatEngineTopicRsc.addAdminUser(_self.initRequestUser($scope.user.selected.username, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.addAdminUser(_self.initRequestUser($scope.user.selected
+        .username, recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -170,10 +188,11 @@ angular.module('TatUi')
      * @description Remove an admin user from topic
      */
     $scope.removeAdminUser = function(username, recursive) {
-      TatEngineTopicRsc.removeAdminUser(_self.initRequestUser(username, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.removeAdminUser(_self.initRequestUser(username,
+        recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -185,10 +204,11 @@ angular.module('TatUi')
      * @description Add a Read Only group on topic
      */
     $scope.addRoGroup = function(recursive) {
-      TatEngineTopicRsc.addRoGroup(_self.initRequestGroup($scope.group.selected.name, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.addRoGroup(_self.initRequestGroup($scope.group.selected
+        .name, recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -201,10 +221,11 @@ angular.module('TatUi')
      * @description Remove a Read Only group from topic
      */
     $scope.removeRoGroup = function(groupname, recursive) {
-      TatEngineTopicRsc.removeRoGroup(_self.initRequestGroup(groupname, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.removeRoGroup(_self.initRequestGroup(groupname,
+        recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -216,10 +237,11 @@ angular.module('TatUi')
      * @description Add a Read Write group on topic
      */
     $scope.addRwGroup = function(recursive) {
-      TatEngineTopicRsc.addRwGroup(_self.initRequestGroup($scope.group.selected.name, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.addRwGroup(_self.initRequestGroup($scope.group.selected
+        .name, recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -232,10 +254,11 @@ angular.module('TatUi')
      * @description Remove a Read Write group from topic
      */
     $scope.removeRwGroup = function(groupname, recursive) {
-      TatEngineTopicRsc.removeRwGroup(_self.initRequestGroup(groupname, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.removeRwGroup(_self.initRequestGroup(groupname,
+        recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -247,10 +270,11 @@ angular.module('TatUi')
      * @description Add an Admin group on topic
      */
     $scope.addAdminGroup = function(recursive) {
-      TatEngineTopicRsc.addAdminGroup(_self.initRequestGroup($scope.group.selected.name, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.addAdminGroup(_self.initRequestGroup($scope.group.selected
+        .name, recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -263,10 +287,11 @@ angular.module('TatUi')
      * @description Remove an Admin group from topic
      */
     $scope.removeAdminGroup = function(groupname, recursive) {
-      TatEngineTopicRsc.removeAdminGroup(_self.initRequestGroup(groupname, recursive)).$promise.then(function(data){
+      TatEngineTopicRsc.removeAdminGroup(_self.initRequestGroup(groupname,
+        recursive)).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -278,8 +303,7 @@ angular.module('TatUi')
      * @description Update Topic Parameters : maxlength, candForceDate, canUpdateMsg, canDeleteMsg, canUpdateAllMsg, canDeleteAllMsg, isROPublic
      */
     $scope.updateParam = function(recursive) {
-      TatEngineTopicRsc.updateParam(
-      {
+      TatEngineTopicRsc.updateParam({
         "topic": $scope.topic.topic,
         "recursive": recursive,
         "maxlength": $scope.topic.maxlength,
@@ -289,13 +313,12 @@ angular.module('TatUi')
         "canUpdateAllMsg": $scope.topic.canUpdateAllMsg,
         "canDeleteAllMsg": $scope.topic.canDeleteAllMsg,
         "isROPublic": $scope.topic.isROPublic
-      }
-      ).$promise.then(function(data){
+      }).$promise.then(function(data) {
         _self.init();
       }, function(err) {
-          console.log(err);
+        console.log(err);
       });
     };
 
     this.init();
-});
+  });

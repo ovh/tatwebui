@@ -8,11 +8,11 @@
  * @description Topics List Controller
  */
 angular.module('TatUi')
-    .controller('TopicsListCtrl', function($scope, TatEngineTopicsRsc, TatEngine) {
+  .controller('TopicsListCtrl', function($scope, TatEngineTopicsRsc, TatEngine) {
     'use strict';
 
     $scope.data = {
-      filtertopic : "",
+      filtertopic: "",
       getForTatAdmin: false,
       adminOfOneTopic: false
     };
@@ -25,10 +25,10 @@ angular.module('TatUi')
      */
     $scope.init = function() {
       var criteria = {
-        "topic" : $scope.data.filtertopic,
+        "topic": $scope.data.filtertopic,
         "getForTatAdmin": $scope.data.getForTatAdmin
       };
-      TatEngineTopicsRsc.list(criteria).$promise.then(function(data){
+      TatEngineTopicsRsc.list(criteria).$promise.then(function(data) {
         for (var i = 0; i < data.topics.length; i++) {
           if (data.topics[i].adminUsers || data.topics[i].adminGroups) {
             $scope.data.adminOfOneTopic = true;
@@ -38,7 +38,7 @@ angular.module('TatUi')
         $scope.data.topics = data.topics;
         $scope.data.count = data.count;
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -52,11 +52,11 @@ angular.module('TatUi')
         return false;
       }
       return topic.adminUsers || topic.adminGroups ||
-      topic.roUsers ||
-      topic.rwUsers ||
-      topic.roGroups ||
-      topic.rwGroups;
+        topic.roUsers ||
+        topic.rwUsers ||
+        topic.roGroups ||
+        topic.rwGroups;
     };
 
     $scope.init();
-});
+  });

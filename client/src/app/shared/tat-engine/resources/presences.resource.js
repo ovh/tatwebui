@@ -8,21 +8,23 @@
  *
  */
 angular.module('TatUi').service('TatEnginePresencesRsc', function($resource) {
-    'use strict';
-    return $resource('tatengine/presences/:topic', {'topic': '@topic'}, {
+  'use strict';
+  return $resource('tatengine/presences/:topic', {
+    'topic': '@topic'
+  }, {
 
-        /**
-         * @ngdoc function
-         * @name list
-         * @methodOf TatUi.resource:TatEnginePresencesRsc
-         * @restMethod GET
-         * @description
-         *
-         * @return {object} Promise
-         */
-        list: {
-            method: 'GET',
-            isArray: false
-        }
-    });
+    /**
+     * @ngdoc function
+     * @name list
+     * @methodOf TatUi.resource:TatEnginePresencesRsc
+     * @restMethod GET
+     * @description
+     *
+     * @return {object} Promise
+     */
+    list: {
+      method: 'GET',
+      isArray: false
+    }
+  });
 });

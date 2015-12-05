@@ -12,6 +12,6 @@
 angular.module('TatUi').filter('shortener', function() {
   'use strict';
   return function(input, length) {
-    return input.substr(0,length) + (input.length>length ? '...' : '');
+    return input.substr(0, length) + (input.length > length ? '...' : '');
   };
 });

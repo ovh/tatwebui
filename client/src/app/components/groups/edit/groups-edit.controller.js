@@ -14,7 +14,8 @@
  *
  */
 angular.module('TatUi')
-    .controller('GroupsEditCtrl', function($scope, $stateParams, Authentication, TatEngineUsersRsc, TatEngineGroupsRsc, TatEngineGroupRsc, TatEngine) {
+  .controller('GroupsEditCtrl', function($scope, $stateParams, Authentication,
+    TatEngineUsersRsc, TatEngineGroupsRsc, TatEngineGroupRsc, TatEngine) {
     'use strict';
 
     $scope.group = {};
@@ -26,28 +27,34 @@ angular.module('TatUi')
 
     var _self = this;
     this.init = function() {
-      TatEngineGroupsRsc.list({idGroup : $stateParams.groupId}).$promise.then(function(data){
+      TatEngineGroupsRsc.list({
+        idGroup: $stateParams.groupId
+      }).$promise.then(function(data) {
         if (data.count === 1) {
           $scope.group = data.groups[0];
-          if ($scope.isAdmin() || _.contains($scope.group.adminUsers, Authentication.getIdentity().username)) {
+          if ($scope.isAdmin() || _.contains($scope.group.adminUsers,
+              Authentication.getIdentity().username)) {
             $scope.data.isAdminOnGroup = true;
 
             // fetch users list, only for admin
-            TatEngineUsersRsc.list().$promise.then(function(data){
+            TatEngineUsersRsc.list().$promise.then(function(data) {
               $scope.users = data.users;
             }, function(err) {
-                TatEngine.displayReturn(err);
+              TatEngine.displayReturn(err);
             });
           }
         }
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
 
     this.initRequest = function(username) {
-        return {'groupname': $scope.group.name, 'username': username};
+      return {
+        'groupname': $scope.group.name,
+        'username': username
+      };
     };
 
     /**
@@ -59,10 +66,10 @@ angular.module('TatUi')
      */
     $scope.addUser = function() {
       var r = _self.initRequest($scope.user.selected.username);
-      TatEngineGroupRsc.addUser(r).$promise.then(function(){
+      TatEngineGroupRsc.addUser(r).$promise.then(function() {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -74,11 +81,13 @@ angular.module('TatUi')
      *
      */
     $scope.removeUser = function(username) {
-      TatEngineGroupRsc.removeUser(_self.initRequest(username)).$promise.then(function(){
-        _self.init();
-      }, function(err) {
+      TatEngineGroupRsc.removeUser(_self.initRequest(username)).$promise.then(
+        function() {
+          _self.init();
+        },
+        function(err) {
           TatEngine.displayReturn(err);
-      });
+        });
     };
 
     /**
@@ -90,10 +99,10 @@ angular.module('TatUi')
      */
     $scope.addAdmin = function() {
       var r = _self.initRequest($scope.user.selected.username);
-      TatEngineGroupRsc.addAdmin(r).$promise.then(function(){
+      TatEngineGroupRsc.addAdmin(r).$promise.then(function() {
         _self.init();
       }, function(err) {
-          TatEngine.displayReturn(err);
+        TatEngine.displayReturn(err);
       });
     };
 
@@ -105,12 +114,14 @@ angular.module('TatUi')
      *
      */
     $scope.removeAdmin = function(username) {
-      TatEngineGroupRsc.removeAdmin(_self.initRequest(username)).$promise.then(function(){
-        _self.init();
-      }, function(err) {
+      TatEngineGroupRsc.removeAdmin(_self.initRequest(username)).$promise.then(
+        function() {
+          _self.init();
+        },
+        function(err) {
           TatEngine.displayReturn(err);
-      });
+        });
     };
 
     this.init();
-});
+  });
