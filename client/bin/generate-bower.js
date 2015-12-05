@@ -3,7 +3,7 @@
   'use strict';
 
   var cwd = '.';
-  var teplatePattern = /\.tpl\.json$/;
+  var templatePattern = /\.tpl\.json$/;
   var bowerFilename = 'bower.json';
   var output = {};
 
@@ -31,7 +31,7 @@
     }).filter(function(file) {
       return fs.statSync(file).isFile();
     }).forEach(function(file) {
-      if (teplatePattern.test(file)) {
+      if (templatePattern.test(file)) {
         console.log('Merging', file);
         deepExtend(output, loadJsonFile(file));
         fs.writeFileSync(bowerFilename, JSON.stringify(output, null,
