@@ -2,6 +2,7 @@
 angular.module('TatUi')
   .controller('MasterCtrl', function MasterCtrl($scope, $rootScope,
     Authentication, $cookieStore, $state, appConfiguration, TatEngineUserRsc,
+    TatEngine,
     TatEngineTopicRsc, Flash, Plugin, $localStorage, $stateParams, $translate
   ) {
     'use strict';
@@ -162,51 +163,55 @@ angular.module('TatUi')
         $scope.path = toState.name.split('-');
         self.data.state = toState.name;
 
-        var restrictedPlugin = Plugin.getPluginByRestriction('/' + params.topic);
-        if (restrictedPlugin && restrictedPlugin.route != toState.name) {
-          $state.go(restrictedPlugin.route, {
-            topic: params.topic
-          }, {
-            inherit: false,
-            reload: false
-          });
-          return;
-        }
-
         if (self.isPluginViewRoute(toState.name)) {
           $rootScope.$broadcast('topic', params.topic);
           self.topic = params.topic;
-          $scope.title = params.topic.split('/');
-          self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
-          self.data.offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
-          self.data.isFavoriteTopic = false;
-          self.data.isNotificationsOffTopic = false;
-          if (!self.data.favoriteTopics) {
-            self.data.favoriteTopics = [];
-          }
-          if (!self.data.offNotificationsTopics) {
-            self.data.offNotificationsTopics = [];
-          }
-          for (var i = 0; i < self.data.favoriteTopics.length; i++) {
-            if (self.data.favoriteTopics[i] === '/' + params.topic) {
-              self.data.isFavoriteTopic = true;
-            }
-          }
-          for (i = 0; i < self.data.offNotificationsTopics.length; i++) {
-            if (self.data.offNotificationsTopics[i] === '/' + params.topic) {
-              self.data.isNotificationsOffTopic = true;
-            }
-          }
 
           TatEngineTopicRsc.oneTopic({
             action: self.topic
           }).$promise.then(function(data) {
             if (!data.topic) {
-              Flash.create('danger', $translate.instant(
-                'topics_notopic'));
+              Flash.create('danger',
+                $translate.instant('topics_notopic'));
               return;
             }
             self.data.topic = data.topic;
+
+            $scope.title = params.topic.split('/');
+            self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
+            self.data.offNotificationsTopics = Authentication.getIdentity()
+              .offNotificationsTopics;
+            self.data.isFavoriteTopic = false;
+            self.data.isNotificationsOffTopic = false;
+            if (!self.data.favoriteTopics) {
+              self.data.favoriteTopics = [];
+            }
+            if (!self.data.offNotificationsTopics) {
+              self.data.offNotificationsTopics = [];
+            }
+            for (var i = 0; i < self.data.favoriteTopics.length; i++) {
+              if (self.data.favoriteTopics[i] === '/' + params.topic) {
+                self.data.isFavoriteTopic = true;
+              }
+            }
+            for (i = 0; i < self.data.offNotificationsTopics.length; i++) {
+              if (self.data.offNotificationsTopics[i] === '/' + params.topic) {
+                self.data.isNotificationsOffTopic = true;
+              }
+            }
+
+            var restrictedPlugin =
+              Plugin.getPluginByRestriction(self.data.topic);
+            if (restrictedPlugin && restrictedPlugin.route != toState.name) {
+              $state.go(restrictedPlugin.route, {
+                topic: params.topic
+              }, {
+                inherit: false,
+                reload: false
+              });
+              return;
+            }
+
           }, function(err) {
             TatEngine.displayReturn(err);
           });
@@ -224,39 +229,50 @@ angular.module('TatUi')
         reload = true;
       }
 
-      var restrictedPlugin = Plugin.getPluginByRestriction(meta.topic);
-      if (restrictedPlugin) {
-        $state.go(restrictedPlugin.route, {
-          topic: topic,
-          idMessage: idMessage
-        }, {
-          inherit: false,
-          reload: reload
-        });
-        return;
-      }
-      if ($localStorage && $localStorage.views && $localStorage.views[
-          topic]) {
-        if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
-          $localStorage.views[topic] = Plugin.getDefaultPlugin(meta.topic)
-            .route;
+      TatEngineTopicRsc.oneTopic({
+        action: topic
+      }).$promise.then(function(data) {
+        if (!data.topic) {
+          Flash.create('danger',
+            $translate.instant('topics_notopic'));
+          return;
         }
-        $state.go($localStorage.views[topic], {
-          topic: topic,
-          idMessage: idMessage
-        }, {
-          inherit: false,
-          reload: reload
-        });
-      } else {
-        $state.go(Plugin.getDefaultPlugin(meta.topic).route, {
-          topic: topic,
-          idMessage: idMessage
-        }, {
-          inherit: false,
-          reload: reload
-        });
-      }
+        var restrictedPlugin = Plugin.getPluginByRestriction(data.topic);
+        if (restrictedPlugin) {
+          $state.go(restrictedPlugin.route, {
+            topic: topic,
+            idMessage: idMessage
+          }, {
+            inherit: false,
+            reload: reload
+          });
+          return;
+        }
+        if ($localStorage && $localStorage.views && $localStorage.views[
+            topic]) {
+          if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
+            $localStorage.views[topic] =
+              Plugin.getDefaultPlugin(data.topic).route;
+          }
+          $state.go($localStorage.views[topic], {
+            topic: topic,
+            idMessage: idMessage
+          }, {
+            inherit: false,
+            reload: reload
+          });
+        } else {
+          $state.go(Plugin.getDefaultPlugin(data.topic).route, {
+            topic: topic,
+            idMessage: idMessage
+          }, {
+            inherit: false,
+            reload: reload
+          });
+        }
+      }, function(err) {
+        TatEngine.displayReturn(err);
+      });
     });
 
     $scope.$on('loading', function(event, status) {

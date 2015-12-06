@@ -13,64 +13,128 @@
       </div>
   </div>
 
-  <div class="row" data-ng-if="topic._id">
-    <h4>{{ 'shared_common_parameters' | translate }}</h4>
-    <div class="col-lg-6">
-      <form role="form">
-        <div class="form-group">
-          <label for="maxlength">{{ 'shared_common_topic' | translate}}</label>
-          <input type="number" class="form-control" id="maxlength" data-ng-model="topic.maxlength" min="10" data-ng-required="true">
+  <form role="form">
+    <div class="row" data-ng-if="topic._id">
+      <h4>{{ 'shared_common_parameters' | translate }}</h4>
+      <div class="col-lg-6">
+          <div class="form-group">
+            <label for="maxlength">{{ 'components_topics_max_message_length' | translate}}</label>
+            <input type="number" class="form-control" id="maxlength" data-ng-model="topic.maxlength" min="10" data-ng-required="true">
+          </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.canForceDate">
+               {{ 'components_topics_can_force_date' | translate}}
+             </label>
+          </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.canUpdateMsg">
+               {{ 'components_topics_can_update_msg' | translate}}
+             </label>
+          </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.canDeleteMsg">
+               {{ 'components_topics_can_delete_msg' | translate}}
+             </label>
+          </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.canUpdateAllMsg">
+               {{ 'components_topics_can_update_all_msg' | translate}}
+             </label>
+          </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.canDeleteAllMsg">
+               {{ 'components_topics_can_delete_all_msg' | translate}}
+             </label>
+          </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.isROPublic">
+               {{ 'components_topics_is_ro_public' | translate}}
+             </label>
+          </div>
+      </div>
+      <div class="col-lg-6">
+        <h5>{{'components_topics_views_parameters' | translate}}</h5>
+        <div class="alert alert-info">
+          <ul>
+            <li>tatwebui.view.restricted : {{ 'components_topics_tatwebui_view_restricted' | translate}}</li>
+            <li>tatwebui.view.default : {{ 'components_topics_tatwebui_view_default' | translate}}</li>
         </div>
-        <div class="checkbox">
-           <label>
-             <input type="checkbox" data-ng-model="topic.canForceDate">
-             {{ 'components_topics_can_force_date' | translate}}
-           </label>
+        <div ng-repeat="param in topic.parameters | filter:{key:'tatwebui.view'}" class="row colm">
+          <div class="col-md-5">
+            <input type="text" class="form-control" data-ng-model="param.key">
+          </div>
+          <div class="col-md-6" data-ng-show="!param.deleting">
+            <ui-select data-ng-model="param.value" theme="bootstrap">
+              <ui-select-match placeholder="Select a view...">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="view.route as view in data.viewsPlugins | filter: $select.search">
+                <div>{{view.name}}</div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-1">
+            <button data-ng-click="param.deleting=true" class="btn btn-default" data-ng-show="!param.deleting">
+              <i class="fa fa-trash"></i>
+            </button>
+            <div data-ng-show="param.deleting">
+                <button class="btn btn-danger" data-ng-click="removeParameter(param)">
+                    <i class="fa fa-trash"></i>
+                    {{ 'shared_common_yes_i_confirm' | translate }}
+                </button>
+                <button class="btn btn-default" data-ng-click="cancelDeleteParameter(param)">
+                    <i class="fa fa-ban"></i>
+                    {{ 'shared_common_cancel' | translate }}
+                </button>
+            </div>
+          </div>
         </div>
-        <div class="checkbox">
-           <label>
-             <input type="checkbox" data-ng-model="topic.canUpdateMsg">
-             {{ 'components_topics_can_update_msg' | translate}}
-           </label>
+
+        <h5>{{'components_topics_others_parameters' | translate}}</h5>
+        <div ng-repeat="param in topic.parameters | filter:{key:'!tatwebui.view'}" class="row colm">
+          <div class="col-md-5">
+            <input type="text" class="form-control" data-ng-model="param.key">
+          </div>
+          <div class="col-md-6" data-ng-show="!param.deleting">
+            <input type="text" class="form-control" data-ng-model="param.value">
+          </div>
+          <div class="col-md-1">
+            <button data-ng-click="param.deleting=true" class="btn btn-default" data-ng-show="!param.deleting">
+              <i class="fa fa-trash"></i>
+            </button>
+            <div data-ng-show="param.deleting">
+                <button class="btn btn-danger" data-ng-click="removeParameter(param)">
+                    <i class="fa fa-trash"></i>
+                    {{ 'shared_common_yes_i_confirm' | translate }}
+                </button>
+                <button class="btn btn-default" data-ng-click="cancelDeleteParameter(param)">
+                    <i class="fa fa-ban"></i>
+                    {{ 'shared_common_cancel' | translate }}
+                </button>
+            </div>
+          </div>
         </div>
-        <div class="checkbox">
-           <label>
-             <input type="checkbox" data-ng-model="topic.canDeleteMsg">
-             {{ 'components_topics_can_delete_msg' | translate}}
-           </label>
-        </div>
-        <div class="checkbox">
-           <label>
-             <input type="checkbox" data-ng-model="topic.canUpdateAllMsg">
-             {{ 'components_topics_can_update_all_msg' | translate}}
-           </label>
-        </div>
-        <div class="checkbox">
-           <label>
-             <input type="checkbox" data-ng-model="topic.canDeleteAllMsg">
-             {{ 'components_topics_can_delete_all_msg' | translate}}
-           </label>
-        </div>
-        <div class="checkbox">
-           <label>
-             <input type="checkbox" data-ng-model="topic.isROPublic">
-             {{ 'components_topics_is_ro_public' | translate}}
-           </label>
-        </div>
-        <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-default" data-ng-click="updateParam(false)">
-          {{ 'shared_common_validate' | translate}}
-        </button>
-        <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-default" data-ng-click="updateParam(true)">
-          {{ 'shared_common_validate' | translate}} {{ 'shared_common_recursively' | translate}}
-        </button>
-      </form>
+        <button data-ng-click="newParameter()" class="btn btn-default">{{ 'components_topics_add_parameter' | translate}}</button>
+      </div>
     </div>
-  </div>
+    <div class="row">
+      <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-primary" data-ng-click="updateParam(false)">
+        {{ 'shared_common_validate' | translate}}
+      </button>
+      <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-default" data-ng-click="updateParam(true)">
+        {{ 'shared_common_validate' | translate}} {{ 'shared_common_recursively' | translate}}
+      </button>
+    </div>
+  </form>
 
   <div class="row" data-ng-if="topic._id">
     <h4>{{ 'shared_common_users' | translate }}</h4>
     <div class="col-lg-6" data-ng-if="isAdmin() || data.isAdminOnTopic" >
-      <ui-select data-ng-model="user.selected" theme="bootstrap">
+        <ui-select data-ng-model="user.selected" theme="bootstrap">
           <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
           <ui-select-choices repeat="item in users | filter: $select.search">
             <div>{{item.username}}</div>

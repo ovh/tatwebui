@@ -52,6 +52,7 @@
     <translation id="shared_common_fail">Echec</translation>
     <translation id="shared_common_back">Retour</translation>
     <translation id="shared_common_yes_i_confirm">Oui, je confirme</translation>
+    <translation id="shared_common_cancel">Annuler</translation>
     <translation id="shared_common_name">Nom</translation>
     <translation id="shared_common_description">Description</translation>
     <translation id="shared_common_users">Utilisateurs</translation>

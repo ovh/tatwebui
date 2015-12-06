@@ -15,7 +15,7 @@
 angular.module('TatUi')
   .controller('TopicsEditCtrl', function($scope, $stateParams, Authentication,
     TatEngineUsersRsc, TatEngineGroupsRsc, TatEngineTopicsRsc,
-    TatEngineTopicRsc, TatEngine) {
+    TatEngineTopicRsc, TatEngine, Plugin) {
     'use strict';
 
     $scope.topic = {};
@@ -23,12 +23,13 @@ angular.module('TatUi')
     $scope.group = {};
 
     $scope.data = {
-      isAdminOnTopic: false
+      isAdminOnTopic: false,
+      viewsPlugins: Plugin.getPluginsMessagesViews()
     };
 
     var _self = this;
 
-    /** 
+    /**
      * @ngdoc function
      * @name init
      * @methodOf TatUi.controller:TopicsEditCtrl
@@ -46,6 +47,7 @@ angular.module('TatUi')
             // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
             $scope.data.isAdminOnTopic = true;
           }
+          _self.checkParametersView();
         }
       }, function(err) {
         TatEngine.displayReturn(err);
@@ -62,6 +64,43 @@ angular.module('TatUi')
       }, function(err) {
         TatEngine.displayReturn(err);
       });
+    };
+
+    /**
+     * @ngdoc function
+     * @name checkParametersView
+     * @methodOf TatUi.controller:TopicsEditCtrl
+     * @description add defaultview and restrictedview parameters
+     *
+     */
+    this.checkParametersView = function() {
+      var hasDefaultView = false;
+      var hasRestrictedView = false;
+
+      if (!$scope.topic.parameters) {
+        $scope.topic.parameters = [];
+      }
+
+      for (var i = 0; i < $scope.topic.parameters.length; i++) {
+        if ($scope.topic.parameters[i].key === "tatwebui.view.default") {
+          hasDefaultView = true;
+        } else if ($scope.topic.parameters[i].key ===
+          "tatwebui.view.restricted") {
+          hasRestrictedView = true;
+        }
+      }
+      if (!hasDefaultView) {
+        $scope.topic.parameters.push({
+          key: 'tatwebui.view.default',
+          value: ''
+        });
+      }
+      if (!hasRestrictedView) {
+        $scope.topic.parameters.push({
+          key: 'tatwebui.view.restricted',
+          value: ''
+        });
+      }
     };
 
     /**
@@ -312,12 +351,29 @@ angular.module('TatUi')
         "canDeleteMsg": $scope.topic.canDeleteMsg,
         "canUpdateAllMsg": $scope.topic.canUpdateAllMsg,
         "canDeleteAllMsg": $scope.topic.canDeleteAllMsg,
-        "isROPublic": $scope.topic.isROPublic
+        "isROPublic": $scope.topic.isROPublic,
+        "parameters": $scope.topic.parameters
       }).$promise.then(function(data) {
         _self.init();
+        TatEngine.displayReturn(data);
       }, function(err) {
         console.log(err);
       });
+    };
+
+    $scope.newParameter = function() {
+      $scope.topic.parameters.push({
+        key: 'key',
+        value: 'value'
+      });
+    };
+
+    $scope.removeParameter = function(parameter) {
+      _.pull($scope.topic.parameters, parameter);
+    };
+
+    $scope.cancelDeleteParameter = function(parameter) {
+      delete parameter.deleting;
     };
 
     this.init();

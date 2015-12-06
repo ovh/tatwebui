@@ -29,7 +29,7 @@ angular.module('TatUi').provider('Plugin', function() {
 
   /**
    * @ngdoc function
-   * @name getPluginsMessagesViews 
+   * @name getPluginsMessagesViews
    * @methodOf TatUi.PluginProvider
    * @module TatUi
    * @description get list of registered plugins of messages-views
@@ -45,27 +45,50 @@ angular.module('TatUi').provider('Plugin', function() {
     var views = _.filter(plugins, {
       'type': 'messages-views'
     });
-    var defaultView = {};
+    var globalDefaultView = {};
+    var defaultView;
     for (var i = 0; i < views.length; i++) {
       if (views[i].default === true) {
-        defaultView = views[i];
+        globalDefaultView = views[i];
       }
       if (views[i].topic && views[i].topic[param]) {
         var re = new RegExp(views[i].topic[param]);
-        if (topic.match(re)) {
-          return views[i];
+        if (topic.topic && topic.topic.match(re)) {
+          defaultView = views[i];
+          if (param !== 'default') {
+            return defaultView;
+          }
         }
       }
     }
-    if (param === 'default') {
-      return defaultView;
+
+    var pluginNameOnTopic = '';
+    var pluginOnTopic;
+    if (topic.parameters) {
+      for (var j = 0; j < topic.parameters.length; j++) {
+        if (topic.parameters[j].key === 'tatwebui.view.' + param) {
+          pluginNameOnTopic = topic.parameters[j].value;
+          pluginOnTopic = this.getPluginByRoute(pluginNameOnTopic);
+          break;
+        }
+      }
+
     }
-    return undefined;
+    if (!pluginOnTopic && param === 'default') {
+      return globalDefaultView;
+    } else if (!pluginOnTopic && defaultView) {
+      return defaultView;
+    } else if (pluginOnTopic) {
+      return pluginOnTopic;
+    } else if (param == 'restricted') {
+      return undefined;
+    }
+    return globalDefaultView;
   };
 
   /**
    * @ngdoc function
-   * @name getDefaultPlugin
+   * @name getPluginByRestriction
    * @methodOf TatUi.PluginProvider
    * @module TatUi
    * @description returns view if there's a view restriction on topic

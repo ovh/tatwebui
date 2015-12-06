@@ -19,4 +19,10 @@
   <translation id="components_topics_list_admin_mode">List all topics (Admin Mode)</translation>
   <translation id="components_topics_list_non_admin_mode">List your topics only</translation>
   <translation id="components_topics_list_admin_mode_info">Admin mode : all topics, except /Private/*</translation>
+  <translation id="components_topics_max_message_length">Maximum message length</translation>
+  <translation id="components_topics_others_parameters">Others</translation>
+  <translation id="components_topics_views_parameters">Views</translation>
+  <translation id="components_topics_add_parameter">Add a parameter</translation>
+  <translation id="components_topics_tatwebui_view_restricted">force a view on this topic, users can't choose another view</translation>
+  <translation id="components_topics_tatwebui_view_default">set a default view on this topic, users can choose another view</translation>
 </translations>
