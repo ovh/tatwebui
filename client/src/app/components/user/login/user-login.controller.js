@@ -19,7 +19,7 @@ angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
   /**
    * @ngdoc function
    * @methodOf TatUi.controller:UserLoginCtrl
-   * @name signup 
+   * @name signup
    * @description
    *
    * Go to signup page
@@ -50,9 +50,14 @@ angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
    */
   $scope.connect = function() {
     Authentication.connect($scope.user).then(function() {
-      $rootScope.$broadcast('topic-change', {
-        topic: 'Private/' + $scope.user.username
-      });
+      if ($scope.user && $scope.user.username && $scope.user.username !==
+        '') {
+        $rootScope.$broadcast('topic-change', {
+          topic: 'Private/' + $scope.user.username
+        });
+      } else {
+        $state.go('index');
+      }
     }, function(err) {
       console.log(err);
       $state.go('index');

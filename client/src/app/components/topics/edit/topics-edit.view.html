@@ -18,52 +18,52 @@
       <h4>{{ 'shared_common_parameters' | translate }}</h4>
       <div class="col-lg-6">
           <div class="form-group">
-            <label for="maxlength">{{ 'components_topics_max_message_length' | translate}}</label>
+            <label for="maxlength">{{ 'components_topics_max_message_length' | translate }}</label>
             <input type="number" class="form-control" id="maxlength" data-ng-model="topic.maxlength" min="10" data-ng-required="true">
           </div>
           <div class="checkbox">
              <label>
                <input type="checkbox" data-ng-model="topic.canForceDate">
-               {{ 'components_topics_can_force_date' | translate}}
+               {{ 'components_topics_can_force_date' | translate }}
              </label>
           </div>
           <div class="checkbox">
              <label>
                <input type="checkbox" data-ng-model="topic.canUpdateMsg">
-               {{ 'components_topics_can_update_msg' | translate}}
+               {{ 'components_topics_can_update_msg' | translate }}
              </label>
           </div>
           <div class="checkbox">
              <label>
                <input type="checkbox" data-ng-model="topic.canDeleteMsg">
-               {{ 'components_topics_can_delete_msg' | translate}}
+               {{ 'components_topics_can_delete_msg' | translate }}
              </label>
           </div>
           <div class="checkbox">
              <label>
                <input type="checkbox" data-ng-model="topic.canUpdateAllMsg">
-               {{ 'components_topics_can_update_all_msg' | translate}}
+               {{ 'components_topics_can_update_all_msg' | translate }}
              </label>
           </div>
           <div class="checkbox">
              <label>
                <input type="checkbox" data-ng-model="topic.canDeleteAllMsg">
-               {{ 'components_topics_can_delete_all_msg' | translate}}
+               {{ 'components_topics_can_delete_all_msg' | translate }}
              </label>
           </div>
           <div class="checkbox">
              <label>
                <input type="checkbox" data-ng-model="topic.isROPublic">
-               {{ 'components_topics_is_ro_public' | translate}}
+               {{ 'components_topics_is_ro_public' | translate }}
              </label>
           </div>
       </div>
       <div class="col-lg-6">
-        <h5>{{'components_topics_views_parameters' | translate}}</h5>
+        <h5>{{'components_topics_views_parameters' | translate }}</h5>
         <div class="alert alert-info">
           <ul>
-            <li>tatwebui.view.restricted : {{ 'components_topics_tatwebui_view_restricted' | translate}}</li>
-            <li>tatwebui.view.default : {{ 'components_topics_tatwebui_view_default' | translate}}</li>
+            <li>tatwebui.view.restricted : {{ 'components_topics_tatwebui_view_restricted' | translate }}</li>
+            <li>tatwebui.view.default : {{ 'components_topics_tatwebui_view_default' | translate }}</li>
         </div>
         <div ng-repeat="param in topic.parameters | filter:{key:'tatwebui.view'}" class="row colm">
           <div class="col-md-5">
@@ -94,7 +94,7 @@
           </div>
         </div>
 
-        <h5>{{'components_topics_others_parameters' | translate}}</h5>
+        <h5>{{'components_topics_others_parameters' | translate }}</h5>
         <div ng-repeat="param in topic.parameters | filter:{key:'!tatwebui.view'}" class="row colm">
           <div class="col-md-5">
             <input type="text" class="form-control" data-ng-model="param.key">
@@ -118,15 +118,15 @@
             </div>
           </div>
         </div>
-        <button data-ng-click="newParameter()" class="btn btn-default">{{ 'components_topics_add_parameter' | translate}}</button>
+        <button data-ng-click="newParameter()" class="btn btn-default">{{ 'components_topics_add_parameter' | translate }}</button>
       </div>
     </div>
     <div class="row">
       <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-primary" data-ng-click="updateParam(false)">
-        {{ 'shared_common_validate' | translate}}
+        {{ 'shared_common_validate' | translate }}
       </button>
       <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-default" data-ng-click="updateParam(true)">
-        {{ 'shared_common_validate' | translate}} {{ 'shared_common_recursively' | translate}}
+        {{ 'shared_common_validate' | translate }} {{ 'shared_common_recursively' | translate }}
       </button>
     </div>
   </form>
@@ -143,32 +143,32 @@
         <div class="btn-group-vertical" role="group" aria-label="...">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  data-ng-disabled="!user.selected">
-              {{ 'components_topics_add_ro_user' | translate}}
+              {{ 'components_topics_add_ro_user' | translate }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a role="button" data-ng-click="addRoUser(false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-              <li><a role="button" data-ng-click="addRoUser(true)">{{ 'shared_common_recursively' | translate}}</a></li>
+              <li><a role="button" data-ng-click="addRoUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+              <li><a role="button" data-ng-click="addRoUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
             </ul>
           </div>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!user.selected">
-              {{ 'components_topics_add_rw_user' | translate}}
+              {{ 'components_topics_add_rw_user' | translate }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a role="button" data-ng-click="addRwUser(false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-              <li><a role="button" data-ng-click="addRwUser(true)">{{ 'shared_common_recursively' | translate}}</a></li>
+              <li><a role="button" data-ng-click="addRwUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+              <li><a role="button" data-ng-click="addRwUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
             </ul>
           </div>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!user.selected">
-              <i class="fa fa-user-md"></i> {{ 'components_topics_add_user_admin' | translate}}
+              <i class="fa fa-user-md"></i> {{ 'components_topics_add_user_admin' | translate }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a role="button" data-ng-click="addAdminUser(false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-              <li><a role="button" data-ng-click="addAdminUser(true)">{{ 'shared_common_recursively' | translate}}</a></li>
+              <li><a role="button" data-ng-click="addAdminUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+              <li><a role="button" data-ng-click="addAdminUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
             </ul>
           </div>
         </div>
@@ -186,17 +186,17 @@
             </button>
             <button data-ng-click="askRemoveRoUser=false" data-ng-show="askRemoveRoUser"
                       class="btn btn-xs btn-default btn-info">
-                      {{ 'components_topics_dont_want_remove_group' | translate}}
+                      {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRoUser">
               <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+                {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="removeRoUser(v, false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-                <li><a role="button" data-ng-click="removeRoUser(v, true)">{{ 'shared_common_recursively' | translate}}</a></li>
+                <li><a role="button" data-ng-click="removeRoUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" data-ng-click="removeRoUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </span>
@@ -204,7 +204,7 @@
       </ul>
     </div>
     <div class="col-lg-4">
-      <b>{{ 'shared_common_read_write' | translate }} : </b>
+      <b>{{ 'shared_common_read_write' | translate }}: </b>
       <ul>
         <li data-ng-repeat="(k, v) in topic.rwUsers">
           {{v}}
@@ -214,17 +214,17 @@
             </button>
             <button data-ng-click="askRemoveRwUser=false" data-ng-show="askRemoveRwUser"
                       class="btn btn-xs btn-default btn-info">
-                      {{ 'components_topics_dont_want_remove_group' | translate}}
+                      {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRwUser">
               <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+                {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="removeRwUser(v, false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-                <li><a role="button" data-ng-click="removeRwUser(v, true)">{{ 'shared_common_recursively' | translate}}</a></li>
+                <li><a role="button" data-ng-click="removeRwUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" data-ng-click="removeRwUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </span>
@@ -242,17 +242,17 @@
             </button>
             <button data-ng-click="askRemoveAdminUser=false" data-ng-show="askRemoveAdminUser"
                       class="btn btn-xs btn-default btn-info">
-                      {{ 'components_topics_dont_want_remove_group' | translate}}
+                      {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveAdminUser">
               <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+                {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="removeAdminUser(v, false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-                <li><a role="button" data-ng-click="removeAdminUser(v, true)">{{ 'shared_common_recursively' | translate}}</a></li>
+                <li><a role="button" data-ng-click="removeAdminUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" data-ng-click="removeAdminUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </span>
@@ -274,32 +274,32 @@
         <div class="btn-group-vertical" role="group" aria-label="...">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!group.selected">
-              {{ 'components_topics_add_ro_group' | translate}}
+              {{ 'components_topics_add_ro_group' | translate }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a role="button" data-ng-click="addRoGroup(false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-              <li><a role="button" data-ng-click="addRoGroup(true)">{{ 'shared_common_recursively' | translate}}</a></li>
+              <li><a role="button" data-ng-click="addRoGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+              <li><a role="button" data-ng-click="addRoGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
             </ul>
           </div>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!group.selected">
-              {{ 'components_topics_add_rw_group' | translate}}
+              {{ 'components_topics_add_rw_group' | translate }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a role="button" data-ng-click="addRwGroup(false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-              <li><a role="button" data-ng-click="addRwGroup(true)">{{ 'shared_common_recursively' | translate}}</a></li>
+              <li><a role="button" data-ng-click="addRwGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+              <li><a role="button" data-ng-click="addRwGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
             </ul>
           </div>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!group.selected">
-              <i class="fa fa-user-md"></i> {{ 'components_topics_add_group_admin' | translate}}
+              <i class="fa fa-user-md"></i> {{ 'components_topics_add_group_admin' | translate }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a role="button" data-ng-click="addAdminGroup(false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-              <li><a role="button" data-ng-click="addAdminGroup(true)">{{ 'shared_common_recursively' | translate}}</a></li>
+              <li><a role="button" data-ng-click="addAdminGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+              <li><a role="button" data-ng-click="addAdminGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
             </ul>
           </div>
         </div>
@@ -317,17 +317,17 @@
             </button>
             <button data-ng-click="askRemoveRoGroup=false" data-ng-show="askRemoveRoGroup"
                       class="btn btn-xs btn-default btn-info">
-                      {{ 'components_topics_dont_want_remove_group' | translate}}
+                      {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRoGroup">
               <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+                {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="removeRoGroup(v, false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-                <li><a role="button" data-ng-click="removeRoGroup(v, true)">{{ 'shared_common_recursively' | translate}}</a></li>
+                <li><a role="button" data-ng-click="removeRoGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" data-ng-click="removeRoGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </span>
@@ -345,17 +345,17 @@
             </button>
             <button data-ng-click="askRemoveRwGroup=false" data-ng-show="askRemoveRwGroup"
                       class="btn btn-xs btn-default btn-info">
-                      {{ 'components_topics_dont_want_remove_group' | translate}}
+                      {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRwGroup">
               <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+                {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="removeRwGroup(v, false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-                <li><a role="button" data-ng-click="removeRwGroup(v, true)">{{ 'shared_common_recursively' | translate}}</a></li>
+                <li><a role="button" data-ng-click="removeRwGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" data-ng-click="removeRwGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </span>
@@ -373,17 +373,17 @@
             </button>
             <button data-ng-click="askRemoveAdminGroup=false" data-ng-show="askRemoveAdminGroup"
                       class="btn btn-xs btn-default btn-info">
-                      {{ 'components_topics_dont_want_remove_group' | translate}}
+                      {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveAdminGroup">
               <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+                {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="removeAdminGroup(v, false)">{{ 'components_topics_only_topic' | translate}}</a></li>
-                <li><a role="button" data-ng-click="removeAdminGroup(v, true)">{{ 'shared_common_recursively' | translate}}</a></li>
+                <li><a role="button" data-ng-click="removeAdminGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" data-ng-click="removeAdminGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </span>
