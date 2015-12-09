@@ -9,8 +9,10 @@
  */
 angular.module('TatUi').service('TatEngineMessagesRsc', function($resource) {
   'use strict';
-  return $resource('tatengine/messages/:topic', {
-    'topic': '@topic'
+  return $resource('tatengine/messages/:topic:cascade:idMessage', {
+    'topic': '@topic',
+    'cascade': '@cascade',
+    'idMessage': '@idMessage'
   }, {
 
     /**
