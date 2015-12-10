@@ -9,10 +9,10 @@
  */
 angular.module('TatUi').service('TatEngineMessagesRsc', function($resource) {
   'use strict';
-  return $resource('tatengine/messages/:topic:cascade:idMessage', {
+  return $resource('tatengine/messages/:topic:cascade:idMessageToDelete', {
     'topic': '@topic',
     'cascade': '@cascade',
-    'idMessage': '@idMessage'
+    'idMessageToDelete': '@idMessageToDelete'
   }, {
 
     /**
