@@ -65,6 +65,16 @@ if [ ! -z $UAT_US_URL ]; then
   sed -i "s#UAT_US_URL#$UAT_US_URL#" public/assets/config.json
 fi;
 
+if [ ! -z $RELEASEVIEW_TRACKER ]; then
+  echo "replace RELEASEVIEW_TRACKER with $RELEASEVIEW_TRACKER";
+  sed -i "s#RELEASEVIEW_TRACKER#$RELEASEVIEW_TRACKER#" public/assets/config.json
+fi;
+
+if [ ! -z $RELEASEVIEW_KEYWORD ]; then
+  echo "replace RELEASEVIEW_KEYWORD with $RELEASEVIEW_KEYWORD";
+  sed -i "s#RELEASEVIEW_KEYWORD#$RELEASEVIEW_KEYWORD#" public/assets/config.json
+fi;
+
 if [ ! -z $BACKEND_HOST ]; then
   echo "replace BACKEND_HOST with $BACKEND_HOST";
   sed -i "s#BACKEND_HOST#$BACKEND_HOST#" public/assets/config.json
