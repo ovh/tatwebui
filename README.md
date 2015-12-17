@@ -6,6 +6,12 @@ Tat Command Line Interface.
 
 See Tat Engine for more information: https://github.com/ovh/tat
 
+## Views
+
+- Standard View: https://github.com/ovh/tatwebui-plugin-standardview
+- Notifications View: https://github.com/ovh/tatwebui-plugin-notificationsview
+- Release View: https://github.com/ovh/tatwebui-plugin-releaseview
+
 
 ## Docker
 ### Build Image
