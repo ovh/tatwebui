@@ -8,6 +8,10 @@
   var url = require('url');
   var app = express();
 
+  app.get('/health', function(req, res) {
+    res.send('tatwebui is alive');
+  });
+
   // Filesystem
   app.use(new(require('./middlewares/filesystem-middleware.js'))({
     basePath: __dirname + '/..',
