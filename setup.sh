@@ -60,6 +60,11 @@ if [ ! -z $RUNVIEW_TOPIC_ALERTS ]; then
   sed -i "s#RUNVIEW_TOPIC_ALERTS#$RUNVIEW_TOPIC_ALERTS#" public/assets/config.json
 fi;
 
+if [ ! -z $RUNVIEW_TAT2SHINKEN_URL ]; then
+  echo "replace RUNVIEW_TAT2SHINKEN_URL with $RUNVIEW_TAT2SHINKEN_URL";
+  sed -i "s#RUNVIEW_TAT2SHINKEN_URL#$RUNVIEW_TAT2SHINKEN_URL#" public/assets/config.json
+fi;
+
 if [ ! -z $UAT_US_URL ]; then
   echo "replace UAT_US_URL with $UAT_US_URL";
   sed -i "s#UAT_US_URL#$UAT_US_URL#" public/assets/config.json
