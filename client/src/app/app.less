@@ -11,6 +11,18 @@ div.row.header {
     margin:0;
 }
 
+.meta {
+  .fa-caret {
+    color: #ddd;
+  }
+  .fa-star {
+    color: rgb(233, 177, 44);
+  }
+  .fa-bell-o {
+    color: rgb(109, 182, 201);
+  }
+}
+
 div.single {
     background-color: @menu-bg;
     height: 100%;
@@ -58,10 +70,26 @@ div.page {
 }
 
 div.notification {
-  height: 40px;
-  width: 100%;
   z-index: 999;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 70px;
+  transition: left 0.4s ease 0s;
+}
+.open .notification {
+  left: 250px;
+}
+
+.alert {
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 20px;
+  opacity: 0.85;
+  margin-bottom: 0;
+  .close {
+    top: -8px;
+  }
 }
 
 #page-wrapper {
@@ -70,8 +98,33 @@ div.notification {
 
 #sidebar-wrapper {
   width: @menu-width;
+  ul.sidebar {
+    bottom: 40px;
+    .sidebar-sublist-item {
+      .badge {
+        padding: 3px 7px;
+        background-color: #213257;
+        color: #A4C1FF;
+        border: 1px solid #20325A;
+      }
+    }
+  }
+  .sidebar-section {
+    display: none;
+  }
+}
+.open #sidebar-wrapper {
+  .sidebar-section {
+    display: block;
+  }
 }
 
-ul.sidebar {
-  bottom: 40px;
+.sidebar-footer {
+  background-color: #213257;
+  a {
+    color: #A4C1FF!important;
+    &:hover {
+      color: white!important;
+    }
+  }
 }
