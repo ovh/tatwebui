@@ -25,4 +25,6 @@
   <translation id="components_topics_add_parameter">Ajouter un paramètre</translation>
   <translation id="components_topics_tatwebui_view_restricted">force une vue sur ce topic, les utilisateurs ne peuvent pas en choisir une autre.</translation>
   <translation id="components_topics_tatwebui_view_default">positionne une vue par défaut sur ce topic, les utilisateurs peuvent en choisir une autre.</translation>
+  <translation id="components_topics_presences">Présences</translation>
+  <translation id="components_topics_rights">Droits</translation>
 </translations>

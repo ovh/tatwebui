@@ -15,4 +15,4 @@ bower.json
 custom.plugin.tpl.json
 config.json.prod
 client/src/index.html
-
+*.un~
