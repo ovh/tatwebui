@@ -21,5 +21,6 @@
   <translation id="components_users_new_username">New Username</translation>
   <translation id="components_users_new_fullname">New Fullname</translation>
   <translation id="components_users_new_email">New Email</translation>
-
+  <translation id="components_users_search_by_username">Search by Username</translation>
+  <translation id="components_users_count_of_total">Users on total of</translation>
 </translations>

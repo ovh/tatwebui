@@ -68,9 +68,8 @@
     <translation id="shared_common_validate">Valider</translation>
     <translation id="shared_common_created_at">Créé le</translation>
     <translation id="shared_common_rights_stats">Stats</translation>
-
     <translation id="shared_common_an_error_occured">Une erreur est survenue</translation>
-
     <translation id="shared_common_message_item_reply">Répondre</translation>
     <translation id="shared_common_message_item_label">Modifier les labels</translation>
+    <translation id="shared_common_full_name">Nom complet</translation>
 </translations>

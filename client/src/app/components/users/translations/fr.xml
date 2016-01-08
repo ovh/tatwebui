@@ -21,5 +21,6 @@
   <translation id="components_users_new_username">Nouveau nom d'utilisateur</translation>
   <translation id="components_users_new_fullname">Nouveau nom complet</translation>
   <translation id="components_users_new_email">Nouvel email</translation>
-
+  <translation id="components_users_search_by_username">Recherche par nom d'usager</translation>
+  <translation id="components_users_count_of_total">Utilisateurs sur un total de</translation>
 </translations>

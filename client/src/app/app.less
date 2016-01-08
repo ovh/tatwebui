@@ -12,14 +12,47 @@ div.row.header {
 }
 
 .meta {
+  a:hover {
+    text-decoration: none;
+  }
+  .fa {
+    transition: color 0.4s;
+  }
   .fa-caret {
     color: #ddd;
+  }
+  .fa-bell-slash:hover,
+  .fa-star-o:hover {
+    color: #30AFFF;
   }
   .fa-star {
     color: rgb(233, 177, 44);
   }
   .fa-bell-o {
-    color: rgb(109, 182, 201);
+    color: rgb(233, 177, 44);
+  }
+}
+
+.menu-icon {
+  opacity: 0.6;
+  transition: opacity 0.4s;
+  color: #A4C1FF;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.user {
+  .item {
+    .fa {
+      transition: color 0.4s;
+      line-height: 65px!important;
+    }
+    &.open, &:hover {
+      .fa {
+        color: #30AFFF;
+      }
+    }
   }
 }
 
@@ -47,18 +80,6 @@ div.wrapper {
     font-size: 14px;
 }
 
-button.btn-water {
-    border: 1px solid rgba(145, 225, 255, 0.9);
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    color:#444444;
-    background: -webkit-linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
-    background: -o-linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
-    background: -moz-linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
-    background: linear-gradient(rgba(211, 224, 255, 0.5) 0px, rgba(154, 186, 255, 0.5) 50%, rgba(123, 147, 203, 0.5) 65%, rgba(125, 186, 255, 0.5) 100%) 50% 50% / auto repeat padding-box border-box, rgba(140, 211, 255, 0.5);
-}
-
 div.input-group {
     margin-bottom:10px;
 }
@@ -67,6 +88,13 @@ div.page {
     i {
         color: @topic-sep;
     }
+}
+
+.sidebar-sublist-item a {
+  transition: background-color 0.4s;
+  span {
+    transition: color 0.4s;
+  }
 }
 
 div.notification {
@@ -85,10 +113,20 @@ div.notification {
   border-radius: 0;
   font-size: 16px;
   line-height: 20px;
-  opacity: 0.85;
   margin-bottom: 0;
   .close {
-    top: -8px;
+    top: -1px;
+    opacity: 0.8;
+  }
+  &.alert-info {
+    color: white;
+    background-color: #30AFFF;
+    border-color: #30AFFF;
+  }
+  &.alert-danger {
+    color: white;
+    background-color: #DD2B57;
+    border-color: #DD2B57;
   }
 }
 
