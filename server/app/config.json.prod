@@ -6,10 +6,10 @@
       "port": 8888,
       "sslInsecureSkipVerify": false
     },
-    "listen_port": PROXY_LISTEN_PORT
+    "listen_port": "PROXY_LISTEN_PORT"
   },
   "filesystem": {
-      "listen_port": FILESYSTEM_LISTEN_PORT
+      "listen_port": "FILESYSTEM_LISTEN_PORT"
   },
   "process": {
     "nb_forks": "PROCESS_NB_FORKS"
