@@ -50,7 +50,7 @@
                   </thead>
                   <tbody>
                     <tr data-ng-repeat="topicItem in data.topics" class="topic-first-row">
-                        <th class="topics-name"><strong>{{ topicItem.topic }}</th>
+                        <th class="topics-name">{{ topicItem.topic }}</th>
                         <td class="topics-description">{{ topicItem.description }}</td>
                         <td class="topics-presences" data-ng-if="isAdmin()">
                           <!-- FIXME <a ui-sref="presences-list({topic:topicItem.topic})"><i class="fa fa-eye"></i></a>-->
