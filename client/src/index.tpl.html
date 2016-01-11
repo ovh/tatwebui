@@ -173,12 +173,12 @@
           <div class="col-xs-12">
             <div class="user pull-right">
               <div class="item dropdown" dropdown>
-                <a role="button" class="dropdown-toggle" dropdown-toggle>
+                <a role="button" class="dropdown-toggle" title="{{ getUser('fullname') }}" dropdown-toggle>
                   <i class="fa fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
-                    {{getUser('fullname')}}
+                    {{ getUser('fullname') }}
                   </li>
                   <li class="divider"></li>
                   <li class="link">
@@ -199,7 +199,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
-                    Configuration
+                    {{ 'master-configuration' | translate }}
                   </li>
                   <li class="divider"></li>
                   <li class="link">
@@ -226,7 +226,7 @@
               </div>
 
               <div class="item dropdown" dropdown>
-                <a role="button" class="dropdown-toggle" dropdown-toggle>
+                <a role="button" class="dropdown-toggle" title="{{ 'master-users-and-groups' | translate }}" dropdown-toggle>
                   <i class="fa fa-users"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -244,12 +244,12 @@
               </div>
 
               <div class="item dropdown" dropdown>
-                <a role="button" class="dropdown-toggle" dropdown-toggle>
-                  <i class="fa fa-comments" title="{{ 'master-topics' | translate }}"></i>
+                <a role="button" class="dropdown-toggle" title="{{ 'master-topics' | translate }}" dropdown-toggle>
+                  <i class="fa fa-comments"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
-                    Favorites
+                    {{ 'master-favorites' | translate }}
                   </li>
                   <li class="divider"></li>
                   <li class="link" ng-repeat="t in getFavoritesTopics() |  orderBy:'toString()'">
@@ -265,7 +265,7 @@
               </div>
 
               <div class="item dropdown" data-ng-if="isMessagesView(ctrl.data.state)" dropdown>
-               <a role="button" class="dropdown-toggle" dropdown-toggle>
+               <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" dropdown-toggle>
                   <i class="fa fa-eye"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -285,12 +285,13 @@
               </div>
               <div class="page" data-ng-if="isMessagesView(ctrl.data.state)">
                 <span>
-                  {{getTitle(ctrl.data.state)}}
+                  {{ getTitle(ctrl.data.state) }}
                 </span>
                 <span data-ng-repeat="sub in title">
                   <i class="fa fa-caret-right"></i>
                   {{sub}}
                 </span>
+                &nbsp;
                 <a role="button"
                    data-ng-click="ctrl.toggleTopicFavorite()">
                   <i class="fa"
@@ -298,7 +299,7 @@
                   </i>
                 </a>
                 <a role="button"
-                  title="Enable or disable messages unread notifications on left menu"
+                  title="{{ 'master-toggle-notification' | translate }}"
                    data-ng-click="ctrl.toggleNotificationsTopic()">
                   <i class="fa"
                      data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">

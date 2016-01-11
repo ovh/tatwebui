@@ -1,68 +1,15 @@
-@import "../../../constants.less";
-
-div.topics-list {
-  padding: 20px 20px 0px 20px;
-  font-size: 14px;
-  .widget-header {
-    .row {
-      .pull-left {
-        position: relative;
-        font-size: 1.45em;
-        top: 10px;
-        left: 10px;
+.list-view.topics {
+  .table {
+    td {
+      &.topics-topic {
+        width:20%;
       }
-      .pull-right {
-        margin-bottom: 0px;
-        position: relative;
-        top: 7px;
+      &.topics-date {
+        width: 10%;
+      }
+      &.topics-header {
+        padding-left:10px;
       }
     }
   }
-}
-
-table.groups-list {
-    width:100%;
-    padding: 20px 20px 0px 20px;
-    margin-bottom: 0;
-    tbody {
-        tr {
-            &:hover {
-                background-color: rgb(245, 250, 255);
-                td {
-                    &.topics-spacer {
-                        border-right: 3px solid @topics-selected;
-                    }
-                }
-            }
-        }
-        tr {
-            &.topics-first-row {
-                border-top: 1px solid @topics-border;
-            }
-            td {
-                padding: 8px 12px;
-                &.topics-spacer {
-                    width: 5px;
-                }
-                &.topics-topic {
-                    margin-left: 5px;
-                    padding-left:10px;
-                    width:20%;
-                }
-                &.topics-text {
-
-                }
-                &.topics-date {
-                    width: 10%;
-                }
-                &.topics-header {
-                    padding-left:10px;
-                }
-                .disabled {
-                  opacity: 0.3;
-                }
-            }
-
-        }
-    }
 }

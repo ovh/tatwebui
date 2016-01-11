@@ -5,6 +5,7 @@
     <translation id="index">TextAndTags</translation>
 
     <!-- Header menu -->
+    <translation id="master-configuration">Configuration</translation>
     <translation id="master-profile">Profile</translation>
     <translation id="master-logout">Déconnexion</translation>
     <translation id="master-notifications">Notifications</translation>
@@ -13,6 +14,9 @@
     <translation id="master-presences">Presences</translation>
     <translation id="master-sockets">Sockets</translation>
     <translation id="master-views">Vues</translation>
+    <translation id="master-favorites">Favoris</translation>
+    <translation id="master-users-and-groups">Utilisateurs et groupes</translation>
+    <translation id="master-toggle-notification">Activer ou désactiver la notification pour les messages non lus dans le menu à gauche</translation>
 
     <!-- Sidebar menu -->
     <translation id="master-topics">Topics</translation>

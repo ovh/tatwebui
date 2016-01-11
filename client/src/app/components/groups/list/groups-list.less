@@ -1,64 +1,12 @@
-@groups-border:    #bbbbbb;
-@groups-selected:  #ffbf00;
-
-div.groups-list {
-  padding: 20px 20px 0px 20px;
-  font-size: 14px;
-  .widget-header {
-    .row {
-      .pull-left {
-        position: relative;
-        font-size: 1.45em;
-        top: 10px;
-        left: 10px;
+.list-view.groups {
+  .table {
+    td {
+      &.groups-name {
+        width:20%;
       }
-      .pull-right {
-        margin-bottom: 0px;
-        position: relative;
-        top: 7px;
+      &.groups-date {
+        width: 10%;
       }
     }
   }
-}
-
-table.groups-list {
-    width:100%;
-    padding: 20px 20px 0px 20px;
-    margin-bottom: 0;
-    tbody {
-        tr {
-            &:hover {
-                background-color: rgb(245, 250, 255);
-                td {
-                    &.groups-spacer {
-                        border-right: 3px solid @groups-selected;
-                    }
-                }
-            }
-        }
-        tr {
-            &.groups-first-row {
-                border-top: 1px solid @groups-border;
-            }
-            cursor: pointer;
-            td {
-                padding: 8px 12px;
-                &.groups-spacer {
-                    width: 5px;
-                }
-                &.groups-name {
-                    margin-left: 5px;
-                    padding-left:10px;
-                    width:20%;
-                }
-                &.groups-date {
-                    width: 10%;
-                }
-                &.groups-header {
-                    padding-left:10px;
-                }
-            }
-
-        }
-    }
 }

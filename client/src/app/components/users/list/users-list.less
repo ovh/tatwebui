@@ -1,69 +1,9 @@
-@users-border:    #bbbbbb;
-@users-selected:  #ffbf00;
-
-div.users-list {
-    padding: 20px 20px 0px 20px;
-    font-size: 14px;
-    .widget-header {
-      .row {
-        .pull-left {
-          position: relative;
-          font-size: 1.45em;
-          top: 10px;
-          left: 10px;
-        }
-        .pull-right {
-          margin-bottom: 0px;
-          position: relative;
-          top: 7px;
-        }
+.list-view.users {
+  .table {
+    td {
+      &.users-author {
+        width:20%;
       }
     }
-}
-
-table.users-list {
-    width:100%;
-    padding: 20px 20px 0px 20px;
-    margin-bottom: 0;
-    tbody {
-        tr {
-            &:hover {
-                background-color: rgb(245, 250, 255);
-                td {
-                    &.users-spacer {
-                        border-right: 3px solid @users-selected;
-                    }
-                }
-            }
-        }
-        tr {
-            &.users-first-row {
-                border-top: 1px solid @users-border;
-            }
-            cursor: pointer;
-
-            td {
-                padding:8px 0 8px 0;
-                height: 38px;
-                &.users-spacer {
-                    width: 5px;
-                }
-                &.users-author {
-                    margin-left: 5px;
-                    padding-left:10px;
-                    width:20%;
-                }
-                &.users-username {
-
-                }
-                &.users-date {
-                    width: 20%;
-                }
-                &.users-header {
-                    padding-left:10px;
-                }
-            }
-
-        }
-    }
+  }
 }

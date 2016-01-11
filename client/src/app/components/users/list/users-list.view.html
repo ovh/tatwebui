@@ -1,4 +1,4 @@
-<div class="wrapper users-list" data-ng-controller="UsersListCtrl">
+<div class="list-view users" data-ng-controller="UsersListCtrl">
 
     <div data-ng-if="data.count==0" class="alert alert-warning">
       {{ 'users-nouser' | translate }}
@@ -14,7 +14,7 @@
           </rd-widget-header>
           <rd-widget-body classes="no-padding">
             <div class="table-responsive">
-              <table class="table users-list">
+              <table class="table">
                 <thead>
                   <tr>
                     <th>{{ 'shared_common_full_name' | translate }}</th>
@@ -25,10 +25,10 @@
                   </thead>
                   <tbody>
                     <tr data-ng-repeat="userItem in data.users" class="users-first-row">
-                        <td class="users-author">
+                        <th class="users-author">
                           <user-display username="userItem.username" fullname="userItem.fullname">
                           <i class="fa fa-user-md" data-ng-if="userItem.isAdmin" title="Admin"></i>
-                        </td>
+                        </th>
                         <td class="users-username"><user-display username="userItem.username"></td>
                         <td class="users-date" data-ng-if="isAdmin()">{{ userItem.dateCreation  * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                         <td class="users-action" data-ng-if="isAdmin()">
