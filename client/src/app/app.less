@@ -3,13 +3,24 @@
 body {
     font-size:10px;
     overflow-y: hidden;
-    background: #f3f3f3;
+    background: #fbfbfb;
 }
 
 .row {
   &.header {
     height:65px;
     margin:0;
+  }
+}
+
+.btn {
+  &.btn-default {
+    background-color: #fff;
+    border-color: #ededed;
+    &:hover {
+      background-color: #cceff9;
+      border-color: #b9dde7;
+    }
   }
 }
 
@@ -139,7 +150,47 @@ body {
 
 #sidebar-wrapper {
   width: @menu-width;
-  ul.sidebar {
+  .sidebar-main {
+    height: auto;
+    margin-left: 180px;
+    transition: margin 0.3s;
+    a {
+      width: 70px;
+      height: 70px;
+      border-radius: 0 0 40px 40px;
+      transition: width 0.3s;
+      .menu-icon {
+        position: absolute;
+        top: 8px;
+        right: 0;
+        opacity: 1;
+        display: none;
+      }
+      &:hover {
+        .tat-logo {
+          background-color: #4374ab;
+        }
+        .menu-icon {
+          display: none;
+        }
+      }
+      .tat-logo {
+        background-image: url("/assets/img/tat.svg"), none;
+        text-indent: -9999px;
+        height: 50px;
+        width: 50px;
+        display: block;
+        background-size: 50px auto;
+        background-position: 35% 53%;
+        border-radius: 50%;
+        position: relative;
+        top: 10px;
+        background-color: #305681;
+        margin: 0 auto;
+      }
+    }
+  }
+  .sidebar {
     bottom: 40px;
     .sidebar-sublist-item {
       .badge {
@@ -154,6 +205,21 @@ body {
     display: none;
   }
 }
+
+.open {
+  .sidebar-main {
+    margin-left: 0!important;
+    a {
+      width: 250px!important;
+      &:hover {
+        .menu-icon {
+          display: inline-block!important;
+        }
+      }
+    }
+  }
+}
+
 .open #sidebar-wrapper {
   .sidebar-section {
     display: block;
