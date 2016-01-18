@@ -150,15 +150,16 @@ body {
 
 #sidebar-wrapper {
   width: @menu-width;
+  transition: all 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
   .sidebar-main {
     height: auto;
     margin-left: 180px;
-    transition: margin 0.3s;
+    transition: margin 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
     a {
       width: 70px;
       height: 70px;
       border-radius: 0 0 40px 40px;
-      transition: width 0.3s;
+      transition: width 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
       .menu-icon {
         position: absolute;
         top: 8px;
@@ -175,18 +176,22 @@ body {
         }
       }
       .tat-logo {
-        background-image: url("/assets/img/tat.svg"), none;
-        text-indent: -9999px;
-        height: 50px;
-        width: 50px;
-        display: block;
-        background-size: 50px auto;
-        background-position: 35% 53%;
-        border-radius: 50%;
-        position: relative;
-        top: 10px;
         background-color: #305681;
+        background-image: url("/assets/img/tat.svg"), none;
+        background-position: 35% 53%;
+        background-size: 50px auto;
+        border-radius: 50%;
+        display: block;
+        height: 50px;
         margin: 0 auto;
+        position: relative;
+        text-indent: -9999px;
+        top: 10px;
+        width: 50px;
+        &:hover {
+          background-image: url("/assets/img/angle-right.svg"), none!important;
+          background-position: 3px -2px;
+        }
       }
     }
   }
@@ -207,6 +212,11 @@ body {
 }
 
 .open {
+  .tat-logo {
+    &:hover {
+      transform: rotate(180deg);
+    }
+  }
   .sidebar-main {
     margin-left: 0!important;
     a {
