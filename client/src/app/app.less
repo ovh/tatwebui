@@ -1,4 +1,5 @@
 @import "constants.less";
+@import "sidebar.less";
 
 body {
     font-size:10px;
@@ -10,6 +11,12 @@ body {
   &.header {
     height:65px;
     margin:0;
+    .user > .item a {
+      color: #507095;
+      &:hover {
+        color: #9EBFE6!important;
+      }
+    }
   }
 }
 
@@ -29,7 +36,7 @@ body {
     text-decoration: none;
   }
   .fa {
-    transition: color 0.4s;
+    transition: color 0.3s;
   }
   .fa-caret {
     color: #ddd;
@@ -48,7 +55,7 @@ body {
 
 .menu-icon {
   opacity: 0.6;
-  transition: opacity 0.4s;
+  transition: opacity 0.3s;
   color: #A4C1FF;
   &:hover {
     opacity: 1;
@@ -58,7 +65,7 @@ body {
 .user {
   .item {
     .fa {
-      transition: color 0.4s;
+      transition: color 0.3s;
       line-height: 65px!important;
     }
     &.open, &:hover {
@@ -103,13 +110,6 @@ body {
     }
 }
 
-.sidebar-sublist-item a {
-  transition: background-color 0.4s;
-  span {
-    transition: color 0.4s;
-  }
-}
-
 .notification {
   z-index: 999;
   position: fixed;
@@ -146,104 +146,6 @@ body {
 
 #page-wrapper {
   min-height: 300px;
-}
-
-#sidebar-wrapper {
-  width: @menu-width;
-  transition: all 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
-  .sidebar-main {
-    height: auto;
-    margin-left: 180px;
-    transition: margin 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
-    a {
-      width: 70px;
-      height: 70px;
-      border-radius: 0 0 40px 40px;
-      transition: width 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
-      .menu-icon {
-        position: absolute;
-        top: 8px;
-        right: 0;
-        opacity: 1;
-        display: none;
-      }
-      &:hover {
-        .tat-logo {
-          background-color: #4374ab;
-        }
-        .menu-icon {
-          display: none;
-        }
-      }
-      .tat-logo {
-        background-color: #305681;
-        background-image: url("/assets/img/tat.svg"), none;
-        background-position: 35% 53%;
-        background-size: 50px auto;
-        border-radius: 50%;
-        display: block;
-        height: 50px;
-        margin: 0 auto;
-        position: relative;
-        text-indent: -9999px;
-        top: 10px;
-        width: 50px;
-        &:hover {
-          background-image: url("/assets/img/angle-right.svg"), none!important;
-          background-position: 3px -2px;
-        }
-      }
-    }
-  }
-  .sidebar {
-    bottom: 40px;
-    .sidebar-sublist-item {
-      .badge {
-        padding: 3px 7px;
-        background-color: #213257;
-        color: #A4C1FF;
-        border: 1px solid #20325A;
-      }
-    }
-  }
-  .sidebar-section {
-    display: none;
-  }
-}
-
-.open {
-  .tat-logo {
-    &:hover {
-      transform: rotate(180deg);
-    }
-  }
-  .sidebar-main {
-    margin-left: 0!important;
-    a {
-      width: 250px!important;
-      &:hover {
-        .menu-icon {
-          display: inline-block!important;
-        }
-      }
-    }
-  }
-}
-
-.open #sidebar-wrapper {
-  .sidebar-section {
-    display: block;
-  }
-}
-
-.sidebar-footer {
-  background-color: #213257;
-  a {
-    color: #A4C1FF!important;
-    &:hover {
-      color: white!important;
-    }
-  }
 }
 
 .list-view {
