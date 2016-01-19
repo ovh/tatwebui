@@ -1,0 +1,177 @@
+@import "constants.less";
+
+#sidebar-wrapper {
+
+  width: @menu-width;
+  transition: all 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
+  background-color: #161D23;
+
+  .sidebar-header {
+    height: auto;
+    margin-left: 180px;
+    transition: margin 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
+
+    a {
+      width: 70px;
+      height: 72px;
+      border-radius: 0px 0px 70px 70px;
+      transition: width 0.3s cubic-bezier(.78,.05,.88,.99) 0s;
+      cursor: pointer;
+      background-color: #202f3c;
+      .tat-logo {
+        background-color: #507095;
+        background-image: url("/assets/img/tat.svg"), none;
+        background-position: 1px -11px;
+        background-size: 49px auto;
+        transition: background-color 0.3s ease;
+        border-radius: 50%;
+        display: block;
+        height: 50px;
+        margin: 0 auto;
+        position: relative;
+        text-indent: -9999px;
+        top: 10px;
+        width: 50px;
+        box-shadow: 0 0 6px #16222F;
+        &:hover {
+          background-image: url("/assets/img/angle-right.svg"), none!important;
+          background-position: 3px -2px;
+          box-shadow: 0 0 6px #0F1821;
+        }
+      }
+      &:hover {
+        .tat-logo {
+          background-color: #578ECE;
+        }
+      }
+    } // a
+
+  } // .sidebar-header
+
+  .sidebar-section {
+    display: none;
+    .sidebar-section-title {
+      text-transform: uppercase;
+      display: block;
+      width: 250px;
+      margin: 78px 0px 0px;
+      padding: 8px 0;
+      text-align: center;
+      text-indent: 0px;
+      color: rgb(84, 84, 84);
+      letter-spacing: 4px;
+      font-size: 15px;
+      text-shadow: 1px 1px 1px rgb(0, 0, 0);
+
+    }
+  }
+
+  .sidebar-sublist {
+    padding-left: 0px;
+    
+    .sidebar-sublist-item {
+      display: block;
+      font-size: 14px;
+      height: 40px;
+      line-height: 40px;
+      list-style: none outside none;
+      text-align: left;
+      text-decoration: none;
+      width: 245px;
+      a {
+        &.selected {
+          color: @topics-selected;
+        }
+        box-sizing: border-box;
+        color: #b2bfdc;
+        text-indent: 6px;
+        padding-left: 5px;
+        overflow: hidden;
+        height: 40px;
+        cursor:pointer;
+        .topic-space {
+          display:inline-block;
+          width:15px;
+        }
+        .topic-title {
+          height:100%;
+          display: inline-block;
+          border-left:1px dashed #202F3C;
+          i {
+            text-indent: 0px;
+          }
+        }
+        .badge {
+          background-color: #202F3C;
+          border: 1px solid #202F3C;
+          color: #9EBFE6;
+          display: inline;
+          margin-right: 29px;
+          margin-top: 12px;
+          padding: 3px 7px;
+        }
+        &:hover {
+          color: white;
+          background-color: #202F3C;
+          border-left: 3px solid #9EBFE6;
+          padding-left: 2px;
+          .badge {
+            background-color: #161D23;
+          }
+        }
+        &.selected {
+          color: white;
+          background-color: #202F3C;
+          border-left: 3px solid #A74A78;
+          padding-left: 2px;
+          .badge {
+            background-color: #161D23;
+          }
+        }
+
+      }
+    }
+    .menu-icon {
+      padding-right:29px;
+      padding-top: 12px;
+      float:right;
+    }
+  } // .sidebar-sublist
+
+
+  .sidebar-footer {
+    background-color: #202f3c;
+    a {
+      color: #9EBFE6!important;
+      &:hover {
+        color: white!important;
+      }
+    }
+  }
+
+} // .sidebar-wrapper
+
+.open {
+  .tat-logo {
+    &:hover {
+      transform: rotate(180deg);
+    }
+  }
+  #sidebar-wrapper {
+    .sidebar-header {
+      margin-left: 0!important;
+      a {
+        width: 250px!important;
+        &:hover {
+          .menu-icon {
+            display: inline-block!important;
+          }
+        }
+      }
+    }
+    .sidebar-section {
+      display: block;
+    }
+  }
+}
+
