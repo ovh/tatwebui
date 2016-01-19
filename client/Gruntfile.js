@@ -82,7 +82,8 @@ module.exports = function(grunt) {
       dist: {
         options: {},
         files: {
-          '<%= project.build%>/main.css': ['<%= project.app%>/**/*.less',
+          '<%= project.build%>/styles/main.css': [
+            '<%= project.app%>/**/*.less',
             '<%= project.build%>/tatwebui-plugin-*/**/*.less'
           ]
         }
@@ -295,14 +296,23 @@ module.exports = function(grunt) {
         }]
       },
       assets: {
-        files: [{
+        files: [
+        {
           expand: true,
           flatten: false,
           cwd: '<%= project.src%>',
           src: ['assets/**/*'],
           dest: '<%= project.dist%>/',
           filter: 'isFile'
-        }]
+        },
+        {
+          expand: true,
+          flatten: false,
+          cwd: '<%= project.src%>',
+          src: ['assets/img/*'],
+          dest: '<%= project.build%>'
+        }
+        ]
       },
       fonts: {
         files: [{
