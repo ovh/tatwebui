@@ -1,5 +1,5 @@
-<div class="signup" data-ng-controller="UserLoginCtrl">
-    <h1>{{ 'shared-title-tat' | translate}}</h1>
+<div class="wrapper" data-ng-controller="UserLoginCtrl">
+    <h1 id="tat-logo">{{ 'shared-title-tat' | translate}}</h1>
     <div class="signup-box">
         <form role="form">
           <div class="form-group">
@@ -14,15 +14,17 @@
             <label> <input type="checkbox" data-ng-model="user.remember">{{ 'components_user_signup_remember' | translate}}</label>
           </div>
           <div class="form-group">
-            <a role="button" data-ng-click="signup()">{{ 'components_user_signup_signup' | translate}}</a>
+            <button type="submit" class="btn btn-primary" data-ng-click="connect()">{{ 'components_user_signup_submit' | translate}}</button>
           </div>
-            <div class="form-group">
+          <br>
+          <div class="form-group">
+            <a role="button" data-ng-click="signup()">{{ 'components_user_signup_signup' | translate}}</a>
+            &nbsp;|&nbsp;
             <a role="button" data-ng-click="resetPassword()">{{ 'components_user_reset_request' | translate}}</a>
           </div>
-          <button type="submit" class="btn btn-default" data-ng-click="connect()">{{ 'components_user_signup_submit' | translate}}</button>
         </form>
     </div>
-    <div class="signup-box-footer">
+    <div class="tat-login-footer">
         <div config-urls="'home'"></div>
     </div>
 
