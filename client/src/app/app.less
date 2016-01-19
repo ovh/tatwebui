@@ -21,12 +21,22 @@ body {
 }
 
 .btn {
+  transition: background-color 0.3s ease;
+
   &.btn-default {
     background-color: #fff;
     border-color: #ededed;
     &:hover {
       background-color: #cceff9;
       border-color: #b9dde7;
+    }
+  }
+
+  &.btn-primary {
+    background-color: #507095;
+    border-color: #5E81AA;
+    &:hover {
+      background-color: #578ECE;
     }
   }
 }
@@ -76,23 +86,56 @@ body {
   }
 }
 
-.single {
-    background-color: @menu-bg;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    div.signup {
-        padding-top: 100px;
-        text-align: center;
-        color: #b2bfdc;
-        a {
-            font-size: 16px;
-        }
-        h1 {
-            font-weight: bold;
-            padding: 0 0 20px 0;
-        }
+.tat-login {
+  background-color: #161D23;
+  // #202F3C #507095 #578ECE
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  .form-control {
+    background-color: #DAF7FF;
+  }
+  a {
+    color: #507095;
+    text-decoration: none;
+    &:hover {
+      color: #578ECE;
     }
+  }
+  label {
+    color: #4B616F;
+    font-weight: normal;
+  }
+  #tat-logo {
+    background-color: #507095;
+    background-image: url("../assets/img/tat.svg"), none;
+    background-position: -6px -55px;
+    background-repeat: no-repeat;
+    background-size: 200px;
+    width: 180px;
+    height: 180px;
+    text-indent: -9999px;
+    border-radius: 50%;
+    margin: 0 auto 40px auto;
+    box-shadow: 0px 0px 13px #0C1118;
+  }
+  .wrapper {
+    padding-top: 100px;
+    margin: 0 auto;
+    width: 300px;
+    text-align: center;
+    color: #b2bfdc;
+    a {
+      font-size: 16px;
+    }
+    h1 {
+      font-weight: bold;
+      padding: 0 0 20px 0;
+    }
+  }
+  .tat-login-footer {
+    margin-top: 20px;
+  }
 }
 
 .wrapper {
