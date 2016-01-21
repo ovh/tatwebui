@@ -17,6 +17,8 @@
     <translation id="master-favorites">Favoris</translation>
     <translation id="master-users-and-groups">Utilisateurs et groupes</translation>
     <translation id="master-toggle-notification">Activer ou désactiver la notification pour les messages non lus dans le menu à gauche</translation>
+    <translation id="topic-configuration">Configurer ce topic</translation>
+    <translation id="master-add-subtopic">Ajouter un sous-topic</translation>
 
     <!-- Sidebar menu -->
     <translation id="master-topics">Topics</translation>

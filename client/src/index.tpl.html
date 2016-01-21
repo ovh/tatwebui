@@ -305,6 +305,12 @@
                      data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
                   </i>
                 </a>
+                <a title="{{ 'master-topic-configuration' | translate }}" data-ng-if="canEditTopic(ctrl.data.topic)" ui-sref="topics-edit({topicId:ctrl.data.topic._id})">
+                  <i class="fa fa-cogs"></i>
+                </a>
+                <a title="{{ 'master-add-subtopic' | translate }}"  data-ng-if="canEditTopic(ctrl.data.topic)" ui-sref="topics-new({topicRoute:ctrl.data.topic.topic})">
+                  <i class="fa fa-plus"></i>
+                </a>
                 <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
               </div>
               <p data-ng-if="isMessagesView(ctrl.data.state)">

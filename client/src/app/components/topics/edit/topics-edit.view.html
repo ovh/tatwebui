@@ -181,16 +181,16 @@
         <li data-ng-repeat="(k, v) in topic.roUsers">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRoUser=true" data-ng-hide="askRemoveRoUser">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRoUser=true" data-ng-hide="askRemoveRoUser">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveRoUser=false" data-ng-show="askRemoveRoUser"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRoUser">
-              <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
@@ -209,16 +209,16 @@
         <li data-ng-repeat="(k, v) in topic.rwUsers">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRwUser=true" data-ng-hide="askRemoveRwUser">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRwUser=true" data-ng-hide="askRemoveRwUser">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveRwUser=false" data-ng-show="askRemoveRwUser"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRwUser">
-              <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
@@ -237,16 +237,16 @@
         <li data-ng-repeat="(k, v) in topic.adminUsers">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdminUser=true" data-ng-hide="askRemoveAdminUser">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdminUser=true" data-ng-hide="askRemoveAdminUser">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveAdminUser=false" data-ng-show="askRemoveAdminUser"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveAdminUser">
-              <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
@@ -312,16 +312,16 @@
         <li data-ng-repeat="(k, v) in topic.roGroups">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRoGroup=true" data-ng-hide="askRemoveRoGroup">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRoGroup=true" data-ng-hide="askRemoveRoGroup">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveRoGroup=false" data-ng-show="askRemoveRoGroup"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRoGroup">
-              <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
@@ -340,16 +340,16 @@
         <li data-ng-repeat="(k, v) in topic.rwGroups">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveRwGroup=true" data-ng-hide="askRemoveRwGroup">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRwGroup=true" data-ng-hide="askRemoveRwGroup">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveRwGroup=false" data-ng-show="askRemoveRwGroup"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveRwGroup">
-              <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
@@ -368,16 +368,16 @@
         <li data-ng-repeat="(k, v) in topic.adminGroups">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdminGroup=true" data-ng-hide="askRemoveAdminGroup">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdminGroup=true" data-ng-hide="askRemoveAdminGroup">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveAdminGroup=false" data-ng-show="askRemoveAdminGroup"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_topics_dont_want_remove_group' | translate }}
                 <i class="fa fa-reply"></i>
             </button>
             <div class="btn-group" role="group" data-ng-show="askRemoveAdminGroup">
-              <button type="button" class="btn btn-xs btn-default btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                 <span class="caret"></span>
               </button>
@@ -390,5 +390,9 @@
         </li>
       </ul>
     </div>
+  </div>
+  <div class="row" data-ng-if="isAdmin()">
+      <!-- FIXME <a ui-sref="presences-list({topic:topicItem.topic})"><i class="fa fa-eye"></i></a>-->
+      <a href="/presences/list{{topic.topic}}"><i class="fa fa-eye"></i> Presence</a>
   </div>
 </div>

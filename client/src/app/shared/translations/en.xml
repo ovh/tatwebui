@@ -17,6 +17,8 @@
     <translation id="master-favorites">Favorites</translation>
     <translation id="master-users-and-groups">Users and groups</translation>
     <translation id="master-toggle-notification">Enable or disable messages unread notifications on left menu</translation>
+    <translation id="topic-configuration">Configure this topic</translation>
+    <translation id="master-add-subtopic">Add a sub topic</translation>
 
     <!-- Sidebar menu -->
     <translation id="master-topics">Topics</translation>

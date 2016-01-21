@@ -51,10 +51,10 @@ angular.module('TatUi', [
   'use strict';
   $urlMatcherFactoryProvider.type('topicRoute', {
     encode: function(val) {
-      return val !== null ? val.toString() : val;
+      return val !== null && val !== undefined ? val.toString() : val;
     },
     decode: function(val) {
-      return val !== null ? val.toString() : val;
+      return val !== null && val !== undefined ? val.toString() : val;
     },
     is: function(val) {
       return this.pattern.test(val);

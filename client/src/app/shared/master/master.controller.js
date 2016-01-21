@@ -36,6 +36,15 @@ angular.module('TatUi')
       //$rootScope.$broadcast('sidebar-change', {topic:topic});
     };
 
+    $scope.canEditTopic = function(topic) {
+      if ($scope.isAdmin() || _.contains(topic.adminUsers,
+          Authentication.getIdentity().username)) {
+        // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
+        return true;
+      }
+      return false;
+    };
+
     $scope.getFavoritesTopics = function() {
       return Authentication.getIdentity().favoritesTopics;
     };

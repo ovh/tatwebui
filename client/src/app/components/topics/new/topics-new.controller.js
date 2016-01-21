@@ -15,7 +15,7 @@ angular.module('TatUi')
     'use strict';
 
     $scope.topic = {
-      'topic': '',
+      'topic': $stateParams.topicRoute + "/newTopic",
       'description': ''
     };
 

@@ -38,7 +38,7 @@ angular.module('TatUi')
      */
     this.init = function() {
       TatEngineTopicsRsc.list({
-        idTopic: $stateParams.topicId
+        topic: $stateParams.topicRoute
       }).$promise.then(function(data) {
         if (data.count === 1) {
           $scope.topic = data.topics[0];
