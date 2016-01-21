@@ -17,7 +17,8 @@ angular.module('TatUi')
     this.data = {
       isFavoriteTopic: false,
       isNotificationsOffTopic: false,
-      topic: {}
+      topic: {},
+      viewsEnabled: false
     };
 
     var views = [];
@@ -89,7 +90,15 @@ angular.module('TatUi')
     };
 
     $scope.getViews = function() {
-      return views;
+      var restrictedPlugin =
+        Plugin.getPluginByRestriction(self.data.topic);
+      if (restrictedPlugin) {
+        self.data.viewsEnabled = false;
+        return null;
+      } else {
+        self.data.viewsEnabled = true;
+        return views;
+      }
     };
 
     $scope.switchView = function(route) {

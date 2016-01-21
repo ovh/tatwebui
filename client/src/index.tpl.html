@@ -156,7 +156,7 @@
         </li>
       </ul>
       <div class="sidebar-footer">
-        <div class="col-xs-4" data-ng-repeat="menuItem in bottomMenu">
+        <div class="col-xs-4" data-ng-repeat="menuItem in bottomMenu track by $index">
           <a href="{{menuItem.url}}">
             {{ menuItem.caption | translate}}
           </a>
@@ -252,7 +252,7 @@
                     {{ 'master-favorites' | translate }}
                   </li>
                   <li class="divider"></li>
-                  <li class="link" ng-repeat="t in getFavoritesTopics() |  orderBy:'toString()'">
+                  <li class="link" ng-repeat="t in getFavoritesTopics() track by $index |  orderBy:'toString()'">
                       <a data-ng-href="#" data-ng-click="topicClick(t)">{{t}}</a>
                   </li>
                   <li class="divider"></li>
@@ -273,8 +273,11 @@
                     {{ 'master-views' | translate }}
                   </li>
                   <li class="divider"></li>
-                  <li ng-repeat="v in getViews() | orderBy:'name'">
+                  <li ng-repeat="v in getViews() track by $index | orderBy:'name'">
                     <a role="button" ng-click="switchView(v.route)">{{v.name}}</a>
+                  </li>
+                  <li ng-hide="ctrl.data.viewsEnabled">
+                    {{ 'master-cant-change-view' | translate }}
                   </li>
                 </ul>
               </div>
@@ -287,7 +290,7 @@
                 <span>
                   {{ getTitle(ctrl.data.state) }}
                 </span>
-                <span data-ng-repeat="sub in title">
+                <span data-ng-repeat="sub in title track by $index">
                   <i class="fa fa-caret-right"></i>
                   {{sub}}
                 </span>

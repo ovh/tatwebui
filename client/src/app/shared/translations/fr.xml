@@ -19,6 +19,7 @@
     <translation id="master-toggle-notification">Activer ou désactiver la notification pour les messages non lus dans le menu à gauche</translation>
     <translation id="topic-configuration">Configurer ce topic</translation>
     <translation id="master-add-subtopic">Ajouter un sous-topic</translation>
+    <translation id="master-cant-change-view">Vous ne pouvez pas changer de vue sur ce topic</translation>
 
     <!-- Sidebar menu -->
     <translation id="master-topics">Topics</translation>
