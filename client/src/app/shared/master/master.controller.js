@@ -34,12 +34,19 @@ angular.module('TatUi')
       $rootScope.$broadcast('topic-change', {
         topic: topic
       });
-      //$rootScope.$broadcast('sidebar-change', {topic:topic});
+      $rootScope.$broadcast('sidebar-change', {topic:topic});
     };
 
     $scope.canEditTopic = function(topic) {
+      if (!topic.topic) {
+        return;
+      }
       if ($scope.isAdmin() || _.contains(topic.adminUsers,
-          Authentication.getIdentity().username)) {
+          Authentication.getIdentity().username) ||
+          (topic.topic.indexOf("/Private/" + Authentication.getIdentity().username) === 0 &&
+           topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") !== 0
+          )
+        ) {
         // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
         return true;
       }

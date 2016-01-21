@@ -8,13 +8,14 @@
  * @description Topics List Controller
  */
 angular.module('TatUi')
-  .controller('TopicsListCtrl', function($scope, TatEngineTopicsRsc, TatEngine) {
+  .controller('TopicsListCtrl', function($scope, TatEngineTopicsRsc, TatEngine, Authentication) {
     'use strict';
 
     $scope.data = {
       filtertopic: "",
       getForTatAdmin: false,
-      adminOfOneTopic: false
+      adminOfOneTopic: false,
+      filterList: ""
     };
 
     /**
@@ -48,8 +49,11 @@ angular.module('TatUi')
     };
 
     $scope.canView = function(topic) {
-      if (topic.topic.indexOf("/Private") === 0) {
+      if (topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") === 0) {
         return false;
+      }
+      if (topic.topic.indexOf("/Private/" + Authentication.getIdentity().username) === 0) {
+        return true;
       }
       return topic.adminUsers || topic.adminGroups ||
         topic.roUsers ||

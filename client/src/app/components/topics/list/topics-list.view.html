@@ -31,9 +31,7 @@
       <div class="col-lg-12">
         <rd-widget>
           <rd-widget-header icon="fa-group" title="{{data.topics.length}} Topics on total of {{data.count}}">
-          <form data-ng-submit="init()">
-              <input data-ng-model="data.filtertopic" type="text" placeholder="Search by Topic Name" class="form-control">
-          </form>
+              <input data-ng-model="data.filterList" type="text" placeholder="Search in this list" class="form-control">
           </rd-widget-header>
           <rd-widget-body classes="no-padding">
             <div class="table-responsive">
@@ -48,7 +46,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <tr data-ng-repeat="topicItem in data.topics" class="topic-first-row" ui-sref="topics-edit({topicRoute:topicItem.topic})">
+                    <tr data-ng-repeat="topicItem in data.topics | filter:data.filterList" class="topic-first-row">
                         <th class="topics-name">{{ topicItem.topic }}</th>
                         <td class="topics-description">{{ topicItem.description }}</td>
                         <td class="topics-users">

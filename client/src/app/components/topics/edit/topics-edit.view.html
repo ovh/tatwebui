@@ -4,7 +4,9 @@
       <div class="col-lg-6">
           <div class="group-profile">
               <div>
-                  <label>{{ 'shared_common_name' | translate }}</label> : <span>{{topic.topic}}</span>
+                  <label>{{ 'shared_common_name' | translate }}</label> : <span>
+                    <a data-ng-href="#" data-ng-click="topicClick(topic.topic)">{{topic.topic}}</a>
+                  </span>
               </div>
               <div>
                   <label>{{ 'shared_common_description' | translate }}</label> : <span>{{topic.description}}</span>

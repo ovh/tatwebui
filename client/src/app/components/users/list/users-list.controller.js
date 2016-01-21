@@ -12,7 +12,8 @@ angular.module('TatUi')
     'use strict';
 
     $scope.data = {
-      filterusername: ""
+      filterusername: "",
+      filterList: ""
     };
 
     /**
