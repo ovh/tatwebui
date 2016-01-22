@@ -32,6 +32,24 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.components:messageFilter",
+      "shortName": "messageFilter",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message filter",
+      "keywords": "ae api components create directive filter filtersearch function generic initfilterfield message messages tatui"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.components:messageFilterBar",
+      "shortName": "messageFilterBar",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message filter bar",
+      "keywords": "ae api bar components create directive filter generic message tatui"
+    },
+    {
+      "section": "api",
       "id": "TatUi.controller:GroupsEditCtrl",
       "shortName": "GroupsEditCtrl",
       "type": "controller",
