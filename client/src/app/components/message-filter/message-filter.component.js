@@ -31,14 +31,15 @@ angular.module('TatUi').component('messageFilter',
     'use strict';
 
     var self = this;
-
+    self.topic = $stateParams.topic;
+    self.view = $localStorage.views[self.topic];
+    self.config = appConfiguration.viewconfigs[self.view];
+    self.options = self.config ? self.config.filters : null;
     self.filter = TatFilter.getCurrent();
     self.tmpFilter = self.filter;
-    self.topic = $stateParams.topic;
 
     self.filterSearch = function() {
-      self.filter = self.tmpFilter;
-      TatFilter.setFilters(self.filter).search();
+      TatFilter.setFilters(self.tmpFilter).search();
     };
 
     $scope.$on('filter-changed', function(ev, filter){

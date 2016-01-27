@@ -14,13 +14,14 @@ angular.module('TatUi')
     var self = this;
 
     self.FILTERS = [
+      'label',
       'andLabel',
-      'andTag',
-      'inLabel',
-      'inTag',
       'notLabel',
+      'tag',
+      'andTag',
       'notTag',
-      'text'
+      'text',
+      'idMessage'
     ];
 
     self.topic = null;
@@ -30,7 +31,6 @@ angular.module('TatUi')
     for (var i = 0; i < self.FILTERS.length; i++) {
       self.currentFilters[self.FILTERS[i]] = null;
     }
-
 
     return {
       /**
@@ -63,7 +63,7 @@ angular.module('TatUi')
 
           self.sanitize = function(f) {
             // Removes spaces & duplicate (preserve order)
-            return (typeof(f) === 'undefined' || f === null) ? null : f.replace(/\s+/, '')
+            return (typeof(f) === 'undefined' || f === null) ? null : f.replace(/\s+/g, '')
               .split(',').reduce(function(p, c) {
                 if (c !== '' && p.indexOf(c) < 0) p.push(c); return p;
               }, []).join(',');
@@ -84,7 +84,13 @@ angular.module('TatUi')
           self.removeFilter = function(key, value) {
             var items, index, fltr;
             fltr = self.currentFilters[key];
-            if (key == 'text') {
+            if (key == 'idMessage') {
+              self.currentFilters.idMessage = null;
+              $localStorage.filters[self.topic].idMessage = null;
+              $location.search('idMessage', null);
+              self.search();
+            }
+            else if (key == 'text') {
               self.currentFilters.text = null;
               $localStorage.filters[self.topic].text = null;
               $location.search('text', null);
@@ -96,8 +102,8 @@ angular.module('TatUi')
               if (index > -1) items.splice(index, 1);
               self.currentFilters[key] = items.join(',');
               if (self.currentFilters[key] === '') self.currentFilters[key] = null;
-              $localStorage.filters[self.topic][key] = self.currentFilters[key];
-              $location.search(key, self.currentFilters[key]);
+              $localStorage.filters[self.topic][key] = null;
+              $location.search(key, null);
               self.search();
             }
             return self;
@@ -116,7 +122,12 @@ angular.module('TatUi')
           };
 
           self.setFilter = function(k, v) {
-            self.currentFilters[k] = v;
+            if (k !== 'text' && k !== 'idMessage') {
+              self.currentFilters[k] = self.sanitize(v);
+            }
+            else {
+              self.currentFilters[k] = (typeof(v) === 'string') ? v.replace(/(^\s+|\s+$)/g, ''): v;
+            }
             $localStorage.filters[self.topic][k] = self.currentFilters[k];
             $location.search(k, self.currentFilters[k]);
             return self;
@@ -148,13 +159,6 @@ angular.module('TatUi')
          *
          */
         return {
-          /**
-           * @ngdoc array
-           * @name checkConnection
-           * @description
-           *
-           * List of supported filters (constant)
-           */
           FILTERS: self.FILTERS,
           removeFilter: self.removeFilter,
           getCurrent: self.getCurrentFilters,
@@ -165,63 +169,3 @@ angular.module('TatUi')
       }
     };
   });
-
-//  self.filterSearch = function() {
-//
-//    var filter = {};
-//
-//    filter.text     = self.tmpFilter.text ? self.tmpFilter.text : null;
-//    filter.label    = sanitize(self.tmpFilter.label);
-//    filter.andLabel = sanitize(self.tmpFilter.andLabel);
-//    filter.notLabel = sanitize(self.tmpFilter.notLabel);
-//    filter.inTag    = sanitize(self.tmpFilter.inTag);
-//    filter.andTag   = sanitize(self.tmpFilter.andTag);
-//    filter.notTag   = sanitize(self.tmpFilter.notTag);
-//
-//    if (self.tmpFilter.idMessage === "-1") {
-//      $rootScope.$broadcast('topic-change', {
-//        topic: self.topic,
-//        reload: true
-//      });
-//    } else {
-//      filter.idMessage = $stateParams.idMessage;
-//    }
-//
-//    self.setFilter('text');
-//    self.setFilter('label');
-//    self.setFilter('andLabel');
-//    self.setFilter('notLabel');
-//    self.setFilter('inTag');
-//    self.setFilter('andTag');
-//    self.setFilter('notTag');
-//
-//    if (self.isSureWithNoFilter || !self.isNoFilter) {
-//      $rootScope.$broadcast('filter-changed', filter); // calls refresh
-//    }
-//  };
-//  self.setFilter = function(key) {
-//    if (self.tmpFilter[key] === '' || self.tmpFilter[key] === undefined) {
-//      $location.search(key, null);
-//    } else {
-//      self.isNoFilter = false;
-//      $location.search(key, self.tmpFilter[key]);
-//    }
-//    $localStorage.messagesFilters[self.topic][key] = self.tmpFilter[key];
-//  };
-
-//  /**
-//   * @ngdoc function
-//   * @name initFilterField
-//   * @methodOf TatUi.components:messageFilter
-//   * @description
-//   */
-//  self.initFilters = function(keys) {
-//    var key, i;
-//    for (i = 0; i < keys.length; i++) {
-//      key = keys[i];
-//      if ($localStorage.messagesFilters[self.topic][key]) {
-//        self.tmpFilter[key] = $localStorage.messagesFilters[self.topic][key];
-//      }
-//    }
-//  };
-

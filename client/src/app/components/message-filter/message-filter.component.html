@@ -1,53 +1,103 @@
 <div class="filter-dialog">
   <form>
+
+    <!-- full text search -->
     <div class="input-group">
       <span class="input-group-addon" id="filter-fulltext"><i class="fa fa-search"></i></span>
-      <input type="text" class="form-control" placeholder="text" ng-model="MessageFilter.tmpFilter.text" aria-describedby="filter-fulltext">
+      <input type="text"
+             class="form-control"
+             placeholder="{{ MessageFilter.options.placeholder.text || 'text' }}"
+             ng-model="MessageFilter.tmpFilter.text"
+             aria-describedby="filter-fulltext">
     </div>
+
+    <!-- in labels -->
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="open,doing" ng-model="MessageFilter.tmpFilter.inLabel" aria-describedby="filter-labels">
+      <input type="text"
+             class="form-control"
+             placeholder="{{ MessageFilter.options.placeholder.label || 'open,doing' }}"
+             ng-model="MessageFilter.tmpFilter.label"
+             aria-describedby="filter-labels">
       <span id="helpBlock" class="help-block">
         <i class="fa fa-tags"></i>
         <strong>{{ 'message_in' | translate }}</strong>: {{ 'message_contains_labels' | translate }}
       </span>
     </div>
+
+    <!-- and labels -->
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="open,doing" ng-model="MessageFilter.tmpFilter.andLabel" aria-describedby="filter-labels">
+      <input type="text"
+             class="form-control"
+             placeholder="{{ MessageFilter.options.placeholder.andLabel || 'open,doing' }}"
+             ng-model="MessageFilter.tmpFilter.andLabel"
+             aria-describedby="filter-labels">
       <span id="helpBlock" class="help-block">
         <i class="fa fa-tags"></i>
         <strong>{{ 'message_all' | translate }}</strong>: {{ 'message_contains_all_labels' | translate }}
       </span>
     </div>
+
+    <!-- hide labels -->
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="done" ng-model="MessageFilter.tmpFilter.notLabel" aria-describedby="filter-hide-labels">
+      <input type="text"
+             class="form-control"
+             placeholder="{{ MessageFilter.options.placeholder.notLabel || 'done' }}"
+             ng-model="MessageFilter.tmpFilter.notLabel"
+             aria-describedby="filter-hide-labels">
       <span id="helpBlock" class="help-block">
         <i class="fa fa-tags"></i>
         <strong>{{ 'message_hide' | translate }}</strong>: {{ 'message_hide_labels' | translate }}
       </span>
     </div>
+
+     <!-- in tags -->
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="PCC,STOCKAGE" ng-model="MessageFilter.tmpFilter.inTag" aria-describedby="filter-tags">
+      <input type="text"
+             class="form-control"
+             placeholder="{{ MessageFilter.options.placeholder.tag || 'done' }}"
+             ng-model="MessageFilter.tmpFilter.tag"
+             aria-describedby="filter-tags">
+
       <span id="helpBlock" class="help-block">
         <i class="fa fa-hashtag"></i>
         <strong>{{ 'message_in' | translate }}</strong>: {{ 'message_contains_tags' | translate }}
       </span>
     </div>
+
+    <!-- and tags -->
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="PCC,STOCKAGE" ng-model="MessageFilter.tmpFilter.andTag" aria-describedby="filter-tags">
+      <input type="text"
+             class="form-control"
+             placeholder="{{ MessageFilter.options.placeholder.andTag || 'PCC,STOCKAGE' }}"
+             ng-model="MessageFilter.tmpFilter.andTag"
+             aria-describedby="filter-tags">
       <span id="helpBlock" class="help-block">
         <i class="fa fa-hashtag"></i>
         <strong>{{ 'message_all' | translate }}</strong>: {{ 'message_contains_all_tags' | translate }}
       </span>
     </div>
+
+    <!-- hide tags -->
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="PCC,STOCKAGE" ng-model="MessageFilter.tmpFilter.notTag" aria-describedby="filter-hide-tags">
+      <input type="text"
+             class="form-control"
+             placeholder="{{ MessageFilter.options.placeholder.notTag || 'PCC,STOCKAGE' }}"
+             ng-model="MessageFilter.tmpFilter.notTag"
+             aria-describedby="filter-hide-tags">
       <span id="helpBlock" class="help-block">
         <i class="fa fa-hashtag"></i>
         <strong>{{ 'message_hide' | translate }}</strong>: {{ 'message_hide_all_tags' | translate }}
       </span>
     </div>
+
+    <!-- apply filters -->
     <div class="form-group form-actions">
-      <button type="submit" class="btn btn-primary btn-xs" ng-click="MessageFilter.filterSearch()">{{ 'message_search' | translate }}</button>
+      <button type="submit"
+              class="btn btn-primary btn-xs"
+              ng-click="MessageFilter.filterSearch()">
+              {{ 'message_search' | translate }}
+      </button>
     </div>
+
   </form>
 </div>

@@ -1,24 +1,23 @@
 <!-- tat-message-filters -->
 <div class="tat-message-filters"> <!-- ng-show="MessageFilterBar.hasFilters"> -->
-  <!--<strong>{{ MessageFilterBar.filter }}</strong>-->
+
   <!-- full text search -->
   <span class="tat-filter-group" ng-if="MessageFilterBar.filter.text">
     <strong class="inclusive">
       <i class="fa fa-search"></i>
     </strong>
-    <span class="label label-default">
-      {{ MessageFilterBar.filter.text }}
-      <a role="button" ng-click="MessageFilterBar.removeFilter('text')"><i class="fa fa-times"></i></a>
+    <span class="tat-textlabel" ng-click="MessageFilterBar.removeFilter('text')">
+      {{ MessageFilterBar.filter.text }} <i class="fa fa-minus-circle"></i>
     </span>
   </span>
 
   <!-- in labels -->
-  <span class="tat-filter-group" ng-if="MessageFilterBar.filter.inLabel">
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.label.length">
     <strong class="inclusive">
       <i class="fa fa-plus-square"></i>
       {{ 'message_in' | translate }}
     </strong>
-    <span class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.inLabel" ng-click="MessageFilterBar.removeFilter('inLabel', label)">
+    <span class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.label" ng-click="MessageFilterBar.removeFilter('label', label)">
       {{ label }} <i class="fa fa-minus-circle"></i>
     </span>
   </span>
@@ -46,12 +45,12 @@
   </span>
 
   <!-- in tags -->
-  <span class="tat-filter-group" ng-if="MessageFilterBar.filter.inTag">
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filter.tag">
     <strong class="inclusive">
       <i class="fa fa-plus-square"></i>
       {{ 'message_in' | translate }}
     </strong>
-    <span class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.inTag" ng-click="MessageFilterBar.removeFilter('inTag', tag)">
+    <span class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.tag" ng-click="MessageFilterBar.removeFilter('tag', tag)">
       <i>#</i>{{ tag }} <i class="fa fa-minus-circle"></i>
     </span>
   </span>
@@ -86,9 +85,10 @@
     </strong>
     <span class="tat-tag">
       {{ MessageFilterBar.filter.idMessage }}
-      <a role="button" ng-click="MessageFilterBar.filter.idMessage = '-1'; MessageFilterBar.filterSearch()"><i class="fa fa-times"></i></a>
+      <a role="button" ng-click="MessageFilterBar.removeFilter('idMessage')"><i class="fa fa-times"></i></a>
     </span>
   </span>
+
 </div>
 
 

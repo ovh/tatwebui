@@ -38,8 +38,11 @@ angular.module('TatUi').component('messageFilterBar',
 
     self.setFilterHelpers = function() {
       TatFilter.eachFilter(function(k){
-        if (k !== 'text') {
-          if (self.filter[k])  self.filterAsList[k] = self.filter[k].split(',');
+        if (k == 'text') {
+          self.filterAsList[k] = self.filter[k] ? self.filter[k]: '';
+        }
+        else {
+          self.filterAsList[k] = self.filter[k] ? self.filter[k].split(','): [];
         }
       });
     };
