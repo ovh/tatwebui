@@ -1,9 +1,8 @@
 <!doctype html>
 <html lang="en" data-ng-app="TatUi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
 
     <title>Tat - TextAndTags</title>
@@ -176,8 +175,8 @@
         <div class="row header">
           <div class="col-xs-12">
             <div class="user pull-right">
-              <div class="item dropdown" dropdown>
-                <a role="button" class="dropdown-toggle" title="{{ getUser('fullname') }}" dropdown-toggle>
+              <div class="item dropdown" uib-dropdown>
+                <a role="button" class="dropdown-toggle" title="{{ getUser('fullname') }}" uib-dropdown-toggle>
                   <i class="fa fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -197,8 +196,8 @@
                   </li>
                 </ul>
               </div>
-              <div class="item dropdown" data-ng-if="isAdmin()" dropdown>
-                <a role="button" class="dropdown-toggle" dropdown-toggle>
+              <div class="item dropdown" data-ng-if="isAdmin()" uib-dropdown>
+                <a role="button" class="dropdown-toggle" uib-dropdown-toggle>
                   <i class="fa fa-cogs"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -229,8 +228,8 @@
                 </ul>
               </div>
 
-              <div class="item dropdown" dropdown>
-                <a role="button" class="dropdown-toggle" title="{{ 'master-users-and-groups' | translate }}" dropdown-toggle>
+              <div class="item dropdown" uib-dropdown>
+                <a role="button" class="dropdown-toggle" title="{{ 'master-users-and-groups' | translate }}" uib-dropdown-toggle>
                   <i class="fa fa-users"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -247,8 +246,8 @@
                 </ul>
               </div>
 
-              <div class="item dropdown" dropdown>
-                <a role="button" class="dropdown-toggle" title="{{ 'master-topics' | translate }}" dropdown-toggle>
+              <div class="item dropdown" uib-dropdown>
+                <a role="button" class="dropdown-toggle" title="{{ 'master-topics' | translate }}" uib-dropdown-toggle>
                   <i class="fa fa-comments"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -268,8 +267,8 @@
                 </ul>
               </div>
 
-              <div class="item dropdown" data-ng-if="isMessagesView(ctrl.data.state)" dropdown>
-               <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" dropdown-toggle>
+              <div class="item dropdown" data-ng-if="isMessagesView(ctrl.data.state)" uib-dropdown>
+               <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" uib-dropdown-toggle>
                   <i class="fa fa-eye"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -283,38 +282,40 @@
                 </ul>
               </div>
             </div>
-            <div class="meta">
-              <div class="page" data-ng-if="!isMessagesView(ctrl.data.state)">
+
+            <div class="tat-main-header">
+              <h1 data-ng-if="!isMessagesView(ctrl.data.state)">
                 {{ title | translate }}
-              </div>
-              <div class="page" data-ng-if="isMessagesView(ctrl.data.state)">
+              </h1>
+              <h1 data-ng-if="isMessagesView(ctrl.data.state)">
                 <span>
                   {{ getTitle(ctrl.data.state) }}
                 </span>
                 <span data-ng-repeat="sub in title">
                   <i class="fa fa-caret-right"></i>
-                  {{sub}}
+                  {{ sub }}
                 </span>
                 &nbsp;
                 <a role="button"
-                   data-ng-click="ctrl.toggleTopicFavorite()">
+                  data-ng-click="ctrl.toggleTopicFavorite()">
                   <i class="fa"
-                     data-ng-class="{'fa-star-o':!ctrl.data.isFavoriteTopic, 'fa-star': ctrl.data.isFavoriteTopic}">
+                    data-ng-class="{'fa-star-o':!ctrl.data.isFavoriteTopic, 'fa-star': ctrl.data.isFavoriteTopic}">
                   </i>
                 </a>
                 <a role="button"
                   title="{{ 'master-toggle-notification' | translate }}"
-                   data-ng-click="ctrl.toggleNotificationsTopic()">
+                  data-ng-click="ctrl.toggleNotificationsTopic()">
                   <i class="fa"
-                     data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
+                    data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
                   </i>
                 </a>
                 <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
-              </div>
-              <p data-ng-if="isMessagesView(ctrl.data.state)">
-                {{ctrl.data.topic.description}}
-              </p>
+              </h1>
+              <h2 data-ng-if="isMessagesView(ctrl.data.state)">
+                {{ ctrl.data.topic.description }}
+              </h2>
             </div>
+
           </div>
         </div>
         <!-- End Header Bar -->
