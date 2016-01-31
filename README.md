@@ -2,7 +2,9 @@
 
 # Tat WebUI
 
-Tat Command Line Interface.
+<img align="right" src="https://raw.githubusercontent.com/ovh/tat/master/tat.png">
+
+Tat Web UI - A Web Client for Tat Engine
 
 See Tat Engine for more information: https://github.com/ovh/tat
 
