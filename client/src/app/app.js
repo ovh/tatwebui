@@ -17,7 +17,8 @@ angular.module('TatUi', [
     'colorpicker.module',
     'infinite-scroll',
     'angularSpectrumColorpicker',
-    'ngDraggable'
+    'ngDraggable',
+    'chart.js'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     'use strict';
