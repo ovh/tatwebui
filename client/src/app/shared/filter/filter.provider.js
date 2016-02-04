@@ -81,6 +81,8 @@ angular.module('TatUi')
             }
           });
 
+          $rootScope.filters = self.currentFilters;
+
           self.removeFilter = function(key, value) {
             var items, index, fltr;
             fltr = self.currentFilters[key];
@@ -122,6 +124,10 @@ angular.module('TatUi')
           };
 
           self.setFilter = function(k, v) {
+            // Some users might include the pound sign to reference a tag
+            if (k == 'tag' && v) {
+              v = v.replace('#', '');
+            }
             if (k !== 'text' && k !== 'idMessage') {
               self.currentFilters[k] = self.sanitize(v);
             }

@@ -17,6 +17,7 @@ angular.module('TatUi').component('messageFilter',
   controller: function(
     $scope,
     $rootScope,
+    $state,
     TatEngineMessageRsc,
     TatEngineMessagesRsc,
     TatEngine,
@@ -32,7 +33,7 @@ angular.module('TatUi').component('messageFilter',
 
     var self = this;
     self.topic = $stateParams.topic;
-    self.view = $localStorage.views[self.topic];
+    self.view = $state.current.name;
     self.config = appConfiguration.viewconfigs[self.view];
     self.options = self.config ? self.config.filters : null;
     self.filter = TatFilter.getCurrent();
