@@ -37,7 +37,7 @@ angular.module('TatUi').component('messageFilter',
     self.config = appConfiguration.viewconfigs[self.view];
     self.options = self.config ? self.config.filters : null;
     self.filter = TatFilter.getCurrent();
-    self.tmpFilter = self.filter;
+    self.tmpFilter = angular.copy(self.filter);
 
     self.filterSearch = function() {
       TatFilter.setFilters(self.tmpFilter).search();
