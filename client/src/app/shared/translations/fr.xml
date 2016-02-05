@@ -1,79 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translations>
-    <translation id="shared-title-tat">TextAndTags</translation>
+  <translation id="shared-title-tat">TextAndTags</translation>
 
-    <translation id="index">TextAndTags</translation>
+  <translation id="index">TextAndTags</translation>
 
-    <!-- Header menu -->
-    <translation id="master-configuration">Configuration</translation>
-    <translation id="master-profile">Profile</translation>
-    <translation id="master-logout">Déconnexion</translation>
-    <translation id="master-notifications">Notifications</translation>
-    <translation id="master-groups">Groupes</translation>
-    <translation id="master-users">Utilisateurs</translation>
-    <translation id="master-presences">Presences</translation>
-    <translation id="master-sockets">Sockets</translation>
-    <translation id="master-views">Vues</translation>
-    <translation id="master-favorites">Favoris</translation>
-    <translation id="master-users-and-groups">Utilisateurs et groupes</translation>
-    <translation id="master-toggle-notification">Activer ou désactiver la notification pour les messages non lus dans le menu à gauche</translation>
+  <!-- Header menu -->
+  <translation id="master-configuration">Configuration</translation>
+  <translation id="master-profile">Profile</translation>
+  <translation id="master-logout">Déconnexion</translation>
+  <translation id="master-notifications">Notifications</translation>
+  <translation id="master-groups">Groupes</translation>
+  <translation id="master-users">Utilisateurs</translation>
+  <translation id="master-presences">Presences</translation>
+  <translation id="master-sockets">Sockets</translation>
+  <translation id="master-views">Vues</translation>
+  <translation id="master-favorites">Favoris</translation>
+  <translation id="master-users-and-groups">Utilisateurs et groupes</translation>
+  <translation id="master-toggle-notification">Activer ou désactiver la notification pour les messages non lus dans le menu à gauche</translation>
 
-    <!-- Sidebar menu -->
-    <translation id="master-topics">Topics</translation>
-    <translation id="master-actions">Actions</translation>
-    <translation id="master-messages">Messages</translation>
-    <translation id="master-register">S'abonner</translation>
-    <translation id="master-tables">Tableaux</translation>
+  <!-- Sidebar menu -->
+  <translation id="master-topics">Topics</translation>
+  <translation id="master-actions">Actions</translation>
+  <translation id="master-messages">Messages</translation>
+  <translation id="master-register">S'abonner</translation>
+  <translation id="master-tables">Tableaux</translation>
 
-    <!-- Bottom menu -->
-    <translation id="master-source">Source</translation>
-    <translation id="master-about">A Propos</translation>
-    <translation id="master-support">Support</translation>
+  <!-- Bottom menu -->
+  <translation id="master-source">Source</translation>
+  <translation id="master-about">A Propos</translation>
+  <translation id="master-support">Support</translation>
 
-    <!-- Page titles -->
-    <translation id="user">Utilisateur</translation>
-    <translation id="profile">Profile</translation>
-    <translation id="message">Message</translation>
-    <translation id="list">Liste</translation>
-    <translation id="user-profile">Profile utilisateur</translation>
-    <translation id="user-confirm">Confirmation</translation>
-    <translation id="topics-new">Nouveau topic</translation>
-    <translation id="topics_notopic">Topic inconnu</translation>
-    <translation id="topics-edit">Edition d'un topic</translation>
-    <translation id="topics-list">Liste des topics</translation>
-    <translation id="groups-new">Nouveau groupe</translation>
-    <translation id="groups-edit">Edition d'un groupe</translation>
-    <translation id="groups-list">Liste des groupes</translation>
-    <translation id="users-edit">Edition d'un utilisateur</translation>
-    <translation id="users-list">Liste des utilisateurs</translation>
-    <translation id="presences-list">Liste des présences</translation>
-    <translation id="sockets-admin">Administration Sockets</translation>
+  <!-- Page titles -->
+  <translation id="user">Utilisateur</translation>
+  <translation id="profile">Profile</translation>
+  <translation id="message">Message</translation>
+  <translation id="list">Liste</translation>
+  <translation id="user-profile">Profile utilisateur</translation>
+  <translation id="user-confirm">Confirmation</translation>
+  <translation id="topics-new">Nouveau topic</translation>
+  <translation id="topics_notopic">Topic inconnu</translation>
+  <translation id="topics-edit">Edition d'un topic</translation>
+  <translation id="topics-list">Liste des topics</translation>
+  <translation id="groups-new">Nouveau groupe</translation>
+  <translation id="groups-edit">Edition d'un groupe</translation>
+  <translation id="groups-list">Liste des groupes</translation>
+  <translation id="users-edit">Edition d'un utilisateur</translation>
+  <translation id="users-list">Liste des utilisateurs</translation>
+  <translation id="presences-list">Liste des présences</translation>
+  <translation id="sockets-admin">Administration Sockets</translation>
 
-    <translation id="shared_common_password">Mot de passe</translation>
-    <translation id="shared_common_username">Utilisateur</translation>
-    <translation id="shared_common_waiting">(en attente)</translation>
-    <translation id="shared_common_success">Succès !</translation>
-    <translation id="shared_common_fail">Echec</translation>
-    <translation id="shared_common_back">Retour</translation>
-    <translation id="shared_common_yes_i_confirm">Oui, je confirme</translation>
-    <translation id="shared_common_cancel">Annuler</translation>
-    <translation id="shared_common_name">Nom</translation>
-    <translation id="shared_common_description">Description</translation>
-    <translation id="shared_common_users">Utilisateurs</translation>
-    <translation id="shared_common_groups">Groupes</translation>
-    <translation id="shared_common_administrators">Administrateurs</translation>
-    <translation id="shared_common_administrator">Administrateur</translation>
-    <translation id="shared_common_read_write">Lecture / Ecriture</translation>
-    <translation id="shared_common_read_only">Lecture seule</translation>
-    <translation id="shared_common_recursively">Récursivement</translation>
-    <translation id="shared_common_create">Créer</translation>
-    <translation id="shared_common_topic">Topic</translation>
-    <translation id="shared_common_parameters">Paramètres</translation>
-    <translation id="shared_common_validate">Valider</translation>
-    <translation id="shared_common_created_at">Créé le</translation>
-    <translation id="shared_common_rights_stats">Stats</translation>
-    <translation id="shared_common_an_error_occured">Une erreur est survenue</translation>
-    <translation id="shared_common_message_item_reply">Répondre</translation>
-    <translation id="shared_common_message_item_label">Modifier les labels</translation>
-    <translation id="shared_common_full_name">Nom complet</translation>
+  <translation id="shared_common_password">Mot de passe</translation>
+  <translation id="shared_common_username">Utilisateur</translation>
+  <translation id="shared_common_waiting">(en attente)</translation>
+  <translation id="shared_common_success">Succès !</translation>
+  <translation id="shared_common_fail">Echec</translation>
+  <translation id="shared_common_back">Retour</translation>
+  <translation id="shared_common_yes_i_confirm">Oui, je confirme</translation>
+  <translation id="shared_common_cancel">Annuler</translation>
+  <translation id="shared_common_name">Nom</translation>
+  <translation id="shared_common_description">Description</translation>
+  <translation id="shared_common_users">Utilisateurs</translation>
+  <translation id="shared_common_groups">Groupes</translation>
+  <translation id="shared_common_administrators">Administrateurs</translation>
+  <translation id="shared_common_administrator">Administrateur</translation>
+  <translation id="shared_common_read_write">Lecture / Ecriture</translation>
+  <translation id="shared_common_read_only">Lecture seule</translation>
+  <translation id="shared_common_recursively">Récursivement</translation>
+  <translation id="shared_common_create">Créer</translation>
+  <translation id="shared_common_topic">Topic</translation>
+  <translation id="shared_common_parameters">Paramètres</translation>
+  <translation id="shared_common_validate">Valider</translation>
+  <translation id="shared_common_created_at">Créé le</translation>
+  <translation id="shared_common_rights_stats">Stats</translation>
+  <translation id="shared_common_an_error_occured">Une erreur est survenue</translation>
+  <translation id="shared_message_reply">Répondre</translation>
+  <translation id="shared_message_label">Modifier les labels</translation>
+  <translation id="shared_message_update">Modifier</translation>
+  <translation id="shared_message_send">Envoyer</translation>
+  <translation id="shared_message_done">Complété</translation>
+  <translation id="shared_common_full_name">Nom complet</translation>
 </translations>

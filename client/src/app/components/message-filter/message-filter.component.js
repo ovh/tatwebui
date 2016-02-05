@@ -45,6 +45,7 @@ angular.module('TatUi').component('messageFilter',
 
     $scope.$on('filter-changed', function(ev, filter){
       self.filter = filter;
+      self.tmpFilter = filter;
     });
 
   },
