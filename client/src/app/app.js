@@ -36,7 +36,7 @@ angular.module('TatUi', [
   $translateProvider.useCookieStorage();
 
   // http://angular-translate.github.io/docs/#/guide/19_security
-  $translateProvider.useSanitizeValueStrategy('sanitize');
+  $translateProvider.useSanitizeValueStrategy('escape');
 
   // set default and fallback languages
   $translateProvider.preferredLanguage('fr');
