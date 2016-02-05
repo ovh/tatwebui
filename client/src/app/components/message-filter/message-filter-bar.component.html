@@ -16,7 +16,7 @@
   <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.label.length">
     <strong class="inclusive">
       <i class="fa fa-plus-square"></i>
-      {{ 'message_in' | translate }}
+      {{ 'shared_filter_in' | translate }}
     </strong>
     <a role="button" class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.label" ng-click="MessageFilterBar.removeFilter('label', label)">
       {{ label }}
@@ -28,7 +28,7 @@
   <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.andLabel.length">
     <strong class="inclusive">
       <i class="fa fa-plus-square"></i>
-      {{ 'message_all' | translate }}
+      {{ 'shared_filter_all' | translate }}
     </strong>
     <a role="button" class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.andLabel" ng-click="MessageFilterBar.removeFilter('andLabel', label)">
       {{ label }}
@@ -40,7 +40,7 @@
   <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.notLabel.length">
     <strong class="exclusive">
       <i class="fa fa-minus-square"></i>
-      {{ 'message_hide' | translate }}
+      {{ 'shared_filter_hide' | translate }}
     </strong>
     <a role="button" class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.notLabel" ng-click="MessageFilterBar.removeFilter('notLabel', label)">
       {{ label }}
@@ -52,7 +52,7 @@
   <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.tag.length">
     <strong class="inclusive">
       <i class="fa fa-plus-square"></i>
-      {{ 'message_in' | translate }}
+      {{ 'shared_filter_in' | translate }}
     </strong>
     <a role="button" class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.tag" ng-click="MessageFilterBar.removeFilter('tag', tag)">
       <i>#</i>{{ tag }}
@@ -64,7 +64,7 @@
   <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.andTag.length">
     <strong class="inclusive">
       <i class="fa fa-plus-square"></i>
-      {{ 'message_all' | translate }}
+      {{ 'shared_filter_all' | translate }}
     </strong>
     <a role="button" class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.andTag" ng-click="MessageFilterBar.removeFilter('andTag', tag)">
       <i>#</i>{{ tag }}
@@ -76,7 +76,7 @@
   <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.notTag.length">
     <strong class="inclusive">
       <i class="fa fa-minus-square"></i>
-      {{ 'message_hide' | translate }}
+      {{ 'shared_filter_hide' | translate }}
     </strong>
     <a role="button" class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.notTag" ng-click="MessageFilterBar.removeFilter('notTag', tag)">
       <i>#</i>{{ tag }}

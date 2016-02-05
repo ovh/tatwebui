@@ -73,10 +73,38 @@
   <translation id="shared_common_created_at">Créé le</translation>
   <translation id="shared_common_rights_stats">Stats</translation>
   <translation id="shared_common_an_error_occured">Une erreur est survenue</translation>
+  <translation id="shared_common_full_name">Nom complet</translation>
+
+  <!-- Messages -->
   <translation id="shared_message_reply">Répondre</translation>
   <translation id="shared_message_label">Modifier les labels</translation>
   <translation id="shared_message_update">Modifier</translation>
   <translation id="shared_message_send">Envoyer</translation>
   <translation id="shared_message_done">Complété</translation>
-  <translation id="shared_common_full_name">Nom complet</translation>
+  <translation id="shared_message_compose_placeholder">Votre message ici avec #tag</translation>
+  <translation id="shared_message_read_only">Vous êtes en lecture seule sur ce topic.</translation>
+  <translation id="shared_message_show_more">Afficher plus de messages</translation>
+  <translation id="shared_message_characters_left">Restant</translation>
+  <translation id="shared_message_like">J'aime</translation>
+  <translation id="shared_message_unlike">Je n'aime plus</translation>
+  <translation id="shared_message_bookmark">Favoris</translation>
+  <translation id="shared_message_delete">Effacer</translation>
+  <translation id="shared_message_label_add">Ajouter label</translation>
+  <translation id="shared_message_url">Url directe vers ce message</translation>
+  <translation id="shared_message_remove_from_my_tasks">Retirer de mes tâches</translation>
+  <translation id="shared_message_add_to_my_tasks">Ajouter à mes tâches</translation>
+  <translation id="shared_message_confirm_delete">Confirmer la suppression</translation>
+  <translation id="shared_message_and_replies">du message et des réponses</translation>
+
+  <!-- Filters -->
+  <translation id="shared_filter_in">dans</translation>
+  <translation id="shared_filter_all">tout</translation>
+  <translation id="shared_filter_hide">cacher</translation>
+  <translation id="shared_filter_contains_labels">Contient un ou plusieurs label de cette liste</translation>
+  <translation id="shared_filter_contains_all_labels">Contient tout les label de cette liste</translation>
+  <translation id="shared_filter_hide_labels">Cacher tout les labels de cette liste</translation>
+  <translation id="shared_filter_contains_tags">Contient un ou plusieurs tags de cette liste</translation>
+  <translation id="shared_filter_contains_all_tags">Contient tout les tags de cette liste</translation>
+  <translation id="shared_filter_hide_all_tags">Cacher tout les tags de cette liste</translation>
+  <translation id="shared_filter_search">Rechercher</translation>
 </translations>

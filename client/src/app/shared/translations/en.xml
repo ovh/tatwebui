@@ -73,10 +73,38 @@
   <translation id="shared_common_created_at">Created at</translation>
   <translation id="shared_common_rights_stats">Rights Stats</translation>
   <translation id="shared_common_an_error_occured">An error occured</translation>
-  <translation id="shared_common_message_item_reply">Reply</translation>
-  <translation id="shared_common_message_item_label">Modify labels</translation>
-  <translation id="shared_common_message_item_update">Update</translation>
-  <translation id="shared_common_message_item_send">Send</translation>
-  <translation id="shared_common_message_item_done">Done</translation>
   <translation id="shared_common_full_name">Full name</translation>
+
+  <!-- Messages -->
+  <translation id="shared_message_reply">Reply</translation>
+  <translation id="shared_message_label">Modify labels</translation>
+  <translation id="shared_message_update">Update</translation>
+  <translation id="shared_message_send">Send</translation>
+  <translation id="shared_message_done">Done</translation>
+  <translation id="shared_message_compose_placeholder">Your message here with #tag</translation>
+  <translation id="shared_message_read_only">You are in read-only mode in this topic.</translation>
+  <translation id="shared_message_show_more">Show more messages</translation>
+  <translation id="shared_message_characters_left">Remaining</translation>
+  <translation id="shared_message_like">Like</translation>
+  <translation id="shared_message_unlike">Unlike</translation>
+  <translation id="shared_message_bookmark">Bookmark</translation>
+  <translation id="shared_message_delete">Delete</translation>
+  <translation id="shared_message_label_add">Add label</translation>
+  <translation id="shared_message_url">Direct Link to this message</translation>
+  <translation id="shared_message_remove_from_my_tasks">Remove from my tasks</translation>
+  <translation id="shared_message_add_to_my_tasks">Add to my tasks</translation>
+  <translation id="shared_message_confirm_delete">Confirm delete</translation>
+  <translation id="shared_message_and_replies">of message and replies</translation>
+
+  <!-- Filters -->
+  <translation id="shared_filter_in">in</translation>
+  <translation id="shared_filter_all">all</translation>
+  <translation id="shared_filter_hide">hide</translation>
+  <translation id="shared_filter_contains_labels">Contains one or many labels of this list</translation>
+  <translation id="shared_filter_contains_all_labels">Contains all labels in this list</translation>
+  <translation id="shared_filter_hide_labels">Hide all labels in this list</translation>
+  <translation id="shared_filter_contains_tags">Contains one or many tags of this list</translation>
+  <translation id="shared_filter_contains_all_tags">Contains all tags in this list</translation>
+  <translation id="shared_filter_hide_all_tags">Hide all tags in this list</translation>
+  <translation id="shared_filter_search">Search</translation>
 </translations>
