@@ -15,7 +15,8 @@ angular.module('TatUi')
 
     $scope.data = {
       filtername: "",
-      adminOfOneGroup: false
+      adminOfOneGroup: false,
+      filterList: ""
     };
 
     /**

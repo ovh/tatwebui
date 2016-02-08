@@ -31,9 +31,7 @@
       <div class="col-lg-12">
         <rd-widget>
           <rd-widget-header icon="fa-group" title="{{data.topics.length}} Topics on total of {{data.count}}">
-          <form data-ng-submit="init()">
-              <input data-ng-model="data.filtertopic" type="text" placeholder="Search by Topic Name" class="form-control">
-          </form>
+              <input data-ng-model="data.filterList" type="text" placeholder="Search in this list" class="form-control">
           </rd-widget-header>
           <rd-widget-body classes="no-padding">
             <div class="table-responsive">
@@ -42,21 +40,15 @@
                   <tr>
                     <th>{{ 'shared_common_topic' | translate }}</th>
                     <th>{{ 'shared_common_description' | translate }}</th>
-                    <th data-ng-if="isAdmin()">{{ 'components_topics_presences' | translate }}</th>
                     <th>{{ 'components_topics_rights' | translate }}</th>
                     <th data-ng-if="data.adminOfOneTopic">{{ 'shared_common_created_at' | translate }}</th>
                     <th></th>
                   </tr>
                   </thead>
                   <tbody>
-                    <tr data-ng-repeat="topicItem in data.topics" class="topic-first-row">
+                    <tr data-ng-repeat="topicItem in data.topics | filter:data.filterList" class="topic-first-row">
                         <th class="topics-name">{{ topicItem.topic }}</th>
                         <td class="topics-description">{{ topicItem.description }}</td>
-                        <td class="topics-presences" data-ng-if="isAdmin()">
-                          <!-- FIXME <a ui-sref="presences-list({topic:topicItem.topic})"><i class="fa fa-eye"></i></a>-->
-                          <a href="/presences/list{{topicItem.topic}}"><i class="fa fa-eye"></i></a>
-                        </td>
-
                         <td class="topics-users">
                           <span data-ng-if="topicItem.roGroups" title="Read Only Groups">
                             ROG:{{topicItem.roGroups.length}}
@@ -82,7 +74,7 @@
                           <span data-ng-if="!topicItem.dateCreation">&nbsp;</span>
                         </td>
                         <td class="topics-edit">
-                          <a data-ng-if="isadmin() || canView(topicItem)" ui-sref="topics-edit({topicId:topicItem._id})">
+                          <a data-ng-if="isadmin() || canView(topicItem)" ui-sref="topics-edit({topicRoute:topicItem.topic})">
                             <i class="fa fa-edit"></i>
                           </a>
                           <span data-ng-if="!isAdmin() && !canView(topicItem)" class="disabled"><i class="fa fa-edit"></i></span>

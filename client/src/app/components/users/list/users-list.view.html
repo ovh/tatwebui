@@ -8,9 +8,7 @@
       <div class="col-lg-12">
         <rd-widget>
           <rd-widget-header icon="fa-group" title="{{data.users.length}} {{ 'components_users_count_of_total' | translate }} {{data.count}}">
-          <form data-ng-submit="init()">
-              <input data-ng-model="data.filterusername" type="text" placeholder="{{ 'components_users_search_by_username' | translate }}" class="form-control">
-          </form>
+              <input data-ng-model="data.filterList" type="text" placeholder="{{ 'components_users_search_by_username' | translate }}" class="form-control">
           </rd-widget-header>
           <rd-widget-body classes="no-padding">
             <div class="table-responsive">
@@ -24,7 +22,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <tr data-ng-repeat="userItem in data.users" class="users-first-row">
+                    <tr data-ng-repeat="userItem in data.users | filter:data.filterList" class="users-first-row">
                         <th class="users-author">
                           <user-display username="userItem.username" fullname="userItem.fullname">
                           <i class="fa fa-user-md" data-ng-if="userItem.isAdmin" title="Admin"></i>

@@ -15,7 +15,7 @@ angular.module('TatUi')
     'use strict';
 
     $scope.topic = {
-      'topic': '',
+      'topic': $stateParams.topicRoute + "/newTopic",
       'description': ''
     };
 
@@ -31,7 +31,7 @@ angular.module('TatUi')
         'description': $scope.topic.description
       }).$promise.then(function(data) {
         $state.go('topics-edit', {
-          topicId: data._id
+          topicRoute: data.topic
         });
       }, function(err) {
         TatEngine.displayReturn(err);

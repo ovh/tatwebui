@@ -159,7 +159,7 @@
         </li>
       </ul>
       <div class="sidebar-footer">
-        <div class="col-xs-4" data-ng-repeat="menuItem in bottomMenu">
+        <div class="col-xs-4" data-ng-repeat="menuItem in bottomMenu track by $index">
           <a href="{{menuItem.url}}">
             {{ menuItem.caption | translate}}
           </a>
@@ -255,7 +255,7 @@
                     {{ 'master-favorites' | translate }}
                   </li>
                   <li class="divider"></li>
-                  <li class="link" ng-repeat="t in getFavoritesTopics() |  orderBy:'toString()'">
+                  <li class="link" ng-repeat="t in getFavoritesTopics() track by $index |  orderBy:'toString()'">
                       <a data-ng-href="#" data-ng-click="topicClick(t)">{{t}}</a>
                   </li>
                   <li class="divider"></li>
@@ -276,8 +276,11 @@
                     {{ 'master-views' | translate }}
                   </li>
                   <li class="divider"></li>
-                  <li ng-repeat="v in getViews() | orderBy:'name'">
+                  <li ng-repeat="v in getViews() track by $index | orderBy:'name'">
                     <a role="button" ng-click="switchView(v.route)">{{v.name}}</a>
+                  </li>
+                  <li ng-hide="ctrl.data.viewsEnabled">
+                    {{ 'master-cant-change-view' | translate }}
                   </li>
                 </ul>
               </div>
@@ -291,7 +294,7 @@
                 <span>
                   {{ getTitle(ctrl.data.state) }}
                 </span>
-                <span data-ng-repeat="sub in title">
+                <span data-ng-repeat="sub in title track by $index">
                   <i class="fa fa-caret-right"></i>
                   {{ sub }}
                 </span>
@@ -308,6 +311,12 @@
                   <i class="fa"
                     data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
                   </i>
+                </a>
+                <a title="{{ 'master-topic-configuration' | translate }}" data-ng-if="canEditTopic(ctrl.data.topic)" ui-sref="topics-edit({topicRoute:ctrl.data.topic.topic})">
+                  <i class="fa fa-cogs"></i>
+                </a>
+                <a title="{{ 'master-add-subtopic' | translate }}"  data-ng-if="canEditTopic(ctrl.data.topic)" ui-sref="topics-new({topicRoute:ctrl.data.topic.topic})">
+                  <i class="fa fa-plus"></i>
                 </a>
                 <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
               </h1>

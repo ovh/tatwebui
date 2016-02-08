@@ -17,7 +17,8 @@ angular.module('TatUi')
     this.data = {
       isFavoriteTopic: false,
       isNotificationsOffTopic: false,
-      topic: {}
+      topic: {},
+      viewsEnabled: false
     };
 
     var views = [];
@@ -33,7 +34,23 @@ angular.module('TatUi')
       $rootScope.$broadcast('topic-change', {
         topic: topic
       });
-      //$rootScope.$broadcast('sidebar-change', {topic:topic});
+      $rootScope.$broadcast('sidebar-change', {topic:topic});
+    };
+
+    $scope.canEditTopic = function(topic) {
+      if (!topic.topic) {
+        return;
+      }
+      if ($scope.isAdmin() || _.contains(topic.adminUsers,
+          Authentication.getIdentity().username) ||
+          (topic.topic.indexOf("/Private/" + Authentication.getIdentity().username) === 0 &&
+           topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") !== 0
+          )
+        ) {
+        // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
+        return true;
+      }
+      return false;
     };
 
     $scope.getFavoritesTopics = function() {
@@ -80,7 +97,15 @@ angular.module('TatUi')
     };
 
     $scope.getViews = function() {
-      return views;
+      var restrictedPlugin =
+        Plugin.getPluginByRestriction(self.data.topic);
+      if (restrictedPlugin) {
+        self.data.viewsEnabled = false;
+        return null;
+      } else {
+        self.data.viewsEnabled = true;
+        return views;
+      }
     };
 
     $scope.switchView = function(route) {

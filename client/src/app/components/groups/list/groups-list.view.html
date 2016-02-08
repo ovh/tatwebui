@@ -17,9 +17,7 @@
       <div class="col-lg-12">
         <rd-widget>
           <rd-widget-header icon="fa-group" title="{{data.groups.length}} Groups on total of {{data.count}}">
-          <form data-ng-submit="init()">
-              <input data-ng-model="data.filtername" type="text" placeholder="Search by Group Name" class="form-control">
-          </form>
+              <input data-ng-model="data.filterList" type="text" placeholder="Search in this list" class="form-control">
           </rd-widget-header>
           <rd-widget-body classes="no-padding">
             <div class="table-responsive">
@@ -34,7 +32,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <tr data-ng-repeat="groupItem in data.groups">
+                    <tr data-ng-repeat="groupItem in data.groups | filter:data.filterList">
                         <th class="groups-name">{{ groupItem.name }}</th>
                         <td class="groups-description">{{ groupItem.description }}</td>
                         <td class="groups-groups">
