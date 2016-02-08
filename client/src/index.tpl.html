@@ -153,9 +153,21 @@
             <span class="tat-logo">TaT</span>
           </a>
         </li>
-        <li data-ng-controller="TopicCtrl as sideBarCtrl" class="sidebar-section">
+        <li data-ng-controller="TopicCtrl as sideBarCtrl" class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
             <span class="sidebar-section-title">{{ 'master-topics' | translate }}</span>
             <div topic-list="sideBarCtrl.treeTopics"></div>
+        </li>
+        <li class="sidebar-section tat-presences" ng-show="ctrl.data.isPresencesOpen">
+          <span class="sidebar-section-title">
+            {{ 'master-presences' | translate }}
+          </span>
+          <ul>
+            <li ng-repeat="user in presences">
+              <a title="Last seen: {{ user.dateTimePresence }}">
+                <i class="fa fa-circle" ng-class="user.status"></i>&nbsp;{{ user.userPresence.fullname }}
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
       <div class="sidebar-footer">
@@ -317,6 +329,13 @@
                 </a>
                 <a title="{{ 'master-add-subtopic' | translate }}"  data-ng-if="canEditTopic(ctrl.data.topic)" ui-sref="topics-new({topicRoute:ctrl.data.topic.topic})">
                   <i class="fa fa-plus"></i>
+                </a>
+                <a role="button"
+                  title="{{ 'master-toggle-presences' | translate }}"
+                  ng-click="ctrl.togglePresences()"
+                  ng-class="{'open': ctrl.data.isPresencesOpen}">
+                  <i class="fa fa-street-view"></i>
+                  <span class="badge">{{ presences.length }}</span>
                 </a>
                 <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
               </h1>
