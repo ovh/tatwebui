@@ -1,9 +1,21 @@
 /*global angular */
 angular.module('TatUi')
-  .controller('MasterCtrl', function MasterCtrl($scope, $rootScope,
-    Authentication, $cookieStore, $state, appConfiguration, TatEngineUserRsc,
+  .controller('MasterCtrl', function MasterCtrl(
+    $scope,
+    $rootScope,
+    Authentication,
+    $cookieStore,
+    $state,
+    appConfiguration,
+    TatEngineUserRsc,
     TatEngine,
-    TatEngineTopicRsc, Flash, Plugin, $localStorage, $stateParams, $translate
+    TatEngineTopicRsc,
+    TatEnginePresencesRsc,
+    Flash,
+    Plugin,
+    $localStorage,
+    $stateParams,
+    $translate
   ) {
     'use strict';
     /**
@@ -17,6 +29,7 @@ angular.module('TatUi')
     this.data = {
       isFavoriteTopic: false,
       isNotificationsOffTopic: false,
+      isPresencesOpen: false,
       topic: {},
       viewsEnabled: false
     };
@@ -183,8 +196,29 @@ angular.module('TatUi')
       return false;
     };
 
+    this.togglePresences = function() {
+      this.data.isPresencesOpen = !this.data.isPresencesOpen;
+    };
+
+    this.loadPresences = function() {
+      // Load/display presences *after* messages
+      TatEnginePresencesRsc.list({
+        topic: self.topic,
+        limit: 500
+      }).$promise.then(function(data) {
+        $scope.presences = data.presences;
+        $scope.presences.sort(function(a, b) {
+          if (a.userPresence.fullname.toLocaleLowerCase() < b.userPresence.fullname.toLocaleLowerCase()) return -1;
+          else if (a.userPresence.fullname.toLocaleLowerCase() > b.userPresence.fullname.toLocaleLowerCase()) return 1;
+          else return 0;
+        });
+      }, function(err) {
+        TatEngine.displayReturn(err);
+      });
+    };
+
     $rootScope.$on('$stateChangeSuccess',
-      function(event, toState, params) {
+      function(e, toState, params) {
         $scope.path = toState.name.split('-');
         self.data.state = toState.name;
 
@@ -246,7 +280,7 @@ angular.module('TatUi')
       }
     );
 
-    $scope.$on('topic-change', function(event, meta) {
+    $scope.$on('topic-change', function(e, meta) {
       var topic = meta.topic.replace(/^\//, '');
       var idMessage = meta.idMessage;
       var reload = false;
@@ -300,7 +334,14 @@ angular.module('TatUi')
       });
     });
 
-    $scope.$on('loading', function(event, status) {
+    $scope.$on('loading', function(e, status) {
       self.loading = status;
     });
+
+    var tmp=false;
+    $scope.$on('presences-refresh', function(e) {
+      if (!tmp) self.loadPresences();
+      tmp=true;
+    });
+
   });
