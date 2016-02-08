@@ -338,10 +338,8 @@ angular.module('TatUi')
       self.loading = status;
     });
 
-    var tmp=false;
     $scope.$on('presences-refresh', function(e) {
-      if (!tmp) self.loadPresences();
-      tmp=true;
+      self.loadPresences();
     });
 
   });
