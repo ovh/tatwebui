@@ -32,6 +32,24 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.components:messageFilter",
+      "shortName": "messageFilter",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message filter",
+      "keywords": "ae api components create directive filter generic message tatui"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.components:messageFilterBar",
+      "shortName": "messageFilterBar",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message filter bar",
+      "keywords": "ae api bar components create directive filter generic message tatui"
+    },
+    {
+      "section": "api",
       "id": "TatUi.controller:GroupsEditCtrl",
       "shortName": "GroupsEditCtrl",
       "type": "controller",
@@ -407,6 +425,24 @@ NG_DOCS={
       "moduleName": "TatUi",
       "shortDescription": "Manager TatEngine URI",
       "keywords": "api manager service tatengine tatengineprovider tatui uri"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.TatFilter",
+      "shortName": "TatUi.TatFilter",
+      "type": "service",
+      "moduleName": "TatUi",
+      "shortDescription": "manage message filters",
+      "keywords": "api filters manage message service tatfilter tatui"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.TatFilterProvider",
+      "shortName": "TatUi.TatFilterProvider",
+      "type": "service",
+      "moduleName": "TatUi",
+      "shortDescription": "Manage Tat message filters",
+      "keywords": "add addevent api callback data event eventname filters function invoke killing listen manage message parameter service tat tatfilterprovider tatui websocket"
     },
     {
       "section": "api",

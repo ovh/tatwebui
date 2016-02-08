@@ -1,0 +1,287 @@
+@import "constants.less";
+
+.tat-textlabel,
+.tat-label {
+  background: #818181;
+  border-color: #818181;
+  border-radius: 2px;
+  color: white;
+  display: inline-block;
+  font-size: 0.9em;
+  height: 16px;
+  left: 0;
+  line-height: 16px;
+  margin: 0 0 0 6px;
+  padding: 0px 8px 0px 10px;
+  position: relative;
+  top: 0;
+  a {
+    color: white;
+    font-size: 9px;
+    margin-left: 2px;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+      text-decoration: none!important;
+    }
+  }
+}
+
+.tat-label {
+  border-radius: 0 2px 2px 0;
+  margin: 0 0 0 16px;
+  &:before {
+    // triangle shape on left
+    border-bottom: 8px transparent solid;
+    border-right: 8px #aaa solid;
+    border-top: 8px transparent solid;
+    border-right-color: inherit;
+    content: '';
+    height: 0;
+    left: -8px;
+    position: absolute;
+    top: 0;
+    width: 0;
+  }
+  &:after {
+    // "hole"
+    background: white;
+    border-radius: 50%;
+    content: '';
+    height: 4px;
+    left: 0;
+    position: absolute;
+    top: 6px;
+    width: 4px;
+  }
+}
+
+.tat-msg {
+  font-size: 16px;
+  margin-right: 60px;
+}
+
+.tat-meta {
+  color: #aaa;
+  margin-top: 2px;
+
+  .tat-permalink,
+  a.link {
+    font-weight: bold;
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      color: #23527C;
+    }
+  }
+
+}
+
+.tat-actions {
+  float: right;
+}
+
+.tat-deleting,
+.tat-replies .tat-editing {
+  margin: 0 0 2px 0;
+  .btn-group {
+    float: right;
+  }
+}
+
+.tat-likes {
+  font-weight: bold;
+  color: #EC3B7F;
+}
+
+.fa-heart {
+  color: #EC3B7F;
+}
+
+.tat-tag {
+  color: #2bbbaa;
+  border: 0;
+  padding: 0;
+  margin: 0 4px 0 0;
+  font-weight: bold;
+  i {
+    font-weight: normal;
+    color: #aacec4;
+  }
+  a {
+    color: white;
+    font-size: 9px;
+    margin-left: 2px;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+      text-decoration: none!important;
+    }
+  }
+}
+
+.tat-replies-count {
+  float: right;
+  border: 0;
+  font-weight: normal;
+  padding: 8px 10px;
+  border-radius: 14px;
+  position: relative;
+  top: 8px;
+  right: 10px;
+  text-shadow: 1px 1px 3px #333;
+  background-color: #507095;
+  transition: background-color @tat-default-transition-time;
+  &:hover {
+    background-color: #9EBFE6;
+  }
+}
+
+.tat-msg-wrapper {
+  &.primary {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 12px 12px;
+    box-shadow: 0px 0px 8px #e3e3e3;
+    margin-bottom: 8px;
+  }
+}
+
+.tat-msg-create {
+  margin: 0 0 10px 0;
+
+  > form {
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+
+    .tat-msg-input {
+      flex: auto;
+      textarea {
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        background-color: #fff;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        outline: 0;
+        resize: none;
+        overflow-y: hidden;
+        padding-right: 38px;
+        padding: 6px 12px;
+        height: 34px;
+        margin: 0;
+        font-size: 1.3em;
+        line-height: 1.4em;
+        width: calc(~'100% - 8px');
+        &.editing {}
+        &:focus {
+          border-color: #66afe9;
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          outline: 0;
+        }
+      }
+      .icon-paper-plane {
+        position: absolute;
+        right: 104px;
+        cursor: pointer;
+        padding: 9px;
+        font-size: 16px;
+        z-index: 999;
+      }
+    }
+
+    .btn-group {
+      width: 80px;
+    }
+
+    .tat-remaining-chars {
+      background: rgb(102, 175, 233);
+      border-radius: 3px;
+      color: white;
+      display: inline-block;
+      font-size: 10px;
+      height: 20px;
+      overflow: hidden;
+      padding: 3px 10px;
+      position: absolute;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      z-index: 999;
+      right: 136px;
+      margin: 7px 0 0 0;
+  }
+
+  }
+  /*
+
+  .formatting-tips {
+    float: right;
+    height: 23px;
+    font-size: 11px;
+    padding: 3px;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: absolute;
+    right: 20px;
+    opacity: .5;
+    transition: opacity .2 linear;
+    > * {
+      margin: 0 3px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+    q {
+      padding: 0 0 0 3px;
+      border-left: 3px solid;
+      &:before {
+        content: none !important;
+      }
+    }
+    code {
+      line-height: 13px;
+      overflow: hidden;
+      vertical-align: top;
+      font-size: 10px;
+    }
+    .hidden-br {
+      display: inline-block;
+    }
+    .icon-level-down:before {
+      transform: rotate(90deg);
+    }
+  }
+  .editing-commands {
+    display: none;
+    text-transform: lowercase;
+    .editing-commands-cancel {
+      float: left;
+      height: 23px;
+      font-size: 11px;
+      padding: 3px;
+    }
+    .editing-commands-save {
+      float: right;
+      height: 23px;
+      font-size: 11px;
+      padding: 3px;
+    }
+  }
+  &.editing {
+    .formatting-tips, .users-typing{
+      display: none;
+    }
+    .editing-commands {
+      display: block;
+    }
+  }
+  */
+}
+
+
+

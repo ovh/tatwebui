@@ -1,0 +1,48 @@
+//
+// Generic view styles
+//
+
+@import "constants.less";
+
+@head-height: @tat-message-header-height + @tat-application-header-height + 25px;
+
+.tat-view {
+  padding: @wrapper-padding 0px 0px @wrapper-padding;
+  font-size: 1.2em;
+}
+
+.tat-view-list {
+  overflow-y: auto;
+  height: calc(100vh ~"-" @head-height);
+
+  .table-striped {
+    tr:first-child {
+      td {
+        border-top: 0;
+      }
+    }
+    tbody > tr:hover > td {
+      background: #f5faff;
+    }
+  }
+}
+
+.tat-view-detail {
+  .tat-replies {
+    margin: 6px 8px 2px 0px;
+  }
+}
+
+.message-delete,
+.message-update,
+.message-reply,
+.tat-editing {
+  margin: 8px 0 2px 0;
+  text-align: right;
+  textarea {
+    margin: 0 0 10px 0;
+  }
+  .btn-group {
+    text-align: right;
+  }
+}
