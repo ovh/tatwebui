@@ -3,7 +3,7 @@
     "scheme": "http",
     "host": "ip_or_domain_of_tat_engine",
     "port": 8001,
-    "autologin" : false
+    "autologin": false
   },
   "socket": {
     "scheme": "ws",
@@ -11,11 +11,11 @@
     "port": 8080,
     "path": "/socket/ws"
   },
-  "help" : {
-    "signup" : [ "HELP_SIGNUP" ]
+  "help": {
+    "signup": [ "HELP_SIGNUP" ]
   },
-  "links" : {
-    "home" : [
+  "links": {
+    "home": [
       {
         "caption": "label home 1",
         "url": "http://tat-engine.tat.tat.home1.sample"
@@ -25,7 +25,7 @@
         "url": "http://tat-engine.tat.tat.home2.sample"
       }
     ],
-    "menu" : [
+    "menu": [
       {
         "caption": "label 1",
         "url": "http://tat-engine.tat.tat.label1.sample"
@@ -35,5 +35,20 @@
         "url": "http://tat-engine.tat.tat.label2.sample"
       }
     ]
+  },
+  "viewconfigs": {
+    "standardview-list": {
+      "filters": {
+        "placeholder": {
+          "text": "text",
+          "label": "open,doing",
+          "andLabel": "open,doing",
+          "notLabel": "done",
+          "tag": "PCC,STOCKAGE",
+          "andTag": "PCC,STOCKAGE",
+          "notTag": "PCC,STOCKAGE"
+        }
+      }
+    }
   }
 }

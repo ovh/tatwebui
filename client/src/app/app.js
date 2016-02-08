@@ -1,4 +1,5 @@
 /*global angular,console*/
+
 angular.module('TatUi', [
     'tat.config',
     'ui.bootstrap',
@@ -17,7 +18,8 @@ angular.module('TatUi', [
     'colorpicker.module',
     'infinite-scroll',
     'angularSpectrumColorpicker',
-    'ngDraggable'
+    'ngDraggable',
+    'chart.js'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     'use strict';
@@ -25,18 +27,21 @@ angular.module('TatUi', [
     $locationProvider.html5Mode(true);
   })
 
-.config(function($httpProvider) {
-  'use strict';
-  $httpProvider.interceptors.push('TatEngineInterceptor');
+  .config(function($httpProvider) {
+    'use strict';
+    $httpProvider.interceptors.push('TatEngineInterceptor');
 })
 
 .config(function($translateProvider, $windowProvider) {
   'use strict';
   $translateProvider.useCookieStorage();
 
+  // http://angular-translate.github.io/docs/#/guide/19_security
+  $translateProvider.useSanitizeValueStrategy('escape');
+
   // set default and fallback languages
   $translateProvider.preferredLanguage('fr');
-  $windowProvider.$get().moment.lang('fr');
+  $windowProvider.$get().moment.locale('fr');
 
   // define translation loader
   $translateProvider.useLoader("$translatePartialLoader", {
@@ -64,7 +69,7 @@ angular.module('TatUi', [
 
 .run(function(Authentication) {
   'use strict';
-  moment.lang('fr', {
+  moment.locale('fr', {
     calendar: {
       lastDay: '[Yesterday], dddd MMM D H:mm:ss',
       sameDay: '[Today], H:mm:ss',

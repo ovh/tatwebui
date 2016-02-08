@@ -59,6 +59,18 @@
                {{ 'components_topics_is_ro_public' | translate }}
              </label>
           </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.isAutoComputeTags">
+               {{ 'components_topics_is_auto_compute_tags' | translate }}
+             </label>
+          </div>
+          <div class="checkbox">
+             <label>
+               <input type="checkbox" data-ng-model="topic.isAutoComputeLabels">
+               {{ 'components_topics_is_auto_compute_labels' | translate }}
+             </label>
+          </div>
       </div>
       <div class="col-lg-6">
         <h5>{{'components_topics_views_parameters' | translate }}</h5>

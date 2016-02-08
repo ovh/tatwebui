@@ -1,0 +1,100 @@
+<!-- tat-message-filters -->
+<div class="tat-message-filters">
+
+  <!-- full text search -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filter.text">
+    <strong class="inclusive">
+      <i class="fa fa-search"></i>
+    </strong>
+    <a role="button" class="tat-textlabel" ng-click="MessageFilterBar.removeFilter('text')">
+      {{ MessageFilterBar.filter.text }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- in labels -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.label.length">
+    <strong class="inclusive">
+      <i class="fa fa-plus-square"></i>
+      {{ 'shared_filter_in' | translate }}
+    </strong>
+    <a role="button" class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.label" ng-click="MessageFilterBar.removeFilter('label', label)">
+      {{ label }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- and labels -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.andLabel.length">
+    <strong class="inclusive">
+      <i class="fa fa-plus-square"></i>
+      {{ 'shared_filter_all' | translate }}
+    </strong>
+    <a role="button" class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.andLabel" ng-click="MessageFilterBar.removeFilter('andLabel', label)">
+      {{ label }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- hide labels -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.notLabel.length">
+    <strong class="exclusive">
+      <i class="fa fa-minus-square"></i>
+      {{ 'shared_filter_hide' | translate }}
+    </strong>
+    <a role="button" class="tat-label" ng-repeat="label in MessageFilterBar.filterAsList.notLabel" ng-click="MessageFilterBar.removeFilter('notLabel', label)">
+      {{ label }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- in tags -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.tag.length">
+    <strong class="inclusive">
+      <i class="fa fa-plus-square"></i>
+      {{ 'shared_filter_in' | translate }}
+    </strong>
+    <a role="button" class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.tag" ng-click="MessageFilterBar.removeFilter('tag', tag)">
+      <i>#</i>{{ tag }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- all tags -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.andTag.length">
+    <strong class="inclusive">
+      <i class="fa fa-plus-square"></i>
+      {{ 'shared_filter_all' | translate }}
+    </strong>
+    <a role="button" class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.andTag" ng-click="MessageFilterBar.removeFilter('andTag', tag)">
+      <i>#</i>{{ tag }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- hide tags -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filterAsList.notTag.length">
+    <strong class="inclusive">
+      <i class="fa fa-minus-square"></i>
+      {{ 'shared_filter_hide' | translate }}
+    </strong>
+    <a role="button" class="tat-tag" ng-repeat="tag in MessageFilterBar.filterAsList.notTag" ng-click="MessageFilterBar.removeFilter('notTag', tag)">
+      <i>#</i>{{ tag }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- message id -->
+  <span class="tat-filter-group" ng-if="MessageFilterBar.filter.idMessage">
+    <strong class="inclusive">
+      <i class="fa fa-envelope"></i> ID
+    </strong>
+    <a role="button" class="tat-tag" ng-click="MessageFilterBar.removeFilter('idMessage')">
+      {{ MessageFilterBar.filter.idMessage }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+</div>
+
+
