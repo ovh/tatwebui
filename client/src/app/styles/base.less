@@ -38,6 +38,36 @@ body {
     .fa-bell-o {
       color: rgb(233, 177, 44);
     }
+    .fa-street-view {
+      color: #888;
+      &:hover {
+        color: #30AFFF;
+      }
+    }
+    a {
+      .badge {
+        background: #888;
+        border: 0;
+        color: #fff;
+        font-size: 0.5em;
+        left: -6px;
+        line-height: 12px;
+        position: relative;
+        top: -4px;
+        transition: background 0.3s;
+      }
+      &:hover {
+        .fa { color: #30afff; }
+        .badge {
+          background-color: #30afff;
+          color: white;
+        }
+      }
+    }
+    .open {
+      .badge { background: #337ab7; color: white; }
+      .fa { color: #337ab7; }
+    }
   }
   h2 {
     color: #888;
