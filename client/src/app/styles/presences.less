@@ -14,10 +14,15 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    width: 216px;
+    position: absolute;
+    top: 120px;
+    left: 8px;
 
     li {
       margin: 0;
       padding: 0;
+      background: transparent!important;
 
       a {
         display: block;
@@ -28,6 +33,12 @@
         width: auto;
         text-indent: 0;
         border-bottom: 1px solid #202f3c;
+        cursor: pointer;
+        color: #C8D9EC;
+        &:hover {
+          background-color: #202f3c;
+          color: white;
+        }
 
         .fa {
           margin: 0 6px 0 0;
