@@ -211,7 +211,7 @@ angular.module('TatUi')
     this.loadPresences = function() {
       // Load/display presences *after* messages
       if (!self.topic || self.topic === "") {
-        return
+        return;
       }
       TatEnginePresencesRsc.list({
         topic: self.topic,
