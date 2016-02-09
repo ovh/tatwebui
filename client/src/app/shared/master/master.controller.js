@@ -209,17 +209,14 @@ angular.module('TatUi')
     };
 
     this.loadPresences = function() {
-      if (!this.data.isPresencesOpen) {
-        return;
-      }
       // Load/display presences *after* messages
       TatEnginePresencesRsc.list({
         topic: self.topic,
         dateMinPresence: (Math.floor(Date.now() /1000) - 30), // last 30s
         limit: 500
       }).$promise.then(function(data) {
+        $scope.presences = data.presences;
         if (data.presences) {
-          $scope.presences = data.presences;
           $scope.presences.sort(function(a, b) {
             if (a.userPresence.fullname.toLocaleLowerCase() < b.userPresence.fullname.toLocaleLowerCase()) return -1;
             else if (a.userPresence.fullname.toLocaleLowerCase() > b.userPresence.fullname.toLocaleLowerCase()) return 1;
