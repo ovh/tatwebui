@@ -106,9 +106,11 @@ angular.module('TatUi')
 
     $scope.directMessage = function(username) {
       var me = Authentication.getIdentity().username;
+      if (me !== username) {
         $rootScope.$broadcast('topic-change', {
           topic: 'Private/'+ me +'/DM/'+ username
         });
+      }
     };
 
     $scope.toggleSidebar = function() {
