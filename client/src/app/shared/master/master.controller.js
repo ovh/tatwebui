@@ -218,12 +218,14 @@ angular.module('TatUi')
         dateMinPresence: (Math.floor(Date.now() /1000) - 30), // last 30s
         limit: 500
       }).$promise.then(function(data) {
-        $scope.presences = data.presences;
-        $scope.presences.sort(function(a, b) {
-          if (a.userPresence.fullname.toLocaleLowerCase() < b.userPresence.fullname.toLocaleLowerCase()) return -1;
-          else if (a.userPresence.fullname.toLocaleLowerCase() > b.userPresence.fullname.toLocaleLowerCase()) return 1;
-          else return 0;
-        });
+        if (data.presences) {
+          $scope.presences = data.presences;
+          $scope.presences.sort(function(a, b) {
+            if (a.userPresence.fullname.toLocaleLowerCase() < b.userPresence.fullname.toLocaleLowerCase()) return -1;
+            else if (a.userPresence.fullname.toLocaleLowerCase() > b.userPresence.fullname.toLocaleLowerCase()) return 1;
+            else return 0;
+          });
+        }
       }, function(err) {
         TatEngine.displayReturn(err);
       });
