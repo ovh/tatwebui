@@ -210,6 +210,9 @@ angular.module('TatUi')
 
     this.loadPresences = function() {
       // Load/display presences *after* messages
+      if (!self.topic || self.topic === "") {
+        return
+      }
       TatEnginePresencesRsc.list({
         topic: self.topic,
         dateMinPresence: (Math.floor(Date.now() /1000) - 30), // last 30s
