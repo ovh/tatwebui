@@ -84,6 +84,7 @@ angular.module('TatUi')
           TatEngine.displayReturn(err);
           self.data.inRefresh = false;
         });
+        $rootScope.$broadcast('presences-refresh');
       } else {
         console.log("topics list already in refresh...");
       }

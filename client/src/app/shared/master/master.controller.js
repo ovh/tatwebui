@@ -205,12 +205,17 @@ angular.module('TatUi')
 
     this.togglePresences = function() {
       this.data.isPresencesOpen = !this.data.isPresencesOpen;
+      self.loadPresences(); // load here, and in topics list refresh
     };
 
     this.loadPresences = function() {
+      if (!this.data.isPresencesOpen) {
+        return;
+      }
       // Load/display presences *after* messages
       TatEnginePresencesRsc.list({
         topic: self.topic,
+        dateMinPresence: (Math.floor(Date.now() /1000) - 30), // last 30s
         limit: 500
       }).$promise.then(function(data) {
         $scope.presences = data.presences;
