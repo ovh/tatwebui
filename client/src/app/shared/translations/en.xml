@@ -17,6 +17,7 @@
   <translation id="master-favorites">Favorites</translation>
   <translation id="master-users-and-groups">Users and groups</translation>
   <translation id="master-toggle-notification">Enable or disable messages unread notifications on left menu</translation>
+  <translation id="master-toggle-presences">Enable or disable presences on left menu</translation>
   <translation id="master-topic-configuration">Configure this topic</translation>
   <translation id="master-add-subtopic">Add a sub topic</translation>
   <translation id="master-cant-change-view">You can't change view on this topic</translation>
@@ -93,7 +94,7 @@
 
   <translation id="shared_message_voteup">Vote UP</translation>
   <translation id="shared_message_unvoteup">Don't Vote UP</translation>
-  <translation id="shared_message_unvotedown">Vote Down</translation>
+  <translation id="shared_message_votedown">Vote Down</translation>
   <translation id="shared_message_unvotedown">Don't Vote Down</translation>
 
   <translation id="shared_message_bookmark">Bookmark</translation>

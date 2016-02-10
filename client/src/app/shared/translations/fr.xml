@@ -17,6 +17,7 @@
   <translation id="master-favorites">Favoris</translation>
   <translation id="master-users-and-groups">Utilisateurs et groupes</translation>
   <translation id="master-toggle-notification">Activer ou désactiver la notification pour les messages non lus dans le menu à gauche</translation>
+  <translation id="master-toggle-presences">Activer ou désactiver les présences dans le menu à gauche</translation>
   <translation id="topic-configuration">Configurer ce topic</translation>
   <translation id="master-add-subtopic">Ajouter un sous-topic</translation>
   <translation id="master-cant-change-view">Vous ne pouvez pas changer de vue sur ce topic</translation>
@@ -93,7 +94,7 @@
 
   <translation id="shared_message_voteup">Je vote positif</translation>
   <translation id="shared_message_unvoteup">Je ne vote plus positif</translation>
-  <translation id="shared_message_unvotedown">Je vote négatif</translation>
+  <translation id="shared_message_votedown">Je vote négatif</translation>
   <translation id="shared_message_unvotedown">Je ne vote plus négatif</translation>
 
   <translation id="shared_message_bookmark">Favoris</translation>
