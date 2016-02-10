@@ -114,6 +114,7 @@ angular.module('TatUi')
                 self.currentFilters[$stateParams.topic][k] = $localStorage.filters[$stateParams.topic][k];
               }
             });
+            self.applyFilters();
             return self.currentFilters[$stateParams.topic];
           };
 
@@ -145,8 +146,7 @@ angular.module('TatUi')
           };
 
           self.search = function() {
-            var f = self.getCurrentFilters();
-            $rootScope.$broadcast('filter-changed', f);
+            $rootScope.$broadcast('filter-changed', self.getCurrentFilters());
           };
 
         /**
