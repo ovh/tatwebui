@@ -90,6 +90,12 @@
   <translation id="shared_message_characters_left">Restant</translation>
   <translation id="shared_message_like">J'aime</translation>
   <translation id="shared_message_unlike">Je n'aime plus</translation>
+
+  <translation id="shared_message_voteup">Je vote positif</translation>
+  <translation id="shared_message_unvoteup">Je ne vote plus positif</translation>
+  <translation id="shared_message_unvotedown">Je vote négatif</translation>
+  <translation id="shared_message_unvotedown">Je ne vote plus négatif</translation>
+
   <translation id="shared_message_bookmark">Favoris</translation>
   <translation id="shared_message_delete">Effacer</translation>
   <translation id="shared_message_label_add">Ajouter label</translation>

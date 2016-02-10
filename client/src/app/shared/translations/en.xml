@@ -90,6 +90,12 @@
   <translation id="shared_message_characters_left">Remaining</translation>
   <translation id="shared_message_like">Like</translation>
   <translation id="shared_message_unlike">Unlike</translation>
+
+  <translation id="shared_message_voteup">Vote UP</translation>
+  <translation id="shared_message_unvoteup">Don't Vote UP</translation>
+  <translation id="shared_message_unvotedown">Vote Down</translation>
+  <translation id="shared_message_unvotedown">Don't Vote Down</translation>
+
   <translation id="shared_message_bookmark">Bookmark</translation>
   <translation id="shared_message_delete">Delete</translation>
   <translation id="shared_message_label_add">Add label</translation>
