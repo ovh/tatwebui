@@ -24,13 +24,8 @@ angular.module('TatUi')
       'idMessage'
     ];
 
-    self.topic = null;
     self.options = {};
     self.currentFilters = {};
-
-    for (var i = 0; i < self.FILTERS.length; i++) {
-      self.currentFilters[self.FILTERS[i]] = null;
-    }
 
     return {
       /**
@@ -48,15 +43,6 @@ angular.module('TatUi')
       // addEvent: addEvent,
       $get: function($rootScope, $localStorage, $location, $stateParams) {
 
-          self.topic = $stateParams.topic;
-
-          if (!$localStorage.filters) {
-            $localStorage.filters = {};
-          }
-          if (!$localStorage.filters[self.topic]) {
-            $localStorage.filters[self.topic] = {};
-          }
-
           self.eachFilter = function(callback) {
             for (var i = 0; i < self.FILTERS.length; i++) callback(self.FILTERS[i]);
           };
@@ -69,42 +55,28 @@ angular.module('TatUi')
               }, []).join(',');
           };
 
-          var search = $location.search();
-          self.eachFilter(function(k){
-            // First check in query string and propagate to localstorage if necessary
-            if (search[k] && search[k] !== '') {
-              $localStorage.filters[self.topic][k] = search[k];
-            }
-            // Then pull filter from localstorage if they exists
-            if ($localStorage.filters[self.topic][k]) {
-              self.currentFilters[k] = $localStorage.filters[self.topic][k];
-            }
-          });
-
-          $rootScope.filters = self.currentFilters;
-
           self.removeFilter = function(key, value) {
             var items, index, fltr;
-            fltr = self.currentFilters[key];
+            fltr = self.currentFilters[$stateParams.topic][key];
             if (key == 'idMessage') {
-              self.currentFilters.idMessage = null;
-              $localStorage.filters[self.topic].idMessage = null;
+              self.currentFilters[$stateParams.topic].idMessage = null;
+              $localStorage.filters[$stateParams.topic].idMessage = null;
               $location.search('idMessage', null);
               self.search();
             }
             else if (key == 'text') {
-              self.currentFilters.text = null;
-              $localStorage.filters[self.topic].text = null;
+              self.currentFilters[$stateParams.topic].text = null;
+              $localStorage.filters[$stateParams.topic].text = null;
               $location.search('text', null);
               self.search();
             }
             else if (fltr) {
-              items = self.currentFilters[key].split(',');
+              items = self.currentFilters[$stateParams.topic][key].split(',');
               index = items.indexOf(value);
               if (index > -1) items.splice(index, 1);
-              self.currentFilters[key] = items.join(',');
-              if (self.currentFilters[key] === '') self.currentFilters[key] = null;
-              $localStorage.filters[self.topic][key] = null;
+              self.currentFilters[$stateParams.topic][key] = items.join(',');
+              if (self.currentFilters[$stateParams.topic][key] === '') self.currentFilters[$stateParams.topic][key] = null;
+              $localStorage.filters[$stateParams.topic][key] = null;
               $location.search(key, null);
               self.search();
             }
@@ -113,14 +85,36 @@ angular.module('TatUi')
 
           self.applyFilters = function() {
             self.eachFilter(function(k){
-              $localStorage.filters[self.topic][k] = self.currentFilters[k];
-              $location.search(k, self.currentFilters[k]);
+              $localStorage.filters[$stateParams.topic][k] = self.currentFilters[$stateParams.topic][k];
+              $location.search(k, self.currentFilters[$stateParams.topic][k]);
             });
             return self;
           };
 
           self.getCurrentFilters = function() {
-            return self.currentFilters;
+            if (!self.currentFilters[$stateParams.topic]) {
+              self.currentFilters[$stateParams.topic] = {};
+            }
+
+            if (!$localStorage.filters) {
+              $localStorage.filters = {};
+            }
+            if (!$localStorage.filters[$stateParams.topic]) {
+              $localStorage.filters[$stateParams.topic] = {};
+            }
+
+            var search = $location.search();
+            self.eachFilter(function(k){
+              // First check in query string and propagate to localstorage if necessary
+              if (search[k] && search[k] !== '') {
+                $localStorage.filters[$stateParams.topic][k] = search[k];
+              }
+              // Then pull filter from localstorage if they exists
+              if ($localStorage.filters[$stateParams.topic][k]) {
+                self.currentFilters[$stateParams.topic][k] = $localStorage.filters[$stateParams.topic][k];
+              }
+            });
+            return self.currentFilters[$stateParams.topic];
           };
 
           self.setFilter = function(k, v) {
@@ -129,13 +123,13 @@ angular.module('TatUi')
               v = v.replace('#', '');
             }
             if (k !== 'text' && k !== 'idMessage') {
-              self.currentFilters[k] = self.sanitize(v);
+              self.currentFilters[$stateParams.topic][k] = self.sanitize(v);
             }
             else {
-              self.currentFilters[k] = (typeof(v) === 'string') ? v.replace(/(^\s+|\s+$)/g, ''): v;
+              self.currentFilters[$stateParams.topic][k] = (typeof(v) === 'string') ? v.replace(/(^\s+|\s+$)/g, ''): v;
             }
-            $localStorage.filters[self.topic][k] = self.currentFilters[k];
-            $location.search(k, self.currentFilters[k]);
+            $localStorage.filters[$stateParams.topic][k] = self.currentFilters[$stateParams.topic][k];
+            $location.search(k, self.currentFilters[$stateParams.topic][k]);
             return self;
           };
 
@@ -151,7 +145,8 @@ angular.module('TatUi')
           };
 
           self.search = function() {
-            $rootScope.$broadcast('filter-changed', self.currentFilters);
+            var f = self.getCurrentFilters();
+            $rootScope.$broadcast('filter-changed', f);
           };
 
         /**

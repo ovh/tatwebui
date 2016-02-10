@@ -64,4 +64,3 @@ angular.module('TatUi').component('messageFilterBar',
   },
   templateUrl: 'app/components/message-filter/message-filter-bar.component.html'
 });
-
