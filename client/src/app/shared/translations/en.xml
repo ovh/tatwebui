@@ -106,6 +106,9 @@
   <translation id="shared_message_confirm_delete">Confirm delete</translation>
   <translation id="shared_message_and_replies">of message and replies</translation>
 
+  <translation id="shared_messages_delete">Delete all messages</translation>
+  <translation id="shared_messages">of all messages</translation>
+
   <!-- Filters -->
   <translation id="shared_filter_in">in</translation>
   <translation id="shared_filter_all">all</translation>

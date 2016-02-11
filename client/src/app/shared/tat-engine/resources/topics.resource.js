@@ -27,7 +27,7 @@ angular.module('TatUi').service('TatEngineTopicsRsc', function($resource) {
   });
 });
 
-/** 
+/**
  * @ngdoc resource
  * @name TatUi.resource:TatEngineTopicRsc
  * @module TatUi
@@ -322,6 +322,23 @@ angular.module('TatUi').service('TatEngineTopicRsc', function($resource) {
       isArray: false,
       params: {
         action: 'param'
+      }
+    },
+
+    /**
+     * @ngdoc function
+     * @name truncate
+     * @methodOf TatUi.resource:TatEngineTopicRsc
+     * @restMethod PUT
+     * @description
+     *
+     * @return {object} Promise
+     */
+    truncate: {
+      method: 'PUT',
+      isArray: false,
+      params: {
+        action: 'truncate'
       }
     }
   });

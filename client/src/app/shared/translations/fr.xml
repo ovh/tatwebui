@@ -106,6 +106,9 @@
   <translation id="shared_message_confirm_delete">Confirmer la suppression</translation>
   <translation id="shared_message_and_replies">du message et des réponses</translation>
 
+  <translation id="shared_messages_delete">Supprimer tous les messages</translation>
+  <translation id="shared_messages">de tous les messages</translation>
+
   <!-- Filters -->
   <translation id="shared_filter_in">dans</translation>
   <translation id="shared_filter_all">tout</translation>
