@@ -31,16 +31,16 @@
         <li data-ng-repeat="(k, v) in group.users">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnGroup">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_groups_dont_want_remove_group' | translate}}
                 <i class="fa fa-reply"></i>
             </button>
             <button data-ng-click="removeUser(v);" data-ng-show="askRemoveUser"
-                      class="btn btn-xs btn-default btn-warning">
+                      class="btn btn-xs btn-warning">
                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
             </button>
           </span>
@@ -53,16 +53,16 @@
         <li data-ng-repeat="(k, v) in group.adminUsers">
           {{v}}
           <span data-ng-if="isAdmin() || data.isAdminOnGroup">
-            <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveAdmin=true" data-ng-hide="askRemoveAdmin">
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdmin=true" data-ng-hide="askRemoveAdmin">
                <i class="fa fa-trash-o"></i>
             </button>
             <button data-ng-click="askRemoveAdmin=false" data-ng-show="askRemoveAdmin"
-                      class="btn btn-xs btn-default btn-info">
+                      class="btn btn-xs btn-info">
                       {{ 'components_groups_dont_want_remove_group' | translate}}
                 <i class="fa fa-reply"></i>
             </button>
             <button data-ng-click="removeAdmin(v);" data-ng-show="askRemoveAdmin"
-                      class="btn btn-xs btn-default btn-warning">
+                      class="btn btn-xs btn-warning">
                {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
             </button>
           </span>

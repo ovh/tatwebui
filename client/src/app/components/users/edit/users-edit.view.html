@@ -26,12 +26,12 @@
            {{ 'components_users_archive' | translate}}
         </button>
         <button data-ng-click="askArchiveUser=false" data-ng-show="askArchiveUser"
-                  class="btn btn-default btn-info">
+                  class="btn btn-info">
                   {{ 'components_users_dont_want_archive' | translate}}
             <i class="fa fa-reply"></i>
         </button>
         <button data-ng-click="archiveUser()" data-ng-show="askArchiveUser"
-                  class="btn btn-default btn-warning">
+                  class="btn btn-warning">
            {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
         </button>
 
@@ -39,18 +39,18 @@
            {{ 'components_users_convert_to_system' | translate}}
         </button>
         <button data-ng-click="askConvertSystemUser=false" data-ng-show="askConvertSystemUser"
-                  class="btn btn-default btn-info">
+                  class="btn btn-info">
                   {{ 'components_users_dont_want_convert_system' | translate}}
             <i class="fa fa-reply"></i>
         </button>
         <button data-ng-click="convertSystemUser(true);" data-ng-show="askConvertSystemUser"
-                  class="btn btn-default btn-warning">
+                  class="btn btn-warning">
             {{ 'shared_common_yes_i_confirm' | translate}}
             {{ 'components_users_with_write_notifications' | translate}}
             <i class="fa fa-exclamation-triangle"></i>
         </button>
         <button data-ng-click="convertSystemUser(false);" data-ng-show="askConvertSystemUser"
-                  class="btn btn-default btn-warning">
+                  class="btn btn-warning">
             {{ 'shared_common_yes_i_confirm' | translate}}
             {{ 'components_users_without_write_notifications' | translate}}
             <i class="fa fa-exclamation-triangle"></i>
@@ -60,12 +60,12 @@
            <i class="fa fa-user-md"></i> {{ 'components_users_convert_to_admin' | translate}}
         </button>
         <button data-ng-click="askConvertAdminUser=false" data-ng-show="askConvertAdminUser"
-                  class="btn btn-default btn-info">
+                  class="btn btn-info">
                   {{ 'components_users_dont_want_convert_admin' | translate}}
             <i class="fa fa-reply"></i>
         </button>
         <button data-ng-click="convertAdminUser();" data-ng-show="askConvertAdminUser"
-                  class="btn btn-default btn-warning">
+                  class="btn btn-warning">
            {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
         </button>
 
@@ -73,7 +73,7 @@
            {{ 'components_users_rename' | translate}}
         </button>
         <button data-ng-click="askRenameUser=false" data-ng-show="askRenameUser"
-                  class="btn btn-default btn-info">
+                  class="btn btn-info">
                   {{ 'components_users_dont_want_rename' | translate}}
             <i class="fa fa-reply"></i>
         </button>
@@ -84,7 +84,7 @@
         </div>
 
         <button data-ng-click="renameUser();" data-ng-show="askRenameUser" data-ng-disabled="!newUsername"
-                  class="btn btn-default btn-warning">
+                  class="btn btn-warning">
            {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
         </button>
 
@@ -92,7 +92,7 @@
            {{ 'components_users_update' | translate}}
         </button>
         <button data-ng-click="askUpdateUser=false" data-ng-show="askUpdateUser"
-                  class="btn btn-default btn-info">
+                  class="btn btn-info">
                   {{ 'components_users_dont_want_update' | translate}}
             <i class="fa fa-reply"></i>
         </button>
@@ -107,7 +107,7 @@
         </div>
 
         <button data-ng-click="updateUser();" data-ng-show="askUpdateUser" data-ng-disabled="!newFullname || !newEmail"
-                  class="btn btn-default btn-warning">
+                  class="btn btn-warning">
            {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
         </button>
       </div>
@@ -137,16 +137,16 @@
         <li data-ng-repeat="(k, v) in user.groups">
           {{v}}
 
-          <button class="btn btn-xs btn-default btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
+          <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
              <i class="fa fa-trash-o"></i>
           </button>
           <button data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
-                    class="btn btn-xs btn-default btn-info">
+                    class="btn btn-xs btn-info">
                     {{ 'components_users_dont_want_remove_group' | translate}}
               <i class="fa fa-reply"></i>
           </button>
           <button data-ng-click="removeUserFromGroup(v);" data-ng-show="askRemoveUser"
-                    class="btn btn-xs btn-default btn-warning">
+                    class="btn btn-xs btn-warning">
              {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
           </button>
         </li>
