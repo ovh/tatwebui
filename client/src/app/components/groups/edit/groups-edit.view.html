@@ -15,13 +15,13 @@
   <div class="row" ng-if="isAdmin() || data.isAdminOnGroup">
     <div class="col-lg-6">
       <ui-select data-ng-model="user.selected" theme="bootstrap">
-          <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
-          <ui-select-choices repeat="item in users | filter: $select.search">
-            <div>{{item.username}}</div>
-          </ui-select-choices>
-        </ui-select>
-        <button type="button" class="btn btn-default" data-ng-click="addUser()">{{ 'components_groups_add_user' | translate}}</button>
-        <button type="button" class="btn btn-default" data-ng-click="addAdmin()">{{ 'components_groups_add_admin' | translate}}</button>
+        <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
+        <ui-select-choices repeat="item in users | filter: $select.search">
+          <div>{{item.username}}</div>
+        </ui-select-choices>
+      </ui-select>
+      <button type="button" class="btn btn-default" data-ng-click="addUser()">{{ 'components_groups_add_user' | translate}}</button>
+      <button type="button" class="btn btn-default" data-ng-click="addAdmin()">{{ 'components_groups_add_admin' | translate}}</button>
     </div>
   </div>
   <div class="row">

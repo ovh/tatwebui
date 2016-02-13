@@ -19,6 +19,7 @@ angular.module('TatUi', [
     'infinite-scroll',
     'angularSpectrumColorpicker',
     'ngDraggable',
+    'MassAutoComplete',
     'chart.js'
   ])
   .config(function($urlRouterProvider, $locationProvider) {

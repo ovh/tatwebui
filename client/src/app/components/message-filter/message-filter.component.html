@@ -13,24 +13,30 @@
 
     <!-- in labels -->
     <div class="form-group">
-      <input type="text"
-             class="form-control"
-             placeholder="{{ MessageFilter.options.placeholder.label || 'open,doing' }}"
-             ng-model="MessageFilter.tmpFilter.label"
-             aria-describedby="filter-labels">
-      <span id="helpBlock" class="help-block">
-        <i class="fa fa-tags"></i>
-        <strong>{{ 'shared_filter_in' | translate }}</strong>: {{ 'shared_filter_contains_labels' | translate }}
-      </span>
+      <div mass-autocomplete>
+        <input ng-model="MessageFilter.tmpFilter.label" class="form-control"
+               type="text"
+               mass-autocomplete-item="autocomplete_options_labels"
+               aria-describedby="filter-labels"
+               placeholder="{{ MessageFilter.options.placeholder.label || 'open,doing' }}">
+        </div>
+        <span id="helpBlock" class="help-block">
+          <i class="fa fa-tags"></i>
+          <strong>{{ 'shared_filter_in' | translate }}</strong>: {{ 'shared_filter_contains_labels' | translate }}
+        </span>
+      </div>
     </div>
 
     <!-- and labels -->
     <div class="form-group">
-      <input type="text"
-             class="form-control"
-             placeholder="{{ MessageFilter.options.placeholder.andLabel || 'open,doing' }}"
-             ng-model="MessageFilter.tmpFilter.andLabel"
-             aria-describedby="filter-labels">
+      <div mass-autocomplete>
+        <input type="text"
+               class="form-control"
+               placeholder="{{ MessageFilter.options.placeholder.andLabel || 'open,doing' }}"
+               mass-autocomplete-item="autocomplete_options_labels"
+               ng-model="MessageFilter.tmpFilter.andLabel"
+               aria-describedby="filter-labels">
+      </div>
       <span id="helpBlock" class="help-block">
         <i class="fa fa-tags"></i>
         <strong>{{ 'shared_filter_all' | translate }}</strong>: {{ 'shared_filter_contains_all_labels' | translate }}
@@ -39,55 +45,67 @@
 
     <!-- hide labels -->
     <div class="form-group">
-      <input type="text"
-             class="form-control"
-             placeholder="{{ MessageFilter.options.placeholder.notLabel || 'done' }}"
-             ng-model="MessageFilter.tmpFilter.notLabel"
-             aria-describedby="filter-hide-labels">
-      <span id="helpBlock" class="help-block">
-        <i class="fa fa-tags"></i>
-        <strong>{{ 'shared_filter_hide' | translate }}</strong>: {{ 'shared_filter_hide_labels' | translate }}
-      </span>
+      <div mass-autocomplete>
+        <input type="text"
+               class="form-control"
+               placeholder="{{ MessageFilter.options.placeholder.notLabel || 'done' }}"
+               ng-model="MessageFilter.tmpFilter.notLabel"
+               mass-autocomplete-item="autocomplete_options_labels"
+               aria-describedby="filter-hide-labels">
+        <span id="helpBlock" class="help-block">
+          <i class="fa fa-tags"></i>
+          <strong>{{ 'shared_filter_hide' | translate }}</strong>: {{ 'shared_filter_hide_labels' | translate }}
+        </span>
+      </div>
     </div>
 
      <!-- in tags -->
     <div class="form-group">
-      <input type="text"
-             class="form-control"
-             placeholder="{{ MessageFilter.options.placeholder.tag || 'done' }}"
-             ng-model="MessageFilter.tmpFilter.tag"
-             aria-describedby="filter-tags">
+      <div mass-autocomplete>
+        <input type="text"
+               class="form-control"
+               placeholder="{{ MessageFilter.options.placeholder.tag || 'done' }}"
+               mass-autocomplete-item="autocomplete_options_tags"
+               ng-model="MessageFilter.tmpFilter.tag"
+               aria-describedby="filter-tags">
 
-      <span id="helpBlock" class="help-block">
-        <i class="fa fa-hashtag"></i>
-        <strong>{{ 'shared_filter_in' | translate }}</strong>: {{ 'shared_filter_contains_tags' | translate }}
-      </span>
+        <span id="helpBlock" class="help-block">
+          <i class="fa fa-hashtag"></i>
+          <strong>{{ 'shared_filter_in' | translate }}</strong>: {{ 'shared_filter_contains_tags' | translate }}
+        </span>
+      </div>
     </div>
 
     <!-- and tags -->
     <div class="form-group">
-      <input type="text"
-             class="form-control"
-             placeholder="{{ MessageFilter.options.placeholder.andTag || 'PCC,STOCKAGE' }}"
-             ng-model="MessageFilter.tmpFilter.andTag"
-             aria-describedby="filter-tags">
-      <span id="helpBlock" class="help-block">
-        <i class="fa fa-hashtag"></i>
-        <strong>{{ 'shared_filter_all' | translate }}</strong>: {{ 'shared_filter_contains_all_tags' | translate }}
-      </span>
+      <div mass-autocomplete>
+        <input type="text"
+               class="form-control"
+               placeholder="{{ MessageFilter.options.placeholder.andTag || 'PCC,STOCKAGE' }}"
+               mass-autocomplete-item="autocomplete_options_tags"
+               ng-model="MessageFilter.tmpFilter.andTag"
+               aria-describedby="filter-tags">
+        <span id="helpBlock" class="help-block">
+          <i class="fa fa-hashtag"></i>
+          <strong>{{ 'shared_filter_all' | translate }}</strong>: {{ 'shared_filter_contains_all_tags' | translate }}
+        </span>
+      </div>
     </div>
 
     <!-- hide tags -->
     <div class="form-group">
-      <input type="text"
-             class="form-control"
-             placeholder="{{ MessageFilter.options.placeholder.notTag || 'PCC,STOCKAGE' }}"
-             ng-model="MessageFilter.tmpFilter.notTag"
-             aria-describedby="filter-hide-tags">
-      <span id="helpBlock" class="help-block">
-        <i class="fa fa-hashtag"></i>
-        <strong>{{ 'shared_filter_hide' | translate }}</strong>: {{ 'shared_filter_hide_all_tags' | translate }}
-      </span>
+      <div mass-autocomplete>
+        <input type="text"
+               class="form-control"
+               placeholder="{{ MessageFilter.options.placeholder.notTag || 'PCC,STOCKAGE' }}"
+               ng-model="MessageFilter.tmpFilter.notTag"
+               mass-autocomplete-item="autocomplete_options_tags"
+               aria-describedby="filter-hide-tags">
+        <span id="helpBlock" class="help-block">
+          <i class="fa fa-hashtag"></i>
+          <strong>{{ 'shared_filter_hide' | translate }}</strong>: {{ 'shared_filter_hide_all_tags' | translate }}
+        </span>
+      </div>
     </div>
 
     <!-- apply filters -->
@@ -98,6 +116,5 @@
               {{ 'shared_filter_search' | translate }}
       </button>
     </div>
-
   </form>
 </div>

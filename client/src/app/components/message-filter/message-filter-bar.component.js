@@ -11,7 +11,8 @@ angular.module('TatUi').component('messageFilterBar',
 {
   bindings: {
     issurewithnofilter: '=',
-    isnofilter: '='
+    isnofilter: '=',
+    topic: '='
   },
   controllerAs: 'MessageFilterBar',
   controller: function(
@@ -32,7 +33,8 @@ angular.module('TatUi').component('messageFilterBar',
 
     var self = this;
 
-    self.topic = $stateParams.topic;
+    //console.log("messageFilterBar> topic:", this.topic);
+    //self.topic = $stateParams.topic;
     self.filter = TatFilter.getCurrent();
     self.filterAsList = {};
 

@@ -11,6 +11,8 @@ build
 npm-debug.log
 config.json
 config.json.dev
+config.json.dev.2
+config.json.prod
 .DS_Store
 bower.json
 custom.plugin.tpl.json
