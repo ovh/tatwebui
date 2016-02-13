@@ -34,8 +34,7 @@
       if (templatePattern.test(file)) {
         console.log('Merging', file);
         deepExtend(output, loadJsonFile(file));
-        fs.writeFileSync(bowerFilename, JSON.stringify(output, null,
-          4));
+        fs.writeFileSync(bowerFilename, JSON.stringify(output, null, 4));
       }
     });
   });
