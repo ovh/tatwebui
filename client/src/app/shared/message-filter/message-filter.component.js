@@ -43,7 +43,6 @@ angular.module('TatUi').component('messageFilter',
     };
 
     self.computeLabelsFromTopic = function () {
-      console.log("computeLabelsFromTopic, topic:", self.topic);
       if (self.topic && self.topic.labels && self.topic.labels.length > 0) {
         for (var i = 0; i < this.topic.labels.length; i++) {
           self.labels.push(this.topic.labels[i].text);
