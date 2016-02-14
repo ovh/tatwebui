@@ -122,5 +122,5 @@ angular.module('TatUi').component('messageFilter',
     });
 
   },
-  templateUrl: 'app/components/message-filter/message-filter.component.html'
+  templateUrl: 'app/shared/message-filter/message-filter.component.html'
 });

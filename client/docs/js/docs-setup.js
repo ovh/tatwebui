@@ -392,6 +392,15 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.shared:messageVote",
+      "shortName": "messageVote",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message vote",
+      "keywords": "ae api create define directive function generic hasvoterdown hasvoterup marked message shared tatui toggle togglevoterdown togglevoterup true vote votedown voterdown voterup voteup"
+    },
+    {
+      "section": "api",
       "id": "TatUi.TatEngine",
       "shortName": "TatUi.TatEngine",
       "type": "service",
