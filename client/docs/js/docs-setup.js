@@ -252,8 +252,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "",
-      "keywords": "api filter tatui"
+      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
+      "keywords": "api filter leangth parameter shorten string tatui"
     },
     {
       "section": "api",
@@ -261,8 +261,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
-      "keywords": "api filter leangth parameter shorten string tatui"
+      "shortDescription": "",
+      "keywords": "api filter tatui"
     },
     {
       "section": "api",
@@ -392,6 +392,15 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.shared:messageLabel",
+      "shortName": "messageLabel",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message label",
+      "keywords": "add addlabel ae api create directive function generic label message shared tatui"
+    },
+    {
+      "section": "api",
       "id": "TatUi.shared:messageVote",
       "shortName": "messageVote",
       "type": "directive",
@@ -452,6 +461,15 @@ NG_DOCS={
       "moduleName": "TatUi",
       "shortDescription": "Manage Tat message filters",
       "keywords": "add addevent api callback data event eventname filters function invoke killing listen manage message parameter service tat tatfilterprovider tatui websocket"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.TatMessageProvider",
+      "shortName": "TatUi.TatMessageProvider",
+      "type": "service",
+      "moduleName": "TatUi",
+      "shortDescription": "Manage Tat message filters",
+      "keywords": "addlabel api filters function manage message service tat tatmessageprovider tatui"
     },
     {
       "section": "api",

@@ -1,0 +1,15 @@
+<div class="tat-add-label-form" ng-show="ctrl.isDisplayed">
+  <div class="input-group">
+    <div class="input-group-addon tat-colorpicker">
+      <spectrum-colorpicker ng-show="ctrl.isDisplayed"
+        ng-model="ctrl.labelColor"
+        palette="ctrl.palette"
+        options="{showInput: true, showAlpha: true, preferredFormat:'Hex',
+        showPalette: true, togglePaletteOnly: false}" >
+      </spectrum-colorpicker>
+    </div>
+    <form ng-submit="ctrl.addLabel(message)">
+      <input class="form-control" type="text" ng-model="ctrl.labelText" placeholder="{{ 'shared_message_label_add' | translate }}">
+    </form>
+  </div>
+</div>
