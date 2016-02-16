@@ -55,20 +55,6 @@ angular.module('TatUi').component('messageLabel',
       ]
     ];
 
-    self.computeLabelsFromTopic = function () {
-      if (self.topic && self.topic.labels && self.topic.labels.length > 0) {
-        for (var i = 0; i < this.topic.labels.length; i++) {
-          self.labels.push(this.topic.labels[i].text);
-        }
-      }
-    };
-
-    self.highlight = function(str, term) {
-      var highlight_regex = new RegExp('(' + term + ')', 'gi');
-      return str.replace(highlight_regex,
-        '<span class="highlight">$1</span>');
-    };
-
     self.getBrightness = function(rgb) {
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(rgb);
       return result ?
@@ -85,12 +71,11 @@ angular.module('TatUi').component('messageLabel',
     };
 
     self.suggest_labels = function (term) {
-      if (self.topic && self.topic.labels &&
-        (!self.labels || self.labels.length < 1 || self.labels.length != self.topic.labels.length)) {
-        self.computeLabelsFromTopic();
+      var results = [];
+      if (!self.topic || !self.topic.labels) {
+        return results;
       }
       var q = term.toLowerCase().trim();
-      var results = [];
       for (var i = 0; i < self.topic.labels.length && results.length < 10; i++) {
         var label = self.topic.labels[i];
         if (label.text.toLowerCase().indexOf(q) === 0) {
@@ -98,12 +83,12 @@ angular.module('TatUi').component('messageLabel',
           label:$sce.trustAsHtml(
            '<div class="row">' +
            ' <div class="col-xs-5 tat-label-suggestion">' +
-           '<span class="tat-label" '+
-           ' style="background-color:'+ label.color +' ; '+
-           ' border-right-color: '+label.color+' ; '+
+           ' <span class="tat-label" ' +
+           ' style="background-color:' + label.color + ' ; ' +
+           ' border-right-color: ' + label.color + ' ; ' +
            ' color: '+ self.getBrightnessColor(label.color) +'">' +
            label.text +
-           '</span>' +
+           ' </span>' +
            ' </div>' +
            '</div>') });
         }
@@ -145,7 +130,7 @@ angular.module('TatUi').component('messageLabel',
      */
     this.addLabel = function(message) {
       TatMessage.addLabel(self.message,
-        self.topic,
+        self.topic.topic,
         self.labelText,
         self.labelColor,
         function() {
