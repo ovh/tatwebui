@@ -165,7 +165,6 @@ angular.module('TatUi')
 
     this.init = function() {
       self.refresh();
-      console.log("init on topic controller");
       $scope.$on('topic', function(event, data) {
         self.currentTopic = data;
         for (var key in self.topics) {
