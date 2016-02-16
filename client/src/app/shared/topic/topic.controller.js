@@ -8,7 +8,8 @@ angular.module('TatUi')
 
     this.data = {
       requestFrequency: 15000,
-      inRefresh: false
+      inRefresh: false,
+      isFirstCall: true
     };
 
     this.menuState = [];
@@ -56,12 +57,14 @@ angular.module('TatUi')
       }
     };
 
-    this.refresh = function(isFirstRefresh) {
+    this.refresh = function() {
       if (!self.data.inRefresh) {
         self.data.inRefresh = true;
         TatEngineTopicsRsc.list({
-          'getNbMsgUnread': !isFirstRefresh
+          'getNbMsgUnread': !self.data.isFirstCall
         }).$promise.then(function(data) {
+          self.data.inRefresh = false;
+          self.data.isFirstCall = false;
           var tree = {
             fullname: '',
             name: '',
@@ -77,10 +80,10 @@ angular.module('TatUi')
           }
           self.treeTopics = tree.children;
           self.refreshMenu();
-          self.data.inRefresh = false;
         }, function(err) {
           TatEngine.displayReturn(err);
           self.data.inRefresh = false;
+          self.data.isFirstCall = false;
         });
         $rootScope.$broadcast('presences-refresh');
       } else {
@@ -161,8 +164,8 @@ angular.module('TatUi')
     };
 
     this.init = function() {
-      self.refresh(true);
-
+      self.refresh();
+      console.log("init on topic controller");
       $scope.$on('topic', function(event, data) {
         self.currentTopic = data;
         for (var key in self.topics) {
