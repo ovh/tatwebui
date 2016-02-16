@@ -19,13 +19,15 @@ angular.module('TatUi').component('messageLabel',
     $scope,
     TatEngineMessageRsc,
     TatEngine,
-    TatMessage
+    TatMessage,
+    $sce
   ) {
     'use strict';
 
     var self = this;
     self.labelColor = '#d04437';
     self.labelText = '';
+    self.labels = [];
 
     this.palette = [
       ["#d04437", "#14892c", "#5484ed"],
@@ -52,6 +54,87 @@ angular.module('TatUi').component('messageLabel',
         "#20124d", "#4c1130"
       ]
     ];
+
+    self.computeLabelsFromTopic = function () {
+      if (self.topic && self.topic.labels && self.topic.labels.length > 0) {
+        for (var i = 0; i < this.topic.labels.length; i++) {
+          self.labels.push(this.topic.labels[i].text);
+        }
+      }
+    };
+
+    self.highlight = function(str, term) {
+      var highlight_regex = new RegExp('(' + term + ')', 'gi');
+      return str.replace(highlight_regex,
+        '<span class="highlight">$1</span>');
+    };
+
+    self.getBrightness = function(rgb) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(rgb);
+      return result ?
+        0.2126 * parseInt(result[1], 16) +
+        0.7152 * parseInt(result[2], 16) +
+        0.0722 * parseInt(result[3], 16) : 0;
+    };
+
+    self.getBrightnessColor = function(rgb) {
+      if (self.getBrightness(rgb) > 130) {
+        return '#000000';
+      }
+      return '#ffffff';
+    };
+
+    self.suggest_labels = function (term) {
+      if (self.topic && self.topic.labels &&
+        (!self.labels || self.labels.length < 1 || self.labels.length != self.topic.labels.length)) {
+        self.computeLabelsFromTopic();
+      }
+      var q = term.toLowerCase().trim();
+      var results = [];
+      for (var i = 0; i < self.topic.labels.length && results.length < 10; i++) {
+        var label = self.topic.labels[i];
+        if (label.text.toLowerCase().indexOf(q) === 0) {
+          results.push({ obj:label, value: label.text,
+          label:$sce.trustAsHtml(
+           '<div class="row">' +
+           ' <div class="col-xs-5 tat-label-suggestion">' +
+           '<span class="tat-label" '+
+           ' style="background-color:'+ label.color +' ; '+
+           ' border-right-color: '+label.color+' ; '+
+           ' color: '+ self.getBrightnessColor(label.color) +'">' +
+           label.text +
+           '</span>' +
+           ' </div>' +
+           '</div>') });
+        }
+      }
+      return results;
+    };
+
+    self.suggest = function (term, fnc) {
+      var ix = term.lastIndexOf(','),
+          lhs = term.substring(0, ix + 1),
+          rhs = term.substring(ix + 1),
+          suggestions = fnc(rhs);
+      suggestions.forEach(function (s) {
+        s.value = lhs + s.value;
+      });
+      return suggestions;
+    };
+
+    self.suggest_labels_delimited = function (term) {
+      if (!self.topic || !self.topic.topic) {
+        return;
+      }
+      return self.suggest(term, self.suggest_labels);
+    };
+
+    $scope.autocomplete_options_labels = {
+      suggest: self.suggest_labels_delimited,
+      on_select: function (selected) {
+        self.labelColor = selected.obj.color;
+      }
+    };
 
     /**
      * @ngdoc function

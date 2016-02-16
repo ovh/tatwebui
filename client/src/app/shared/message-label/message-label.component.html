@@ -8,8 +8,13 @@
         showPalette: true, togglePaletteOnly: false}" >
       </spectrum-colorpicker>
     </div>
+
     <form ng-submit="ctrl.addLabel(message)">
-      <input class="form-control" type="text" ng-model="ctrl.labelText" placeholder="{{ 'shared_message_label_add' | translate }}">
+      <div mass-autocomplete>
+        <input ng-model="ctrl.labelText" class="form-control" type="text"
+               mass-autocomplete-item="autocomplete_options_labels"
+               placeholder="{{ 'shared_message_label_add' | translate }}">
+      </div>
     </form>
   </div>
 </div>
