@@ -18,11 +18,8 @@ angular.module('TatUi')
     $translate
   ) {
     'use strict';
-    /**
-     * Sidebar Toggle & Cookie Control
-     */
-    var mobileView = 992;
 
+    var mobileView = 992;
     var self = this;
 
     this.loading = false;
@@ -119,15 +116,13 @@ angular.module('TatUi')
     };
 
     $scope.getViews = function() {
-      var restrictedPlugin =
-        Plugin.getPluginByRestriction(self.data.topic);
+      var restrictedPlugin = Plugin.getPluginByRestriction(self.data.topic);
       if (restrictedPlugin) {
         self.data.viewsEnabled = false;
         return null;
-      } else {
-        self.data.viewsEnabled = true;
-        return views;
       }
+      self.data.viewsEnabled = true;
+      return views;
     };
 
     $scope.switchView = function(route) {
@@ -254,8 +249,7 @@ angular.module('TatUi')
 
             $scope.title = params.topic.split('/');
             self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
-            self.data.offNotificationsTopics = Authentication.getIdentity()
-              .offNotificationsTopics;
+            self.data.offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
             self.data.isFavoriteTopic = false;
             self.data.isNotificationsOffTopic = false;
             if (!self.data.favoriteTopics) {
@@ -275,8 +269,7 @@ angular.module('TatUi')
               }
             }
 
-            var restrictedPlugin =
-              Plugin.getPluginByRestriction(self.data.topic);
+            var restrictedPlugin = Plugin.getPluginByRestriction(self.data.topic);
             if (restrictedPlugin && restrictedPlugin.route != toState.name) {
               $state.go(restrictedPlugin.route, {
                 topic: params.topic
@@ -308,8 +301,7 @@ angular.module('TatUi')
         action: topic
       }).$promise.then(function(data) {
         if (!data.topic) {
-          Flash.create('danger',
-            $translate.instant('topics_notopic'));
+          Flash.create('danger', $translate.instant('topics_notopic'));
           return;
         }
         var restrictedPlugin = Plugin.getPluginByRestriction(data.topic);
@@ -323,11 +315,9 @@ angular.module('TatUi')
           });
           return;
         }
-        if ($localStorage && $localStorage.views && $localStorage.views[
-            topic]) {
+        if ($localStorage && $localStorage.views && $localStorage.views[topic]) {
           if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
-            $localStorage.views[topic] =
-              Plugin.getDefaultPlugin(data.topic).route;
+            $localStorage.views[topic] = Plugin.getDefaultPlugin(data.topic).route;
           }
           $state.go($localStorage.views[topic], {
             topic: topic,

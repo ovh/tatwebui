@@ -7,7 +7,7 @@ angular.module('TatUi')
     var self = this;
 
     this.data = {
-      requestFrequency: 10000,
+      requestFrequency: 15000,
       inRefresh: false
     };
 
@@ -24,8 +24,7 @@ angular.module('TatUi')
     };
 
     var addSubTopic = function(root, topics, meta, level) {
-      var topicList = '[object Array]' === Object.prototype.toString.call(
-        topics) ? topics : topics.replace(/^\//, '').split('/');
+      var topicList = '[object Array]' === Object.prototype.toString.call(topics) ? topics : topics.replace(/^\//, '').split('/');
       var childName = topicList[0];
       var children = getSub(root, childName);
       if (!children) {
@@ -52,16 +51,16 @@ angular.module('TatUi')
     };
 
     this.addUnRead = function(topic, listUnread) {
-      if (listUnread !== undefined && listUnread[topic.topic] !== undefined) {
+      if (listUnread !== undefined && listUnread !== null && listUnread[topic.topic] !== undefined) {
         topic.unRead = listUnread[topic.topic];
       }
     };
 
-    this.refresh = function() {
+    this.refresh = function(isFirstRefresh) {
       if (!self.data.inRefresh) {
         self.data.inRefresh = true;
         TatEngineTopicsRsc.list({
-          'getNbMsgUnread': true
+          'getNbMsgUnread': !isFirstRefresh
         }).$promise.then(function(data) {
           var tree = {
             fullname: '',
@@ -70,8 +69,7 @@ angular.module('TatUi')
           };
           for (var i = 0; i < data.topics.length; i++) {
             self.addUnRead(data.topics[i], data.topicsMsgUnread);
-            self.topics[data.topics[i].topic.replace(/^\//, '')] = data
-              .topics[i];
+            self.topics[data.topics[i].topic.replace(/^\//, '')] = data.topics[i];
             if ((self.currentTopic) && (self.topics[self.currentTopic])) {
               self.topics[self.currentTopic].active = true;
             }
@@ -139,9 +137,7 @@ angular.module('TatUi')
       if (('[object Array]' === Object.prototype.toString.call(tree)) && (
           '[object Array]' === Object.prototype.toString.call(expansion))) {
         for (var i = 0; i < expansion.length; i++) {
-          topic = _.find(topic, {
-            name: expansion[i]
-          });
+          topic = _.find(topic, {name: expansion[i]});
           if (topic) {
             topic.visible = visible;
             if (topic.children) {
@@ -155,12 +151,7 @@ angular.module('TatUi')
     this.beginTimer = function(timeInterval) {
       if ('undefined' === typeof self.data.timer) {
         self.data.timer = $interval(self.refresh, timeInterval);
-        $scope.$on(
-          "$destroy",
-          function() {
-            self.stopTimer();
-          }
-        );
+        $scope.$on("$destroy", function() { self.stopTimer(); });
       }
     };
 
@@ -170,7 +161,7 @@ angular.module('TatUi')
     };
 
     this.init = function() {
-      self.refresh();
+      self.refresh(true);
 
       $scope.$on('topic', function(event, data) {
         self.currentTopic = data;

@@ -92,9 +92,8 @@ angular.module('TatUi').directive('topicList', function() {
         }
         if (nbUnread > 0) {
           return nbUnread;
-        } else {
-          return "";
         }
+        return "";
       };
 
       $scope.getUnreadInChild = function(topic) {
