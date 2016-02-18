@@ -15,16 +15,9 @@ angular.module('TatUi').component('messageFilter',
   controllerAs: 'MessageFilter',
   controller: function(
     $scope,
-    $rootScope,
     $state,
-    TatEngineMessageRsc,
-    TatEngineMessagesRsc,
     TatEngine,
     TatFilter,
-    $localStorage,
-    $location,
-    Authentication,
-    $http,
     appConfiguration
   ) {
     'use strict';
@@ -50,7 +43,7 @@ angular.module('TatUi').component('messageFilter',
       }
     };
 
-    self.suggest_labels = function (term) {
+    self.suggestLabels = function (term) {
       if (self.topic && self.topic.labels &&
         (!self.labels || self.labels.length < 1 || self.labels.length != self.topic.labels.length)) {
         self.computeLabelsFromTopic();
@@ -66,8 +59,8 @@ angular.module('TatUi').component('messageFilter',
       return results;
     };
 
-    self.suggest_tags = function (term) {
-      if (!self.topic.tags) {
+    self.suggestTags = function (term) {
+      if (!self.topic || !self.topic.tags) {
         return [];
       }
       var q = term.toLowerCase().trim();
@@ -92,19 +85,19 @@ angular.module('TatUi').component('messageFilter',
       return suggestions;
     };
 
-    self.suggest_labels_delimited = function (term) {
-        return self.suggest(term, self.suggest_labels);
+    self.suggestLabelsDelimited = function (term) {
+        return self.suggest(term, self.suggestLabels);
     };
-    self.suggest_tags_delimited = function (term) {
-        return self.suggest(term, self.suggest_tags);
-    };
-
-    $scope.autocomplete_options_labels = {
-      suggest: self.suggest_labels_delimited
+    self.suggestTagsDelimited = function (term) {
+        return self.suggest(term, self.suggestTags);
     };
 
-    $scope.autocomplete_options_tags = {
-      suggest: self.suggest_tags_delimited
+    $scope.autocompleteOptionsLabels = {
+      suggest: self.suggestLabelsDelimited
+    };
+
+    $scope.autocompleteOptionsTags = {
+      suggest: self.suggestTagsDelimited
     };
 
     self.changeLabels = function() {
@@ -113,7 +106,6 @@ angular.module('TatUi').component('messageFilter',
         t.push(self.selectedLabels[i].text);
       }
       self.tmpFilter.label = t.join();
-      console.log("self.tmpFilter.label:", self.tmpFilter.label);
     };
 
     $scope.$on('filter-changed', function(ev, filter){

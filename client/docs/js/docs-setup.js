@@ -252,8 +252,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
-      "keywords": "api filter leangth parameter shorten string tatui"
+      "shortDescription": "",
+      "keywords": "api filter tatui"
     },
     {
       "section": "api",
@@ -261,8 +261,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "",
-      "keywords": "api filter tatui"
+      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
+      "keywords": "api filter leangth parameter shorten string tatui"
     },
     {
       "section": "api",
@@ -389,6 +389,15 @@ NG_DOCS={
       "moduleName": "TatUi",
       "shortDescription": "",
       "keywords": "api function list promise resource tatui"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.shared:messageBox",
+      "shortName": "messageBox",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message tag",
+      "keywords": "ae api create createmessage current directive function generic message msg post shared tag tatui topic"
     },
     {
       "section": "api",
