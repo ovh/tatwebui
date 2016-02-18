@@ -12,13 +12,11 @@ angular.module('TatUi').directive('ngEnter', function() {
   'use strict';
   return function(scope, element, attrs) {
     element.bind("keydown", function(e) {
-      var code = event.keyCode || event.which;
+      var code = e.keyCode || e.which;
       if (e.which === 13) {
-        if (!event.shiftKey) {
+        if (!e.shiftKey) {
           scope.$apply(function() {
-            scope.$eval(attrs.ngEnter, {
-              'e': e
-            });
+            scope.$eval(attrs.ngEnter, { 'e': e });
           });
           e.preventDefault();
         }
