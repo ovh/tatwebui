@@ -1,0 +1,11 @@
+<div class="message-reply">
+  <textarea class="form-control" ng-model="ctrl.replyText"></textarea>
+  <div class="btn-group">
+    <button class="btn btn-default btn-xs" ng-click="ctrl.isReplying=false">
+      {{ 'shared_common_cancel' | translate }}
+    </button>
+    <button class="btn btn-primary btn-xs" ng-click="ctrl.replyMessage(); $event.stopPropagation();">
+      {{ 'shared_message_reply' | translate }}
+    </button>
+  </div>
+</div>

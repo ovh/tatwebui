@@ -410,6 +410,15 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.shared:messageReply",
+      "shortName": "messageReply",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Create a generic message tag",
+      "keywords": "ae api create directive function generic message reply replymessage shared tag tatui"
+    },
+    {
+      "section": "api",
       "id": "TatUi.shared:messageVote",
       "shortName": "messageVote",
       "type": "directive",

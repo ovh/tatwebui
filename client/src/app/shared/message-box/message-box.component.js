@@ -9,7 +9,6 @@
  */
 angular.module('TatUi').component('messageBox', {
   bindings: {
-    message: '=',
     topic: '=',
     messages: '=',
     isTopicRw: '=',
