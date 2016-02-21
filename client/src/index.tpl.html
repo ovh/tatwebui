@@ -314,9 +314,11 @@
                 <span>
                   {{ getTitle(ctrl.data.state) }}
                 </span>
-                <span data-ng-repeat="sub in title track by $index">
-                  <i class="fa fa-caret-right"></i>
-                  {{ sub }}
+                <span>
+                  {{ getTitle(ctrl.data.state) }} &ndash;
+                </span>
+                <span>
+                  {{ ctrl.data.topic.description }}
                 </span>
                 &nbsp;
                 <a role="button"
@@ -348,7 +350,10 @@
                 <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
               </h1>
               <h2 data-ng-if="isMessagesView(ctrl.data.state)">
-                {{ ctrl.data.topic.description }}
+                <span data-ng-repeat="sub,pos in title track by $index">
+                  <i class="fa fa-caret-right"></i>
+                  <a data-ng-href="#" data-ng-click="topicClickHeader(title, sub, $index)">{{ sub }}</a>
+                </span>
               </h2>
             </div>
 

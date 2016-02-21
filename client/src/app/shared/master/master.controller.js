@@ -47,6 +47,14 @@ angular.module('TatUi')
       $rootScope.$broadcast('sidebar-change', {topic:topic});
     };
 
+    $scope.topicClickHeader = function(topic, sub, pos ) {
+      var t = "";
+      for (var i = 0; i <= pos; i++) {
+        t += "/" + $scope.title[i];
+      }
+      return $scope.topicClick(t);
+    };
+
     $scope.canEditTopic = function(topic) {
       if (!topic.topic) {
         return;
