@@ -350,7 +350,7 @@
                 <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
               </h1>
               <h2 data-ng-if="isMessagesView(ctrl.data.state)">
-                <span data-ng-repeat="sub,pos in title track by $index">
+                <span data-ng-repeat="sub in title track by $index">
                   <i class="fa fa-caret-right"></i>
                   <a data-ng-href="#" data-ng-click="topicClickHeader(title, sub, $index)">{{ sub }}</a>
                 </span>
