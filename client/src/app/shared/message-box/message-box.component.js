@@ -33,6 +33,7 @@ angular.module('TatUi').component('messageBox', {
     self.filterDialog = { x: 380, y: 32, visible: false };
     self.currentMessage = '';
     self.showBox = true;
+    self.createMessageFocus = false;
 
     if (!self.placeholder || self.placeholder === "") {
       self.placeholder = $translate.instant('shared_message_compose_placeholder');

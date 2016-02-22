@@ -21,6 +21,47 @@ angular.module('TatUi').component('messageReply', {
     'use strict';
 
     var self = this;
+    self.createMessageFocus = false;
+
+    self.suggestTags = function (term) {
+      if (!self.topic.tags) {
+        return [];
+      }
+      var q = term.toLowerCase().trim();
+      var results = [];
+      for (var i = 0; i < self.topic.tags.length && results.length < 10; i++) {
+        var tag = self.topic.tags[i];
+        if (tag.toLowerCase().indexOf(q) === 0) {
+          results.push({ label: "#" + tag, value: tag });
+        }
+      }
+      return results;
+    };
+
+    self.suggest = function (term, fnc) {
+      var ix = term.lastIndexOf('#');
+      if (ix == -1) {
+        return [];
+      }
+      var lhs = term.substring(0, ix + 1),
+          rhs = term.substring(ix + 1),
+          suggestions = fnc(rhs);
+      suggestions.forEach(function (s) {
+        s.value = lhs + s.value;
+      });
+      return suggestions;
+    };
+
+    self.suggestTagsDelimited = function (term) {
+      if (!self.topic || !self.topic.topic) {
+        return;
+      }
+      return self.suggest(term, self.suggestTags);
+    };
+
+    self.autocompleteOptionsTags = {
+      suggest: self.suggestTagsDelimited,
+    };
 
     /**
      * @ngdoc function

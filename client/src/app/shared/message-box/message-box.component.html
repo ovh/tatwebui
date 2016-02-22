@@ -4,15 +4,20 @@
       <div mass-autocomplete>
         <textarea dir="auto" name="msg"
           ng-enter="ctrl.createMessage()"
-          ng-focus="createMessageFocus=true"
+          ng-focus="ctrl.createMessageFocus=true"
           mass-autocomplete-item="autocompleteOptionsTags"
-          ng-blur="createMessageFocus=false"
+          ng-blur="ctrl.createMessageFocus=false"
           ng-model="ctrl.currentMessage"
           placeholder="{{ctrl.placeholder}}">
         </textarea>
         <i ng-click="ctrl.createMessage()" class="icon-paper-plane fa fa-send-o" title="{{ 'shared_message_send' | translate }}"></i>
       </div>
     </div>
+
+    <div ng-if="ctrl.currentMessage.length > 0" class="tat-remaining-chars" ng-hide="!ctrl.createMessageFocus">
+      <i>{{ 'shared_message_characters_left' | translate }}: {{ ctrl.topic.maxlength - ctrl.currentMessage.length }}</i>
+    </div>
+    
     <div class="btn-group">
 
       <a class="btn btn-default" ng-show="ctrl.isCompact && ctrl.showBox" ng-click="ctrl.showBox=false">
@@ -30,10 +35,7 @@
         <i ng-class="ctrl.expandReplies ? 'fa fa-compress': 'fa fa-expand'"></i>
       </a>
     </div>
-    <div ng-if="ctrl.currentMessage.length > 0" class="tat-remaining-chars" ng-hide="!createMessageFocus">
-      <i>{{ 'shared_message_characters_left' | translate }}: {{ ctrl.topic.maxlength - ctrl.currentMessage.length }}</i>
-    </div>
-    <div class="formatting-tips" aria-hidden="true" dir="auto"></div>
+
   </form>
   <message-filter-bar></message-filter-bar>
   <div movable-dialog title="'Filter'" ng-model="ctrl.filterDialog">

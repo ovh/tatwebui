@@ -1,6 +1,22 @@
-<div class="message-reply">
-  <textarea class="form-control" ng-model="ctrl.replyText"></textarea>
+<div class="row tat-msg-create">
+  <form method="post" action="/">
+    <div class="tat-msg-input">
+      <div mass-autocomplete>
+        <textarea dir="auto" name="msg"
+          ng-enter="ctrl.replyMessage()"
+          ng-focus="ctrl.createMessageFocus=true"
+          mass-autocomplete-item="ctrl.autocompleteOptionsTags"
+          ng-blur="ctrl.createMessageFocus=false"
+          ng-model="ctrl.replyText"
+          placeholder="{{ctrl.placeholder}}">
+        </textarea>
+      </div>
+    </div>
+  </form>
   <div class="btn-group">
+    <span ng-if="ctrl.replyText.length > 0" class="tat-remaining-chars" ng-hide="!ctrl.createMessageFocus">
+      <i> &nbsp; {{ 'shared_message_characters_left' | translate }}: {{ ctrl.topic.maxlength - ctrl.replyText.length }}</i>
+    </span>
     <button class="btn btn-default btn-xs" ng-click="ctrl.isReplying=false">
       {{ 'shared_common_cancel' | translate }}
     </button>
