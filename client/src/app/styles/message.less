@@ -107,6 +107,7 @@
   padding: 0;
   margin: 0 4px 0 0;
   font-weight: bold;
+  display: inline;
   i {
     font-weight: normal;
     color: #aacec4;
@@ -121,6 +122,12 @@
       text-decoration: none!important;
     }
   }
+  -webkit-user-select: auto !important; /* Chrome/Safari */
+  -moz-user-select: all; /* Firefox */
+  -ms-user-select: all; /* IE10+ */
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: all;
+  user-select: all;
 }
 
 .tat-replies-count {
