@@ -17,7 +17,7 @@
     <div ng-if="ctrl.currentMessage.length > 0" class="tat-remaining-chars" ng-hide="!ctrl.createMessageFocus">
       <i>{{ 'shared_message_characters_left' | translate }}: {{ ctrl.topic.maxlength - ctrl.currentMessage.length }}</i>
     </div>
-    
+
     <div class="btn-group">
 
       <a class="btn btn-default" ng-show="ctrl.isCompact && ctrl.showBox" ng-click="ctrl.showBox=false">
@@ -35,7 +35,6 @@
         <i ng-class="ctrl.expandReplies ? 'fa fa-compress': 'fa fa-expand'"></i>
       </a>
     </div>
-
   </form>
   <message-filter-bar></message-filter-bar>
   <div movable-dialog title="'Filter'" ng-model="ctrl.filterDialog">

@@ -20,7 +20,8 @@ angular.module('TatUi', [
     'angularSpectrumColorpicker',
     'ngDraggable',
     'MassAutoComplete',
-    'chart.js'
+    'chart.js',
+    'ngclipboard'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     'use strict';

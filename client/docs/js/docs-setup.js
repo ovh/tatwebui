@@ -176,6 +176,15 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.directive:codeHighlight",
+      "shortName": "codeHighlight",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "usage:",
+      "keywords": "ae api codetohighlight codetype directive disable-highlighting disablehighlighting https source tatui type usage"
+    },
+    {
+      "section": "api",
       "id": "TatUi.directive:colorPicker",
       "shortName": "colorPicker",
       "type": "directive",
@@ -252,8 +261,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "",
-      "keywords": "api filter tatui"
+      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
+      "keywords": "api filter leangth parameter shorten string tatui"
     },
     {
       "section": "api",
@@ -261,8 +270,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
-      "keywords": "api filter leangth parameter shorten string tatui"
+      "shortDescription": "",
+      "keywords": "api filter tatui"
     },
     {
       "section": "api",
