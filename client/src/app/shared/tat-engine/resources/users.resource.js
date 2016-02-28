@@ -230,5 +230,39 @@ angular.module('TatUi').service('TatEngineUserRsc', function($resource) {
         action: 'me/disable/notifications/topics'
       }
     },
+
+    /**
+     * @ngdoc function
+     * @name enableNotificationsAllTopics
+     * @methodOf TatUi.resource:TatEngineUserRsc
+     * @restMethod POST
+     * @description
+     *
+     * @return {object} Promise
+     */
+    enableNotificationsAllTopics: {
+      method: 'POST',
+      isArray: false,
+      params: {
+        action: 'me/enable/notifications/alltopics'
+      }
+    },
+
+    /**
+     * @ngdoc function
+     * @name disableNotificationsAllTopics
+     * @methodOf TatUi.resource:TatEngineUserRsc
+     * @restMethod POST
+     * @description
+     *
+     * @return {object} Promise
+     */
+    disableNotificationsAllTopics: {
+      method: 'POST',
+      isArray: false,
+      params: {
+        action: 'me/disable/notifications/alltopics'
+      }
+    },
   });
 });

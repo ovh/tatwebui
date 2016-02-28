@@ -11,12 +11,24 @@
           {{ 'components_topics_new_topic' | translate}}
         </a>
         <button data-ng-if="isAdmin()" class="btn btn-default" data-ng-click="topicsAdminMode(false)">
-          <i class="fa fa-plus"></i>
+          <i class="fa fa-list"></i>
           {{ 'components_topics_list_non_admin_mode' | translate}}
         </button>
         <button data-ng-if="isAdmin()" class="btn btn-default" data-ng-click="topicsAdminMode(true)">
-          <i class="fa fa-plus"></i>
+          <i class="fa fa-list"></i> <i class="fa fa-graduation-cap"></i>
           {{ 'components_topics_list_admin_mode' | translate}}
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <button class="btn btn-default" data-ng-click="toggleAllNotificationsTopics(false)">
+          <i class="fa fa-bell-slash"></i>
+          {{ 'components_topics_list_disable_all_notifs' | translate}}
+        </button>
+        <button class="btn btn-default" data-ng-click="toggleAllNotificationsTopics(true)">
+          <i class="fa fa-bell-o"></i>
+          {{ 'components_topics_list_enable_all_notifs' | translate}}
         </button>
       </div>
     </div>
@@ -40,7 +52,7 @@
                   <tr>
                     <th>{{ 'shared_common_topic' | translate }}</th>
                     <th>{{ 'shared_common_description' | translate }}</th>
-                    <th>{{ 'components_topics_rights' | translate }}</th>
+                    <th>{{ 'components_topics_options' | translate }}</th>
                     <th data-ng-if="data.adminOfOneTopic">{{ 'shared_common_created_at' | translate }}</th>
                     <th></th>
                   </tr>
@@ -49,25 +61,18 @@
                     <tr data-ng-repeat="topicItem in data.topics | filter:data.filterList" class="topic-first-row">
                         <th class="topics-name">{{ topicItem.topic }}</th>
                         <td class="topics-description">{{ topicItem.description }}</td>
-                        <td class="topics-users">
-                          <span data-ng-if="topicItem.roGroups" title="Read Only Groups">
-                            ROG:{{topicItem.roGroups.length}}
-                          </span>
-                          <span data-ng-if="topicItem.rwGroups" title="Read Write Groups">
-                            RWG:{{topicItem.rwGroups.length}}
-                          </span>
-                          <span data-ng-if="topicItem.roUsers" title="Read Only Users">
-                            ROU:{{topicItem.roUsers.length}}
-                          </span>
-                          <span data-ng-if="topicItem.rwUsers" title="Read Write Users">
-                            RWU:{{topicItem.rwUsers.length}}
-                          </span>
-                          <span data-ng-if="topicItem.adminUsers" title="Admin Users">
-                            AU:{{topicItem.adminUsers.length}}
-                          </span>
-                          <span data-ng-if="topicItem.adminGroups" title="Admin Group">
-                            AG:{{topicItem.adminGroups.length}}
-                          </span>
+                        <td>
+                          <a role="button" data-ng-click="toggleTopicFavorite(topicItem)">
+                            <i class="fa" data-ng-class="{'fa-star-o':!topicItem.isFavoriteTopic, 'fa-star': topicItem.isFavoriteTopic}">
+                            </i>
+                          </a>
+                          <a role="button"
+                            title="{{ 'master-toggle-notification' | translate }}"
+                            data-ng-click="toggleNotificationsTopic(topicItem)">
+                            <i class="fa" data-ng-class="{'fa-bell-o':!topicItem.isNotificationsOffTopic, 'fa-bell-slash': topicItem.isNotificationsOffTopic}">
+                            </i>
+                          </a>
+
                         </td>
                         <td class="topics-date">
                           <span data-ng-if="topicItem.dateCreation">{{topicItem.dateCreation * 1000 | date:'yyyy-MM-dd'}}</span>

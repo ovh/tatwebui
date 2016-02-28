@@ -388,7 +388,7 @@ NG_DOCS={
       "type": "resource",
       "moduleName": "TatUi",
       "shortDescription": "",
-      "keywords": "addcontact addfavoritetopic api archive convert delete disablenotificationstopic enablenotificationstopic function post promise removecontact removefavoritetopic rename resource setadmin tatui update"
+      "keywords": "addcontact addfavoritetopic api archive convert delete disablenotificationsalltopics disablenotificationstopic enablenotificationsalltopics enablenotificationstopic function post promise removecontact removefavoritetopic rename resource setadmin tatui update"
     },
     {
       "section": "api",

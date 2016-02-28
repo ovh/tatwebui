@@ -284,18 +284,18 @@
                   <i class="fa fa-comments"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="link">
+                    <a ui-sref="topics-list">
+                      {{ 'master-topics' | translate }}
+                    </a>
+                  </li>
+                  <li class="divider"></li>
                   <li class="dropdown-header">
                     {{ 'master-favorites' | translate }}
                   </li>
                   <li class="divider"></li>
                   <li class="link" ng-repeat="t in getFavoritesTopics() track by $index |  orderBy:'toString()'">
                       <a data-ng-href="#" data-ng-click="topicClick(t)">{{t}}</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li class="link">
-                    <a ui-sref="topics-list">
-                      {{ 'master-topics' | translate }}
-                    </a>
                   </li>
                 </ul>
               </div>
