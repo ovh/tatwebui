@@ -11,7 +11,7 @@ angular.module('TatUi').directive('topicList', function() {
   'use strict';
   return {
     retrict: 'AE',
-    template: '<ul class="sidebar-sublist"><li data-ng-repeat="topic in topicList track by topic.name" topic-list-item="topic" data-ng-click="topicClick(topic);$event.stopPropagation();"></li></ul>',
+    template: '<ul class="sidebar-sublist"><li data-ng-repeat="topic in topicList track by $index" topic-list-item="topic" data-ng-click="topicClick(topic);$event.stopPropagation();"></li></ul>',
     scope: {
       topicList: '='
     },
@@ -99,21 +99,23 @@ angular.module('TatUi').directive('topicList', function() {
       $scope.getUnreadInChild = function(topic) {
         var nbUnread = 0;
         var newTopic = false;
-        for (var i = 0; i < topic.children.length; i++) {
-          if (topic.children[i].metadata !== undefined && topic.children[
-              i].metadata.unRead !== undefined) {
-            if (topic.children[i].metadata.unRead == -1) {
-              newTopic = true;
-            } else {
-              nbUnread += topic.children[i].metadata.unRead;
+        if (topic.children) {
+          for (var i = 0; i < topic.children.length; i++) {
+            if (topic.children[i].metadata !== undefined && topic.children[
+                i].metadata.unRead !== undefined) {
+              if (topic.children[i].metadata.unRead == -1) {
+                newTopic = true;
+              } else {
+                nbUnread += topic.children[i].metadata.unRead;
+              }
             }
-          }
-          if (!topic.visible) {
-            var childUnread = $scope.getUnreadInChild(topic.children[i]);
-            if (childUnread != "New Topic") {
-              nbUnread += childUnread;
-            } else {
-              newTopic = true;
+            if (!topic.visible) {
+              var childUnread = $scope.getUnreadInChild(topic.children[i]);
+              if (childUnread != "New Topic") {
+                nbUnread += childUnread;
+              } else {
+                newTopic = true;
+              }
             }
           }
         }

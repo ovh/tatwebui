@@ -176,7 +176,19 @@
         </li>
         <li data-ng-controller="TopicCtrl as sideBarCtrl" class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
             <span class="sidebar-section-title">{{ 'master-topics' | translate }}</span>
-            <div topic-list="sideBarCtrl.treeTopics"></div>
+            <div topic-list="sideBarCtrl.treeTopics.internal"></div>
+        </li>
+        <li data-ng-controller="TopicCtrl as sideBarCtrl" class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
+            <span class="sidebar-section-title">Private</span>
+            <div topic-list="sideBarCtrl.treeTopics.private"></div>
+        </li>
+        <li data-ng-controller="TopicCtrl as sideBarCtrl" class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
+            <span class="sidebar-section-title">Direct Messages</span>
+            <div topic-list="sideBarCtrl.treeTopics.privateDm"></div>
+        </li>
+        <li data-ng-controller="TopicCtrl as sideBarCtrl" class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
+            <span class="sidebar-section-title">Others Users</span>
+            <div topic-list="sideBarCtrl.treeTopics.privateOthers"></div>
         </li>
         <li class="sidebar-section tat-presences" ng-show="ctrl.data.isPresencesOpen">
           <span class="sidebar-section-title">

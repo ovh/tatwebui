@@ -1,7 +1,12 @@
 /*global angular,_ */
 angular.module('TatUi')
-  .controller('TopicCtrl', function TopicCtrl($scope, $rootScope, $interval,
-    TatEngineTopicsRsc, TatEngine) {
+  .controller('TopicCtrl', function TopicCtrl(
+    $scope,
+    $rootScope,
+    $interval,
+    TatEngineTopicsRsc,
+    Authentication,
+    TatEngine) {
     'use strict';
 
     var self = this;
@@ -14,7 +19,12 @@ angular.module('TatUi')
 
     this.menuState = [];
     this.topics = {};
-    this.treeTopics = [];
+    this.treeTopics = {
+      "internal": [],
+      "private": [],
+      "privateDm": [],
+      "privateOthers": []
+    };
 
     var getSub = function(root, topicName) {
       for (var i = 0; i < root.children.length; i++) {
@@ -24,10 +34,22 @@ angular.module('TatUi')
       }
     };
 
-    var addSubTopic = function(root, topics, meta, level) {
-      var topicList = '[object Array]' === Object.prototype.toString.call(topics) ? topics : topics.replace(/^\//, '').split('/');
+    var addSubTopic = function(topicType, root, topicName, meta, level) {
+      var topicList = [];
+      if (topicType == "privateDm" || topicType == "privateOthers") {
+        if ('[object Array]' !== Object.prototype.toString.call(topicName)) {
+            topicName = self.getNameDM(topicName);
+        }
+      } else if (topicType == "private") {
+        if ('[object Array]' !== Object.prototype.toString.call(topicName)) {
+            topicName = self.getNamePrivate(topicName);
+        }
+      }
+      topicList = '[object Array]' === Object.prototype.toString.call(topicName) ? topicName : topicName.replace(/^\//, '').split('/');
+
       var childName = topicList[0];
       var children = getSub(root, childName);
+
       if (!children) {
         children = {
           level: level,
@@ -45,16 +67,44 @@ angular.module('TatUi')
       }
       var next = topicList.slice(1);
       if (next.length) {
-        addSubTopic(children, next, meta, level + 1);
+        addSubTopic(topicType, children, next, meta, level + 1);
       } else {
         children.metadata = meta;
       }
+    };
+
+    this.getNamePrivate = function(topicName) {
+      return topicName.replace("/Private/", "");
+    };
+
+    this.getNameDM = function(topicName) {
+      return topicName.replace("/Private/" + Authentication.getIdentity().username + "/", "");
     };
 
     this.addUnRead = function(topic, listUnread) {
       if (listUnread !== undefined && listUnread !== null && listUnread[topic.topic] !== undefined) {
         topic.unRead = listUnread[topic.topic];
       }
+    };
+
+    this.computeTypeTopic = function(topicName) {
+      if (topicName.indexOf("/Internal") === 0) {
+        return "internal";
+      } else if (topicName.indexOf("/Private/" + Authentication.getIdentity().username+"/DM/") === 0) {
+        return "privateDm";
+      } else if (topicName.indexOf("/Private/" + Authentication.getIdentity().username) === 0) {
+        return "private";
+      } else if (topicName.indexOf("/Private/") === 0) {
+        return "privateOthers";
+      }
+    };
+
+    this.initTreeVar = function() {
+      return {
+        fullname: '',
+        name: '',
+        children: []
+      };
     };
 
     this.refresh = function() {
@@ -65,20 +115,28 @@ angular.module('TatUi')
         }).$promise.then(function(data) {
           self.data.inRefresh = false;
           self.data.isFirstCall = false;
-          var tree = {
-            fullname: '',
-            name: '',
-            children: []
-          };
+
+          var tree = {};
+          tree.internal = self.initTreeVar();
+          tree.private = self.initTreeVar();
+          tree.privateOthers = self.initTreeVar();
+          tree.privateDm = self.initTreeVar();
+
           for (var i = 0; i < data.topics.length; i++) {
+            var topicType = self.computeTypeTopic(data.topics[i].topic);
             self.addUnRead(data.topics[i], data.topicsMsgUnread);
             self.topics[data.topics[i].topic.replace(/^\//, '')] = data.topics[i];
             if ((self.currentTopic) && (self.topics[self.currentTopic])) {
               self.topics[self.currentTopic].active = true;
             }
-            addSubTopic(tree, data.topics[i].topic, data.topics[i], 0);
+            addSubTopic(topicType, tree[topicType], data.topics[i].topic, data.topics[i], 0);
           }
-          self.treeTopics = tree.children;
+
+          self.treeTopics.internal = tree.internal.children;
+          self.treeTopics.private = tree.private.children;
+          self.treeTopics.privateDm = tree.privateDm.children;
+          self.treeTopics.privateOthers = tree.privateOthers.children;
+
           self.refreshMenu();
         }, function(err) {
           TatEngine.displayReturn(err);
@@ -109,7 +167,10 @@ angular.module('TatUi')
         if (topicArray[0] === '') {
           topicArray.splice(0, 1);
         }
-        self.changeTopicsVisibility(self.treeTopics, topicArray, true);
+        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true);
+        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true);
+        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true);
+        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true);
       }
     };
 
@@ -126,7 +187,10 @@ angular.module('TatUi')
             if (topicArray[0] === '') {
               topicArray.splice(0, 1);
             }
-            self.changeTopicsVisibility(self.treeTopics, topicArray, false);
+            self.changeTopicsVisibility(self.treeTopics.internal, topicArray, false);
+            self.changeTopicsVisibility(self.treeTopics.private, topicArray, false);
+            self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, false);
+            self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, false);
             self.menuState.splice(i, 1);
             i--;
           }
@@ -135,9 +199,9 @@ angular.module('TatUi')
       self.refreshMenu();
     };
 
-    this.changeTopicsVisibility = function(tree, expansion, visible) {
-      var topic = tree;
-      if (('[object Array]' === Object.prototype.toString.call(tree)) && (
+    this.changeTopicsVisibility = function(treeTopics, expansion, visible) {
+      var topic = treeTopics;
+      if (('[object Array]' === Object.prototype.toString.call(treeTopics)) && (
           '[object Array]' === Object.prototype.toString.call(expansion))) {
         for (var i = 0; i < expansion.length; i++) {
           topic = _.find(topic, {name: expansion[i]});
