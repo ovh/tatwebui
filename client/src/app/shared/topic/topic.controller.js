@@ -92,6 +92,8 @@ angular.module('TatUi')
         return "internal";
       } else if (topicName.indexOf("/Private/" + Authentication.getIdentity().username+"/DM/") === 0) {
         return "privateDm";
+      } else if (topicName === "/Private/" + Authentication.getIdentity().username+"/DM") {
+        return "toSkip";
       } else if (topicName.indexOf("/Private/" + Authentication.getIdentity().username) === 0) {
         return "private";
       } else if (topicName.indexOf("/Private/") === 0) {
@@ -124,6 +126,9 @@ angular.module('TatUi')
 
           for (var i = 0; i < data.topics.length; i++) {
             var topicType = self.computeTypeTopic(data.topics[i].topic);
+            if (topicType == "toSkip") {
+              continue;
+            }
             self.addUnRead(data.topics[i], data.topicsMsgUnread);
             self.topics[data.topics[i].topic.replace(/^\//, '')] = data.topics[i];
             if ((self.currentTopic) && (self.topics[self.currentTopic])) {
