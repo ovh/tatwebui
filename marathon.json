@@ -1,0 +1,68 @@
+{
+  "container": {
+    "docker": {
+      "forcePullImage": true,
+      "image": "{{.docker_image}}",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": {{.tatwebui_listen_port}},
+          "hostPort": 0,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "type": "DOCKER"
+  },
+  "cpus": 1,
+  "env": {
+    "FILESYSTEM_LISTEN_PORT": "{{.filesystem_listen_port}}",
+    "PROCESS_NB_FORKS": "{{.process_nb_forks}}",
+    "BACKEND_SCHEME": "{{.backend_scheme}}",
+    "BACKEND_HOST": "{{.backend_host}}",
+    "BACKEND_PORT": "{{.backend_port}}",
+    "BACKEND_AUTOLOGIN": "{{.backend_autologin}}",
+    "WS_SOCKET_SCHEME": "{{.ws_socket_scheme}}",
+    "WS_SOCKET_PORT": "{{.ws_socket_port}}",
+    "PROXY_LISTEN_PORT": "{{.proxy_listen_port}}",
+    "WS_SOCKET_HOST": "{{.ws_socket_host}}",
+    "LINK_HOME_LABEL_1": "{{.link_home_label_1}}",
+    "LINK_HOME_URL_1": "{{.link_home_url_1}}",
+    "LINK_HOME_LABEL_2": "{{.link_home_label_2}}",
+    "LINK_HOME_URL_2": "{{.link_home_url_2}}",
+    "LINK_MENU_LABEL_1": "{{.link_menu_label_1}}",
+    "LINK_MENU_URL_1": "{{.link_menu_url_1}}",
+    "LINK_MENU_LABEL_2": "{{.link_menu_label_2}}",
+    "LINK_MENU_URL_2": "{{.link_menu_url_2}}",
+    "LINK_MENU_LABEL_3": "{{.link_menu_label_3}}",
+    "LINK_MENU_URL_3": "{{.link_menu_url_3}}",
+    "HELP_SIGNUP": "{{.help_signup}}",
+    "BASE_URL": "{{.base_url}}",
+    "RUN_MT_URL": "{{.run_mt_url}}",
+    "RUNVIEW_TOPIC_ALERTS": "{{.runview_topic_alerts}}",
+    "RUNVIEW_ONCALL_SERVICES": "{{.runview_oncall_services}}",
+    "RUNVIEW_TAT2SHINKEN_URL": "{{.runview_tat2shinken_url}}",
+    "UAT_US_URL": "{{.uat_us_url}}",
+    "RELEASEVIEW_TRACKER": "{{.releaseview_tracker}}",
+    "RELEASEVIEW_KEYWORD": "{{.releaseview_keyword}}"
+  },
+  "healthChecks": [
+    {
+        "path": "/health",
+        "protocol": "HTTP",
+        "portIndex": 0,
+        "gracePeriodSeconds": 15,
+        "intervalSeconds": 60,
+        "timeoutSeconds": 10,
+        "maxConsecutiveFailures": 3,
+        "ignoreHttp1xx": false
+    }
+  ],
+  "id": "/{{.id}}",
+  "instances": {{.nb_instances}},
+  "labels": {
+    "HAPROXY_0_MODE": "{{.haproxy_0_mode}}",
+    "HAPROXY_0_VHOST": "{{.haproxy_0_vhost}}"
+  },
+  "mem": {{.mem}}
+}

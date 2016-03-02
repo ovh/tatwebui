@@ -36,27 +36,6 @@ docker run -it --rm --name tat-webui-instance1 \
   -p 8082:8082 tat-webui
 ```
 
-## Sailabove
-
-```
-docker build -t tat-webui .
-docker tag -f tat-webui sailabove.io/<yourSailaboveUsername>/tat-webui
-docker push sailabove.io/<yourSailaboveUsername>/tat-webui
-
-sail services add <yourSailaboveUsername>/tat-webui \
-  --network predictor \
-  -e FILESYSTEM_LISTEN_PORT=8080 \
-  -e PROCESS_NB_FORKS=2 \
-  -e BACKEND_SCHEME=http \
-  -e BACKEND_HOST=tat-webui.<yourSailaboveUsername>.app.sailabove.io \
-  -e BACKEND_PORT=8081 \
-  -e WS_SOCKET_SCHEME=wss \
-  -e WS_SOCKET_PORT=443 \
-  -e WS_SOCKET_HOST=tat-engine.<yourSailaboveUsername>.app.sailabove.io
-  -p 8080:8080 tat-webui
-```
-
-
 # Hacking
 
 You've developed a new cool feature? Fixed an annoying bug? We'd be happy
