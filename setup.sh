@@ -5,31 +5,6 @@ cd /tat/dist
 cp app/config.json.prod app/config.json
 cp public/assets/config.json.prod public/assets/config.json
 
-if [ ! -z $PROXY_TATENGINE_SCHEME ]; then
-  echo "replace PROXY_TATENGINE_SCHEME with $PROXY_TATENGINE_SCHEME";
-  sed -i "s#PROXY_TATENGINE_SCHEME#$PROXY_TATENGINE_SCHEME#" app/config.json
-fi;
-
-if [ ! -z $PROXY_TATENGINE_HOST ]; then
-  echo "replace PROXY_TATENGINE_HOST with $PROXY_TATENGINE_HOST";
-  sed -i "s#PROXY_TATENGINE_HOST#$PROXY_TATENGINE_HOST#" app/config.json
-fi;
-
-if [ ! -z $PROXY_TATENGINE_PORT ]; then
-  echo "replace PROXY_TATENGINE_PORT with $PROXY_TATENGINE_PORT";
-  sed -i "s#PROXY_TATENGINE_PORT#$PROXY_TATENGINE_PORT#" app/config.json
-fi;
-
-if [ ! -z $PROXY_TATENGINE_INSECURE_SSL ]; then
-  echo "replace PROXY_TATENGINE_INSECURE_SSL with $PROXY_TATENGINE_INSECURE_SSL";
-  sed -i "s#PROXY_TATENGINE_INSECURE_SSL#$PROXY_TATENGINE_INSECURE_SSL#" app/config.json
-fi;
-
-if [ ! -z $PROXY_LISTEN_PORT ]; then
-  echo "replace PROXY_LISTEN_PORT with $PROXY_LISTEN_PORT";
-  sed -i "s#PROXY_LISTEN_PORT#$PROXY_LISTEN_PORT#" app/config.json
-fi;
-
 if [ ! -z $FILESYSTEM_LISTEN_PORT ]; then
   echo "replace FILESYSTEM_LISTEN_PORT with $FILESYSTEM_LISTEN_PORT";
   sed -i "s#FILESYSTEM_LISTEN_PORT#$FILESYSTEM_LISTEN_PORT#" app/config.json
@@ -159,6 +134,11 @@ if [ ! -z $HELP_SIGNUP ]; then
   echo "replace HELP_SIGNUP with $HELP_SIGNUP";
   sed -i "s#HELP_SIGNUP#$HELP_SIGNUP#" public/assets/config.json
 fi;
+
+echo "#########"
+echo "file app/config.json : ";
+cat app/config.json;
+echo "#########"
 
 echo "#########"
 echo "file public/assets/config.json : ";

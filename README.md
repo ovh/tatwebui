@@ -84,7 +84,7 @@ Get the dependencies by launching those commands:
 -  ```cp ./app/config.json.sample ./app/config.json```
 -  edit ./app/config.json
 
-### Launch the proxy
+### Launch
 Launch *serve* task of grunt:
 
 -  ```cd ./server```

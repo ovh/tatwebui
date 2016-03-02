@@ -1,13 +1,4 @@
 {
-  "proxy": {
-    "tatEngine": {
-      "scheme": "PROXY_TATENGINE_SCHEME",
-      "host": "PROXY_TATENGINE_HOST",
-      "port": 8888,
-      "sslInsecureSkipVerify": false
-    },
-    "listen_port": PROXY_LISTEN_PORT
-  },
   "filesystem": {
       "listen_port": FILESYSTEM_LISTEN_PORT
   },

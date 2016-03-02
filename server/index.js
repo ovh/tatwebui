@@ -31,12 +31,6 @@
         }).process.pid,
         task: 'fileServer'
       });
-      serverProcess.push({
-        pid: cluster.fork({
-          task: 'proxyServer'
-        }).process.pid,
-        task: 'proxyServer'
-      });
     }
 
     cluster.on('exit', function(worker) {
@@ -65,17 +59,6 @@
         /* Binding */
         var fileServer = fileApp.listen(fileApp.get('port'), function() {
           logger('Express file-server listening on port ' + fileServer.address()
-            .port);
-        });
-        break;
-      case 'proxyServer':
-        var proxyApp = require('./app/proxy-server.js');
-        proxyApp.logger = logger;
-        proxyApp.set('port', process.env.PORT || config.proxy.listen_port);
-
-        /* Binding */
-        var proxyServer = proxyApp.listen(proxyApp.get('port'), function() {
-          logger('Express proxy-server listening on port ' + proxyServer.address()
             .port);
         });
         break;

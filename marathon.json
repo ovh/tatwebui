@@ -24,7 +24,6 @@
     "BACKEND_AUTOLOGIN": "{{.backend_autologin}}",
     "WS_SOCKET_SCHEME": "{{.ws_socket_scheme}}",
     "WS_SOCKET_PORT": "{{.ws_socket_port}}",
-    "PROXY_LISTEN_PORT": "{{.proxy_listen_port}}",
     "WS_SOCKET_HOST": "{{.ws_socket_host}}",
     "LINK_HOME_LABEL_1": "{{.link_home_label_1}}",
     "LINK_HOME_URL_1": "{{.link_home_url_1}}",
