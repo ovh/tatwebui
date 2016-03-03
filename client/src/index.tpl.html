@@ -175,7 +175,10 @@
           </a>
         </li>
         <li class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
-            <span class="sidebar-section-title">{{ 'master-topics' | translate }}</span>
+            <span class="sidebar-section-title">
+              {{ 'master-topics' | translate }}
+              <i ui-sref="topics-list" class="listtopic fa fa-list-ul" title="{{ 'master-topics' | translate }}"></i>
+            </span>
             <div topic-list="sideBarCtrl.treeTopics.internal"></div>
         </li>
         <li class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
@@ -290,28 +293,7 @@
                   </li>
                 </ul>
               </div>
-
-              <div class="item dropdown" uib-dropdown>
-                <a role="button" class="dropdown-toggle" title="{{ 'master-topics' | translate }}" uib-dropdown-toggle>
-                  <i class="fa fa-comments"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="link">
-                    <a ui-sref="topics-list">
-                      {{ 'master-topics' | translate }}
-                    </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">
-                    {{ 'master-favorites' | translate }}
-                  </li>
-                  <li class="divider"></li>
-                  <li class="link" ng-repeat="t in getFavoritesTopics() track by $index |  orderBy:'toString()'">
-                      <a data-ng-href="#" data-ng-click="topicClick(t)">{{t}}</a>
-                  </li>
-                </ul>
-              </div>
-
+              
               <div class="item dropdown" data-ng-if="isMessagesView(ctrl.data.state)" uib-dropdown>
                <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" uib-dropdown-toggle>
                   <i class="fa fa-eye"></i>

@@ -71,10 +71,6 @@ angular.module('TatUi')
       return false;
     };
 
-    $scope.getFavoritesTopics = function() {
-      return Authentication.getIdentity().favoritesTopics;
-    };
-
     $scope.getTitle = function(route) {
       var p = Plugin.getPluginByRoute(route);
       if (p) {
