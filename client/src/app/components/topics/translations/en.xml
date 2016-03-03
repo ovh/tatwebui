@@ -31,4 +31,5 @@
   <translation id="components_topics_list_enable_all_notifs">Enable notifications on all topics</translation>
   <translation id="components_topics_is_auto_compute_tags">Auto Compute Cached Tags (for autocompletion)</translation>
   <translation id="components_topics_is_auto_compute_labels">Auto Compute Cached Labels (for autocompletion)</translation>
+  <translation id="components_topics_unread_msg">Unread Messages</translation>
 </translations>

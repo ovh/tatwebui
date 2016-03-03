@@ -20,7 +20,8 @@ angular.module('TatUi')
       filtertopic: "",
       getForTatAdmin: false,
       adminOfOneTopic: false,
-      filterList: ""
+      filterList: "",
+      unreadOnly: false
     };
 
     /**
@@ -32,6 +33,7 @@ angular.module('TatUi')
     $scope.init = function() {
       var criteria = {
         "topic": $scope.data.filtertopic,
+        "getNbMsgUnread": true,
         "getForTatAdmin": $scope.data.getForTatAdmin
       };
       TatEngineTopicsRsc.list(criteria).$promise.then(function(data) {
@@ -61,6 +63,7 @@ angular.module('TatUi')
               }
             }
           }
+          self.addUnRead(data.topics[i], data.topicsMsgUnread);
         }
 
         $scope.data.topics = data.topics;
@@ -68,6 +71,20 @@ angular.module('TatUi')
       }, function(err) {
         TatEngine.displayReturn(err);
       });
+    };
+
+    $scope.greaterThan = function(prop) {
+      if ($scope.data.unreadOnly === true) {
+        return function(item){
+          return item[prop] > 0;
+        };
+      }
+    };
+
+    self.addUnRead = function(topic, listUnread) {
+      if (listUnread !== undefined && listUnread !== null && listUnread[topic.topic] !== undefined) {
+        topic.unRead = listUnread[topic.topic];
+      }
     };
 
     $scope.toggleAllNotificationsTopics = function(toEnable) {

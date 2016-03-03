@@ -5,7 +5,7 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-6">
         <a class="btn btn-primary" ui-sref="topics-new">
           <i class="fa fa-plus"></i>
           {{ 'components_topics_new_topic' | translate}}
@@ -19,9 +19,7 @@
           {{ 'components_topics_list_admin_mode' | translate}}
         </button>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-6">
         <button class="btn btn-default" data-ng-click="toggleAllNotificationsTopics(false)">
           <i class="fa fa-bell-slash"></i>
           {{ 'components_topics_list_disable_all_notifs' | translate}}
@@ -43,14 +41,25 @@
       <div class="col-lg-12">
         <rd-widget>
           <rd-widget-header icon="fa-group" title="{{data.topics.length}} Topics on total of {{data.count}}">
-              <input data-ng-model="data.filterList" type="text" placeholder="Search in this list" class="form-control">
+
           </rd-widget-header>
           <rd-widget-body classes="no-padding">
             <div class="table-responsive">
               <table class="table groups-list">
                 <thead>
                   <tr>
-                    <th>{{ 'shared_common_topic' | translate }}</th>
+                    <th>
+                      {{ 'shared_common_topic' | translate }}
+                      <input data-ng-model="data.filterList" type="text" placeholder="Search in this list" class="form-control">
+                    </th>
+                    <th>
+                      {{ 'components_topics_unread_msg' | translate }}
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-model="data.unreadOnly"> Unread only
+                        </label>
+                      </div>
+                    </th>
                     <th>{{ 'shared_common_description' | translate }}</th>
                     <th>{{ 'components_topics_options' | translate }}</th>
                     <th data-ng-if="data.adminOfOneTopic">{{ 'shared_common_created_at' | translate }}</th>
@@ -58,8 +67,13 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <tr data-ng-repeat="topicItem in data.topics | filter:data.filterList" class="topic-first-row">
-                        <th class="topics-name">{{ topicItem.topic }}</th>
+                    <tr data-ng-repeat="topicItem in data.topics | filter:data.filterList | filter:greaterThan('unRead')" class="topic-first-row">
+                        <th class="topics-name">
+                          <a data-ng-href="#" data-ng-click="topicClick(topicItem.topic)">{{topicItem.topic}}</a>
+                        </th>
+                        <th class="topics-unread">
+                          <span class="badge" ng-show="topicItem.unRead > 0">{{topicItem.unRead}}</span>
+                        </th>
                         <td class="topics-description">{{ topicItem.description }}</td>
                         <td>
                           <a role="button" data-ng-click="toggleTopicFavorite(topicItem)">
