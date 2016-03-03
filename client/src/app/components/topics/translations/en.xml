@@ -27,7 +27,7 @@
   <translation id="components_topics_tatwebui_view_default">set a default view on this topic, users can choose another view</translation>
   <translation id="components_topics_presences">Presences</translation>
   <translation id="components_topics_options">Options</translation>
-  <translation id="components_topics_list_disable_all_notifs">Disable notifications on all topics</translation>
+  <translation id="components_topics_list_disable_all_notifs">Disable notifications on all topics (except /Private/*)</translation>
   <translation id="components_topics_list_enable_all_notifs">Enable notifications on all topics</translation>
   <translation id="components_topics_is_auto_compute_tags">Auto Compute Cached Tags (for autocompletion)</translation>
   <translation id="components_topics_is_auto_compute_labels">Auto Compute Cached Labels (for autocompletion)</translation>
