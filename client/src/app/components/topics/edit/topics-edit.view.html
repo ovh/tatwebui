@@ -11,6 +11,13 @@
               <div>
                   <label>{{ 'shared_common_description' | translate }}</label> : <span>{{topic.description}}</span>
               </div>
+              <div>
+                <a class="btn btn-primary" title="{{ 'master-add-subtopic' | translate }}"
+                  data-ng-if="isAdmin() || data.isAdminOnTopic"
+                  ui-sref="topics-new({topicRoute:topic.topic})">
+                  <i class="fa fa-plus"></i> {{ 'master-add-subtopic' | translate }}
+                </a>
+              </div>
           </div>
       </div>
   </div>

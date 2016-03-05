@@ -15,6 +15,8 @@
   <translation id="master-sockets">Sockets</translation>
   <translation id="master-views">Views</translation>
   <translation id="master-favorites">Favorites</translation>
+  <translation id="master-toggle-favorites">Show / Hide favorites topics</translation>
+  <translation id="master-no-favorites">You have no favorite topic</translation>
   <translation id="master-users-and-groups">Users and groups</translation>
   <translation id="master-toggle-notification">Enable or disable messages unread notifications on left menu</translation>
   <translation id="master-toggle-presences">Enable or disable presences on left menu</translation>

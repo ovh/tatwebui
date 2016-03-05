@@ -14,7 +14,9 @@ angular.module('TatUi')
     this.data = {
       requestFrequency: 15000,
       inRefresh: false,
-      isFirstCall: true
+      isFirstCall: true,
+      onlyFavorites: false,
+      isInitializing: false
     };
 
     this.menuState = [];
@@ -110,10 +112,18 @@ angular.module('TatUi')
     };
 
     this.refresh = function() {
+      if (self.data.isFirstCall === true &&
+        Authentication.getIdentity().favoritesTopics &&
+        Authentication.getIdentity().favoritesTopics.length > 0) {
+          self.data.onlyFavorites = true;
+          self.data.isInitializing = true;
+      }
+
       if (!self.data.inRefresh) {
         self.data.inRefresh = true;
         TatEngineTopicsRsc.list({
-          'getNbMsgUnread': !self.data.isFirstCall
+          'getNbMsgUnread': !self.data.isFirstCall,
+          'onlyFavorites': self.data.onlyFavorites
         }).$promise.then(function(data) {
           self.data.inRefresh = false;
           self.data.isFirstCall = false;
@@ -141,7 +151,7 @@ angular.module('TatUi')
           self.treeTopics.private = tree.private.children;
           self.treeTopics.privateDm = tree.privateDm.children;
           self.treeTopics.privateOthers = tree.privateOthers.children;
-
+          self.data.isInitializing = false;
           self.refreshMenu();
         }, function(err) {
           TatEngine.displayReturn(err);
@@ -230,6 +240,15 @@ angular.module('TatUi')
     this.stopTimer = function() {
       $interval.cancel(self.data.timer);
       self.data.timer = undefined;
+    };
+
+    this.toggleFavoritesTopics = function() {
+      self.data.isInitializing = true;
+      self.data.onlyFavorites = !self.data.onlyFavorites;
+      if (self.data.onlyFavorites === true) {
+        self.treeTopics.internal = [];
+      }
+      self.refresh();
     };
 
     this.init = function() {
