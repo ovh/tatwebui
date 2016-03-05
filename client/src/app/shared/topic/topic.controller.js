@@ -166,9 +166,25 @@ angular.module('TatUi')
 
     $scope.$on('sidebar-change', function(event, data) {
       if (data.topic !== undefined) {
-        self.changeMenuState(data.topic);
+
+        if (self.data.onlyFavorites === true && !self.isFavoriteTopic(data.topic)) {
+          self.toggleFavoritesTopics();
+          self.changeMenuState(data.topic);
+        } else {
+          self.changeMenuState(data.topic);
+        }
       }
     });
+
+    this.isFavoriteTopic = function(topic) {
+      var favoritesTopics = Authentication.getIdentity().favoritesTopics;
+      for (var i = 0; i < favoritesTopics.length; i++) {
+        if (favoritesTopics[i] === topic.topic) {
+          return true;
+        }
+      }
+      return false;
+    };
 
     this.refreshMenu = function() {
       for (var i = 0; i < self.menuState.length; i++) {
