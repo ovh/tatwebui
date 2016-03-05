@@ -166,13 +166,7 @@ angular.module('TatUi')
 
     $scope.$on('sidebar-change', function(event, data) {
       if (data.topic !== undefined) {
-
-        if (self.data.onlyFavorites === true && !self.isFavoriteTopic(data.topic)) {
-          self.toggleFavoritesTopics();
-          self.changeMenuState(data.topic);
-        } else {
-          self.changeMenuState(data.topic);
-        }
+        self.changeMenuState(data.topic);
       }
     });
 
