@@ -164,11 +164,6 @@ angular.module('TatUi')
       }
     };
 
-    $scope.$on('menu-expand', function(event, data) {
-      var topicName = data.join("/");
-      self.changeMenuState(topicName);
-    });
-
     $scope.$on('sidebar-change', function(event, data) {
       if (data.topic !== undefined) {
         self.changeMenuState(data.topic);
@@ -190,14 +185,14 @@ angular.module('TatUi')
     };
 
     this.changeMenuState = function(topic) {
-      if (topic !== undefined && topic.visible) {
+      if (topic !== undefined && !topic.visible) {
         // add in menu state
-        if (!self.menuState[topic.fullname]) {
-          self.menuState.push(topic.fullname);
+        if (!self.menuState[topic.topic]) {
+          self.menuState.push(topic.topic);
         }
       } else if (topic !== undefined) {
         for (var i = 0; i < self.menuState.length; i++) {
-          if (self.menuState[i].indexOf(topic.fullname) === 0) {
+          if (self.menuState[i].indexOf(topic.topic) === 0) {
             var topicArray = self.menuState[i].split('/');
             if (topicArray[0] === '') {
               topicArray.splice(0, 1);
