@@ -71,8 +71,7 @@ angular.module('TatUi').directive('topicList', function() {
       $scope.getNbUnread = function(topic) {
         var nbUnread = 0;
         var newTopic = false;
-        if (topic.metadata !== undefined && topic.metadata.unRead !==
-          undefined) {
+        if (topic.metadata !== undefined && topic.metadata.unRead !== undefined) {
           if (topic.metadata.unRead == -1) {
             newTopic = true;
           } else {

@@ -51,12 +51,12 @@ angular.module('TatUi')
 
       var childName = topicList[0];
       var children = getSub(root, childName);
-
       if (!children) {
         children = {
           level: level,
           name: childName,
           fullname: root.fullname + '/' + childName,
+          topic: meta.topic,
           children: [],
           visible: false,
           isExpanded: function() {
