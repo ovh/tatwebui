@@ -166,6 +166,9 @@ angular.module('TatUi')
 
     $scope.$on('sidebar-change', function(event, data) {
       if (data.topic !== undefined) {
+        if (data.topic.visible === undefined) {
+          data.topic.visible = true;
+        }
         self.changeMenuState(data.topic);
       }
     });
@@ -187,46 +190,65 @@ angular.module('TatUi')
         if (topicArray[0] === '') {
           topicArray.splice(0, 1);
         }
-        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true);
-        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true);
-        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true);
-        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true);
+        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true, "internal");
+        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true, "private");
+        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true, "privateDm");
+        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true, "privateOthers");
       }
     };
 
     this.changeMenuState = function(topic) {
-      if (topic !== undefined && !topic.visible) {
+      var topicArray = [];
+      if (topic !== undefined && topic.visible) {
         // add in menu state
-        if (!self.menuState[topic.topic]) {
+        if (_.indexOf(self.menuState, topic.topic) == -1) {
           self.menuState.push(topic.topic);
         }
+        topicArray = topic.topic.split('/');
+        if (topicArray[0] === '') {
+          topicArray.splice(0, 1);
+        }
+        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true, "internal");
+        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true, "private");
+        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true, "privateDm");
+        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true, "privateOthers");
       } else if (topic !== undefined) {
         for (var i = 0; i < self.menuState.length; i++) {
           if (self.menuState[i].indexOf(topic.topic) === 0) {
-            var topicArray = self.menuState[i].split('/');
+            topicArray = self.menuState[i].split('/');
             if (topicArray[0] === '') {
               topicArray.splice(0, 1);
             }
-            self.changeTopicsVisibility(self.treeTopics.internal, topicArray, false);
-            self.changeTopicsVisibility(self.treeTopics.private, topicArray, false);
-            self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, false);
-            self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, false);
+            self.changeTopicsVisibility(self.treeTopics.internal, topicArray, false, "internal");
+            self.changeTopicsVisibility(self.treeTopics.private, topicArray, false, "private");
+            self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, false, "privateDm");
+            self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, false, "privateOthers");
             self.menuState.splice(i, 1);
             i--;
           }
         }
       }
-      self.refreshMenu();
+      //self.refreshMenu();
     };
 
-    this.changeTopicsVisibility = function(treeTopics, expansion, visible) {
+    this.changeTopicsVisibility = function(treeTopics, expansion, visible, typeTopics) {
+      //console.log("changeTopicsVisibility treeTopics:",treeTopics," expansion:",expansion," visible:",visible);
       var topic = treeTopics;
       if (('[object Array]' === Object.prototype.toString.call(treeTopics)) && (
           '[object Array]' === Object.prototype.toString.call(expansion))) {
-        for (var i = 0; i < expansion.length; i++) {
+        var start = 0;
+        if (typeTopics == "private" || typeTopics == "privateOthers") {
+          start = 1;
+        } else if (typeTopics == "privateDm") {
+          start = 2;
+        }
+        for (var i = start; i < expansion.length; i++) {
           topic = _.find(topic, {name: expansion[i]});
           if (topic) {
-            topic.visible = visible;
+            if (visible === true || (visible === false && expansion.length == i-1)) {
+              // TODO fix Private & DM message visible console.log("set to visible:",visible," for:",topic.topic);
+              topic.visible = visible;
+            }
             if (topic.children) {
               topic = topic.children;
             }
