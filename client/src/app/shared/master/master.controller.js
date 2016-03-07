@@ -41,9 +41,7 @@ angular.module('TatUi')
     }
 
     $scope.topicClick = function(topic) {
-      $rootScope.$broadcast('topic-change', {
-        topic: topic
-      });
+      $rootScope.$broadcast('topic-change', {topic: topic});
       $rootScope.$broadcast('sidebar-change', {topic:topic});
     };
 
@@ -102,7 +100,6 @@ angular.module('TatUi')
       } else {
         $scope.toggle = false;
       }
-
     });
 
     $scope.directMessage = function(username) {
@@ -238,15 +235,14 @@ angular.module('TatUi')
         self.data.state = toState.name;
 
         if (self.isPluginViewRoute(toState.name)) {
-          $rootScope.$broadcast('topic', params.topic);
+          $rootScope.$broadcast('topicChangeRoute', params.topic);
           self.topic = params.topic;
 
           TatEngineTopicRsc.oneTopic({
             action: self.topic
           }).$promise.then(function(data) {
             if (!data.topic) {
-              Flash.create('danger',
-                $translate.instant('topics_notopic'));
+              Flash.create('danger', $translate.instant('topics_notopic'));
               return;
             }
             self.data.topic = data.topic;

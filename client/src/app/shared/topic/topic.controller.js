@@ -36,6 +36,10 @@ angular.module('TatUi')
       }
     };
 
+    this.endsWith = function(str, suffix) {
+      return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    };
+
     var addSubTopic = function(topicType, root, topicName, meta, level) {
       var topicList = [];
       if (topicType == "privateDm" || topicType == "privateOthers") {
@@ -51,12 +55,16 @@ angular.module('TatUi')
 
       var childName = topicList[0];
       var children = getSub(root, childName);
+      var fulltopicname = meta.topic;
+      if (!self.endsWith(meta.topic, root.fullname+'/'+childName)) {
+        fulltopicname = root.fullname + '/' + childName;
+      }
       if (!children) {
         children = {
           level: level,
           name: childName,
           fullname: root.fullname + '/' + childName,
-          topic: meta.topic,
+          topic: fulltopicname,
           children: [],
           visible: false,
           isExpanded: function() {
@@ -111,7 +119,7 @@ angular.module('TatUi')
       };
     };
 
-    this.refresh = function() {
+    this.refresh = function(cb) {
       if (self.data.isFirstCall === true &&
         Authentication.getIdentity().favoritesTopics &&
         Authentication.getIdentity().favoritesTopics.length > 0) {
@@ -153,6 +161,7 @@ angular.module('TatUi')
           self.treeTopics.privateOthers = tree.privateOthers.children;
           self.data.isInitializing = false;
           self.refreshMenu();
+          try { cb(); } catch(e){}
         }, function(err) {
           TatEngine.displayReturn(err);
           self.data.inRefresh = false;
@@ -161,13 +170,34 @@ angular.module('TatUi')
         $rootScope.$broadcast('presences-refresh');
       } else {
         console.log("topics list already in refresh...");
+        try { cb(); } catch(e){}
       }
     };
+
+    $scope.$on('topicChangeRoute', function(event, data) {
+      self.refresh(function() {
+        self.currentTopic = data;
+        for (var key in self.topics) {
+          if (self.topics.hasOwnProperty(key)) {
+            self.topics[key].active = false;
+          }
+        }
+        if (self.topics[data]) {
+          self.topics[data].active = true;
+          self.topics[data].visible = true;
+          self.changeMenuState(self.topics[data]);
+        }
+        self.beginTimer(self.data.requestFrequency);
+      });
+    });
 
     $scope.$on('sidebar-change', function(event, data) {
       if (data.topic !== undefined) {
         if (data.topic.visible === undefined) {
           data.topic.visible = true;
+        }
+        if ('/' + self.currentTopic == data.topic.topic) {
+          data.topic.visible = !data.topic.visible;
         }
         self.changeMenuState(data.topic);
       }
@@ -228,7 +258,6 @@ angular.module('TatUi')
           }
         }
       }
-      //self.refreshMenu();
     };
 
     this.changeTopicsVisibility = function(treeTopics, expansion, visible, typeTopics) {
@@ -277,24 +306,5 @@ angular.module('TatUi')
       }
       self.refresh();
     };
-
-    this.init = function() {
-      self.refresh();
-      $scope.$on('topic', function(event, data) {
-        self.currentTopic = data;
-        for (var key in self.topics) {
-          if (self.topics.hasOwnProperty(key)) {
-            self.topics[key].active = false;
-          }
-        }
-        if (self.topics[data]) {
-          self.topics[data].active = true;
-        }
-      });
-
-      self.beginTimer(self.data.requestFrequency);
-    };
-
-    this.init();
 
   });

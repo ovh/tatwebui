@@ -26,15 +26,12 @@ angular.module('TatUi').directive('topicList', function() {
        * @param {object} topic Topic that recieved the click
        */
       $scope.topicClick = function(topic) {
-        topic.visible = !topic.visible;
         if (topic.metadata) {
-          $rootScope.$broadcast('topic-change', {
-            topic: topic.metadata.topic
-          });
+          $rootScope.$broadcast('topic-change', {topic: topic.metadata.topic});
+        } else {
+          topic.visible = !topic.visible;
         }
-        $rootScope.$broadcast('sidebar-change', {
-          topic: topic
-        });
+        $rootScope.$broadcast('sidebar-change', {topic: topic});
       };
     }
   };
@@ -100,8 +97,7 @@ angular.module('TatUi').directive('topicList', function() {
         var newTopic = false;
         if (topic.children) {
           for (var i = 0; i < topic.children.length; i++) {
-            if (topic.children[i].metadata !== undefined && topic.children[
-                i].metadata.unRead !== undefined) {
+            if (topic.children[i].metadata !== undefined && topic.children[i].metadata.unRead !== undefined) {
               if (topic.children[i].metadata.unRead == -1) {
                 newTopic = true;
               } else {
