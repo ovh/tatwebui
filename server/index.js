@@ -54,7 +54,7 @@
       case 'fileServer':
         var fileApp = require('./app/file-server.js');
         fileApp.logger = logger;
-        fileApp.set('port', process.env.PORT || config.filesystem.listen_port);
+        fileApp.set('port', config.filesystem.listen_port);
 
         /* Binding */
         var fileServer = fileApp.listen(fileApp.get('port'), function() {
