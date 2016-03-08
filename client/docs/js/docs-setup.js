@@ -50,6 +50,15 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.controller:DashboardCtrl",
+      "shortName": "DashboardCtrl",
+      "type": "controller",
+      "moduleName": "TatUi",
+      "shortDescription": "",
+      "keywords": "api controller engine messages provider resource tat tatengine tatenginegroupsrsc tatui"
+    },
+    {
+      "section": "api",
       "id": "TatUi.controller:GroupsEditCtrl",
       "shortName": "GroupsEditCtrl",
       "type": "controller",
