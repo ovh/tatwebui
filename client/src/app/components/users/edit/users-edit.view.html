@@ -12,6 +12,9 @@
               <div>
                   <label>{{ 'components_user_email' | translate }}</label><span>{{user.email}}</span>
               </div>
+              <div data-ng-if="isAdmin()">
+                  <label>{{ 'components_user_date' | translate }}</label><span>{{ user.dateCreation  * 1000 | amCalendar }}</span>
+              </div>
               <div data-ng-if="user.isAdmin">
                   <label>{{ 'shared_common_administrator' | translate }}</label>
               </div>

@@ -14,6 +14,7 @@
     <translation id="components_user_confirming">Confirming successfull</translation>
     <translation id="components_user_name">Name</translation>
     <translation id="components_user_email">Email</translation>
+    <translation id="components_user_date">Inscription</translation>
     <translation id="components_user_username">Username</translation>
     <translation id="components_user_reset">Ask for reset a new password</translation>
 </translations>
