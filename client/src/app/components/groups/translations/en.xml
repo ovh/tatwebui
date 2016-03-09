@@ -6,4 +6,5 @@
   <translation id="components_groups_dont_want_remove_group">No, I don't want to remove user from this group.</translation>
   <translation id="components_groups_new_group">New group</translation>
   <translation id="components_groups_users_in_group">Users in group</translation>
+  <translation id="components_groups_info_admin">Generally, administrators group are also users of the groups, don't forget to add them as users too</translation>
 </translations>
