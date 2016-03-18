@@ -20,7 +20,8 @@ angular.module('TatUi', [
     'angularSpectrumColorpicker',
     'ngDraggable',
     'MassAutoComplete',
-    'chart.js',
+    'chart.js', // let users to dev a view with chartjs
+    'highcharts-ng', // let users to dev a view with hightcharts
     'ngclipboard'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
