@@ -11,7 +11,7 @@
  *
  */
 angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
-  $state, Authentication, appConfiguration) {
+  $state, Authentication) {
   'use strict';
 
   $scope.user = {};

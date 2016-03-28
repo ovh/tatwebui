@@ -121,16 +121,7 @@ angular.module('TatUi', [
     if ((!routeOption.acl_bypass) && (!Authentication.isConnected())) {
       event.preventDefault();
       if (appConfiguration.backend.autologin === true) {
-        Authentication.connect($scope.user).then(function() {
-          if ($scope.user && $scope.user.username && $scope.user.username !== '') {
-            console.log("user is logged, username:", $scope.username);
-          } else {
-            console.log("user is not logged, username:", $scope.username);
-          }
-        }, function(err) {
-          console.log(err);
-          $state.go('index');
-        });
+        Authentication.refreshIdentity();
       } else {
         $state.go('user-login');
       }
