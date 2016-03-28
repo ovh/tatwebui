@@ -72,6 +72,11 @@ angular.module('TatUi', [
 
 .run(function(Authentication) {
   'use strict';
+  Authentication.refreshIdentity();
+})
+
+.run(function() {
+  'use strict';
   moment.locale('fr', {
     calendar: {
       lastDay: '[Yesterday], dddd MMM D H:mm:ss',
@@ -82,11 +87,6 @@ angular.module('TatUi', [
       sameElse: 'dddd, MMM D H:mm:ss'
     }
   });
-})
-
-.run(function(Authentication) {
-  'use strict';
-  Authentication.refreshIdentity();
 })
 
 .run(function($rootScope, $translatePartialLoader, $translate, Authentication,
@@ -120,11 +120,7 @@ angular.module('TatUi', [
     $translate.refresh();
     if ((!routeOption.acl_bypass) && (!Authentication.isConnected())) {
       event.preventDefault();
-      if (appConfiguration.backend.autologin === true) {
-        Authentication.refreshIdentity();
-      } else {
-        $state.go('user-login');
-      }
+      $state.go('user-login');
     }
   });
 });

@@ -25,7 +25,7 @@ angular.module('TatUi').provider('Identity', function() {
      *
      */
     return {
-      /** 
+      /**
        * @ngdoc function
        * @name checkPersistent
        * @methodOf TatUi.Identity
