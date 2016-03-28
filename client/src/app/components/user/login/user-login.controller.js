@@ -63,7 +63,4 @@ angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
     });
   };
 
-  if (appConfiguration.backend.autologin === true) {
-    $scope.connect();
-  }
 });

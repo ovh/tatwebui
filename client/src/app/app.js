@@ -94,13 +94,8 @@ angular.module('TatUi', [
   'use strict';
 
   // manage route change
-
   $translate.refresh();
   $rootScope.$on("$stateChangeStart", function(event, routeOption) {
-    if ((!routeOption.acl_bypass) && (!Authentication.isConnected())) {
-      event.preventDefault();
-      $state.go('user-login');
-    }
     $translatePartialLoader.addPart('shared');
     if (routeOption.translations) {
       // load translation parts
@@ -123,5 +118,22 @@ angular.module('TatUi', [
       $translate.refresh();
     }
     $translate.refresh();
+    if ((!routeOption.acl_bypass) && (!Authentication.isConnected())) {
+      event.preventDefault();
+      if (appConfiguration.backend.autologin === true) {
+        Authentication.connect($scope.user).then(function() {
+          if ($scope.user && $scope.user.username && $scope.user.username !== '') {
+            console.log("user is logged, username:", $scope.username);
+          } else {
+            console.log("user is not logged, username:", $scope.username);
+          }
+        }, function(err) {
+          console.log(err);
+          $state.go('index');
+        });
+      } else {
+        $state.go('user-login');
+      }
+    }
   });
 });
