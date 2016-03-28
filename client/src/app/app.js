@@ -90,7 +90,7 @@ angular.module('TatUi', [
 })
 
 .run(function($rootScope, $translatePartialLoader, $translate, Authentication,
-  $state) {
+  appConfiguration, $state) {
   'use strict';
 
   // manage route change
