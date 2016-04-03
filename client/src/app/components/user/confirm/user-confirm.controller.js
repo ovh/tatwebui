@@ -33,7 +33,7 @@ angular.module('TatUi').controller('UserConfirmCtrl', function($scope,
 
   this.verify = function() {
     var id = Identity.getIdentity();
-    if ((id) && (id.username === $scope.username)) {
+    if (id && id.username === $scope.username) {
       $scope.password = id.password;
       return;
     }

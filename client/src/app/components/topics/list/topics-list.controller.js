@@ -37,40 +37,55 @@ angular.module('TatUi')
         "getForTatAdmin": $scope.data.getForTatAdmin
       };
       TatEngineTopicsRsc.list(criteria).$promise.then(function(data) {
-        var favoriteTopics = Authentication.getIdentity().favoritesTopics;
-        var offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
-
-        for (var i = 0; i < data.topics.length; i++) {
-          if (!$scope.data.adminOfOneTopic && (data.topics[i].adminUsers || data.topics[i].adminGroups)) {
-            $scope.data.adminOfOneTopic = true;
-          }
-          data.topics[i].isFavoriteTopic = false;
-          if (favoriteTopics) {
-            for (var j = 0; j < favoriteTopics.length; j++) {
-              if (favoriteTopics[j] === data.topics[i].topic) {
-                data.topics[i].isFavoriteTopic = true;
-                break;
-              }
-            }
-          }
-
-          data.topics[i].isNotificationsOffTopic = false;
-          if (offNotificationsTopics) {
-            for (var k = 0; k < offNotificationsTopics.length; k++) {
-              if (offNotificationsTopics[k] === data.topics[i].topic) {
-                data.topics[i].isNotificationsOffTopic = true;
-                break;
-              }
-            }
-          }
-          self.addUnRead(data.topics[i], data.topicsMsgUnread);
+        if (Authentication.getIdentity().favoritesTopics) {
+          $scope.nextInit(data);
+        } else {
+          Authentication.refreshIdentity().then(
+            function(data) {
+              console.log("refreshing identity in topics list ok");
+              $scope.nextInit(data);
+            },
+            function(err) {
+              console.log("error while refreshing identity in topics list");
+            });
         }
-
-        $scope.data.topics = data.topics;
-        $scope.data.count = data.count;
       }, function(err) {
         TatEngine.displayReturn(err);
       });
+    };
+
+    $scope.nextInit = function(data) {
+      var favoriteTopics = Authentication.getIdentity().favoritesTopics;
+      var offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
+
+      for (var i = 0; i < data.topics.length; i++) {
+        if (!$scope.data.adminOfOneTopic && (data.topics[i].adminUsers || data.topics[i].adminGroups)) {
+          $scope.data.adminOfOneTopic = true;
+        }
+        data.topics[i].isFavoriteTopic = false;
+        if (favoriteTopics) {
+          for (var j = 0; j < favoriteTopics.length; j++) {
+            if (favoriteTopics[j] === data.topics[i].topic) {
+              data.topics[i].isFavoriteTopic = true;
+              break;
+            }
+          }
+        }
+
+        data.topics[i].isNotificationsOffTopic = false;
+        if (offNotificationsTopics) {
+          for (var k = 0; k < offNotificationsTopics.length; k++) {
+            if (offNotificationsTopics[k] === data.topics[i].topic) {
+              data.topics[i].isNotificationsOffTopic = true;
+              break;
+            }
+          }
+        }
+        self.addUnRead(data.topics[i], data.topicsMsgUnread);
+      }
+
+      $scope.data.topics = data.topics;
+      $scope.data.count = data.count;
     };
 
     $scope.greaterThan = function(prop) {

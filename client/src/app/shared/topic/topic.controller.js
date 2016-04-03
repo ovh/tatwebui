@@ -120,6 +120,21 @@ angular.module('TatUi')
     };
 
     this.refresh = function(cb) {
+      // check if refresh identity was done
+      if (Authentication.getIdentity().favoritesTopics) {
+        self.nextRefresh(cb);
+      } else {
+        Authentication.refreshIdentity().then(
+          function(data) {
+            self.nextRefresh(cb);
+          },
+          function(err) {
+            console.log("error while refreshing identity in topic controller:",err);
+          });
+      }
+    };
+
+    this.nextRefresh = function(cb) {
       if (self.data.isFirstCall === true &&
         Authentication.getIdentity().favoritesTopics &&
         Authentication.getIdentity().favoritesTopics.length > 0) {

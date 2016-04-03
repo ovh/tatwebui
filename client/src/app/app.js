@@ -118,7 +118,7 @@ angular.module('TatUi', [
       $translate.refresh();
     }
     $translate.refresh();
-    if ((!routeOption.acl_bypass) && (!Authentication.isConnected())) {
+    if (!routeOption.acl_bypass && !Authentication.isConnected()) {
       event.preventDefault();
       $state.go('user-login');
     }

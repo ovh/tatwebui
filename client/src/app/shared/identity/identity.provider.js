@@ -13,6 +13,8 @@ angular.module('TatUi').provider('Identity', function() {
   'use strict';
 
   var identity = null;
+  var favoritesTopics = [];
+  var offNotificationsTopics = [];
 
   this.$get = function($cookieStore, $localStorage) {
     /**
@@ -36,12 +38,14 @@ angular.module('TatUi').provider('Identity', function() {
        * If found, set the current identity
        */
       checkPersistent: function(force) {
-        if ((!identity) || (force)) {
+        if (!identity || force) {
           var persistentIdentity = $cookieStore.get('identity');
           if (!persistentIdentity) {
             persistentIdentity = $localStorage.identity;
           }
-          identity = persistentIdentity ? persistentIdentity : identity;
+          if (!identity && persistentIdentity) {
+            identity = persistentIdentity;
+          }
         }
       },
 
@@ -57,7 +61,7 @@ angular.module('TatUi').provider('Identity', function() {
        * @return {bool} True if there is a current identity
        */
       hasIdentity: function() {
-        return ((identity !== null) && (identity.dateCreation));
+        return (identity !== null && identity.dateCreation);
       },
 
       /**
@@ -103,9 +107,15 @@ angular.module('TatUi').provider('Identity', function() {
        */
       setIdentity: function(user) {
         identity = user;
-        $cookieStore.put('identity', identity);
+        var identityInLocalStorage = {
+          username: user.username,
+          dateCreation: user.dateCreation,
+          isAdmin: user.isAdmin,
+          password: user.password
+        };
+        $cookieStore.put('identity', identityInLocalStorage);
         if (user.remember) {
-          $localStorage.identity = identity;
+          $localStorage.identity = identityInLocalStorage;
         }
       }
     };

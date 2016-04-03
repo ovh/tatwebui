@@ -17,6 +17,5 @@ angular.module('TatUi')
         topic: 'Private/' + Authentication.getIdentity().username
       });
     };
-
     $scope.init();
 });

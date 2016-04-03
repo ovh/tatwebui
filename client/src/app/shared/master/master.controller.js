@@ -248,38 +248,17 @@ angular.module('TatUi')
             self.data.topic = data.topic;
 
             $scope.title = params.topic.split('/');
-            self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
-            self.data.offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
-            self.data.isFavoriteTopic = false;
-            self.data.isNotificationsOffTopic = false;
-            if (!self.data.favoriteTopics) {
-              self.data.favoriteTopics = [];
+            if (Authentication.getIdentity().favoritesTopics) {
+              self.endLoadStateChangeSuccess(toState, params);
+            } else {
+              Authentication.refreshIdentity().then(
+                function(data) {
+                  self.endLoadStateChangeSuccess(toState, params);
+                },
+                function(err) {
+                  console.log("error while refreshing identity in stateChangeSuccess");
+                });
             }
-            if (!self.data.offNotificationsTopics) {
-              self.data.offNotificationsTopics = [];
-            }
-            for (var i = 0; i < self.data.favoriteTopics.length; i++) {
-              if (self.data.favoriteTopics[i] === '/' + params.topic) {
-                self.data.isFavoriteTopic = true;
-              }
-            }
-            for (i = 0; i < self.data.offNotificationsTopics.length; i++) {
-              if (self.data.offNotificationsTopics[i] === '/' + params.topic) {
-                self.data.isNotificationsOffTopic = true;
-              }
-            }
-
-            var restrictedPlugin = Plugin.getPluginByRestriction(self.data.topic);
-            if (restrictedPlugin && restrictedPlugin.route != toState.name) {
-              $state.go(restrictedPlugin.route, {
-                topic: params.topic
-              }, {
-                inherit: false,
-                reload: false
-              });
-              return;
-            }
-
           }, function(err) {
             TatEngine.displayReturn(err);
           });
@@ -288,6 +267,40 @@ angular.module('TatUi')
         }
       }
     );
+
+    this.endLoadStateChangeSuccess = function(toState, params) {
+      self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
+      self.data.offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
+      self.data.isFavoriteTopic = false;
+      self.data.isNotificationsOffTopic = false;
+      if (!self.data.favoriteTopics) {
+        self.data.favoriteTopics = [];
+      }
+      if (!self.data.offNotificationsTopics) {
+        self.data.offNotificationsTopics = [];
+      }
+      for (var i = 0; i < self.data.favoriteTopics.length; i++) {
+        if (self.data.favoriteTopics[i] === '/' + params.topic) {
+          self.data.isFavoriteTopic = true;
+        }
+      }
+      for (i = 0; i < self.data.offNotificationsTopics.length; i++) {
+        if (self.data.offNotificationsTopics[i] === '/' + params.topic) {
+          self.data.isNotificationsOffTopic = true;
+        }
+      }
+
+      var restrictedPlugin = Plugin.getPluginByRestriction(self.data.topic);
+      if (restrictedPlugin && restrictedPlugin.route != toState.name) {
+        $state.go(restrictedPlugin.route, {
+          topic: params.topic
+        }, {
+          inherit: false,
+          reload: false
+        });
+        return;
+      }
+    };
 
     $scope.$on('topic-change', function(e, meta) {
       var topic = meta.topic.replace(/^\//, '');
