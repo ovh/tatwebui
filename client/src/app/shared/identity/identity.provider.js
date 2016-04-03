@@ -16,7 +16,7 @@ angular.module('TatUi').provider('Identity', function() {
   var favoritesTopics = [];
   var offNotificationsTopics = [];
 
-  this.$get = function($cookieStore, $localStorage) {
+  this.$get = function($cookieStore, $localStorage, appConfiguration) {
     /**
      * @ngdoc service
      * @name TatUi.Identity
@@ -114,6 +114,9 @@ angular.module('TatUi').provider('Identity', function() {
           password: user.password
         };
         $cookieStore.put('identity', identityInLocalStorage);
+        if (appConfiguration.backend && appConfiguration.backend.autologin === true) {
+          user.remember = true;
+        }
         if (user.remember) {
           $localStorage.identity = identityInLocalStorage;
         }
