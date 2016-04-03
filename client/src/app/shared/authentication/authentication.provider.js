@@ -211,8 +211,10 @@ angular.module('TatUi').provider('Authentication', function() {
         Identity.checkPersistent();
         AuthenticationRsc.getInfo({}).$promise.then(function(data) {
           var id = Identity.getIdentity();
-          data.user.password = id.password;
-          Identity.setIdentity(data.user);
+          if (id !== null && data !== null && data.user !== null) {
+            data.user.password = id.password;
+            Identity.setIdentity(data.user);
+          }
         }, function() {
           Identity.killIdentity();
         });
