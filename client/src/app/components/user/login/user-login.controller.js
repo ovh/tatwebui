@@ -11,7 +11,7 @@
  *
  */
 angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
-  $state, Authentication) {
+  $state, Authentication, appConfiguration) {
   'use strict';
 
   $scope.user = {};
@@ -62,5 +62,9 @@ angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
       $state.go('index');
     });
   };
+
+  if (appConfiguration && appConfiguration.backend.backend && appConfiguration.backend.autologin == true) {
+    $scope.connect();
+  }
 
 });
