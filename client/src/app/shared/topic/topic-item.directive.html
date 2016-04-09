@@ -1,13 +1,13 @@
 <li class="sidebar-sublist-item">
-    <a title="{{topicListItem.metadata.description}}" data-ng-class="{selected: topicListItem.metadata.active}">
+    <a title="{{::topicListItem.metadata.description}}" data-ng-class="{selected: topicListItem.metadata.active}">
         <span data-ng-repeat="spc in spaces track by $index" class="topic-space"> </span>
         <span data-ng-class="{'topic-title':topicListItem.level}">
             <i class="fa fa-plus-square-o" data-ng-show="topicListItem.isExpanded() === false "></i>
             <i class="fa fa-minus-square-o" data-ng-show="topicListItem.isExpanded() === true "></i>
-            {{topicListItem.name}}
+            {{::topicListItem.name}}
         </span>
         <div style="float:right">
-            <span class="badge" ng-show="getNbUnread(topicListItem) != ''">{{getNbUnread(topicListItem)}}</span>
+            <span class="badge" ng-show="topicListItem.unreadDisplay">{{getNbUnread(topicListItem)}}</span>
         </div>
     </a>
 </li>

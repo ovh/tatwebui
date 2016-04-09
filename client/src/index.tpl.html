@@ -296,8 +296,8 @@
                     {{ 'master-views' | translate }}
                   </li>
                   <li class="divider"></li>
-                  <li ng-repeat="v in getViews() track by $index | orderBy:'name'">
-                    <a role="button" ng-click="switchView(v.route)">{{v.name}}</a>
+                  <li ng-repeat="v in getViews() track by v.name | orderBy:'name'">
+                    <a role="button" ng-click="switchView(v.route)">{{::v.name}}</a>
                   </li>
                   <li ng-hide="ctrl.data.viewsEnabled">
                     {{ 'master-cant-change-view' | translate }}

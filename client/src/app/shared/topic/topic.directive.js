@@ -27,10 +27,9 @@ angular.module('TatUi').directive('topicList', function() {
        */
       $scope.topicClick = function(topic) {
         $rootScope.$broadcast('sidebar-change', {topic: topic});
+        topic.visible = !topic.visible;
         if (topic.metadata) {
           $rootScope.$broadcast('topic-change', {topic: topic.metadata.topic});
-        } else {
-          topic.visible = !topic.visible;
         }
       };
     }
@@ -83,13 +82,15 @@ angular.module('TatUi').directive('topicList', function() {
             newTopic = true;
           }
         }
+        topic.unreadDisplay = '';
         if (newTopic && topic.metadata !== undefined) {
-          return "New Topic";
+          topic.unreadDisplay = "New Topic";
         }
         if (nbUnread > 0) {
-          return nbUnread;
+          topic.unreadDisplay = nbUnread;
         }
-        return "";
+
+        return topic.unreadDisplay;
       };
 
       $scope.getUnreadInChild = function(topic) {
