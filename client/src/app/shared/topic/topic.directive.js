@@ -26,12 +26,12 @@ angular.module('TatUi').directive('topicList', function() {
        * @param {object} topic Topic that recieved the click
        */
       $scope.topicClick = function(topic) {
+        $rootScope.$broadcast('sidebar-change', {topic: topic});
         if (topic.metadata) {
           $rootScope.$broadcast('topic-change', {topic: topic.metadata.topic});
         } else {
           topic.visible = !topic.visible;
         }
-        $rootScope.$broadcast('sidebar-change', {topic: topic});
       };
     }
   };

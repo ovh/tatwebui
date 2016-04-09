@@ -13,7 +13,7 @@ angular.module('TatUi').component('messageBox', {
     messages: '=',
     isTopicRw: '=',
     expandReplies: '=',
-    placeholder: '=',
+    placeholder: '@',
     btnExpand: '=',
     isCompact: '=',
     tooltipBtnCompact: '='
