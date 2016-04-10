@@ -4,6 +4,7 @@ angular.module('TatUi')
     $scope,
     $rootScope,
     $interval,
+    $localStorage,
     TatEngineTopicsRsc,
     Authentication,
     TatEngine) {
@@ -135,10 +136,13 @@ angular.module('TatUi')
     };
 
     this.nextRefresh = function(cb) {
-      if (self.data.isFirstCall === true &&
-        Authentication.getIdentity().favoritesTopics &&
-        Authentication.getIdentity().favoritesTopics.length > 0) {
-          self.data.onlyFavorites = true;
+      if ($localStorage.tatMenuDisplayFavorites) {
+        self.data.onlyFavorites = $localStorage.tatMenuDisplayFavorites;
+      } else {
+        $localStorage.tatMenuDisplayFavorites = false;
+      }
+
+      if (self.data.isFirstCall === true) {
           self.data.isInitializing = true;
       }
 
@@ -316,6 +320,7 @@ angular.module('TatUi')
     this.toggleFavoritesTopics = function() {
       self.data.isInitializing = true;
       self.data.onlyFavorites = !self.data.onlyFavorites;
+      $localStorage.tatMenuDisplayFavorites = self.data.onlyFavorites;
       if (self.data.onlyFavorites === true) {
         self.treeTopics.internal = [];
       }
