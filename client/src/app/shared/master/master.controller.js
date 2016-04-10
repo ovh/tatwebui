@@ -57,13 +57,13 @@ angular.module('TatUi')
       if (!topic.topic) {
         return;
       }
-      if ($scope.isAdmin() || _.contains(topic.adminUsers,
+      if ($scope.isAdmin() || _.includes(topic.adminUsers,
           Authentication.getIdentity().username) ||
           (topic.topic.indexOf("/Private/" + Authentication.getIdentity().username) === 0 &&
            topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") !== 0
           )
         ) {
-        // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
+        // FIXME check group of user. _.includes($scope.topic.adminGroups, Authentication.getIdentity().groups)
         return true;
       }
       return false;

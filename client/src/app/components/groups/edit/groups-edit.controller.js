@@ -32,7 +32,7 @@ angular.module('TatUi')
       }).$promise.then(function(data) {
         if (data.count === 1) {
           $scope.group = data.groups[0];
-          if ($scope.isAdmin() || _.contains($scope.group.adminUsers,
+          if ($scope.isAdmin() || _.includes($scope.group.adminUsers,
               Authentication.getIdentity().username)) {
             $scope.data.isAdminOnGroup = true;
 

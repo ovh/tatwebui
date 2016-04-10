@@ -42,12 +42,12 @@ angular.module('TatUi')
       }).$promise.then(function(data) {
         if (data.count === 1) {
           $scope.topic = data.topics[0];
-          if ($scope.isAdmin() || _.contains($scope.topic.adminUsers,
+          if ($scope.isAdmin() || _.includes($scope.topic.adminUsers,
               Authentication.getIdentity().username) ||
               ($scope.topic.topic.indexOf("/Private/" + Authentication.getIdentity().username) === 0 &&
               $scope.topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") !== 0)
             ) {
-            // FIXME check group of user. _.contains($scope.topic.adminGroups, Authentication.getIdentity().groups)
+            // FIXME check group of user. _.includes($scope.topic.adminGroups, Authentication.getIdentity().groups)
             $scope.data.isAdminOnTopic = true;
           }
           _self.checkParametersView();
