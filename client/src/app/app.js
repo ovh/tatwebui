@@ -6,6 +6,7 @@ angular.module('TatUi', [
     'ui.bootstrap.modal',
     'ui.bootstrap.datetimepicker',
     'ui.bootstrap.buttons',
+    'ui.bootstrap.tooltip',
     'ui.calendar',
     'ui.router',
     'ui.select',
