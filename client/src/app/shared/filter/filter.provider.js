@@ -84,8 +84,12 @@ angular.module('TatUi')
           };
 
           self.applyFilters = function() {
-            self.eachFilter(function(k){
-              $localStorage.filters[$stateParams.topic][k] = self.currentFilters[$stateParams.topic][k];
+            self.eachFilter(function(k) {
+              if (k !== "idMessage") {
+                $localStorage.filters[$stateParams.topic][k] = self.currentFilters[$stateParams.topic][k];
+              } else {
+                $localStorage.filters[$stateParams.topic][k] = null;
+              }
               $location.search(k, self.currentFilters[$stateParams.topic][k]);
             });
             return self;
@@ -104,14 +108,22 @@ angular.module('TatUi')
             }
 
             var search = $location.search();
-            self.eachFilter(function(k){
+            self.eachFilter(function(k) {
               // First check in query string and propagate to localstorage if necessary
               if (search[k] && search[k] !== '') {
-                $localStorage.filters[$stateParams.topic][k] = search[k];
+                if (k !== "idMessage") {
+                  $localStorage.filters[$stateParams.topic][k] = search[k];
+                }
               }
               // Then pull filter from localstorage if they exists
               if ($localStorage.filters[$stateParams.topic][k]) {
-                self.currentFilters[$stateParams.topic][k] = $localStorage.filters[$stateParams.topic][k];
+                 if (k === "idMessage") {
+                   self.currentFilters[$stateParams.topic][k] = search[k];
+                 } else {
+                   self.currentFilters[$stateParams.topic][k] = $localStorage.filters[$stateParams.topic][k];
+                 }
+              } else if (k === "idMessage") {
+                self.currentFilters[$stateParams.topic][k] = search[k];
               }
             });
             self.applyFilters();
@@ -125,8 +137,7 @@ angular.module('TatUi')
             }
             if (k !== 'text' && k !== 'idMessage') {
               self.currentFilters[$stateParams.topic][k] = self.sanitize(v);
-            }
-            else {
+            } else {
               self.currentFilters[$stateParams.topic][k] = (typeof(v) === 'string') ? v.replace(/(^\s+|\s+$)/g, ''): v;
             }
             $localStorage.filters[$stateParams.topic][k] = self.currentFilters[$stateParams.topic][k];
@@ -134,8 +145,8 @@ angular.module('TatUi')
             return self;
           };
 
-          self.setFilters = function(filters){
-            self.eachFilter(function(k){
+          self.setFilters = function(filters) {
+            self.eachFilter(function(k) {
               var fltr = filters[k];
               if (!fltr || typeof(fltr) === 'undefined' || fltr === '') {
                 fltr = null;

@@ -33,8 +33,6 @@ angular.module('TatUi').component('messageFilterBar',
 
     var self = this;
 
-    //console.log("messageFilterBar> topic:", this.topic);
-    //self.topic = $stateParams.topic;
     self.filter = TatFilter.getCurrent();
     self.filterAsList = {};
 
