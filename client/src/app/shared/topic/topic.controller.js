@@ -212,7 +212,7 @@ angular.module('TatUi')
 
     $scope.$on('sidebar-change', function(event, data) {
       if (data.topic !== undefined) {
-        if (data.topic.visible === undefined) {
+        if (data.topic.visible === undefined && typeof data.topic !== 'string') {
           data.topic.visible = true;
         }
         if ('/' + self.currentTopic == data.topic.topic) {
