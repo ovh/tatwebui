@@ -96,8 +96,11 @@ angular.module('TatUi', [
   'use strict';
 
   var lang = navigator.language || navigator.userLanguage;
-  if (lang) {
+
+  if (lang === "en" || lang === "fr") {
     $translate.use(lang);
+  } else {
+    $translate.use("en");
   }
 
   // manage route change
