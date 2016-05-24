@@ -46,8 +46,7 @@ angular.module('TatUi', [
   $translateProvider.useSanitizeValueStrategy('escape');
 
   // set default and fallback languages
-  $translateProvider.preferredLanguage('fr');
-  $windowProvider.$get().moment.locale('fr');
+  $translateProvider.preferredLanguage('en');
 
   // define translation loader
   $translateProvider.useLoader("$translatePartialLoader", {
@@ -95,6 +94,11 @@ angular.module('TatUi', [
 .run(function($rootScope, $translatePartialLoader, $translate, Authentication,
   appConfiguration, $state) {
   'use strict';
+
+  var lang = navigator.language || navigator.userLanguage;
+  if (lang) {
+    $translate.use(lang);
+  }
 
   // manage route change
   $translate.refresh();
