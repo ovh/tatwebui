@@ -21,6 +21,7 @@
         "angular-translate-loader-partial": "2.11.0",
         "angular-translate-storage-cookie": "2.11.0",
         "angular-mass-autocomplete": "0.2.3",
+        "angular-toArrayFilter": "1.0.1",
         "ng-websocket": "0.2.1",
         "angular-flash-alert": "a3a0b0dbee",
         "ngstorage": "0.3.0",

@@ -15,6 +15,7 @@ angular.module('TatUi', [
     'ngSanitize',
     'pascalprecht.translate',
     'ngResource',
+    'angular-toArrayFilter',
     'ngWebsocket',
     'flash',
     'angularMoment',
