@@ -153,7 +153,6 @@ angular.module('TatUi')
           'onlyFavorites': self.data.onlyFavorites
         }).$promise.then(function(data) {
           self.data.inRefresh = false;
-          self.data.isFirstCall = false;
 
           var tree = {};
           tree.internal = self.initTreeVar();
@@ -179,7 +178,8 @@ angular.module('TatUi')
           self.treeTopics.privateDm = tree.privateDm.children;
           self.treeTopics.privateOthers = tree.privateOthers.children;
           self.data.isInitializing = false;
-          self.refreshMenu();
+          self.refreshMenu(self.data.isFirstCall);
+          //self.data.isFirstCall = false;
           try { cb(); } catch(e){}
         }, function(err) {
           TatEngine.displayReturn(err);
@@ -204,7 +204,8 @@ angular.module('TatUi')
         if (self.topics[data]) {
           self.topics[data].active = true;
           self.topics[data].visible = true;
-          self.changeMenuState(self.topics[data]);
+          self.changeMenuState(self.topics[data], self.data.isFirstCall);
+          self.data.isFirstCall = false;
         }
         self.beginTimer(self.data.requestFrequency);
       });
@@ -218,7 +219,7 @@ angular.module('TatUi')
         if ('/' + self.currentTopic == data.topic.topic) {
           data.topic.visible = !data.topic.visible;
         }
-        self.changeMenuState(data.topic);
+        self.changeMenuState(data.topic, self.data.isFirstCall);
       }
     });
 
@@ -239,14 +240,14 @@ angular.module('TatUi')
         if (topicArray[0] === '') {
           topicArray.splice(0, 1);
         }
-        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true, "internal");
-        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true, "private");
-        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true, "privateDm");
-        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true, "privateOthers");
+        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true, "internal", false);
+        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true, "private", false);
+        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true, "privateDm", false);
+        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true, "privateOthers", false);
       }
     };
 
-    this.changeMenuState = function(topic) {
+    this.changeMenuState = function(topic, isFirstcall) {
       var topicArray = [];
       if (topic !== undefined && topic.visible) {
         // add in menu state
@@ -257,10 +258,10 @@ angular.module('TatUi')
         if (topicArray[0] === '') {
           topicArray.splice(0, 1);
         }
-        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true, "internal");
-        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true, "private");
-        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true, "privateDm");
-        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true, "privateOthers");
+        self.changeTopicsVisibility(self.treeTopics.internal, topicArray, true, "internal", isFirstcall);
+        self.changeTopicsVisibility(self.treeTopics.private, topicArray, true, "private", isFirstcall);
+        self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, true, "privateDm", isFirstcall);
+        self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, true, "privateOthers", isFirstcall);
       } else if (topic !== undefined) {
         for (var i = 0; i < self.menuState.length; i++) {
           if (self.menuState[i].indexOf(topic.topic) === 0) {
@@ -268,10 +269,10 @@ angular.module('TatUi')
             if (topicArray[0] === '') {
               topicArray.splice(0, 1);
             }
-            self.changeTopicsVisibility(self.treeTopics.internal, topicArray, false, "internal");
-            self.changeTopicsVisibility(self.treeTopics.private, topicArray, false, "private");
-            self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, false, "privateDm");
-            self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, false, "privateOthers");
+            self.changeTopicsVisibility(self.treeTopics.internal, topicArray, false, "internal", isFirstcall);
+            self.changeTopicsVisibility(self.treeTopics.private, topicArray, false, "private", isFirstcall);
+            self.changeTopicsVisibility(self.treeTopics.privateDm, topicArray, false, "privateDm", isFirstcall);
+            self.changeTopicsVisibility(self.treeTopics.privateOthers, topicArray, false, "privateOthers", isFirstcall);
             self.menuState.splice(i, 1);
             i--;
           }
@@ -279,8 +280,15 @@ angular.module('TatUi')
       }
     };
 
-    this.changeTopicsVisibility = function(treeTopics, expansion, visible, typeTopics) {
+    this.changeTopicsVisibility = function(treeTopics, expansion, visible, typeTopics, isFirstcall) {
       //console.log("changeTopicsVisibility treeTopics:",treeTopics," expansion:",expansion," visible:",visible);
+      /*console.log("changeTopicsVisibility >> isFirstCall:", isFirstcall, " visible:",visible);
+      if (isFirstcall !== true) {
+        console.log("changeTopicsVisibility >> isFirstCall done");
+        //return;
+      } else {
+        console.log("changeTopicsVisibility >> isFirstCall true");
+      }*/
       var topic = treeTopics;
       if (('[object Array]' === Object.prototype.toString.call(treeTopics)) && (
           '[object Array]' === Object.prototype.toString.call(expansion))) {

@@ -41,8 +41,8 @@ angular.module('TatUi')
     }
 
     $scope.topicClick = function(topic) {
-      $rootScope.$broadcast('topic-change', {topic: topic});
       $rootScope.$broadcast('sidebar-change', {topic:topic});
+      $rootScope.$broadcast('topic-change', {topic: topic});
     };
 
     $scope.topicClickHeader = function(topic, sub, pos ) {

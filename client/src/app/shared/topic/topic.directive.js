@@ -29,6 +29,7 @@ angular.module('TatUi').directive('topicList', function() {
         $rootScope.$broadcast('sidebar-change', {topic: topic});
         topic.visible = !topic.visible;
         if (topic.metadata) {
+          topic.metadata.active = true;
           $rootScope.$broadcast('topic-change', {topic: topic.metadata.topic});
         }
       };

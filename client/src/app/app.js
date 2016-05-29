@@ -54,8 +54,7 @@ angular.module('TatUi', [
   // define translation loader
   $translateProvider.useLoader("$translatePartialLoader", {
     urlTemplate: function(part, lang) {
-      return 'assets/app/' + part + '/translations/' + lang.replace(
-        /_.*$/, '') + '.json';
+      return 'assets/app/' + part + '/translations/' + lang.replace(/_.*$/, '') + '.json';
     }
   });
 })
@@ -82,7 +81,7 @@ angular.module('TatUi', [
 
 .run(function() {
   'use strict';
-  moment.locale('fr', {
+  moment.updateLocale('fr', {
     calendar: {
       lastDay: '[Yesterday], dddd MMM D H:mm:ss',
       sameDay: '[Today], H:mm:ss',
