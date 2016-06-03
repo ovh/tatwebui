@@ -215,8 +215,10 @@ angular.module('TatUi').provider('Authentication', function() {
             data.user.password = id.password;
             Identity.setIdentity(data.user);
           }
-        }, function() {
-          Identity.killIdentity();
+        }, function(err) {
+          if (err && err.status == 401) {
+            Identity.killIdentity();
+          }
         });
       }
     };
