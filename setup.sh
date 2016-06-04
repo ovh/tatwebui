@@ -25,11 +25,6 @@ if [ ! -z $RUN_MT_URL ]; then
   sed -i "s#RUN_MT_URL#$RUN_MT_URL#" public/assets/config.json
 fi;
 
-if [ ! -z $RUNVIEW_ONCALL_SERVICES ]; then
-  echo "replace RUNVIEW_ONCALL_SERVICES with $RUNVIEW_ONCALL_SERVICES";
-  sed -i "s#RUNVIEW_ONCALL_SERVICES#$RUNVIEW_ONCALL_SERVICES#" public/assets/config.json
-fi;
-
 if [ ! -z $RUNVIEW_TOPIC_ALERTS ]; then
   echo "replace RUNVIEW_TOPIC_ALERTS with $RUNVIEW_TOPIC_ALERTS";
   sed -i "s#RUNVIEW_TOPIC_ALERTS#$RUNVIEW_TOPIC_ALERTS#" public/assets/config.json

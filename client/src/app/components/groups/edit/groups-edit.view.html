@@ -30,7 +30,7 @@
       <b>{{ 'shared_common_users' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in group.users">
-          {{v}}
+          <a ui-sref="users-edit({username:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnGroup">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
                <i class="fa fa-trash-o"></i>
@@ -52,7 +52,7 @@
       <b>{{ 'shared_common_administrators' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in group.adminUsers">
-          {{v}}
+          <a ui-sref="users-edit({username:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnGroup">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdmin=true" data-ng-hide="askRemoveAdmin">
                <i class="fa fa-trash-o"></i>

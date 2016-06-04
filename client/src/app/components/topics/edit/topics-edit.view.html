@@ -200,7 +200,7 @@
       <b>{{ 'shared_common_read_only' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in topic.roUsers">
-          {{v}}
+          <a ui-sref="users-edit({username:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRoUser=true" data-ng-hide="askRemoveRoUser">
                <i class="fa fa-trash-o"></i>
@@ -228,7 +228,7 @@
       <b>{{ 'shared_common_read_write' | translate }}: </b>
       <ul>
         <li data-ng-repeat="(k, v) in topic.rwUsers">
-          {{v}}
+          <a ui-sref="users-edit({username:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRwUser=true" data-ng-hide="askRemoveRwUser">
                <i class="fa fa-trash-o"></i>
@@ -256,7 +256,7 @@
       <b>{{ 'shared_common_administrators' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in topic.adminUsers">
-          {{v}}
+          <a ui-sref="users-edit({username:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdminUser=true" data-ng-hide="askRemoveAdminUser">
                <i class="fa fa-trash-o"></i>
@@ -331,7 +331,7 @@
       <b>{{ 'shared_common_read_only' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in topic.roGroups">
-          {{v}}
+          <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRoGroup=true" data-ng-hide="askRemoveRoGroup">
                <i class="fa fa-trash-o"></i>
@@ -359,7 +359,7 @@
       <b>{{ 'shared_common_read_write' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in topic.rwGroups">
-          {{v}}
+          <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRwGroup=true" data-ng-hide="askRemoveRwGroup">
                <i class="fa fa-trash-o"></i>
@@ -387,7 +387,7 @@
       <b>{{ 'shared_common_administrators' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in topic.adminGroups">
-          {{v}}
+          <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
           <span data-ng-if="isAdmin() || data.isAdminOnTopic">
             <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdminGroup=true" data-ng-hide="askRemoveAdminGroup">
                <i class="fa fa-trash-o"></i>

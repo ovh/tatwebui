@@ -21,4 +21,4 @@ RUN make dockerImage && \
 
 USER root
 WORKDIR /tat
-CMD setup.sh
+CMD ["/usr/bin/setup.sh"]

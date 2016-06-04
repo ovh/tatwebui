@@ -30,7 +30,7 @@
                         <td class="users-username"><user-display username="userItem.username"></td>
                         <td class="users-date" data-ng-if="isAdmin()">{{ userItem.dateCreation  * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                         <td class="users-action" data-ng-if="isAdmin()">
-                          <a ui-sref="users-edit({username:userItem.username})">
+                          <a class="btn btn-default" ui-sref="users-edit({username:userItem.username})">
                             <i class="fa fa-edit"></i>
                           </a>
                         </td>

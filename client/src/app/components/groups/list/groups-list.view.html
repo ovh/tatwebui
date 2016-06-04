@@ -51,7 +51,7 @@
                           </span>
                         </td>
                         <td class="groups-edit">
-                          <a ui-sref="groups-edit({groupId:groupItem._id})" data-ng-if="isAdmin() || groupItem.adminUsers || groupItem.users">
+                          <a class="btn btn-default" ui-sref="groups-edit({groupName:groupItem.name})" data-ng-if="isAdmin() || groupItem.adminUsers || groupItem.users">
                             <i class="fa fa-edit"></i>
                           </a>
                         </td>

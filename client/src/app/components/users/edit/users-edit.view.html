@@ -138,7 +138,7 @@
       <b>{{ 'components_user_groups' | translate }} : </b>
       <ul>
         <li data-ng-repeat="(k, v) in user.groups">
-          {{v}}
+          <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
 
           <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
              <i class="fa fa-trash-o"></i>

@@ -30,7 +30,7 @@ angular.module('TatUi')
         'description': $scope.group.description
       }).$promise.then(function(data) {
         $state.go('groups-edit', {
-          groupId: data._id
+          groupName: data.name
         });
       }, function(err) {
         TatEngine.displayReturn(err);

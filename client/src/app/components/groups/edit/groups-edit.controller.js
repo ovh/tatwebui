@@ -25,11 +25,11 @@ angular.module('TatUi')
       isAdminOnGroup: false
     };
 
+    var filterGroup = { name: $stateParams.groupName };
+    
     var _self = this;
     this.init = function() {
-      TatEngineGroupsRsc.list({
-        idGroup: $stateParams.groupId
-      }).$promise.then(function(data) {
+      TatEngineGroupsRsc.list(filterGroup).$promise.then(function(data) {
         if (data.count === 1) {
           $scope.group = data.groups[0];
           if ($scope.isAdmin() || _.includes($scope.group.adminUsers,
