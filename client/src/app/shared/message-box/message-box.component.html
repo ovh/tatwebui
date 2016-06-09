@@ -36,6 +36,16 @@
       </a>
     </div>
   </form>
+  <div ng-if="ctrl.defaultLabels && ctrl.currentMessage.length > 0">
+  {{ 'shared_messages_labels_add' | translate }}
+    <span
+      class="tat-label"
+      style="background-color: {{ label.color }}; border-color: {{ label.color }}; color: {{ ctrl.getBrightness(label.color)>130 ? '#000000' : '#ffffff' }}"
+      ng-repeat="label in ctrl.defaultLabels track by $index">
+      {{label.text}}
+      <a role="button" ng-click="ctrl.removeLabel(label.text)">X</a>
+    </span>
+  </div>
   <message-filter-bar></message-filter-bar>
   <div movable-dialog title="'Filter'" ng-model="ctrl.filterDialog">
     <message-filter topic="ctrl.topic"></message-filter>

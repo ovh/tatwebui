@@ -113,6 +113,8 @@
   <translation id="shared_messages_delete">Delete all messages</translation>
   <translation id="shared_messages">of all messages</translation>
 
+  <translation id="shared_messages_labels_add">Additional labels to add</translation>
+
   <!-- Filters -->
   <translation id="shared_filter_in">in</translation>
   <translation id="shared_filter_all">all</translation>
