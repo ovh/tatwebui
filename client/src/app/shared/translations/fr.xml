@@ -26,6 +26,9 @@
 
   <!-- Sidebar menu -->
   <translation id="master-all-topics">Tous les topics</translation>
+  <translation id="master-no-topic">Aucun Topic</translation>
+  <translation id="master-unread-topics">Topics non lus</translation>
+  <translation id="master-last-topics">Derniers Topics Vus</translation>
   <translation id="master-topics">Topics</translation>
   <translation id="master-actions">Actions</translation>
   <translation id="master-messages">Messages</translation>

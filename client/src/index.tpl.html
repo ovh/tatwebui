@@ -119,6 +119,7 @@
     <script src="src/app/shared/message-vote/message-vote.component.js"></script>
     <script src="src/app/shared/message-label/message-label.component.js"></script>
     <script src="src/app/shared/message-box/message-box.component.js"></script>
+    <script src="src/app/shared/sidebar/sidebar.component.js"></script>
     <script src="src/app/shared/message-reply/message-reply.component.js"></script>
     <script src="src/app/shared/authentication/authentication.provider.js"></script>
     <script src="src/app/shared/authentication/authentication.resource.js"></script>
@@ -145,8 +146,6 @@
     <script src="src/app/shared/tat-engine/resources/users.resource.js"></script>
     <script src="src/app/shared/tat-engine/resources/sockets.resource.js"></script>
     <script src="src/app/shared/tat-engine/resources/system.resource.js"></script>
-    <script src="src/app/shared/topic/topic.controller.js"></script>
-    <script src="src/app/shared/topic/topic.directive.js"></script>
     <script src="src/app/shared/user-display/user-display.directive.js"></script>
     <script src="src/app/shared/web-socket/web-socket.provider.js"></script>
     <script src="src/app/shared/widget/widget-header.directive.js"></script>
@@ -165,82 +164,17 @@
 
 </head>
 <body data-ng-controller="MasterCtrl as ctrl">
-  <div id="page-wrapper" data-ng-class="{'open': toggle}" data-ng-cloak data-ng-if="isConnected()">
+  <div id="page-wrapper" data-ng-class="{'open': ctrl.data.toggle}" data-ng-cloak data-ng-if="isConnected()">
 
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-      <ul class="sidebar" data-ng-controller="TopicCtrl as sideBarCtrl">
-        <li class="sidebar-header">
-          <a data-ng-click="toggleSidebar()" class="text-center">
-            <span class="tat-logo">TaT</span>
-          </a>
-        </li>
-        <li class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
-            <span class="sidebar-section-title">
-              {{ 'master-topics' | translate }}
-              <i ng-click="sideBarCtrl.toggleFavoritesTopics()"
-              class="favoritesTopics fa"
-              data-ng-class="{'fa-star-o':!sideBarCtrl.data.onlyFavorites, 'fa-star': sideBarCtrl.data.onlyFavorites}"
-              title="{{'master-toggle-favorites' | translate}}"> </i>
-
-              <i ui-sref="topics-list"
-              class="listtopic fa fa-list-ul" title="{{'master-all-topics' | translate}}"> </i>
-              <i ng-show="sideBarCtrl.data.isInitializing" class="fa fa-spinner fa-spin"></i>
-            </span>
-            <div ng-show="!sideBarCtrl.data.isInitializing && sideBarCtrl.data.onlyFavorites && (!sideBarCtrl.treeTopics.internal || sideBarCtrl.treeTopics.internal.length == 0)" class="alert alert-info">
-              {{'master-no-favorites' | translate}}
-            </div>
-
-            <div topic-list="sideBarCtrl.treeTopics.internal"></div>
-        </li>
-        <li class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
-            <span class="sidebar-section-title">
-                Private
-                <i ng-show="sideBarCtrl.data.isInitializing" class="fa fa-spinner fa-spin"></i>
-            </span>
-            <div topic-list="sideBarCtrl.treeTopics.private"></div>
-        </li>
-        <li class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
-            <span class="sidebar-section-title">Direct Messages
-              <i ng-show="sideBarCtrl.data.isInitializing" class="fa fa-spinner fa-spin"></i>
-            </span>
-            <div topic-list="sideBarCtrl.treeTopics.privateDm"></div>
-        </li>
-        <li class="sidebar-section" ng-show="!ctrl.data.isPresencesOpen">
-            <span class="sidebar-section-title">
-              Others Users
-              <i ng-show="sideBarCtrl.data.isInitializing" class="fa fa-spinner fa-spin"></i>
-            </span>
-            <div topic-list="sideBarCtrl.treeTopics.privateOthers"></div>
-        </li>
-        <li class="sidebar-section tat-presences" ng-show="ctrl.data.isPresencesOpen">
-          <span class="sidebar-section-title">
-            {{ 'master-presences' | translate }}
-          </span>
-          <ul>
-            <li ng-repeat="user in presences">
-              <a title="Last seen: {{ user.dateTimePresence }}" ng-click="directMessage(user.userPresence.username)">
-                <i class="fa fa-circle" ng-class="user.status"></i>&nbsp;{{ user.userPresence.fullname }}
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <div class="sidebar-footer">
-        <div class="col-xs-4" data-ng-repeat="menuItem in bottomMenu track by $index">
-          <a href="{{menuItem.url}}">
-            {{ menuItem.caption | translate}}
-          </a>
-        </div>
-      </div>
-    </div>
+    <sidebar></sidebar>
     <!-- End Sidebar -->
 
     <div id="content-wrapper">
       <div class="page-content">
 
         <!-- Header Bar -->
-        <div class="row header" ng-show="toggle">
+        <div class="row header" ng-show="ctrl.data.toggle">
           <div class="col-xs-12">
             <div class="user pull-right">
               <div class="item dropdown" uib-dropdown>
@@ -281,6 +215,11 @@
                   <li class="link">
                     <a ui-sref="user-logout">
                       {{ 'master-logout' | translate }}
+                    </a>
+                  </li>
+                  <li class="link" data-ng-repeat="menuItem in bottomMenu track by $index">
+                    <a href="{{menuItem.url}}">
+                      {{ menuItem.caption | translate}}
                     </a>
                   </li>
                 </ul>

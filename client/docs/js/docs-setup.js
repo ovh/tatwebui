@@ -415,7 +415,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "TatUi",
       "shortDescription": "Create a generic message tag",
-      "keywords": "ae api create createmessage current directive function generic message msg post shared tag tatui topic"
+      "keywords": "ae api create createmessage current default directive function generic label message msg post remove removelabel removes shared tag tatui topic"
     },
     {
       "section": "api",
@@ -443,6 +443,15 @@ NG_DOCS={
       "moduleName": "TatUi",
       "shortDescription": "Create a generic message vote",
       "keywords": "ae api create define directive function generic hasvoterdown hasvoterup marked message shared tatui toggle togglevoterdown togglevoterup true vote votedown voterdown voterup voteup"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.shared:sidebar",
+      "shortName": "sidebar",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "Sidebar",
+      "keywords": "api directive shared sidebar tatui"
     },
     {
       "section": "api",

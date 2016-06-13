@@ -1,0 +1,74 @@
+<div id="sidebar-wrapper" data-ng-class="{'open': ctrl.data.toggle}">
+
+  <ul class="sidebar">
+    <li class="sidebar-header">
+      <a data-ng-click="ctrl.toggleSidebar()" class="text-center">
+        <span class="tat-logo">TaT</span>
+      </a>
+    </li>
+    <li class="sidebar-section">
+      <span class="sidebar-section-title">
+          <i ng-click="ctrl.setMode('favorites')"
+            class="mode fa fa-star"
+            data-ng-class="{'modeselect': ctrl.data.mode == 'favorites'}"
+            uib-tooltip="{{'master-favorites' | translate}}"> </i>
+          <i class="mode fa fa-list-ul"
+              data-ng-class="{'modeselect': ctrl.data.mode == 'all'}"
+              uib-tooltip="{{'master-all-topics' | translate}}" ng-click="ctrl.setMode('all')"> </i>
+          <i class="mode fa fa-history"
+              data-ng-class="{'modeselect': ctrl.data.mode == 'history'}"
+              uib-tooltip="{{'master-last-topics' | translate}}" ng-click="ctrl.setMode('history')"> </i>
+          <i class="mode fa fa-commenting-o"
+              data-ng-class="{'modeselect': ctrl.data.mode == 'unread'}"
+              uib-tooltip="{{'master-unread-topics' | translate}}" ng-click="ctrl.setMode('unread')"> </i>
+      </span>
+    </li>
+    <li class="sidebar-section" ng-if="ctrl.data.loading">
+      <i class="fa fa-spinner fa-spin fa-5x" style="margin-left: 70px;margin-top: 70px;"></i>
+    </li>
+    <li class="sidebar-section" ng-repeat="ct in ctrl.data.treeTopics" ng-if="!ctrl.data.loading && !ctrl.data.isPresencesOpen">
+      <span class="sidebar-section-title" ng-click="ct.expand=!ct.expand">
+        {{ ct.title }} <span ng-hide="ct.expand"><i class="fa fa-caret-down"></i></span>
+      </span>
+      <ul class="sidebar-sublist" ng-show="ct.expand">
+        <li class="sidebar-sublist-item" ng-if="ct.topics.length == 0">
+          <b>{{'master-no-topic' | translate}}</b>
+        </li>
+        <li class="sidebar-sublist-item" ng-repeat="t in ct.topics | filter:{topic:ctrl.data.filtertopic}">
+            <a data-ng-href="#"
+              data-ng-class="{selected: t.topic == ctrl.data.currentTopicName}"
+              data-ng-click="ctrl.topicClick(t.topic)">{{t.nameDisplayed}}
+
+            <div style="float:right">
+              <span class="badge" ng-show="t.unread">{{t.unread}}</span>
+              <i class="fav fa fa-star" ng-show="ctrl.data.favorites[t.topic]"></i>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="sidebar-section tat-presences" ng-if="!ctrl.data.loading && ctrl.data.isPresencesOpen">
+      <span class="sidebar-section-title">
+        {{ 'master-presences' | translate }}
+      </span>
+      <ul>
+        <li ng-repeat="user in ctrl.data.presences">
+          <a title="Last seen: {{ user.dateTimePresence }}" ng-click="ctrl.directMessage(user.userPresence.username)">
+            <i class="fa fa-circle" ng-class="user.status"></i>&nbsp;{{ user.userPresence.fullname }}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <div class="sidebar-footer">
+    <div class="search-form">
+      <div class="search-form form-group has-feedback" ng-mouseover="ctrl.searchEnter()" ng-keyup="ctrl.searchKey($event.keyCode)" ng-mouseleave="ctrl.searchExit()">
+        <label for="search" class="sr-only">Search</label>
+        <input autocomplete="off" type="text" id="searchbox" class="form-control" ng-model="ctrl.data.filtertopic" name="search" id="search" placeholder="search">
+          <i class="mode fa fa-search form-control-feedback" style=""></i>
+      </div>
+    </div>
+  </div>
+</div>

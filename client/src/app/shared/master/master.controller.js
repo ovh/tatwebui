@@ -4,13 +4,13 @@ angular.module('TatUi')
     $scope,
     $rootScope,
     Authentication,
-    $cookieStore,
     $state,
     appConfiguration,
     TatEngineUserRsc,
     TatEngine,
     TatEngineTopicRsc,
     TatEnginePresencesRsc,
+    $cookieStore,
     Flash,
     Plugin,
     $localStorage,
@@ -19,7 +19,6 @@ angular.module('TatUi')
   ) {
     'use strict';
 
-    var mobileView = 992;
     var self = this;
 
     this.loading = false;
@@ -28,6 +27,7 @@ angular.module('TatUi')
       isNotificationsOffTopic: false,
       isPresencesOpen: false,
       topic: {},
+      toggle: true,
       viewsEnabled: false
     };
 
@@ -40,12 +40,19 @@ angular.module('TatUi')
       }
     }
 
+    if (angular.isDefined($cookieStore.get('toggle'))) {
+      self.data.toggle = $cookieStore.get('toggle');
+    }
+
+    $scope.$on('toggle', function(ev, toggleValue) {
+      self.data.toggle = toggleValue;
+    });
+
     $scope.topicClick = function(topic) {
-      $rootScope.$broadcast('sidebar-change', {topic:topic});
       $rootScope.$broadcast('topic-change', {topic: topic});
     };
 
-    $scope.topicClickHeader = function(topic, sub, pos ) {
+    $scope.topicClickHeader = function(topic, sub, pos) {
       var t = "";
       for (var i = 0; i <= pos; i++) {
         t += "/" + $scope.title[i];
@@ -86,22 +93,6 @@ angular.module('TatUi')
       $scope.bottomMenu = appConfiguration.links.menu;
     }
 
-    $scope.getWidth = function() {
-      return window.innerWidth;
-    };
-
-    $scope.$watch($scope.getWidth, function(newValue) {
-      if (newValue >= mobileView) {
-        if (angular.isDefined($cookieStore.get('toggle'))) {
-          $scope.toggle = !$cookieStore.get('toggle') ? false : true;
-        } else {
-          $scope.toggle = true;
-        }
-      } else {
-        $scope.toggle = false;
-      }
-    });
-
     $scope.directMessage = function(username) {
       var me = Authentication.getIdentity().username;
       if (me !== username) {
@@ -109,11 +100,6 @@ angular.module('TatUi')
           topic: 'Private/'+ me +'/DM/'+ username
         });
       }
-    };
-
-    $scope.toggleSidebar = function() {
-      $scope.toggle = !$scope.toggle;
-      $cookieStore.put('toggle', $scope.toggle);
     };
 
     $scope.getViews = function() {
@@ -140,10 +126,6 @@ angular.module('TatUi')
       return Authentication.isConnected();
     };
 
-    window.onresize = function() {
-      $scope.$apply();
-    };
-
     $scope.getUser = function(field) {
       var identity = Authentication.getIdentity();
       return identity[field] ? identity[field] : '';
@@ -162,14 +144,14 @@ angular.module('TatUi')
           'topic': '/' + self.topic
         }).$promise.then(function() {
           self.data.isFavoriteTopic = false;
-          Authentication.refreshIdentity();
+          $rootScope.$broadcast('sidebar-reload', true);
         });
       } else {
         TatEngineUserRsc.addFavoriteTopic({
           'topic': '/' + self.topic
         }).$promise.then(function() {
           self.data.isFavoriteTopic = true;
-          Authentication.refreshIdentity();
+          $rootScope.$broadcast('sidebar-reload', true);
         });
       }
     };
@@ -203,30 +185,7 @@ angular.module('TatUi')
 
     this.togglePresences = function() {
       this.data.isPresencesOpen = !this.data.isPresencesOpen;
-      self.loadPresences(); // load here, and in topics list refresh
-    };
-
-    this.loadPresences = function() {
-      // Load/display presences *after* messages
-      if (!self.topic || self.topic === "") {
-        return;
-      }
-      TatEnginePresencesRsc.list({
-        topic: self.topic,
-        dateMinPresence: (Math.floor(Date.now() /1000) - 30), // last 30s
-        limit: 500
-      }).$promise.then(function(data) {
-        $scope.presences = data.presences;
-        if (data.presences) {
-          $scope.presences.sort(function(a, b) {
-            if (a.userPresence.fullname.toLocaleLowerCase() < b.userPresence.fullname.toLocaleLowerCase()) return -1;
-            else if (a.userPresence.fullname.toLocaleLowerCase() > b.userPresence.fullname.toLocaleLowerCase()) return 1;
-            else return 0;
-          });
-        }
-      }, function(err) {
-        TatEngine.displayReturn(err);
-      });
+      $rootScope.$broadcast("presences-toggle", true);
     };
 
     $rootScope.$on('$stateChangeSuccess',
@@ -246,6 +205,7 @@ angular.module('TatUi')
               return;
             }
             self.data.topic = data.topic;
+            $rootScope.$broadcast('sidebar-change', {topic: self.data.topic});
 
             $scope.title = params.topic.split('/');
             if (Authentication.getIdentity().favoritesTopics) {
@@ -357,8 +317,4 @@ angular.module('TatUi')
       self.loading = status;
     });
 
-    $scope.$on('presences-refresh', function(e) {
-      self.loadPresences();
-    });
-
-  });
+});
