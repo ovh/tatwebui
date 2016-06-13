@@ -40,7 +40,7 @@
               data-ng-click="ctrl.topicClick(t.topic)">{{t.nameDisplayed}}
 
             <div style="float:right">
-              <span class="badge" ng-show="t.unread">{{t.unread}}</span>
+              <span class="badge" ng-show="t.unread > 0">{{t.unread}}</span>
               <i class="fav fa fa-star" ng-show="ctrl.data.favorites[t.topic]"></i>
             </div>
           </a>
@@ -60,7 +60,6 @@
       </ul>
     </li>
   </ul>
-
 
   <div class="sidebar-footer">
     <div class="search-form">

@@ -221,24 +221,6 @@ NG_DOCS={
     },
     {
       "section": "api",
-      "id": "TatUi.directive:topicList",
-      "shortName": "topicList",
-      "type": "directive",
-      "moduleName": "TatUi",
-      "shortDescription": "display all topics",
-      "keywords": "ae api click clicked directive display function invoked recieved tatui topic topicclick topics"
-    },
-    {
-      "section": "api",
-      "id": "TatUi.directive:topicListItem",
-      "shortName": "topicListItem",
-      "type": "directive",
-      "moduleName": "TatUi",
-      "shortDescription": "display a sub topic",
-      "keywords": "ae api directive display tatui topic"
-    },
-    {
-      "section": "api",
       "id": "TatUi.directive:userDisplay",
       "shortName": "userDisplay",
       "type": "directive",
