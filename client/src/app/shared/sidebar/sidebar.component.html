@@ -9,16 +9,16 @@
     <li class="sidebar-section">
       <span class="sidebar-section-title">
           <i ng-click="ctrl.setMode('favorites')"
-            class="mode fa fa-star"
+            class="mode fa fa-star fa-2x"
             data-ng-class="{'modeselect': ctrl.data.mode == 'favorites'}"
             uib-tooltip="{{'master-favorites' | translate}}"> </i>
-          <i class="mode fa fa-list-ul"
+          <i class="mode fa fa-list-ul fa-2x"
               data-ng-class="{'modeselect': ctrl.data.mode == 'all'}"
               uib-tooltip="{{'master-all-topics' | translate}}" ng-click="ctrl.setMode('all')"> </i>
-          <i class="mode fa fa-history"
+          <i class="mode fa fa-history fa-2x"
               data-ng-class="{'modeselect': ctrl.data.mode == 'history'}"
               uib-tooltip="{{'master-last-topics' | translate}}" ng-click="ctrl.setMode('history')"> </i>
-          <i class="mode fa fa-commenting-o"
+          <i class="mode fa fa-commenting-o fa-2x"
               data-ng-class="{'modeselect': ctrl.data.mode == 'unread'}"
               uib-tooltip="{{'master-unread-topics' | translate}}" ng-click="ctrl.setMode('unread')"> </i>
       </span>
@@ -28,7 +28,7 @@
     </li>
     <li class="sidebar-section" ng-repeat="ct in ctrl.data.treeTopics" ng-if="!ctrl.data.loading && !ctrl.data.isPresencesOpen">
       <span class="sidebar-section-title" ng-click="ct.expand=!ct.expand">
-        {{ ct.title }} <span ng-hide="ct.expand"><i class="fa fa-caret-down"></i></span>
+        <span class="sidebar-section-active">{{ ct.title }}</span> <span ng-hide="ct.expand"><i class="fa fa-caret-down"></i></span>
       </span>
       <ul class="sidebar-sublist" ng-show="ct.expand">
         <li class="sidebar-sublist-item" ng-if="ct.topics.length == 0">
