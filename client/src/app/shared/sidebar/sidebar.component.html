@@ -5,6 +5,7 @@
       <a data-ng-click="ctrl.toggleSidebar()" class="text-center">
         <span class="tat-logo">TaT</span>
       </a>
+
     </li>
     <li class="sidebar-section">
       <span class="sidebar-section-title">
@@ -23,6 +24,15 @@
               uib-tooltip="{{'master-unread-topics' | translate}}" ng-click="ctrl.setMode('unread')"> </i>
       </span>
     </li>
+    <li class="search-form" ng-if="ctrl.data.toggle">
+      <div class="search-form form-group has-feedback" ng-mouseover="ctrl.searchEnter()" ng-keyup="ctrl.searchKey($event.keyCode)" ng-mouseleave="ctrl.searchExit()">
+        <label for="search" class="sr-only">Search</label>
+        <input autocomplete="off" type="text" id="searchbox" class="form-control" ng-model="ctrl.data.filtertopic" name="search" id="search" placeholder="search">
+          <i class="mode fa fa-search form-control-feedback" style=""></i>
+      </div>
+    </li>
+  </ul>
+  <ul class="sidebar sidebar-scroll">
     <li class="sidebar-section" ng-if="ctrl.data.loading">
       <i class="fa fa-spinner fa-spin fa-5x" style="margin-left: 70px;margin-top: 70px;"></i>
     </li>
@@ -35,13 +45,12 @@
           <b>{{'master-no-topic' | translate}}</b>
         </li>
         <li class="sidebar-sublist-item" ng-repeat="t in ct.topics | filter:{topic:ctrl.data.filtertopic}">
-            <a data-ng-href="#"
-              data-ng-class="{selected: t.topic == ctrl.data.currentTopicName}"
-              data-ng-click="ctrl.topicClick(t.topic)">{{t.nameDisplayed}}
+
+            <a data-ng-href="#" data-ng-click="ctrl.topicClick(t.topic)">
+              <span data-ng-class="{favorite: ctrl.data.favorites[t.topic]}">/</span>{{t.nameDisplayed}}
 
             <div style="float:right">
               <span class="badge" ng-show="t.unread > 0">{{t.unread}}</span>
-              <i class="fav fa fa-star" ng-show="ctrl.data.favorites[t.topic]"></i>
             </div>
           </a>
         </li>
@@ -60,14 +69,4 @@
       </ul>
     </li>
   </ul>
-
-  <div class="sidebar-footer">
-    <div class="search-form">
-      <div class="search-form form-group has-feedback" ng-mouseover="ctrl.searchEnter()" ng-keyup="ctrl.searchKey($event.keyCode)" ng-mouseleave="ctrl.searchExit()">
-        <label for="search" class="sr-only">Search</label>
-        <input autocomplete="off" type="text" id="searchbox" class="form-control" ng-model="ctrl.data.filtertopic" name="search" id="search" placeholder="search">
-          <i class="mode fa fa-search form-control-feedback" style=""></i>
-      </div>
-    </div>
-  </div>
 </div>

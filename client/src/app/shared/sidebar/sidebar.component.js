@@ -210,7 +210,7 @@ angular.module('TatUi').component('sidebar', {
 
     this.computeTypeTopic = function(topic) {
       if (topic.topic.indexOf("/Internal") === 0) {
-        topic.nameDisplayed = topic.topic.substr("/Internal".length);
+        topic.nameDisplayed = topic.topic.substr("/Internal/".length);
         if (topic.nameDisplayed === '') {
           return "toSkip"; // "/Internal";
         }
@@ -224,13 +224,13 @@ angular.module('TatUi').component('sidebar', {
       } else if (topic.topic === "/Private/" + self.data.username + "/DM") {
         return "toSkip";
       } else if (topic.topic.indexOf("/Private/" + self.data.username) === 0) {
-        topic.nameDisplayed = topic.topic.substr(("/Private/" + self.data.username).length);
+        topic.nameDisplayed = topic.topic.substr(("/Private/" + self.data.username+"/").length);
         if (topic.nameDisplayed === '') {
-          topic.nameDisplayed = "/" + self.data.username;
+          topic.nameDisplayed = self.data.username;
         }
         return "private";
       } else if (topic.topic.indexOf("/Private/") === 0) {
-        topic.nameDisplayed = topic.topic.substr("/Private/".length);
+        topic.nameDisplayed = topic.topic.substr("/Private".length);
         if (topic.nameDisplayed === '') {
           return "toSkip";
         }
