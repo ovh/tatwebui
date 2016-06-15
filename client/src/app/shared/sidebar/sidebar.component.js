@@ -245,7 +245,9 @@ angular.module('TatUi').component('sidebar', {
     self.searchKey = function(keyCode) {
       if (!self.data.isSearch) {
         self.data.previousMode = self.data.mode;
-        self.setMode('all');
+        if (self.data.previousMode !== "all") {
+          self.setMode('all');
+        }
         self.data.isSearch = true;
       } else if (self.data.filtertopic === ""){
         self.searchExit();
