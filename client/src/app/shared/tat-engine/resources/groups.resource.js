@@ -21,7 +21,10 @@ angular.module('TatUi').service('TatEngineGroupsRsc', function($resource) {
      */
     list: {
       method: 'GET',
-      isArray: false
+      isArray: false,
+      params: {
+        limit: 1000
+      }
     }
   });
 });

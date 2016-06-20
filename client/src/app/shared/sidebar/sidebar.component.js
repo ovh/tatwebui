@@ -230,7 +230,7 @@ angular.module('TatUi').component('sidebar', {
         }
         return "private";
       } else if (topic.topic.indexOf("/Private/") === 0) {
-        topic.nameDisplayed = topic.topic.substr("/Private".length);
+        topic.nameDisplayed = topic.topic.substr("/Private/".length);
         if (topic.nameDisplayed === '') {
           return "toSkip";
         }
