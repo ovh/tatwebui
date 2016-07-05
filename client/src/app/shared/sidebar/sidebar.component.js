@@ -10,6 +10,7 @@ angular.module('TatUi').component('sidebar', {
   controllerAs: 'ctrl',
   controller: function(
     $scope,
+    $state,
     $translate,
     $cookieStore,
     $rootScope,
@@ -19,7 +20,8 @@ angular.module('TatUi').component('sidebar', {
     TatEngineUserRsc,
     TatEnginePresencesRsc,
     AuthenticationRsc,
-    Authentication
+    Authentication,
+    Plugin
   ) {
     'use strict';
     var self = this;
@@ -189,7 +191,6 @@ angular.module('TatUi').component('sidebar', {
             } else {
               self.data.treeTopics[topicType].topics.push(data.topics[i]);
             }
-
           }
         }
 
@@ -206,6 +207,20 @@ angular.module('TatUi').component('sidebar', {
         TatEngine.displayReturn(err);
       });
       self.data.isFirstCall = false;
+    };
+
+    this.computeURL = function(topic) {
+      var restrictedPlugin = Plugin.getPluginByRestriction(topic);
+      if (restrictedPlugin) {
+        return $state.href(restrictedPlugin.route, {topic: topic.topic.substring(1)});
+      }
+      if ($localStorage && $localStorage.views && $localStorage.views[topic]) {
+        if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
+          $localStorage.views[topic] = Plugin.getDefaultPlugin(data.topic).route;
+        }
+        return $state.href($localStorage.views[topic.topic], {topic: topic.topic.substring(1)});
+      }
+      return $state.href(Plugin.getDefaultPlugin(topic).route, {topic: topic.topic.substring(1)});
     };
 
     this.computeTypeTopic = function(topic) {
