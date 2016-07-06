@@ -61,7 +61,7 @@
       </span>
       <ul>
         <li ng-repeat="user in ctrl.data.presences">
-          <a title="Last seen: {{ user.dateTimePresence }}" ng-click="ctrl.directMessage(user.userPresence.username)">
+          <a title="Last seen: {{ user.dateTimePresence }}" ng-href="{{ctrl.computURLDM(user.userPresence.username)}}">
             <i class="fa fa-circle" ng-class="user.status"></i>&nbsp;{{ user.userPresence.fullname }}
           </a>
         </li>

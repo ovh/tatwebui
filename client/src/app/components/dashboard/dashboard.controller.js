@@ -9,12 +9,15 @@
  *
  */
 angular.module('TatUi')
-  .controller('DashboardCtrl', function($rootScope, $scope, Authentication) {
+  .controller('DashboardCtrl', function($state, $scope, Authentication) {
     'use strict';
 
     $scope.init = function() {
-      $rootScope.$broadcast('topic-change', {
+      $state.go("standardview-list", {
         topic: 'Private/' + Authentication.getIdentity().username
+      }, {
+        inherit: false,
+        reload: false
       });
     };
     $scope.init();

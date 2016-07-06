@@ -10,7 +10,7 @@
  * Manage user login
  *
  */
-angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
+angular.module('TatUi').controller('UserLoginCtrl', function($scope,
   $state, Authentication, appConfiguration) {
   'use strict';
 
@@ -51,8 +51,11 @@ angular.module('TatUi').controller('UserLoginCtrl', function($scope, $rootScope,
   $scope.connect = function() {
     Authentication.connect($scope.user).then(function() {
       if ($scope.user && $scope.user.username && $scope.user.username !== '') {
-        $rootScope.$broadcast('topic-change', {
+        $state.go("standardview-list", {
           topic: 'Private/' + $scope.user.username
+        }, {
+          inherit: false,
+          reload: false
         });
       } else {
         $state.go('index');

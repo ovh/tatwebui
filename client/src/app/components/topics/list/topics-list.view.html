@@ -69,7 +69,7 @@
                   <tbody>
                     <tr data-ng-repeat="topicItem in data.topics | filter:data.filterList | filter:greaterThan('unRead')" class="topic-first-row">
                         <th class="topics-name">
-                          <a data-ng-href="#" data-ng-click="topicClick(topicItem.topic)">{{topicItem.topic}}</a>
+                          <a data-ng-href="{{topicItem.url}}">{{topicItem.topic}}</a>
                         </th>
                         <th class="topics-unread">
                           <span class="badge" ng-show="topicItem.unRead > 0">{{topicItem.unRead}}</span>

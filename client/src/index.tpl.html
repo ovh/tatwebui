@@ -126,6 +126,7 @@
     <script src="src/app/shared/identity/identity.provider.js"></script>
     <script src="src/app/shared/filter/filter.provider.js"></script>
     <script src="src/app/shared/loading/loading.directive.js"></script>
+    <script src="src/app/shared/linker/linker.provider.js"></script>
     <script src="src/app/shared/master/master.controller.js"></script>
     <script src="src/app/shared/movable-dialog/movable-dialog.directive.js"></script>
     <script src="src/app/shared/nl2br/nl2br.filter.js"></script>
@@ -207,6 +208,12 @@
                     </a>
                   </li>
                   <li class="divider"></li>
+                  <li class="link" data-ng-repeat="menuItem in bottomMenu track by $index">
+                    <a href="{{menuItem.url}}">
+                      {{ menuItem.caption | translate}}
+                    </a>
+                  </li>
+                  <li class="divider"></li>
                   <li class="link">
                     <a ui-sref="user-profile">
                       {{ 'master-profile' | translate }}
@@ -215,11 +222,6 @@
                   <li class="link">
                     <a ui-sref="user-logout">
                       {{ 'master-logout' | translate }}
-                    </a>
-                  </li>
-                  <li class="link" data-ng-repeat="menuItem in bottomMenu track by $index">
-                    <a href="{{menuItem.url}}">
-                      {{ menuItem.caption | translate}}
                     </a>
                   </li>
                 </ul>
@@ -288,15 +290,9 @@
                 </span>
               </h2>
             </div>
-
           </div>
         </div>
         <!-- End Header Bar -->
-
-        <!-- Flash messages -->
-        <div class="notification" ng-show="hasFlash">
-          <div flash-message="5000"></div>
-        </div>
 
         <!-- Main Content -->
         <div ui-view></div>

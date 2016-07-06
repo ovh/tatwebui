@@ -226,7 +226,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "TatUi",
       "shortDescription": "display fullname or username and redirect to DM topic",
-      "keywords": "ae api clicked directive display dm exists fullname function getfullname invoked redirect return tatui topic user username usernameclick"
+      "keywords": "ae api directive display dm exists fullname function getfullname invoked redirect return tatui topic user username"
     },
     {
       "section": "api",
@@ -252,8 +252,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
-      "keywords": "api filter leangth parameter shorten string tatui"
+      "shortDescription": "",
+      "keywords": "api filter tatui"
     },
     {
       "section": "api",
@@ -261,8 +261,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "",
-      "keywords": "api filter tatui"
+      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
+      "keywords": "api filter leangth parameter shorten string tatui"
     },
     {
       "section": "api",
@@ -281,6 +281,15 @@ NG_DOCS={
       "moduleName": "TatUi",
       "shortDescription": "Manage the identity of the user",
       "keywords": "api identity identityprovider manage service tatui user"
+    },
+    {
+      "section": "api",
+      "id": "TatUi.LinkerProvider",
+      "shortName": "TatUi.LinkerProvider",
+      "type": "service",
+      "moduleName": "TatUi",
+      "shortDescription": "Compute URL",
+      "keywords": "api compute linkerprovider service tatui url"
     },
     {
       "section": "api",

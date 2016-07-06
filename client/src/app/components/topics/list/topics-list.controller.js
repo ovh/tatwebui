@@ -13,6 +13,7 @@ angular.module('TatUi')
     TatEngineTopicsRsc,
     TatEngineUserRsc,
     TatEngine,
+    Linker,
     Authentication) {
     'use strict';
 
@@ -63,6 +64,7 @@ angular.module('TatUi')
           $scope.data.adminOfOneTopic = true;
         }
         data.topics[i].isFavoriteTopic = false;
+        data.topics[i].url = Linker.computeURL(data.topics[i]);
         if (favoriteTopics) {
           for (var j = 0; j < favoriteTopics.length; j++) {
             if (favoriteTopics[j] === data.topics[i].topic) {

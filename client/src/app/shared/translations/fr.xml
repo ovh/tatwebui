@@ -42,10 +42,10 @@
 
   <!-- Page titles -->
   <translation id="user">Utilisateur</translation>
-  <translation id="profile">Profile</translation>
+  <translation id="profile">Profil</translation>
   <translation id="message">Message</translation>
   <translation id="list">Liste</translation>
-  <translation id="user-profile">Profile utilisateur</translation>
+  <translation id="user-profile">Profil utilisateur</translation>
   <translation id="user-confirm">Confirmation</translation>
   <translation id="topics-new">Nouveau topic</translation>
   <translation id="topics_notopic">Topic inconnu</translation>

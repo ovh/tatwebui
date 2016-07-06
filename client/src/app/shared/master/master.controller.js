@@ -12,6 +12,7 @@ angular.module('TatUi')
     TatEnginePresencesRsc,
     $cookieStore,
     Flash,
+    Linker,
     Plugin,
     $localStorage,
     $stateParams,
@@ -48,16 +49,18 @@ angular.module('TatUi')
       self.data.toggle = toggleValue;
     });
 
-    $scope.topicClick = function(topic) {
-      $rootScope.$broadcast('topic-change', {topic: topic});
-    };
-
     $scope.topicClickHeader = function(topic, sub, pos) {
       var t = "";
       for (var i = 0; i <= pos; i++) {
         t += "/" + $scope.title[i];
       }
-      return $scope.topicClick(t);
+
+      $state.go("standardview-list", {
+        topic: t.substring(1)
+      }, {
+        inherit: false,
+        reload: false
+      });
     };
 
     $scope.canEditTopic = function(topic) {
@@ -93,15 +96,6 @@ angular.module('TatUi')
       $scope.bottomMenu = appConfiguration.links.menu;
     }
 
-    $scope.directMessage = function(username) {
-      var me = Authentication.getIdentity().username;
-      if (me !== username) {
-        $rootScope.$broadcast('topic-change', {
-          topic: 'Private/'+ me +'/DM/'+ username
-        });
-      }
-    };
-
     $scope.getViews = function() {
       var restrictedPlugin = Plugin.getPluginByRestriction(self.data.topic);
       if (restrictedPlugin) {
@@ -117,8 +111,12 @@ angular.module('TatUi')
         $localStorage.views = {};
       }
       $localStorage.views[$stateParams.topic] = route;
-      $rootScope.$broadcast('topic-change', {
+
+      $state.go(route, {
         topic: $stateParams.topic
+      }, {
+        inherit: false,
+        reload: false
       });
     };
 
@@ -261,57 +259,6 @@ angular.module('TatUi')
         return;
       }
     };
-
-    $scope.$on('topic-change', function(e, meta) {
-      var topic = meta.topic.replace(/^\//, '');
-      var idMessage = meta.idMessage;
-      var reload = false;
-      if (meta.reload) {
-        reload = true;
-      }
-
-      TatEngineTopicRsc.oneTopic({
-        action: topic
-      }).$promise.then(function(data) {
-        if (!data.topic) {
-          Flash.create('danger', $translate.instant('topics_notopic'));
-          return;
-        }
-        var restrictedPlugin = Plugin.getPluginByRestriction(data.topic);
-        if (restrictedPlugin) {
-          $state.go(restrictedPlugin.route, {
-            topic: topic,
-            idMessage: idMessage
-          }, {
-            inherit: false,
-            reload: reload
-          });
-          return;
-        }
-        if ($localStorage && $localStorage.views && $localStorage.views[topic]) {
-          if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
-            $localStorage.views[topic] = Plugin.getDefaultPlugin(data.topic).route;
-          }
-          $state.go($localStorage.views[topic], {
-            topic: topic,
-            idMessage: idMessage
-          }, {
-            inherit: false,
-            reload: reload
-          });
-        } else {
-          $state.go(Plugin.getDefaultPlugin(data.topic).route, {
-            topic: topic,
-            idMessage: idMessage
-          }, {
-            inherit: false,
-            reload: reload
-          });
-        }
-      }, function(err) {
-        TatEngine.displayReturn(err);
-      });
-    });
 
     $scope.$on('loading', function(e, status) {
       self.loading = status;

@@ -21,6 +21,7 @@ angular.module('TatUi').component('sidebar', {
     TatEnginePresencesRsc,
     AuthenticationRsc,
     Authentication,
+    Linker,
     Plugin
   ) {
     'use strict';
@@ -68,11 +69,6 @@ angular.module('TatUi').component('sidebar', {
       self.data.toggle = !self.data.toggle;
       $cookieStore.put('toggle', self.data.toggle);
       $rootScope.$broadcast('toggle', self.data.toggle);
-    };
-
-    self.topicClick = function(topic) {
-      self.data.currentTopicName = topic;
-      $rootScope.$broadcast('topic-change', {topic: topic});
     };
 
     $scope.$watch(self.getWidth, function(newValue) {
@@ -209,20 +205,6 @@ angular.module('TatUi').component('sidebar', {
       self.data.isFirstCall = false;
     };
 
-    this.computeURL = function(topic) {
-      var restrictedPlugin = Plugin.getPluginByRestriction(topic);
-      if (restrictedPlugin) {
-        return $state.href(restrictedPlugin.route, {topic: topic.topic.substring(1)});
-      }
-      if ($localStorage && $localStorage.views && $localStorage.views[topic]) {
-        if (!Plugin.getPluginByRoute($localStorage.views[topic])) {
-          $localStorage.views[topic] = Plugin.getDefaultPlugin(data.topic).route;
-        }
-        return $state.href($localStorage.views[topic.topic], {topic: topic.topic.substring(1)});
-      }
-      return $state.href(Plugin.getDefaultPlugin(topic).route, {topic: topic.topic.substring(1)});
-    };
-
     this.computeTypeTopic = function(topic) {
       if (topic.topic.indexOf("/Internal") === 0) {
         topic.nameDisplayed = topic.topic.substr("/Internal/".length);
@@ -304,13 +286,12 @@ angular.module('TatUi').component('sidebar', {
       });
     };
 
-    self.directMessage = function(username) {
-      var me = Authentication.getIdentity().username;
-      if (me !== username) {
-        $rootScope.$broadcast('topic-change', {
-          topic: 'Private/'+ me +'/DM/'+ username
-        });
-      }
+    this.computeURL = function(topic) {
+      return Linker.computeURL(topic);
+    };
+
+    self.computeURLDM = function(toUsername) {
+      return Linker.computeURLDM(toUsername);
     };
 
     self.searchExit = function() {
