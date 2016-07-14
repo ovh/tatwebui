@@ -76,13 +76,13 @@
                         </th>
                         <td class="topics-description">{{ topicItem.description }}</td>
                         <td>
-                          <a role="button" data-ng-click="toggleTopicFavorite(topicItem)">
+                          <a role="button" data-ng-click="ctrl.toggleTopicFavorite(topicItem)">
                             <i class="fa" data-ng-class="{'fa-star-o':!topicItem.isFavoriteTopic, 'fa-star': topicItem.isFavoriteTopic}">
                             </i>
                           </a>
                           <a role="button"
                             title="{{ 'master-toggle-notification' | translate }}"
-                            data-ng-click="toggleNotificationsTopic(topicItem)">
+                            data-ng-click="ctrl.toggleNotificationsTopic(topicItem)">
                             <i class="fa" data-ng-class="{'fa-bell-o':!topicItem.isNotificationsOffTopic, 'fa-bell-slash': topicItem.isNotificationsOffTopic}">
                             </i>
                           </a>

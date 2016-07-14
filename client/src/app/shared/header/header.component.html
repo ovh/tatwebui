@@ -1,0 +1,117 @@
+<div class="row header" ng-show="ctrl.data.toggle">
+  <div class="col-xs-12">
+    <div class="user pull-right">
+      <div class="item dropdown" uib-dropdown>
+        <a role="button" class="dropdown-toggle" title="{{ ctrl.getUser('fullname') }}" uib-dropdown-toggle>
+          <i class="fa fa-cogs"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-header">
+            {{ ctrl.getUser('fullname') }}
+          </li>
+          <li class="divider"></li>
+          <li class="link">
+            <a ui-sref="users-list">
+              {{ 'master-users' | translate }}
+            </a>
+          </li>
+          <li class="link">
+            <a ui-sref="groups-list">
+              {{ 'master-groups' | translate }}
+            </a>
+          </li>
+          <li class="link" data-ng-if="isAdmin()">
+            <a ui-sref="sockets-admin">
+              {{ 'master-sockets' | translate }}
+            </a>
+          </li>
+          <li class="link">
+            <a ui-sref="topics-list">
+              {{ 'master-topics' | translate }}
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li class="link" data-ng-repeat="menuItem in ctrl.data.bottomMenu track by $index">
+            <a href="{{menuItem.url}}">
+              {{ menuItem.caption | translate}}
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li class="link">
+            <a ui-sref="user-profile">
+              {{ 'master-profile' | translate }}
+            </a>
+          </li>
+          <li class="link">
+            <a ui-sref="user-logout">
+              {{ 'master-logout' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="item dropdown" data-ng-if="ctrl.isMessagesView(ctrl.data.state)" uib-dropdown>
+       <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" uib-dropdown-toggle>
+          <i class="fa fa-eye"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-header">
+            {{ 'master-views' | translate }}
+          </li>
+          <li class="divider"></li>
+          <li ng-repeat="v in ctrl.getViews() track by v.name | orderBy:'name'">
+            <a role="button" ng-click="ctrl.switchView(v.route)">{{::v.name}}</a>
+          </li>
+          <li ng-hide="ctrl.data.viewsEnabled">
+            {{ 'master-cant-change-view' | translate }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tat-main-header">
+      <h1 data-ng-if="!ctrl.isMessagesView(ctrl.data.state)">
+        {{ title | translate }}
+      </h1>
+      <h1 data-ng-if="ctrl.isMessagesView(ctrl.data.state)">
+        <span>
+          {{ ctrl.getTitle(ctrl.data.state) }} &ndash;
+        </span>
+        <span>
+          {{ ctrl.data.topic.description }}
+        </span>
+        &nbsp;
+        <a role="button"
+          title="{{ 'master-toggle-presences' | translate }}"
+          ng-click="ctrl.togglePresences()"
+          ng-class="{'open': ctrl.data.isPresencesOpen}">
+          <i class="fa fa-street-view"></i>
+          <span class="badge">{{ ctrl.data.presences.length }}</span>
+        </a>
+        <a role="button"
+          data-ng-click="ctrl.toggleTopicFavorite()">
+          <i class="fa"
+            data-ng-class="{'fa-star-o':!ctrl.data.isFavoriteTopic, 'fa-star': ctrl.data.isFavoriteTopic}">
+          </i>
+        </a>
+        <a role="button"
+          title="{{ 'master-toggle-notification' | translate }}"
+          data-ng-click="ctrl.toggleNotificationsTopic()">
+          <i class="fa"
+            data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
+          </i>
+        </a>
+        <a title="{{ 'master-topic-configuration' | translate }}" data-ng-if="ctrl.canEditTopic(ctrl.data.topic)" ui-sref="topics-edit({topicRoute:ctrl.data.topic.topic})">
+          <i class="fa fa-pencil"></i>
+        </a>
+        <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.data.loading">
+      </h1>
+      <h2 data-ng-if="ctrl.isMessagesView(ctrl.data.state)">
+        <span data-ng-repeat="sub in title track by $index">
+          <i class="fa fa-caret-right"></i>
+          <a data-ng-href="#" data-ng-click="ctrl.topicClickHeader(title, sub, $index)">{{ sub }}</a>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>

@@ -401,6 +401,15 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.shared:header",
+      "shortName": "header",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "shortDescription": "header",
+      "keywords": "api directive header shared tatui"
+    },
+    {
+      "section": "api",
       "id": "TatUi.shared:messageBox",
       "shortName": "messageBox",
       "type": "directive",

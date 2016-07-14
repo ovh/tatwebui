@@ -162,6 +162,7 @@ angular.module('TatUi').component('sidebar', {
     });
 
     self.getTopicList = function() {
+      console.log("getTopicList");
       TatEngineTopicsRsc.list({
         getNbMsgUnread: !self.data.isFirstCall,
         onlyFavorites: self.data.mode === "favorites"

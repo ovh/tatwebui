@@ -120,6 +120,7 @@
     <script src="src/app/shared/message-label/message-label.component.js"></script>
     <script src="src/app/shared/message-box/message-box.component.js"></script>
     <script src="src/app/shared/sidebar/sidebar.component.js"></script>
+    <script src="src/app/shared/header/header.component.js"></script>
     <script src="src/app/shared/message-reply/message-reply.component.js"></script>
     <script src="src/app/shared/authentication/authentication.provider.js"></script>
     <script src="src/app/shared/authentication/authentication.resource.js"></script>
@@ -175,124 +176,7 @@
       <div class="page-content">
 
         <!-- Header Bar -->
-        <div class="row header" ng-show="ctrl.data.toggle">
-          <div class="col-xs-12">
-            <div class="user pull-right">
-              <div class="item dropdown" uib-dropdown>
-                <a role="button" class="dropdown-toggle" title="{{ getUser('fullname') }}" uib-dropdown-toggle>
-                  <i class="fa fa-cogs"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="dropdown-header">
-                    {{ getUser('fullname') }}
-                  </li>
-                  <li class="divider"></li>
-                  <li class="link">
-                    <a ui-sref="users-list">
-                      {{ 'master-users' | translate }}
-                    </a>
-                  </li>
-                  <li class="link">
-                    <a ui-sref="groups-list">
-                      {{ 'master-groups' | translate }}
-                    </a>
-                  </li>
-                  <li class="link" data-ng-if="isAdmin()">
-                    <a ui-sref="sockets-admin">
-                      {{ 'master-sockets' | translate }}
-                    </a>
-                  </li>
-                  <li class="link">
-                    <a ui-sref="topics-list">
-                      {{ 'master-topics' | translate }}
-                    </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li class="link" data-ng-repeat="menuItem in bottomMenu track by $index">
-                    <a href="{{menuItem.url}}">
-                      {{ menuItem.caption | translate}}
-                    </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li class="link">
-                    <a ui-sref="user-profile">
-                      {{ 'master-profile' | translate }}
-                    </a>
-                  </li>
-                  <li class="link">
-                    <a ui-sref="user-logout">
-                      {{ 'master-logout' | translate }}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="item dropdown" data-ng-if="isMessagesView(ctrl.data.state)" uib-dropdown>
-               <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" uib-dropdown-toggle>
-                  <i class="fa fa-eye"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="dropdown-header">
-                    {{ 'master-views' | translate }}
-                  </li>
-                  <li class="divider"></li>
-                  <li ng-repeat="v in getViews() track by v.name | orderBy:'name'">
-                    <a role="button" ng-click="switchView(v.route)">{{::v.name}}</a>
-                  </li>
-                  <li ng-hide="ctrl.data.viewsEnabled">
-                    {{ 'master-cant-change-view' | translate }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="tat-main-header">
-              <h1 data-ng-if="!isMessagesView(ctrl.data.state)">
-                {{ title | translate }}
-              </h1>
-              <h1 data-ng-if="isMessagesView(ctrl.data.state)">
-                <span>
-                  {{ getTitle(ctrl.data.state) }} &ndash;
-                </span>
-                <span>
-                  {{ ctrl.data.topic.description }}
-                </span>
-                &nbsp;
-                <a role="button"
-                  title="{{ 'master-toggle-presences' | translate }}"
-                  ng-click="ctrl.togglePresences()"
-                  ng-class="{'open': ctrl.data.isPresencesOpen}">
-                  <i class="fa fa-street-view"></i>
-                  <span class="badge">{{ presences.length }}</span>
-                </a>
-                <a role="button"
-                  data-ng-click="ctrl.toggleTopicFavorite()">
-                  <i class="fa"
-                    data-ng-class="{'fa-star-o':!ctrl.data.isFavoriteTopic, 'fa-star': ctrl.data.isFavoriteTopic}">
-                  </i>
-                </a>
-                <a role="button"
-                  title="{{ 'master-toggle-notification' | translate }}"
-                  data-ng-click="ctrl.toggleNotificationsTopic()">
-                  <i class="fa"
-                    data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
-                  </i>
-                </a>
-                <a title="{{ 'master-topic-configuration' | translate }}" data-ng-if="canEditTopic(ctrl.data.topic)" ui-sref="topics-edit({topicRoute:ctrl.data.topic.topic})">
-                  <i class="fa fa-pencil"></i>
-                </a>
-                <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.loading">
-              </h1>
-              <h2 data-ng-if="isMessagesView(ctrl.data.state)">
-                <span data-ng-repeat="sub in title track by $index">
-                  <i class="fa fa-caret-right"></i>
-                  <a data-ng-href="#" data-ng-click="topicClickHeader(title, sub, $index)">{{ sub }}</a>
-                </span>
-              </h2>
-            </div>
-          </div>
-        </div>
-        <!-- End Header Bar -->
+        <header></header>
 
         <!-- Main Content -->
         <div ui-view></div>
