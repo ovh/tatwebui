@@ -1,20 +1,24 @@
-<div class="tat-admin" data-ng-controller="GroupsNewCtrl">
+<div class="page-content">
 
-  <div class="row">
-    <div class="col-lg-6">
-      <form role="form">
-        <div class="form-group">
-          <label for="groupname">{{ 'shared_common_name' | translate}}</label>
-          <input type="text" class="form-control" id="groupname" data-ng-model="group.name">
-        </div>
-        <div class="form-group">
-          <label for="description">{{ 'shared_common_description' | translate}}</label>
-          <input type="text" class="form-control" id="description" data-ng-model="group.description">
-        </div>
-        <button type="submit" class="btn btn-default" data-ng-click="createGroup()">
-          {{ 'shared_common_create' | translate}}
-        </button>
-      </form>
+  <header></header>
+
+  <div class="tat-admin" data-ng-controller="GroupsNewCtrl">
+    <div class="row">
+      <div class="col-lg-6">
+        <form role="form">
+          <div class="form-group">
+            <label for="groupname">{{ 'shared_common_name' | translate}}</label>
+            <input type="text" class="form-control" id="groupname" data-ng-model="group.name">
+          </div>
+          <div class="form-group">
+            <label for="description">{{ 'shared_common_description' | translate}}</label>
+            <input type="text" class="form-control" id="description" data-ng-model="group.description">
+          </div>
+          <button type="submit" class="btn btn-default" data-ng-click="createGroup()">
+            {{ 'shared_common_create' | translate}}
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 

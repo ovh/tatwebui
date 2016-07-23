@@ -17,4 +17,5 @@
     <translation id="components_user_date">Inscription</translation>
     <translation id="components_user_username">Username</translation>
     <translation id="components_user_reset">Ask for reset a new password</translation>
+    <translation id="components_user_attached_groups">Attached Groups</translation>
 </translations>

@@ -28,7 +28,7 @@ angular.module('TatUi').service('AuthenticationRsc', function($resource) {
 
     /**
      * @ngdoc function
-     * @name verify 
+     * @name verify
      * @methodOf TatUi.AuthenticationRsc
      * @module TatUi
      * @description

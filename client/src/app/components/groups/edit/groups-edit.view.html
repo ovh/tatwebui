@@ -1,75 +1,79 @@
-<div class="tat-admin" data-ng-controller="GroupsEditCtrl">
+<div class="page-content">
 
-  <div class="row">
+  <header></header>
+
+  <div class="tat-admin" data-ng-controller="GroupsEditCtrl">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="group-profile">
+                <div>
+                    <label>{{ 'shared_common_name' | translate }}</label> : <span>{{group.name}}</span>
+                </div>
+                <div>
+                    <label>{{ 'shared_common_description' | translate }}</label> : <span>{{group.description}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="isAdmin() || data.isAdminOnGroup">
       <div class="col-lg-6">
-          <div class="group-profile">
-              <div>
-                  <label>{{ 'shared_common_name' | translate }}</label> : <span>{{group.name}}</span>
-              </div>
-              <div>
-                  <label>{{ 'shared_common_description' | translate }}</label> : <span>{{group.description}}</span>
-              </div>
-          </div>
+        <ui-select data-ng-model="user.selected" theme="bootstrap">
+          <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
+          <ui-select-choices repeat="item in users | filter: $select.search">
+            <div>{{item.username}}</div>
+          </ui-select-choices>
+        </ui-select>
+        <button type="button" class="btn btn-default" data-ng-click="addUser()">{{ 'components_groups_add_user' | translate}}</button>
+        <button type="button" class="btn btn-default" data-ng-click="addAdmin()">{{ 'components_groups_add_admin' | translate}}</button>
+        <p class="alert alert-info">{{ 'components_groups_info_admin' | translate }}</p>
       </div>
-  </div>
-  <div class="row" ng-if="isAdmin() || data.isAdminOnGroup">
-    <div class="col-lg-6">
-      <ui-select data-ng-model="user.selected" theme="bootstrap">
-        <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
-        <ui-select-choices repeat="item in users | filter: $select.search">
-          <div>{{item.username}}</div>
-        </ui-select-choices>
-      </ui-select>
-      <button type="button" class="btn btn-default" data-ng-click="addUser()">{{ 'components_groups_add_user' | translate}}</button>
-      <button type="button" class="btn btn-default" data-ng-click="addAdmin()">{{ 'components_groups_add_admin' | translate}}</button>
-      <p class="alert alert-info">{{ 'components_groups_info_admin' | translate }}</p>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6">
-      <b>{{ 'shared_common_users' | translate }} : </b>
-      <ul>
-        <li data-ng-repeat="(k, v) in group.users">
-          <a ui-sref="users-edit({username:v})">{{v}}</a>
-          <span data-ng-if="isAdmin() || data.isAdminOnGroup">
-            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
-               <i class="fa fa-trash-o"></i>
-            </button>
-            <button data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
-                      class="btn btn-xs btn-info">
-                      {{ 'components_groups_dont_want_remove_group' | translate}}
-                <i class="fa fa-reply"></i>
-            </button>
-            <button data-ng-click="removeUser(v);" data-ng-show="askRemoveUser"
-                      class="btn btn-xs btn-warning">
-               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
-            </button>
-          </span>
-        </li>
-      </ul>
-    </div>
-    <div class="col-lg-6">
-      <b>{{ 'shared_common_administrators' | translate }} : </b>
-      <ul>
-        <li data-ng-repeat="(k, v) in group.adminUsers">
-          <a ui-sref="users-edit({username:v})">{{v}}</a>
-          <span data-ng-if="isAdmin() || data.isAdminOnGroup">
-            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdmin=true" data-ng-hide="askRemoveAdmin">
-               <i class="fa fa-trash-o"></i>
-            </button>
-            <button data-ng-click="askRemoveAdmin=false" data-ng-show="askRemoveAdmin"
-                      class="btn btn-xs btn-info">
-                      {{ 'components_groups_dont_want_remove_group' | translate}}
-                <i class="fa fa-reply"></i>
-            </button>
-            <button data-ng-click="removeAdmin(v);" data-ng-show="askRemoveAdmin"
-                      class="btn btn-xs btn-warning">
-               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
-            </button>
-          </span>
-        </li>
-      </ul>
-    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <b>{{ 'shared_common_users' | translate }} : </b>
+        <ul>
+          <li data-ng-repeat="(k, v) in group.users">
+            <a ui-sref="users-edit({username:v})">{{v}}</a>
+            <span data-ng-if="isAdmin() || data.isAdminOnGroup">
+              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
+                 <i class="fa fa-trash-o"></i>
+              </button>
+              <button data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
+                        class="btn btn-xs btn-info">
+                        {{ 'components_groups_dont_want_remove_group' | translate}}
+                  <i class="fa fa-reply"></i>
+              </button>
+              <button data-ng-click="removeUser(v);" data-ng-show="askRemoveUser"
+                        class="btn btn-xs btn-warning">
+                 {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+              </button>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <b>{{ 'shared_common_administrators' | translate }} : </b>
+        <ul>
+          <li data-ng-repeat="(k, v) in group.adminUsers">
+            <a ui-sref="users-edit({username:v})">{{v}}</a>
+            <span data-ng-if="isAdmin() || data.isAdminOnGroup">
+              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdmin=true" data-ng-hide="askRemoveAdmin">
+                 <i class="fa fa-trash-o"></i>
+              </button>
+              <button data-ng-click="askRemoveAdmin=false" data-ng-show="askRemoveAdmin"
+                        class="btn btn-xs btn-info">
+                        {{ 'components_groups_dont_want_remove_group' | translate}}
+                  <i class="fa fa-reply"></i>
+              </button>
+              <button data-ng-click="removeAdmin(v);" data-ng-show="askRemoveAdmin"
+                        class="btn btn-xs btn-warning">
+                 {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+              </button>
+            </span>
+          </li>
+        </ul>
+      </div>
 
+    </div>
   </div>
 </div>

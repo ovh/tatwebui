@@ -6,8 +6,8 @@
  * @description
  * Sidebar
  */
-angular.module('TatUi').component('sidebar', {
-  controllerAs: 'ctrl',
+angular.module("TatUi").component("sidebar", {
+  controllerAs: "ctrl",
   controller: function(
     $scope,
     $state,
@@ -16,6 +16,7 @@ angular.module('TatUi').component('sidebar', {
     $rootScope,
     $localStorage,
     $interval,
+    TatEngine,
     TatEngineTopicsRsc,
     TatEngineUserRsc,
     TatEnginePresencesRsc,
@@ -24,7 +25,7 @@ angular.module('TatUi').component('sidebar', {
     Linker,
     Plugin
   ) {
-    'use strict';
+    "use strict";
     var self = this;
 
     this.data = {
@@ -34,6 +35,7 @@ angular.module('TatUi').component('sidebar', {
       mode: "all",
       isSearch: false,
       loading: true,
+      showSidebar: true,
       isPresencesOpen: false,
       username: Authentication.getIdentity().username,
       currentTopicName : "",
@@ -66,29 +68,18 @@ angular.module('TatUi').component('sidebar', {
     };
 
     self.toggleSidebar = function() {
-      self.data.toggle = !self.data.toggle;
-      $cookieStore.put('toggle', self.data.toggle);
-      $rootScope.$broadcast('toggle', self.data.toggle);
+      self.data.showSidebar = !self.data.showSidebar;
+      $cookieStore.put("showSidebar", self.data.showSidebar);
+      $rootScope.$broadcast("showSidebar", self.data.showSidebar);
     };
 
-    $scope.$watch(self.getWidth, function(newValue) {
-      if (newValue >= self.data.mobileView) {
-        if (angular.isDefined($cookieStore.get('toggle'))) {
-          self.data.toggle = !$cookieStore.get('toggle') ? false : true;
-        } else {
-          self.data.toggle = true;
-        }
-      } else {
-        //self.data.toggle = false;
-      }
-      $rootScope.$broadcast('toggle', self.data.toggle);
-    });
-
-    $scope.$on('topic-change', function(e, meta) {
+    $scope.$on("topic-change", function(e, meta) {
+      console.log("on topic-change, with meta:", meta);
       self.data.currentTopicName = meta.topic;
     });
 
-    $scope.$on('sidebar-reload', function(e, meta) {
+    $scope.$on("sidebar-reload", function(e, meta) {
+      console.log("on sidebar-reload with meta:", meta);
       self.stopTimer();
       self.init();
     });
@@ -103,18 +94,18 @@ angular.module('TatUi').component('sidebar', {
 
     self.init = function() {
       self.data.loading = true;
-      if (angular.isDefined($cookieStore.get('toggle'))) {
-        self.data.toggle = $cookieStore.get('toggle');
+      if (angular.isDefined($cookieStore.get("showSidebar"))) {
+        self.data.showSidebar = $cookieStore.get("showSidebar");
       } else {
-        self.data.toggle = true;
+        self.data.showSidebar = true;
       }
 
       self.data.favorites = {};
       AuthenticationRsc.getInfo({}).$promise.then(function(data) {
         if (data.user.favoritesTopics) {
-            for (var i = 0; i < data.user.favoritesTopics.length; i++) {
-              self.data.favorites[data.user.favoritesTopics[i]] = true;
-            }
+          for (var i = 0; i < data.user.favoritesTopics.length; i++) {
+            self.data.favorites[data.user.favoritesTopics[i]] = true;
+          }
         }
         if ($localStorage.sidebarMode && $localStorage.sidebarMode !== "") {
           self.setMode($localStorage.sidebarMode);
@@ -157,12 +148,15 @@ angular.module('TatUi').component('sidebar', {
       });
     };
 
-    $scope.$on('sidebar-change', function(event, data) {
-      self.data.currentTopicName = data.topic.topic;
+    $scope.$on("sidebar-change", function(event, topicName) {
+      self.data.currentTopicName = topicName;
     });
 
+    self.selectTopic = function(topicName) {
+      self.data.currentTopicName = topicName;
+    };
+
     self.getTopicList = function() {
-      console.log("getTopicList");
       TatEngineTopicsRsc.list({
         getNbMsgUnread: !self.data.isFirstCall,
         onlyFavorites: self.data.mode === "favorites"
@@ -209,13 +203,13 @@ angular.module('TatUi').component('sidebar', {
     this.computeTypeTopic = function(topic) {
       if (topic.topic.indexOf("/Internal") === 0) {
         topic.nameDisplayed = topic.topic.substr("/Internal/".length);
-        if (topic.nameDisplayed === '') {
+        if (topic.nameDisplayed === "") {
           return "toSkip"; // "/Internal";
         }
         return "internal";
       } else if (topic.topic.indexOf("/Private/" + self.data.username + "/DM/") === 0) {
         topic.nameDisplayed = topic.topic.substr(("/Private/" + self.data.username + "/DM/").length);
-        if (topic.nameDisplayed === '') {
+        if (topic.nameDisplayed === "") {
           return "toSkip";
         }
         return "privateDm";
@@ -223,13 +217,13 @@ angular.module('TatUi').component('sidebar', {
         return "toSkip";
       } else if (topic.topic.indexOf("/Private/" + self.data.username) === 0) {
         topic.nameDisplayed = topic.topic.substr(("/Private/" + self.data.username+"/").length);
-        if (topic.nameDisplayed === '') {
+        if (topic.nameDisplayed === "") {
           topic.nameDisplayed = self.data.username;
         }
         return "private";
       } else if (topic.topic.indexOf("/Private/") === 0) {
         topic.nameDisplayed = topic.topic.substr("/Private/".length);
-        if (topic.nameDisplayed === '') {
+        if (topic.nameDisplayed === "") {
           return "toSkip";
         }
         return "privateOthers";
@@ -237,14 +231,14 @@ angular.module('TatUi').component('sidebar', {
     };
 
     self.searchEnter = function() {
-      angular.element('#searchbox').focus();
+      angular.element("#searchbox").focus();
     };
 
     self.searchKey = function(keyCode) {
       if (!self.data.isSearch) {
         self.data.previousMode = self.data.mode;
         if (self.data.previousMode !== "all") {
-          self.setMode('all');
+          self.setMode("all");
         }
         self.data.isSearch = true;
       } else if (self.data.filtertopic === ""){
@@ -252,10 +246,11 @@ angular.module('TatUi').component('sidebar', {
       }
     };
 
-    $scope.$on('presences-refresh', function(e) {
+    $scope.$on("presences-refresh", function(e) {
       self.loadPresences();
     });
-    $scope.$on('presences-toggle', function(e) {
+
+    $scope.$on("presences-toggle", function(e) {
       self.togglePresences();
     });
 
@@ -307,7 +302,7 @@ angular.module('TatUi').component('sidebar', {
     };
 
     self.beginTimer = function() {
-      if ('undefined' === typeof self.data.timer) {
+      if ("undefined" === typeof self.data.timer) {
         self.data.timer = $interval(self.getTopicList, self.data.requestFrequency);
         $scope.$on("$destroy", function() { self.stopTimer(); });
       }
@@ -320,5 +315,5 @@ angular.module('TatUi').component('sidebar', {
 
     self.init();
   },
-  templateUrl: 'app/shared/sidebar/sidebar.component.html'
+  templateUrl: "app/shared/sidebar/sidebar.component.html"
 });

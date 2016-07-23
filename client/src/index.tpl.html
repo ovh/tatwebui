@@ -48,7 +48,6 @@
     <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
     <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
     <script src="bower_components/angular-component/dist/angular-component.min.js"></script>
-    <script src="bower_components/ng-websocket/ng-websocket.js"></script>
     <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/ngDraggable/ngDraggable.js"></script>
@@ -112,8 +111,6 @@
     <script src="src/app/components/users/edit/users-edit.route.js"></script>
     <script src="src/app/components/users/list/users-list.controller.js"></script>
     <script src="src/app/components/users/list/users-list.route.js"></script>
-    <script src="src/app/components/sockets/admin/sockets-admin.controller.js"></script>
-    <script src="src/app/components/sockets/admin/sockets-admin.route.js"></script>
     <script src="src/app/shared/message-filter/message-filter.component.js"></script>
     <script src="src/app/shared/message-filter/message-filter-bar.component.js"></script>
     <script src="src/app/shared/message-vote/message-vote.component.js"></script>
@@ -126,6 +123,7 @@
     <script src="src/app/shared/authentication/authentication.resource.js"></script>
     <script src="src/app/shared/identity/identity.provider.js"></script>
     <script src="src/app/shared/filter/filter.provider.js"></script>
+    <script src="src/app/shared/topic/topic.provider.js"></script>
     <script src="src/app/shared/loading/loading.directive.js"></script>
     <script src="src/app/shared/linker/linker.provider.js"></script>
     <script src="src/app/shared/master/master.controller.js"></script>
@@ -146,10 +144,8 @@
     <script src="src/app/shared/tat-engine/resources/presences.resource.js"></script>
     <script src="src/app/shared/tat-engine/resources/topics.resource.js"></script>
     <script src="src/app/shared/tat-engine/resources/users.resource.js"></script>
-    <script src="src/app/shared/tat-engine/resources/sockets.resource.js"></script>
     <script src="src/app/shared/tat-engine/resources/system.resource.js"></script>
     <script src="src/app/shared/user-display/user-display.directive.js"></script>
-    <script src="src/app/shared/web-socket/web-socket.provider.js"></script>
     <script src="src/app/shared/widget/widget-header.directive.js"></script>
     <script src="src/app/shared/widget/widget.directive.js"></script>
     <script src="src/app/shared/widget/widget-body.directive.js"></script>
@@ -166,22 +162,20 @@
 
 </head>
 <body data-ng-controller="MasterCtrl as ctrl">
-  <div id="page-wrapper" data-ng-class="{'open': ctrl.data.toggle}" data-ng-cloak data-ng-if="isConnected()">
+  <div id="page-wrapper" data-ng-class="{'open': ctrl.data.showSidebar}" data-ng-cloak data-ng-if="isConnected()">
 
     <!-- Sidebar -->
     <sidebar></sidebar>
     <!-- End Sidebar -->
 
     <div id="content-wrapper">
-      <div class="page-content">
+      <!-- Flash messages -->
+      <div class="notification" ng-show="hasFlash">
+        <div flash-message="5000"></div>
+      </div>
 
-        <!-- Header Bar -->
-        <header></header>
-
-        <!-- Main Content -->
-        <div ui-view></div>
-
-      </div><!-- End Page Content -->
+      <div ui-view></div>
+      
     </div><!-- End Content Wrapper -->
   </div><!-- End Page Wrapper -->
   <div data-ng-if="!isConnected()" ui-view class="tat-login"></div>

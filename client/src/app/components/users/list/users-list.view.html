@@ -1,45 +1,50 @@
-<div class="tat-admin users" data-ng-controller="UsersListCtrl">
+<div class="page-content">
 
-    <div data-ng-if="data.count==0" class="alert alert-warning">
-      {{ 'users-nouser' | translate }}
-    </div>
+  <header></header>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <rd-widget>
-          <rd-widget-header icon="fa-group" title="{{data.users.length}} {{ 'components_users_count_of_total' | translate }} {{data.count}}">
-              <input data-ng-model="data.filterList" type="text" placeholder="{{ 'components_users_search_by_username' | translate }}" class="form-control">
-          </rd-widget-header>
-          <rd-widget-body classes="no-padding">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>{{ 'shared_common_full_name' | translate }}</th>
-                    <th>{{ 'shared_common_username' | translate }}</th>
-                    <th data-ng-if="isAdmin()">{{ 'shared_common_created_at' | translate }}</th>
-                    <th data-ng-if="isAdmin()"></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <tr data-ng-repeat="userItem in data.users | filter:data.filterList" class="users-first-row">
-                        <th class="users-author">
-                          <user-display username="userItem.username" fullname="userItem.fullname">
-                          <i class="fa fa-user-md" data-ng-if="userItem.isAdmin" title="Admin"></i>
-                        </th>
-                        <td class="users-username"><user-display username="userItem.username"></td>
-                        <td class="users-date" data-ng-if="isAdmin()">{{ userItem.dateCreation  * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-                        <td class="users-action" data-ng-if="isAdmin()">
-                          <a class="btn btn-default" ui-sref="users-edit({username:userItem.username})">
-                            <i class="fa fa-edit"></i>
-                          </a>
-                        </td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>
-          </rd-widget-body>
-        </rd-widget>
+  <div class="tat-admin users" data-ng-controller="UsersListCtrl">
+      <div data-ng-if="data.count==0" class="alert alert-warning">
+        {{ 'users-nouser' | translate }}
       </div>
-    </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <rd-widget>
+            <rd-widget-header icon="fa-group" title="{{data.users.length}} {{ 'components_users_count_of_total' | translate }} {{data.count}}">
+                <input data-ng-model="data.filterList" type="text" placeholder="{{ 'components_users_search_by_username' | translate }}" class="form-control">
+            </rd-widget-header>
+            <rd-widget-body classes="no-padding">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>{{ 'shared_common_full_name' | translate }}</th>
+                      <th>{{ 'shared_common_username' | translate }}</th>
+                      <th data-ng-if="isAdmin()">{{ 'shared_common_created_at' | translate }}</th>
+                      <th data-ng-if="isAdmin()"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-ng-repeat="userItem in data.users | filter:data.filterList" class="users-first-row">
+                          <th class="users-author">
+                            <user-display username="userItem.username" fullname="userItem.fullname">
+                            <i class="fa fa-user-md" data-ng-if="userItem.isAdmin" title="Admin"></i>
+                          </th>
+                          <td class="users-username"><user-display username="userItem.username"></td>
+                          <td class="users-date" data-ng-if="isAdmin()">{{ userItem.dateCreation  * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                          <td class="users-action" data-ng-if="isAdmin()">
+                            <a class="btn btn-default" ui-sref="users-edit({username:userItem.username})">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                          </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </rd-widget-body>
+          </rd-widget>
+        </div>
+      </div>
+  </div>
+
 </div>

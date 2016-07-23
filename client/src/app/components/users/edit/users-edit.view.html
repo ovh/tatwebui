@@ -1,159 +1,164 @@
-<div class="tat-admin" data-ng-controller="UsersEditCtrl">
+<div class="page-content">
 
-  <div class="row">
-      <div class="col-lg-6">
-          <div class="user-profile">
-              <div>
-                  <label>{{ 'components_user_name' | translate }}</label><span>{{user.fullname}}</span>
-              </div>
-              <div>
-                  <label>{{ 'components_user_username' | translate }}</label><span>{{user.username}}</span>
-              </div>
-              <div>
-                  <label>{{ 'components_user_email' | translate }}</label><span>{{user.email}}</span>
-              </div>
-              <div data-ng-if="isAdmin()">
-                  <label>{{ 'components_user_date' | translate }}</label><span>{{ user.dateCreation  * 1000 | amCalendar }}</span>
-              </div>
-              <div data-ng-if="user.isAdmin">
-                  <label>{{ 'shared_common_administrator' | translate }}</label>
-              </div>
-          </div>
-      </div>
-  </div>
+  <header></header>
 
-  <div class="row">
-    <div class="btn-group-vertical" role="group" aria-label="...">
-      <div class="btn-group" role="group">
-        <button class="btn btn-default" data-ng-click="askArchiveUser=true" data-ng-hide="askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
-           {{ 'components_users_archive' | translate}}
-        </button>
-        <button data-ng-click="askArchiveUser=false" data-ng-show="askArchiveUser"
-                  class="btn btn-info">
-                  {{ 'components_users_dont_want_archive' | translate}}
-            <i class="fa fa-reply"></i>
-        </button>
-        <button data-ng-click="archiveUser()" data-ng-show="askArchiveUser"
-                  class="btn btn-warning">
-           {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
-        </button>
-
-        <button class="btn btn-default" data-ng-click="askConvertSystemUser=true" data-ng-hide="user.isAdmin || askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
-           {{ 'components_users_convert_to_system' | translate}}
-        </button>
-        <button data-ng-click="askConvertSystemUser=false" data-ng-show="askConvertSystemUser"
-                  class="btn btn-info">
-                  {{ 'components_users_dont_want_convert_system' | translate}}
-            <i class="fa fa-reply"></i>
-        </button>
-        <button data-ng-click="convertSystemUser(true);" data-ng-show="askConvertSystemUser"
-                  class="btn btn-warning">
-            {{ 'shared_common_yes_i_confirm' | translate}}
-            {{ 'components_users_with_write_notifications' | translate}}
-            <i class="fa fa-exclamation-triangle"></i>
-        </button>
-        <button data-ng-click="convertSystemUser(false);" data-ng-show="askConvertSystemUser"
-                  class="btn btn-warning">
-            {{ 'shared_common_yes_i_confirm' | translate}}
-            {{ 'components_users_without_write_notifications' | translate}}
-            <i class="fa fa-exclamation-triangle"></i>
-        </button>
-
-        <button class="btn btn-default" data-ng-click="askConvertAdminUser=true" data-ng-hide="user.isAdmin || askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
-           <i class="fa fa-user-md"></i> {{ 'components_users_convert_to_admin' | translate}}
-        </button>
-        <button data-ng-click="askConvertAdminUser=false" data-ng-show="askConvertAdminUser"
-                  class="btn btn-info">
-                  {{ 'components_users_dont_want_convert_admin' | translate}}
-            <i class="fa fa-reply"></i>
-        </button>
-        <button data-ng-click="convertAdminUser();" data-ng-show="askConvertAdminUser"
-                  class="btn btn-warning">
-           {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
-        </button>
-
-        <button class="btn btn-default" data-ng-click="askRenameUser=true" data-ng-hide="askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
-           {{ 'components_users_rename' | translate}}
-        </button>
-        <button data-ng-click="askRenameUser=false" data-ng-show="askRenameUser"
-                  class="btn btn-info">
-                  {{ 'components_users_dont_want_rename' | translate}}
-            <i class="fa fa-reply"></i>
-        </button>
-
-        <div class="form-group" data-ng-show="askRenameUser">
-          <label for="username">{{ 'components_users_new_username' | translate}} : </label>
-          <input type="text" class="form-control" id="username" data-ng-model="newUsername">
+  <div class="tat-admin" data-ng-controller="UsersEditCtrl">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="user-profile">
+                <div>
+                    <label>{{ 'components_user_name' | translate }}</label><span>{{user.fullname}}</span>
+                </div>
+                <div>
+                    <label>{{ 'components_user_username' | translate }}</label><span>{{user.username}}</span>
+                </div>
+                <div>
+                    <label>{{ 'components_user_email' | translate }}</label><span>{{user.email}}</span>
+                </div>
+                <div data-ng-if="isAdmin()">
+                    <label>{{ 'components_user_date' | translate }}</label><span>{{ user.dateCreation  * 1000 | amCalendar }}</span>
+                </div>
+                <div data-ng-if="user.isAdmin" class="alert alert-warning">
+                    {{user.fullname}} {{ 'shared_common_is' | translate}} {{ 'shared_common_administrator' | translate }}
+                </div>
+            </div>
         </div>
-
-        <button data-ng-click="renameUser();" data-ng-show="askRenameUser" data-ng-disabled="!newUsername"
-                  class="btn btn-warning">
-           {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
-        </button>
-
-        <button class="btn btn-default" data-ng-click="askUpdateUser=true" data-ng-hide="askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
-           {{ 'components_users_update' | translate}}
-        </button>
-        <button data-ng-click="askUpdateUser=false" data-ng-show="askUpdateUser"
-                  class="btn btn-info">
-                  {{ 'components_users_dont_want_update' | translate}}
-            <i class="fa fa-reply"></i>
-        </button>
-
-        <div class="form-group" data-ng-show="askUpdateUser">
-          <label for="newFullname">{{ 'components_users_new_fullname' | translate}} : </label>
-          <input type="text" class="form-control" id="newFullname" data-ng-model="newFullname">
-        </div>
-        <div class="form-group" data-ng-show="askUpdateUser">
-          <label for="newEmail">{{ 'components_users_new_email' | translate}} : </label>
-          <input type="text" class="form-control" id="newEmail" data-ng-model="newEmail">
-        </div>
-
-        <button data-ng-click="updateUser();" data-ng-show="askUpdateUser" data-ng-disabled="!newFullname || !newEmail"
-                  class="btn btn-warning">
-           {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
-        </button>
-      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <h4>{{ 'shared_common_groups' | translate }}</h4>
-    <div class="col-lg-6">
-        <ui-select data-ng-model="group.selected" theme="bootstrap">
-          <ui-select-match placeholder="Select or search a group in the list...">
-            {{$select.selected.name}}
-          </ui-select-match>
-          <ui-select-choices repeat="item in groups | filter: $select.search">
-            <div>{{item.name}}</div>
-          </ui-select-choices>
-        </ui-select>
-        <button type="button" class="btn btn-default" data-ng-disabled="!group.selected" data-ng-click="addUserInGroup()">
-          {{ 'components_users_add_to_group' | translate}}
-        </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6">
-      <b>{{ 'components_user_groups' | translate }} : </b>
-      <ul>
-        <li data-ng-repeat="(k, v) in user.groups">
-          <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
-
-          <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
-             <i class="fa fa-trash-o"></i>
+    <div class="row">
+      <div class="btn-group-vertical" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <button class="btn btn-default" data-ng-click="askArchiveUser=true" data-ng-hide="askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
+             {{ 'components_users_archive' | translate}}
           </button>
-          <button data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
-                    class="btn btn-xs btn-info">
-                    {{ 'components_users_dont_want_remove_group' | translate}}
+          <button data-ng-click="askArchiveUser=false" data-ng-show="askArchiveUser"
+                    class="btn btn-info">
+                    {{ 'components_users_dont_want_archive' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <button data-ng-click="removeUserFromGroup(v);" data-ng-show="askRemoveUser"
-                    class="btn btn-xs btn-warning">
+          <button data-ng-click="archiveUser()" data-ng-show="askArchiveUser"
+                    class="btn btn-warning">
              {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
           </button>
-        </li>
-      </ul>
+
+          <button class="btn btn-default" data-ng-click="askConvertSystemUser=true" data-ng-hide="user.isAdmin || askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
+             {{ 'components_users_convert_to_system' | translate}}
+          </button>
+          <button data-ng-click="askConvertSystemUser=false" data-ng-show="askConvertSystemUser"
+                    class="btn btn-info">
+                    {{ 'components_users_dont_want_convert_system' | translate}}
+              <i class="fa fa-reply"></i>
+          </button>
+          <button data-ng-click="convertSystemUser(true);" data-ng-show="askConvertSystemUser"
+                    class="btn btn-warning">
+              {{ 'shared_common_yes_i_confirm' | translate}}
+              {{ 'components_users_with_write_notifications' | translate}}
+              <i class="fa fa-exclamation-triangle"></i>
+          </button>
+          <button data-ng-click="convertSystemUser(false);" data-ng-show="askConvertSystemUser"
+                    class="btn btn-warning">
+              {{ 'shared_common_yes_i_confirm' | translate}}
+              {{ 'components_users_without_write_notifications' | translate}}
+              <i class="fa fa-exclamation-triangle"></i>
+          </button>
+
+          <button class="btn btn-default" data-ng-click="askConvertAdminUser=true" data-ng-hide="user.isAdmin || askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
+             <i class="fa fa-user-md"></i> {{ 'components_users_convert_to_admin' | translate}}
+          </button>
+          <button data-ng-click="askConvertAdminUser=false" data-ng-show="askConvertAdminUser"
+                    class="btn btn-info">
+                    {{ 'components_users_dont_want_convert_admin' | translate}}
+              <i class="fa fa-reply"></i>
+          </button>
+          <button data-ng-click="convertAdminUser();" data-ng-show="askConvertAdminUser"
+                    class="btn btn-warning">
+             {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+          </button>
+
+          <button class="btn btn-default" data-ng-click="askRenameUser=true" data-ng-hide="askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
+             {{ 'components_users_rename' | translate}}
+          </button>
+          <button data-ng-click="askRenameUser=false" data-ng-show="askRenameUser"
+                    class="btn btn-info">
+                    {{ 'components_users_dont_want_rename' | translate}}
+              <i class="fa fa-reply"></i>
+          </button>
+
+          <div class="form-group" data-ng-show="askRenameUser">
+            <label for="username">{{ 'components_users_new_username' | translate}} : </label>
+            <input type="text" class="form-control" id="username" data-ng-model="newUsername">
+          </div>
+
+          <button data-ng-click="renameUser();" data-ng-show="askRenameUser" data-ng-disabled="!newUsername"
+                    class="btn btn-warning">
+             {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+          </button>
+
+          <button class="btn btn-default" data-ng-click="askUpdateUser=true" data-ng-hide="askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
+             {{ 'components_users_update' | translate}}
+          </button>
+          <button data-ng-click="askUpdateUser=false" data-ng-show="askUpdateUser"
+                    class="btn btn-info">
+                    {{ 'components_users_dont_want_update' | translate}}
+              <i class="fa fa-reply"></i>
+          </button>
+
+          <div class="form-group" data-ng-show="askUpdateUser">
+            <label for="newFullname">{{ 'components_users_new_fullname' | translate}} : </label>
+            <input type="text" class="form-control" id="newFullname" data-ng-model="newFullname">
+          </div>
+          <div class="form-group" data-ng-show="askUpdateUser">
+            <label for="newEmail">{{ 'components_users_new_email' | translate}} : </label>
+            <input type="text" class="form-control" id="newEmail" data-ng-model="newEmail">
+          </div>
+
+          <button data-ng-click="updateUser();" data-ng-show="askUpdateUser" data-ng-disabled="!newFullname || !newEmail"
+                    class="btn btn-warning">
+             {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <h4>{{ 'shared_common_groups' | translate }}</h4>
+      <div class="col-lg-6">
+          <ui-select data-ng-model="group.selected" theme="bootstrap">
+            <ui-select-match placeholder="Select or search a group in the list...">
+              {{$select.selected.name}}
+            </ui-select-match>
+            <ui-select-choices repeat="item in groups | filter: $select.search">
+              <div>{{item.name}}</div>
+            </ui-select-choices>
+          </ui-select>
+          <button type="button" class="btn btn-default" data-ng-disabled="!group.selected" data-ng-click="addUserInGroup()">
+            {{ 'components_users_add_to_group' | translate}}
+          </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <b>{{ 'components_user_groups' | translate }} : </b>
+        <ul>
+          <li data-ng-repeat="(k, v) in user.groups">
+            <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
+
+            <button class="btn btn-xs btn-warning" data-ng-click="askRemoveUser=true" data-ng-hide="askRemoveUser">
+               <i class="fa fa-trash-o"></i>
+            </button>
+            <button data-ng-click="askRemoveUser=false" data-ng-show="askRemoveUser"
+                      class="btn btn-xs btn-info">
+                      {{ 'components_users_dont_want_remove_group' | translate}}
+                <i class="fa fa-reply"></i>
+            </button>
+            <button data-ng-click="removeUserFromGroup(v);" data-ng-show="askRemoveUser"
+                      class="btn btn-xs btn-warning">
+               {{ 'shared_common_yes_i_confirm' | translate}} <i class="fa fa-exclamation-triangle"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
+
 </div>

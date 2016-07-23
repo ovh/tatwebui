@@ -27,7 +27,7 @@ angular.module('TatUi')
        * @name TatUi.TatEngine
        * @module TatUi
        * @description
-       * 
+       *
        * Manager TatEngine URI.
        */
       return {

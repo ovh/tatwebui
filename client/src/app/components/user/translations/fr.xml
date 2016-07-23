@@ -17,4 +17,5 @@
     <translation id="components_user_date">Inscription</translation>
     <translation id="components_user_username">Utilisateur</translation>
     <translation id="components_user_reset">Demande de réinitialisation de mot de passe</translation>
+    <translation id="components_user_attached_groups">Groupes rattachés</translation>
 </translations>

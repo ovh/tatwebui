@@ -16,7 +16,6 @@ angular.module('TatUi', [
     'pascalprecht.translate',
     'ngResource',
     'angular-toArrayFilter',
-    'ngWebsocket',
     'flash',
     'angularMoment',
     'colorpicker.module',
@@ -74,9 +73,12 @@ angular.module('TatUi', [
   });
 })
 
-.run(function(Authentication) {
+.run(function(Authentication, Identity, appConfiguration) {
   'use strict';
-  Authentication.refreshIdentity();
+  Identity.checkPersistent(true);
+  if (Authentication.isConnected() || (appConfiguration.backend && appConfiguration.backend.autologin === true)) {
+    Authentication.refreshIdentity();
+  }
 })
 
 .run(function() {

@@ -1,8 +1,8 @@
-<div id="sidebar-wrapper" data-ng-class="{'open': ctrl.data.toggle}">
+<div id="sidebar-wrapper" data-ng-class="{'open': ctrl.data.showSidebar}">
 
   <ul class="sidebar">
     <li class="sidebar-header">
-      <a data-ng-click="ctrl.toggleSidebar()" class="text-center">
+      <a data-ng-click="ctrl.toggleSidebar()" class="text-center" title="{{ctrl.data.showSidebar}}">
         <span class="tat-logo">TaT</span>
       </a>
     </li>
@@ -23,7 +23,7 @@
               uib-tooltip="{{'master-unread-topics' | translate}}" ng-click="ctrl.setMode('unread')"> </i>
       </span>
     </li>
-    <li class="search-form" ng-if="ctrl.data.toggle">
+    <li class="search-form" ng-if="ctrl.data.showSidebar">
       <div class="search-form form-group has-feedback" ng-mouseover="ctrl.searchEnter()" ng-keyup="ctrl.searchKey($event.keyCode)" ng-mouseleave="ctrl.searchExit()">
         <label for="search" class="sr-only">Search</label>
         <input autocomplete="off" type="text" id="searchbox" class="form-control" ng-model="ctrl.data.filtertopic" name="search" id="search" placeholder="search">
@@ -37,17 +37,18 @@
     </li>
     <li class="sidebar-section" ng-repeat="ct in ctrl.data.treeTopics" ng-if="!ctrl.data.loading && !ctrl.data.isPresencesOpen">
       <span class="sidebar-section-title" ng-click="ct.expand=!ct.expand">
-        <span class="sidebar-section-active">{{ ct.title }}</span> <span ng-hide="ct.expand"><i class="fa fa-caret-down"></i></span>
+        <span class="sidebar-section-active">{{ ct.title }}</span>
+        <span ng-hide="ct.expand"><i class="fa fa-caret-down"></i></span>
       </span>
       <ul class="sidebar-sublist" ng-show="ct.expand">
         <li class="sidebar-sublist-item" ng-if="ct.topics.length == 0">
           <b>{{'master-no-topic' | translate}}</b>
         </li>
         <li class="sidebar-sublist-item" ng-repeat="t in ct.topics | filter:{topic:ctrl.data.filtertopic}">
-
-          <a ng-href="{{ctrl.computeURL(t)}}">
+          <a ng-href="{{ctrl.computeURL(t)}}"
+          data-ng-class="{selected: t.topic == ctrl.data.currentTopicName}"
+          ng-click="ctrl.selectTopic(t.topic)">
             <span data-ng-class="{favorite: ctrl.data.favorites[t.topic]}">/</span>{{t.nameDisplayed}}
-
             <div style="float:right">
               <span class="badge" ng-show="t.unread > 0">{{t.unread}}</span>
             </div>
@@ -61,7 +62,7 @@
       </span>
       <ul>
         <li ng-repeat="user in ctrl.data.presences">
-          <a title="Last seen: {{ user.dateTimePresence }}" ng-href="{{ctrl.computURLDM(user.userPresence.username)}}">
+          <a title="Last seen: {{ user.dateTimePresence }}" ng-href="{{ctrl.computeURLDM(user.userPresence.username)}}">
             <i class="fa fa-circle" ng-class="user.status"></i>&nbsp;{{ user.userPresence.fullname }}
           </a>
         </li>

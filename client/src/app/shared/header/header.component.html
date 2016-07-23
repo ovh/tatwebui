@@ -1,4 +1,4 @@
-<div class="row header" ng-show="ctrl.data.toggle">
+<div class="row header" ng-show="ctrl.data.showHeader">
   <div class="col-xs-12">
     <div class="user pull-right">
       <div class="item dropdown" uib-dropdown>
@@ -20,11 +20,6 @@
               {{ 'master-groups' | translate }}
             </a>
           </li>
-          <li class="link" data-ng-if="isAdmin()">
-            <a ui-sref="sockets-admin">
-              {{ 'master-sockets' | translate }}
-            </a>
-          </li>
           <li class="link">
             <a ui-sref="topics-list">
               {{ 'master-topics' | translate }}
@@ -42,7 +37,7 @@
               {{ 'master-profile' | translate }}
             </a>
           </li>
-          <li class="link">
+          <li class="link" ng-if="ctrl.data.displayLogout">
             <a ui-sref="user-logout">
               {{ 'master-logout' | translate }}
             </a>
@@ -50,7 +45,7 @@
         </ul>
       </div>
 
-      <div class="item dropdown" data-ng-if="ctrl.isMessagesView(ctrl.data.state)" uib-dropdown>
+      <div class="item dropdown" data-ng-if="ctrl.isMessagesView()" uib-dropdown>
        <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" uib-dropdown-toggle>
           <i class="fa fa-eye"></i>
         </a>
@@ -70,12 +65,12 @@
     </div>
 
     <div class="tat-main-header">
-      <h1 data-ng-if="!ctrl.isMessagesView(ctrl.data.state)">
-        {{ title | translate }}
+      <h1 data-ng-if="!ctrl.isMessagesView()">
+        {{ ctrl.getTitle() | translate }}
       </h1>
-      <h1 data-ng-if="ctrl.isMessagesView(ctrl.data.state)">
+      <h1 data-ng-if="ctrl.isMessagesView()">
         <span>
-          {{ ctrl.getTitle(ctrl.data.state) }} &ndash;
+          {{ ctrl.getTitle() }} &ndash;
         </span>
         <span>
           {{ ctrl.data.topic.description }}
@@ -104,13 +99,9 @@
         <a title="{{ 'master-topic-configuration' | translate }}" data-ng-if="ctrl.canEditTopic(ctrl.data.topic)" ui-sref="topics-edit({topicRoute:ctrl.data.topic.topic})">
           <i class="fa fa-pencil"></i>
         </a>
-        <img src="assets/img/spinner.gif" height="20px" data-ng-show="ctrl.data.loading">
       </h1>
-      <h2 data-ng-if="ctrl.isMessagesView(ctrl.data.state)">
-        <span data-ng-repeat="sub in title track by $index">
-          <i class="fa fa-caret-right"></i>
-          <a data-ng-href="#" data-ng-click="ctrl.topicClickHeader(title, sub, $index)">{{ sub }}</a>
-        </span>
+      <h2 data-ng-if="ctrl.isMessagesView()">
+        <span data-ng-repeat="sub in ctrl.data.subTitle track by $index">/<a data-ng-href="{{ctrl.topicURL(sub, $index)}}">{{ sub }}</a></span>
       </h2>
     </div>
   </div>

@@ -7,33 +7,37 @@
  * header
  */
 angular.module('TatUi').component('header', {
+  bindings: {
+    topic: '='
+  },
   controllerAs: 'ctrl',
   controller: function(
     $scope,
     $rootScope,
-    Authentication,
-    appConfiguration,
-    TatEngine,
-    TatEngineUserRsc,
-    TatEngineTopicRsc,
-    Plugin,
-    Flash,
     $state,
     $translate,
     $stateParams,
-    $localStorage
+    $localStorage,
+    Authentication,
+    appConfiguration,
+    Flash,
+    Linker,
+    Plugin,
+    TatEngine,
+    TatEngineUserRsc,
+    TatEngineTopicRsc
   ) {
     'use strict';
     var self = this;
 
     this.data = {
-      toggle: true,
+      showHeader: true,
       isPresencesOpen: false,
       viewsEnabled: false,
       bottomMenu: [],
       isFavoriteTopic: false,
       isNotificationsOffTopic: false,
-      loading: false,
+      displayLogout: true,
       topic: {},
       views: []
     };
@@ -44,22 +48,28 @@ angular.module('TatUi').component('header', {
     };
 
     self.togglePresences = function() {
-      this.data.isPresencesOpen = !this.data.isPresencesOpen;
+      self.data.isPresencesOpen = !this.data.isPresencesOpen;
       $rootScope.$broadcast("presences-toggle", true);
     };
+
+    $scope.$on('showSidebar', function(ev, showSidebar) {
+      self.data.showHeader = showSidebar;
+    });
 
     self.toggleTopicFavorite = function() {
       if (self.data.isFavoriteTopic) {
         TatEngineUserRsc.removeFavoriteTopic({
-          'topic': '/' + self.topic
-        }).$promise.then(function() {
+          'topic': self.data.topic.topic
+        }).$promise.then(function(resp) {
+          TatEngine.displayReturn(resp);
           self.data.isFavoriteTopic = false;
           $rootScope.$broadcast('sidebar-reload', true);
         });
       } else {
         TatEngineUserRsc.addFavoriteTopic({
-          'topic': '/' + self.topic
-        }).$promise.then(function() {
+          'topic': self.data.topic.topic
+        }).$promise.then(function(resp) {
+          TatEngine.displayReturn(resp);
           self.data.isFavoriteTopic = true;
           $rootScope.$broadcast('sidebar-reload', true);
         });
@@ -69,15 +79,17 @@ angular.module('TatUi').component('header', {
     self.toggleNotificationsTopic = function() {
       if (self.data.isNotificationsOffTopic) {
         TatEngineUserRsc.enableNotificationsTopic({
-          'topic': '/' + self.topic
-        }).$promise.then(function() {
+          'topic': self.data.topic.topic
+        }).$promise.then(function(resp) {
+          TatEngine.displayReturn(resp);
           self.data.isNotificationsOffTopic = false;
           Authentication.refreshIdentity();
         });
       } else {
         TatEngineUserRsc.disableNotificationsTopic({
-          'topic': '/' + self.topic
-        }).$promise.then(function() {
+          'topic': self.data.topic.topic
+        }).$promise.then(function(resp) {
+          TatEngine.displayReturn(resp);
           self.data.isNotificationsOffTopic = true;
           Authentication.refreshIdentity();
         });
@@ -85,12 +97,6 @@ angular.module('TatUi').component('header', {
     };
 
     self.getViews = function() {
-      var restrictedPlugin = Plugin.getPluginByRestriction(self.data.topic);
-      if (restrictedPlugin) {
-        self.data.viewsEnabled = false;
-        return null;
-      }
-      self.data.viewsEnabled = true;
       return self.data.views;
     };
 
@@ -108,30 +114,24 @@ angular.module('TatUi').component('header', {
       });
     };
 
-    self.isMessagesView = function(route) {
-      return Plugin.getPluginByRoute(route);
+    self.isMessagesView = function() {
+      return Plugin.getPluginByRoute($state.current.name);
     };
 
-    self.topicClickHeader = function(topic, sub, pos) {
+    self.topicURL = function(sub, pos) {
       var t = "";
       for (var i = 0; i <= pos; i++) {
-        t += "/" + $scope.title[i];
+        t += "/" + self.data.subTitle[i];
       }
-
-      $state.go("standardview-list", {
-        topic: t.substring(1)
-      }, {
-        inherit: false,
-        reload: false
-      });
+      return Linker.getComputedURL(t);
     };
 
-    self.getTitle = function(route) {
-      var p = Plugin.getPluginByRoute(route);
+    self.getTitle = function() {
+      var p = Plugin.getPluginByRoute($state.current.name);
       if (p) {
         return p.name;
       }
-      return '';
+      return $state.current.name;
     };
 
     self.isAdmin = function() {
@@ -166,47 +166,18 @@ angular.module('TatUi').component('header', {
       return false;
     };
 
-    $rootScope.$on('$stateChangeSuccess',
-      function(e, toState, params) {
-        $scope.path = toState.name.split('-');
-        self.data.state = toState.name;
+    this.initNextForTopic = function() {
+      self.data.topic = self.topic;
+      self.data.subTitle = self.data.topic.topic.split('/');
+      self.data.subTitle.shift(); // remove first "/"
 
-        if (self.isPluginViewRoute(toState.name)) {
-          $rootScope.$broadcast('topicChangeRoute', params.topic);
-          self.topic = params.topic;
-
-          TatEngineTopicRsc.oneTopic({
-            action: self.topic
-          }).$promise.then(function(data) {
-            if (!data.topic) {
-              Flash.create('danger', $translate.instant('topics_notopic'));
-              return;
-            }
-            self.data.topic = data.topic;
-            $rootScope.$broadcast('sidebar-change', {topic: self.data.topic});
-
-            $scope.title = params.topic.split('/');
-            if (Authentication.getIdentity().favoritesTopics) {
-              self.endLoadStateChangeSuccess(toState, params);
-            } else {
-              Authentication.refreshIdentity().then(
-                function(data) {
-                  self.endLoadStateChangeSuccess(toState, params);
-                },
-                function(err) {
-                  console.log("error while refreshing identity in stateChangeSuccess");
-                });
-            }
-          }, function(err) {
-            TatEngine.displayReturn(err);
-          });
-        } else {
-          $scope.title = toState.name;
+      var viewsPlugins = Plugin.getPluginsMessagesViews();
+      if (viewsPlugins) {
+        for (var k = 0; k < viewsPlugins.length; k++) {
+          self.data.views.push(viewsPlugins[k]);
         }
       }
-    );
 
-    this.endLoadStateChangeSuccess = function(toState, params) {
       self.data.favoriteTopics = Authentication.getIdentity().favoritesTopics;
       self.data.offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
       self.data.isFavoriteTopic = false;
@@ -218,20 +189,27 @@ angular.module('TatUi').component('header', {
         self.data.offNotificationsTopics = [];
       }
       for (var i = 0; i < self.data.favoriteTopics.length; i++) {
-        if (self.data.favoriteTopics[i] === '/' + params.topic) {
+        if (self.data.favoriteTopics[i] === self.data.topic.topic) {
           self.data.isFavoriteTopic = true;
         }
       }
-      for (i = 0; i < self.data.offNotificationsTopics.length; i++) {
-        if (self.data.offNotificationsTopics[i] === '/' + params.topic) {
+      for (var j = 0; j < self.data.offNotificationsTopics.length; j++) {
+        if (self.data.offNotificationsTopics[j] === self.data.topic.topic) {
           self.data.isNotificationsOffTopic = true;
         }
       }
 
       var restrictedPlugin = Plugin.getPluginByRestriction(self.data.topic);
-      if (restrictedPlugin && restrictedPlugin.route != toState.name) {
+
+      if (restrictedPlugin) {
+        self.data.viewsEnabled = false;
+      } else {
+        self.data.viewsEnabled = true;
+      }
+
+      if (restrictedPlugin && restrictedPlugin.route != $state.current.name) {
         $state.go(restrictedPlugin.route, {
-          topic: params.topic
+          topic: self.data.topic
         }, {
           inherit: false,
           reload: false
@@ -240,21 +218,21 @@ angular.module('TatUi').component('header', {
       }
     };
 
-    $scope.$on('loading', function(e, status) {
-      self.data.loading = status;
-    });
-
     self.init = function() {
+      self.data.subTitle = "";
+      self.data.topic = null;
+
       self.data.bottomMenu = [];
       if (appConfiguration.links && appConfiguration.links.menu) {
         self.data.bottomMenu = appConfiguration.links.menu;
       }
 
-      var viewsPlugins = Plugin.getPluginsMessagesViews();
-      if (viewsPlugins) {
-        for (var i = 0; i < viewsPlugins.length; i++) {
-          self.data.views.push(viewsPlugins[i]);
-        }
+      if (self.topic) {
+        self.initNextForTopic();
+      }
+
+      if (appConfiguration.backend && appConfiguration.backend.autologin === true) {
+        self.data.displayLogout = false;
       }
     };
 

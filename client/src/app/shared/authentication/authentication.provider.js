@@ -36,8 +36,7 @@ angular.module('TatUi').provider('Authentication', function() {
     return baseHref;
   }();
 
-  this.$get = function($q, AuthenticationRsc, $location, Identity,
-    WebSocket) {
+  this.$get = function($q, AuthenticationRsc, $location, Identity) {
 
     var callback = baseHref + 'user/confirm/:username/token/:token';
 
@@ -65,9 +64,6 @@ angular.module('TatUi').provider('Authentication', function() {
        */
       isConnected: function() {
         Identity.checkPersistent();
-        if (Identity.hasIdentity()) {
-          //WebSocket.checkConnection();
-        }
         return (Identity.hasIdentity());
       },
 
@@ -82,7 +78,6 @@ angular.module('TatUi').provider('Authentication', function() {
        */
       disconnect: function() {
         Identity.killIdentity();
-        //WebSocket.disconnect();
       },
 
       /**
@@ -115,8 +110,7 @@ angular.module('TatUi').provider('Authentication', function() {
        */
       connect: function(user) {
         return $q.all([
-          getUserInfo($q, AuthenticationRsc, Identity, user),
-          //WebSocket.connect(user)
+          getUserInfo($q, AuthenticationRsc, Identity, user)
         ]);
       },
 
@@ -209,17 +203,19 @@ angular.module('TatUi').provider('Authentication', function() {
        */
       refreshIdentity: function() {
         Identity.checkPersistent();
-        return AuthenticationRsc.getInfo({}).$promise.then(function(data) {
-          var id = Identity.getIdentity();
-          if (id && data) {
-            data.user.password = id.password;
-            Identity.setIdentity(data.user);
-          }
-        }, function(err) {
-          if (err && err.status == 401) {
-            Identity.killIdentity();
-          }
-        });
+        if (Identity.hasIdentity()) {
+          return AuthenticationRsc.getInfo({}).$promise.then(function(data) {
+            var id = Identity.getIdentity();
+            if (id && data) {
+              data.user.password = id.password;
+              Identity.setIdentity(data.user);
+            }
+          }, function(err) {
+            if (err && err.status == 401) {
+              Identity.killIdentity();
+            }
+          });  
+        }
       }
     };
   };

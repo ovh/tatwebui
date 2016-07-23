@@ -95,15 +95,6 @@ NG_DOCS={
     },
     {
       "section": "api",
-      "id": "TatUi.controller:SocketsAdminCtrl",
-      "shortName": "SocketsAdminCtrl",
-      "type": "controller",
-      "moduleName": "TatUi",
-      "shortDescription": "Socket Admin controller",
-      "keywords": "admin api controller engine function init initialize resource socket sockets tat tatengine tatenginesocketsrsc tatui"
-    },
-    {
-      "section": "api",
       "id": "TatUi.controller:TopicsEditCtrl",
       "shortName": "TopicsEditCtrl",
       "type": "controller",
@@ -252,8 +243,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "",
-      "keywords": "api filter tatui"
+      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
+      "keywords": "api filter leangth parameter shorten string tatui"
     },
     {
       "section": "api",
@@ -261,8 +252,8 @@ NG_DOCS={
       "shortName": "shortener",
       "type": "filter",
       "moduleName": "TatUi",
-      "shortDescription": "shorten a string if necessary. Just specify a leangth as parameter. If the string is shorten, &#39;...&#39; are added at the",
-      "keywords": "api filter leangth parameter shorten string tatui"
+      "shortDescription": "",
+      "keywords": "api filter tatui"
     },
     {
       "section": "api",
@@ -344,15 +335,6 @@ NG_DOCS={
       "moduleName": "TatUi",
       "shortDescription": "",
       "keywords": "api function list promise resource tatui"
-    },
-    {
-      "section": "api",
-      "id": "TatUi.resource:TatEngineSocketsRsc",
-      "shortName": "TatEngineSocketsRsc",
-      "type": "resource",
-      "moduleName": "TatUi",
-      "shortDescription": "",
-      "keywords": "actiondump api function promise resource tatui"
     },
     {
       "section": "api",
@@ -518,21 +500,12 @@ NG_DOCS={
     },
     {
       "section": "api",
-      "id": "TatUi.WebSocket",
-      "shortName": "TatUi.WebSocket",
+      "id": "TatUi.TatTopicProvider",
+      "shortName": "TatUi.TatTopicProvider",
       "type": "service",
       "moduleName": "TatUi",
-      "shortDescription": "manage websocket connection",
-      "keywords": "action add addevent api callback check checkconnection connect connected connection data disconnect emit event eventname function invoke isconnected killing listen manage parameter send server service tatui true websocket"
-    },
-    {
-      "section": "api",
-      "id": "TatUi.WebSocketProvider",
-      "shortName": "TatUi.WebSocketProvider",
-      "type": "service",
-      "moduleName": "TatUi",
-      "shortDescription": "Manage the websocket connection",
-      "keywords": "add addevent api callback connection data event eventname function invoke killing listen manage parameter service tatui websocket websocketprovider"
+      "shortDescription": "Compute Topic",
+      "keywords": "api compute service tattopicprovider tatui topic"
     }
   ],
   "apis": {

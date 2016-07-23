@@ -1,66 +1,70 @@
-<div class="tat-admin groups" data-ng-controller="GroupsListCtrl">
+<div class="page-content">
 
-    <div data-ng-if="data.count==0" class="alert alert-warning">
-      {{ 'groups-nogroup' | translate }}
-    </div>
-
-    <div class="row">
-      <div class="col-lg-6">
-      <a data-ng-if="isAdmin()" class="btn btn-defaut btn-primary" ui-sref="groups-new">
-        <i class="fa fa-plus"></i>
-        {{ 'components_groups_new_group' | translate }}
-      </a>
+  <header></header>
+  
+  <div class="tat-admin groups" data-ng-controller="GroupsListCtrl">
+      <div data-ng-if="data.count==0" class="alert alert-warning">
+        {{ 'groups-nogroup' | translate }}
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <rd-widget>
-          <rd-widget-header icon="fa-group" title="{{data.groups.length}} Groups on total of {{data.count}}">
-              <input data-ng-model="data.filterList" type="text" placeholder="Search in this list" class="form-control">
-          </rd-widget-header>
-          <rd-widget-body classes="no-padding">
-            <div class="table-responsive">
-              <table class="table groups-list">
-                <thead>
-                  <tr>
-                    <th>{{ 'shared_common_name' | translate }}</th>
-                    <th>{{ 'shared_common_description' | translate }}</th>
-                    <th data-ng-if="isAdmin() || data.adminOfOneGroup">{{ 'components_groups_users_in_group' | translate }}</th>
-                    <th data-ng-if="isAdmin() || data.adminOfOneGroup">{{ 'shared_common_created_at' | translate }}</th>
-                    <th data-ng-if="isAdmin() || data.adminOfOneGroup">&nbsp;</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <tr data-ng-repeat="groupItem in data.groups | filter:data.filterList">
-                        <th class="groups-name">{{ groupItem.name }}</th>
-                        <td class="groups-description">{{ groupItem.description }}</td>
-                        <td class="groups-groups">
-                          <div data-ng-if="isAdmin() || groupItem.users || groupItem.adminUsers">
-                            <span data-ng-if="isAdmin() || groupItem.users">
-                              Users:{{groupItem.users.length}}
-                            </span>
-                            <span data-ng-if="isAdmin() || groupItem.adminUsers">
-                              Admins:{{groupItem.adminUsers.length}}
-                            </span>
-                          </div>
-                        </td>
-                        <td class="groups-date">
-                          <span data-ng-if="isAdmin() || groupItem.dateCreation">
-                            {{groupItem.dateCreation * 1000 | date:'yyyy-MM-dd'}}
-                          </span>
-                        </td>
-                        <td class="groups-edit">
-                          <a class="btn btn-default" ui-sref="groups-edit({groupName:groupItem.name})" data-ng-if="isAdmin() || groupItem.adminUsers || groupItem.users">
-                            <i class="fa fa-edit"></i>
-                          </a>
-                        </td>
+      <div class="row">
+        <div class="col-lg-6">
+        <a data-ng-if="isAdmin()" class="btn btn-defaut btn-primary" ui-sref="groups-new">
+          <i class="fa fa-plus"></i>
+          {{ 'components_groups_new_group' | translate }}
+        </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <rd-widget>
+            <rd-widget-header icon="fa-group" title="{{data.groups.length}} Groups on total of {{data.count}}">
+                <input data-ng-model="data.filterList" type="text" placeholder="Search in this list" class="form-control">
+            </rd-widget-header>
+            <rd-widget-body classes="no-padding">
+              <div class="table-responsive">
+                <table class="table groups-list">
+                  <thead>
+                    <tr>
+                      <th>{{ 'shared_common_name' | translate }}</th>
+                      <th>{{ 'shared_common_description' | translate }}</th>
+                      <th data-ng-if="isAdmin() || data.adminOfOneGroup">{{ 'components_groups_users_in_group' | translate }}</th>
+                      <th data-ng-if="isAdmin() || data.adminOfOneGroup">{{ 'shared_common_created_at' | translate }}</th>
+                      <th data-ng-if="isAdmin() || data.adminOfOneGroup">&nbsp;</th>
                     </tr>
-                </tbody>
-              </table>
-            </div>
-          </rd-widget-body>
-        </rd-widget>
+                    </thead>
+                    <tbody>
+                      <tr data-ng-repeat="groupItem in data.groups | filter:data.filterList">
+                          <th class="groups-name">{{ groupItem.name }}</th>
+                          <td class="groups-description">{{ groupItem.description }}</td>
+                          <td class="groups-groups">
+                            <div data-ng-if="isAdmin() || groupItem.users || groupItem.adminUsers">
+                              <span data-ng-if="isAdmin() || groupItem.users">
+                                Users:{{groupItem.users.length}}
+                              </span>
+                              <span data-ng-if="isAdmin() || groupItem.adminUsers">
+                                Admins:{{groupItem.adminUsers.length}}
+                              </span>
+                            </div>
+                          </td>
+                          <td class="groups-date">
+                            <span data-ng-if="isAdmin() || groupItem.dateCreation">
+                              {{groupItem.dateCreation * 1000 | date:'yyyy-MM-dd'}}
+                            </span>
+                          </td>
+                          <td class="groups-edit">
+                            <a class="btn btn-default" ui-sref="groups-edit({groupName:groupItem.name})" data-ng-if="isAdmin() || groupItem.adminUsers || groupItem.users">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                          </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </rd-widget-body>
+          </rd-widget>
+        </div>
       </div>
-    </div>
+  </div>
 </div>

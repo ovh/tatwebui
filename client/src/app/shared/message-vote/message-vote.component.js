@@ -10,8 +10,7 @@
 angular.module('TatUi').component('messageVote',
 {
   bindings: {
-    message: '=',
-    topic: '='
+    message: '='
   },
   controllerAs: 'MessageVote',
   controller: function(
@@ -36,8 +35,7 @@ angular.module('TatUi').component('messageVote',
      */
     self.hasVoterUP = function() {
       if (self.message && self.message.votersUP) {
-        return _.include(self.message.votersUP, Authentication.getIdentity()
-          .username);
+        return _.includes(self.message.votersUP, Authentication.getIdentity().username);
       }
       return false;
     };
@@ -51,8 +49,7 @@ angular.module('TatUi').component('messageVote',
      */
     self.hasVoterDown = function() {
       if (self.message && self.message.votersDown) {
-        return _.include(self.message.votersDown, Authentication.getIdentity()
-          .username);
+        return _.includes(self.message.votersDown, Authentication.getIdentity().username);
       }
       return false;
     };
@@ -68,13 +65,14 @@ angular.module('TatUi').component('messageVote',
       self.voterUPDisabled = true;
       var action = self.hasVoterUP(self.message) ? 'unvoteup' : 'voteup';
       TatEngineMessageRsc.update({
-        'topic': self.topic,
+        'topic': self.message.topic,
         'idReference': self.message._id,
         'action': action
       }).$promise.then(function(resp) {
         if (resp.message) {
           self.updateAfterVote(resp.message);
         }
+        TatEngine.displayReturn(resp);
         self.voterUPDisabled = false;
       }, function(err) {
         TatEngine.displayReturn(err);
@@ -93,7 +91,7 @@ angular.module('TatUi').component('messageVote',
       self.voterDownDisabled = true;
       var action = self.hasVoterDown(self.message) ? 'unvotedown' : 'votedown';
       TatEngineMessageRsc.update({
-        'topic': self.topic,
+        'topic': self.message.topic,
         'idReference': self.message._id,
         'action': action
       }).$promise.then(function(resp) {
@@ -101,6 +99,7 @@ angular.module('TatUi').component('messageVote',
           self.updateAfterVote(resp.message);
         }
         self.voterDownDisabled = false;
+        TatEngine.displayReturn(resp);
       }, function(err) {
         TatEngine.displayReturn(err);
         self.voterDownDisabled = false;
