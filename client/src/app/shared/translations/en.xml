@@ -12,7 +12,6 @@
   <translation id="master-groups">Groups</translation>
   <translation id="master-users">Users</translation>
   <translation id="master-presences">Presences</translation>
-  <translation id="master-sockets">Sockets</translation>
   <translation id="master-views">Views</translation>
   <translation id="master-favorites">Favorites</translation>
   <translation id="master-toggle-favorites">Show / Hide favorites topics</translation>
@@ -57,7 +56,6 @@
   <translation id="users-edit">User Edit</translation>
   <translation id="users-list">Users List</translation>
   <translation id="presences-list">Presences List</translation>
-  <translation id="sockets-admin">Sockets Administration</translation>
 
   <translation id="shared_common_password">Password</translation>
   <translation id="shared_common_username">Username</translation>

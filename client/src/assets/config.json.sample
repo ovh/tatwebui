@@ -5,12 +5,6 @@
     "port": 8001,
     "autologin": false
   },
-  "socket": {
-    "scheme": "ws",
-    "host": "ip_or_domain_of_tat_engine",
-    "port": 8080,
-    "path": "/socket/ws"
-  },
   "help": {
     "signup": [ "HELP_SIGNUP" ]
   },

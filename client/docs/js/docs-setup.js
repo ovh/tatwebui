@@ -487,7 +487,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "TatUi",
       "shortDescription": "Manage Tat message filters",
-      "keywords": "add addevent api callback data event eventname filters function invoke killing listen manage message parameter service tat tatfilterprovider tatui websocket"
+      "keywords": "addevent api filters function manage message service tat tatfilterprovider tatui"
     },
     {
       "section": "api",

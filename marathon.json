@@ -14,7 +14,7 @@
     },
     "type": "DOCKER"
   },
-  "cpus": 1,
+  "cpus": 0.1,
   "env": {
     "FILESYSTEM_LISTEN_PORT": "{{.filesystem_listen_port}}",
     "PROCESS_NB_FORKS": "{{.process_nb_forks}}",
@@ -22,9 +22,6 @@
     "BACKEND_HOST": "{{.backend_host}}",
     "BACKEND_PORT": "{{.backend_port}}",
     "BACKEND_AUTOLOGIN": "{{.backend_autologin}}",
-    "WS_SOCKET_SCHEME": "{{.ws_socket_scheme}}",
-    "WS_SOCKET_PORT": "{{.ws_socket_port}}",
-    "WS_SOCKET_HOST": "{{.ws_socket_host}}",
     "LINK_HOME_LABEL_1": "{{.link_home_label_1}}",
     "LINK_HOME_URL_1": "{{.link_home_url_1}}",
     "LINK_HOME_LABEL_2": "{{.link_home_label_2}}",

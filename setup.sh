@@ -65,16 +65,6 @@ if [ ! -z $BACKEND_AUTOLOGIN ]; then
   sed -i "s#BACKEND_AUTOLOGIN#$BACKEND_AUTOLOGIN#" public/assets/config.json
 fi;
 
-if [ ! -z $WS_SOCKET_SCHEME ]; then
-  echo "replace WS_SOCKET_SCHEME with $WS_SOCKET_SCHEME";
-  sed -i "s#WS_SOCKET_SCHEME#$WS_SOCKET_SCHEME#" public/assets/config.json
-fi;
-
-if [ ! -z $WS_SOCKET_PORT ]; then
-  echo "replace WS_SOCKET_PORT with $WS_SOCKET_PORT";
-  sed -i "s#WS_SOCKET_PORT#$WS_SOCKET_PORT#" public/assets/config.json
-fi;
-
 if [ ! -z $LINK_HOME_LABEL_1 ]; then
   echo "replace LINK_HOME_LABEL_1 with $LINK_HOME_LABEL_1";
   sed -i "s#LINK_HOME_LABEL_1#$LINK_HOME_LABEL_1#" public/assets/config.json

@@ -13,6 +13,7 @@ See Tat Engine for more information: https://github.com/ovh/tat
 - Standard View: https://github.com/ovh/tatwebui-plugin-standardview
 - Notifications View: https://github.com/ovh/tatwebui-plugin-notificationsview
 - Release View: https://github.com/ovh/tatwebui-plugin-releaseview
+- Pastat View: https://github.com/ovh/tatwebui-plugin-pastatview
 
 
 ## Docker
@@ -30,9 +31,6 @@ docker run -it --rm --name tat-webui-instance1 \
   -e BACKEND_SCHEME=http \
   -e BACKEND_HOST=localhost \
   -e BACKEND_PORT=8081 \
-  -e WS_SOCKET_SCHEME=ws \
-  -e WS_SOCKET_PORT=8080 \
-  -e WS_SOCKET_HOST=localhost \
   -p 8082:8082 tat-webui
 ```
 

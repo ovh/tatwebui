@@ -32,15 +32,7 @@ angular.module('TatUi')
        * @ngdoc function
        * @name addEvent
        * @methodOf TatUi.TatFilterProvider
-       * @description
-       *
-       * Add an event on the websocket
-       *
-       * @param   {string}   eventName Name of the event to listen
-       * @param   {function} callback  Callback function. It needs one data parameter
-       * @returns {function} Function to invoke for killing the event
        */
-      // addEvent: addEvent,
       $get: function($rootScope, $localStorage, $location, $stateParams) {
 
           self.eachFilter = function(callback) {
