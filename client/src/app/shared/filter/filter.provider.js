@@ -21,7 +21,8 @@ angular.module('TatUi')
       'andTag',
       'notTag',
       'text',
-      'idMessage'
+      'idMessage',
+      'username'
     ];
 
     self.options = {};

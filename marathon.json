@@ -36,7 +36,6 @@
     "BASE_URL": "{{.base_url}}",
     "RUN_MT_URL": "{{.run_mt_url}}",
     "RUNVIEW_TOPIC_ALERTS": "{{.runview_topic_alerts}}",
-    "RUNVIEW_ONCALL_SERVICES": "{{.runview_oncall_services}}",
     "RUNVIEW_TAT2SHINKEN_URL": "{{.runview_tat2shinken_url}}",
     "UAT_US_URL": "{{.uat_us_url}}",
     "RELEASEVIEW_TRACKER": "{{.releaseview_tracker}}",

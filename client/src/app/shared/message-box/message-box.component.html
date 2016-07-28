@@ -1,5 +1,5 @@
 <div class="row tat-msg-create">
-  <form method="post" action="/">
+  <form method="post" action="/" ng-hide="ctrl.filterDialog.visible">
     <div class="tat-msg-input" ng-show="ctrl.showBox && ctrl.isTopicRw">
       <div mass-autocomplete>
         <textarea dir="auto" name="msg"
@@ -46,8 +46,5 @@
       <a role="button" ng-click="ctrl.removeLabel(label.text)">X</a>
     </span>
   </div>
-  <message-filter-bar></message-filter-bar>
-  <div movable-dialog title="'Filter'" ng-model="ctrl.filterDialog">
-    <message-filter topic="ctrl.topic"></message-filter>
-  </div>
+  <message-filter-bar topic="ctrl.topic" searching="ctrl.filterDialog.visible"></message-filter-bar>
 </div>

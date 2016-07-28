@@ -91,7 +91,7 @@
   <translation id="shared_message_update">Update</translation>
   <translation id="shared_message_send">Send</translation>
   <translation id="shared_message_done">Done</translation>
-  <translation id="shared_message_compose_placeholder">Your message here with #tag</translation>
+  <translation id="shared_message_compose_placeholder">Write your message here with #tag</translation>
   <translation id="shared_message_read_only">You are in read-only mode in this topic.</translation>
   <translation id="shared_message_show_more">Show more messages</translation>
   <translation id="shared_message_characters_left">Remaining</translation>
@@ -121,11 +121,13 @@
   <translation id="shared_filter_in">in</translation>
   <translation id="shared_filter_all">all</translation>
   <translation id="shared_filter_hide">hide</translation>
-  <translation id="shared_filter_contains_labels">Contains one or many labels of this list</translation>
-  <translation id="shared_filter_contains_all_labels">Contains all labels in this list</translation>
-  <translation id="shared_filter_hide_labels">Hide all labels in this list</translation>
-  <translation id="shared_filter_contains_tags">Contains one or many tags of this list</translation>
-  <translation id="shared_filter_contains_all_tags">Contains all tags in this list</translation>
-  <translation id="shared_filter_hide_all_tags">Hide all tags in this list</translation>
+  <translation id="shared_filter_contains_labels">Contains one or many labels. "label:LABEL_A,LABEL_B"</translation>
+  <translation id="shared_filter_contains_all_labels">Contains all labels. "andLabel:LABEL_A,LABEL_B"</translation>
+  <translation id="shared_filter_hide_all_labels">Hide all labels. "notLabel:LABEL_A,LABEL_B"</translation>
+  <translation id="shared_filter_contains_tags">Contains one or many tags. "tag:TAG_A,TAG_B"</translation>
+  <translation id="shared_filter_contains_all_tags">Contains all tags. "andTag:TAG_A,TAG_B"</translation>
+  <translation id="shared_filter_hide_all_tags">Hide all tags. "notTag:TAG_A,TAG_B"</translation>
+  <translation id="shared_filter_usernames">Search by usernames</translation>
+  <translation id="shared_filter_text">Search Text</translation>
   <translation id="shared_filter_search">Search</translation>
 </translations>

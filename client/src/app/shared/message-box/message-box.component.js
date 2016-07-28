@@ -99,7 +99,6 @@ angular.module('TatUi').component('messageBox', {
      */
     self.removeLabel = function(labelText) {
       _.remove(self.defaultLabels, function(n) {
-        console.log("hop:",n);
         return n.text === labelText;
       });
     };

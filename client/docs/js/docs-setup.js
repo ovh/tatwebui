@@ -32,15 +32,6 @@ NG_DOCS={
     },
     {
       "section": "api",
-      "id": "TatUi.components:messageFilter",
-      "shortName": "messageFilter",
-      "type": "directive",
-      "moduleName": "TatUi",
-      "shortDescription": "Create a generic message filter",
-      "keywords": "ae api components create directive filter generic message tatui"
-    },
-    {
-      "section": "api",
       "id": "TatUi.components:messageFilterBar",
       "shortName": "messageFilterBar",
       "type": "directive",
@@ -200,15 +191,6 @@ NG_DOCS={
       "moduleName": "TatUi",
       "shortDescription": "display url configured in config.json file. See config.json.template",
       "keywords": "api config configured directive display file json tatui template url"
-    },
-    {
-      "section": "api",
-      "id": "TatUi.directive:movableDialog",
-      "shortName": "movableDialog",
-      "type": "directive",
-      "moduleName": "TatUi",
-      "shortDescription": "Create a non modal dialog",
-      "keywords": "ae api create dialog directive modal tatui"
     },
     {
       "section": "api",
