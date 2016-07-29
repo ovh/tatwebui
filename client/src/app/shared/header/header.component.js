@@ -39,7 +39,8 @@ angular.module('TatUi').component('header', {
       isNotificationsOffTopic: false,
       displayLogout: true,
       topic: {},
-      views: []
+      views: [],
+      currentView: {}
     };
 
     self.getUser = function(field) {
@@ -96,10 +97,6 @@ angular.module('TatUi').component('header', {
       }
     };
 
-    self.getViews = function() {
-      return self.data.views;
-    };
-
     self.switchView = function(route) {
       if (!$localStorage.views) {
         $localStorage.views = {};
@@ -126,12 +123,16 @@ angular.module('TatUi').component('header', {
       return Linker.getComputedURL(t);
     };
 
-    self.getTitle = function() {
+    self.computeCurrent = function() {
       var p = Plugin.getPluginByRoute($state.current.name);
       if (p) {
-        return p.name;
+        console.log("Hop p1:",p);
+        self.data.currentView = p;
+        return;
       }
-      return $state.current.name;
+      console.log("Hop p2:",$state.current);
+      self.data.currentView = $state.current;
+      return;
     };
 
     self.isAdmin = function() {
@@ -226,6 +227,8 @@ angular.module('TatUi').component('header', {
       if (appConfiguration.links && appConfiguration.links.menu) {
         self.data.bottomMenu = appConfiguration.links.menu;
       }
+
+      self.computeCurrent();
 
       if (self.topic) {
         self.initNextForTopic();

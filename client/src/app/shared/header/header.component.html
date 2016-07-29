@@ -1,5 +1,6 @@
 <div class="row header" ng-show="ctrl.data.showHeader">
   <div class="col-xs-12">
+
     <div class="user pull-right">
       <div class="item dropdown" uib-dropdown>
         <a role="button" class="dropdown-toggle" title="{{ ctrl.getUser('fullname') }}" uib-dropdown-toggle>
@@ -42,33 +43,26 @@
         </ul>
       </div>
 
-      <div class="item dropdown" data-ng-if="ctrl.isMessagesView()" uib-dropdown>
-       <a role="button" class="dropdown-toggle" title="{{ 'master-views' | translate }}" uib-dropdown-toggle>
-          <i class="fa fa-eye"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-header">
-            {{ 'master-views' | translate }}
-          </li>
-          <li class="divider"></li>
-          <li ng-repeat="v in ctrl.getViews() track by v.name | orderBy:'name'">
-            <a role="button" ng-click="ctrl.switchView(v.route)">{{::v.name}}</a>
-          </li>
-          <li ng-hide="ctrl.data.viewsEnabled">
-            {{ 'master-cant-change-view' | translate }}
-          </li>
-        </ul>
+      <div  data-ng-if="ctrl.isMessagesView()" style="width: 200px;font-size: 14px;padding-top: 14px;" ng-hide="ctrl.data.viewsEnabled">
+        {{ 'master-cant-change-view' | translate }}
       </div>
+
+      <ui-select data-ng-if="ctrl.isMessagesView()" ng-show="ctrl.data.viewsEnabled" class="pull-right" style="width: 200px;top: 15px;" data-ng-model="ctrl.data.currentView" ng-click="ctrl.switchView($select.selected.route)" theme="bootstrap">
+        <ui-select-match placeholder="Select or search a view...">
+          {{$select.selected.name}}
+        </ui-select-match>
+        <ui-select-choices repeat="v in ctrl.data.views | filter:$select.search">
+          <div ng-bind-html="v.name | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+
     </div>
 
     <div class="tat-main-header">
       <h1 data-ng-if="!ctrl.isMessagesView()">
-        {{ ctrl.getTitle() | translate }}
+        {{ ctrl.data.currentView.name | translate }}
       </h1>
       <h1 data-ng-if="ctrl.isMessagesView()">
-        <span>
-          {{ ctrl.getTitle() }} &ndash;
-        </span>
         <span>
           {{ ctrl.data.topic.description }}
         </span>

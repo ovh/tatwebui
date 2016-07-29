@@ -39,6 +39,7 @@ angular.module('TatUi').component('messageFilterBar',
           self.filterAsList[k] = self.filter[k] ? self.filter[k].split(','): [];
         }
       });
+      self.computeNbFilter();
     };
 
     $scope.$on('filter-changed', function(ev, filter) {
