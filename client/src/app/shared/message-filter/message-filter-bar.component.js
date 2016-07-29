@@ -172,6 +172,13 @@ angular.module('TatUi').component('messageFilterBar',
       suggest: self.suggestAutocompleteSearch
     };
 
+    self.viewFilter = function(prefix) { // f = "tag", etc...
+      if (self.filter[prefix]) {
+        self.searching = true;
+        self.data.search = prefix + ":" + self.filter[prefix];
+      }
+    };
+
     self.setFilterHelpers();
 
   },

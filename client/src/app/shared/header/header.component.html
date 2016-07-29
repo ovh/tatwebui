@@ -7,7 +7,9 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-right">
           <li class="dropdown-header">
-            {{ ctrl.getUser('fullname') }}
+            <a ui-sref="user-profile" title="{{ 'master-profile' | translate }}">
+              {{ ctrl.getUser('fullname') | uppercase }}
+            </a>
           </li>
           <li class="divider"></li>
           <li class="link">
@@ -31,12 +33,7 @@
               {{ menuItem.caption | translate}}
             </a>
           </li>
-          <li class="divider"></li>
-          <li class="link">
-            <a ui-sref="user-profile">
-              {{ 'master-profile' | translate }}
-            </a>
-          </li>
+          <li class="divider" ng-if="ctrl.data.displayLogout"></li>
           <li class="link" ng-if="ctrl.data.displayLogout">
             <a ui-sref="user-logout">
               {{ 'master-logout' | translate }}

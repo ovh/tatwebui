@@ -86,55 +86,9 @@
     <strong>Current search: </strong>
   </span>
 
-  <span class="tat-filter-group" ng-if="ctrl.filter.text">
-    <strong class="inclusive">
-      <i class="fa fa-search"></i>
-    </strong>
-    <a role="button" class="tat-textlabel" ng-click="ctrl.removeFilter('text')">
-      {{ ctrl.filter.text }}
-      <i class="fa fa-times"></i>
-    </a>
-  </span>
-
-  <!-- in labels -->
-  <span class="tat-filter-group" ng-if="ctrl.filterAsList.label.length">
-    <strong class="inclusive">
-      <i class="fa fa-plus-square"></i>
-      {{ 'shared_filter_in' | translate }}
-    </strong>
-    <a role="button" class="tat-label" ng-repeat="label in ctrl.filterAsList.label" ng-click="ctrl.removeFilter('label', label)">
-      {{ label }}
-      <i class="fa fa-times"></i>
-    </a>
-  </span>
-
-  <!-- and labels -->
-  <span class="tat-filter-group" ng-if="ctrl.filterAsList.andLabel.length">
-    <strong class="inclusive">
-      <i class="fa fa-plus-square"></i>
-      {{ 'shared_filter_all' | translate }}
-    </strong>
-    <a role="button" class="tat-label" ng-repeat="label in ctrl.filterAsList.andLabel" ng-click="ctrl.removeFilter('andLabel', label)">
-      {{ label }}
-      <i class="fa fa-times"></i>
-    </a>
-  </span>
-
-  <!-- hide labels -->
-  <span class="tat-filter-group" ng-if="ctrl.filterAsList.notLabel.length">
-    <strong class="exclusive">
-      <i class="fa fa-minus-square"></i>
-      {{ 'shared_filter_hide' | translate }}
-    </strong>
-    <a role="button" class="tat-label" ng-repeat="label in ctrl.filterAsList.notLabel" ng-click="ctrl.removeFilter('notLabel', label)">
-      {{ label }}
-      <i class="fa fa-times"></i>
-    </a>
-  </span>
-
   <!-- in tags -->
   <span class="tat-filter-group" ng-if="ctrl.filterAsList.tag.length">
-    <strong class="inclusive">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('tag')">
       <i class="fa fa-plus-square"></i>
       {{ 'shared_filter_in' | translate }}
     </strong>
@@ -146,7 +100,7 @@
 
   <!-- all tags -->
   <span class="tat-filter-group" ng-if="ctrl.filterAsList.andTag.length">
-    <strong class="inclusive">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('andTag')">
       <i class="fa fa-plus-square"></i>
       {{ 'shared_filter_all' | translate }}
     </strong>
@@ -158,7 +112,7 @@
 
   <!-- hide tags -->
   <span class="tat-filter-group" ng-if="ctrl.filterAsList.notTag.length">
-    <strong class="inclusive">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('notTag')">
       <i class="fa fa-minus-square"></i>
       {{ 'shared_filter_hide' | translate }}
     </strong>
@@ -168,9 +122,45 @@
     </a>
   </span>
 
+  <!-- in labels -->
+  <span class="tat-filter-group" ng-if="ctrl.filterAsList.label.length">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('label')">
+      <i class="fa fa-plus-square"></i>
+      {{ 'shared_filter_in' | translate }}
+    </strong>
+    <a role="button" class="tat-label" ng-repeat="label in ctrl.filterAsList.label" ng-click="ctrl.removeFilter('label', label)">
+      {{ label }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- and labels -->
+  <span class="tat-filter-group" ng-if="ctrl.filterAsList.andLabel.length">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('andLabel')">
+      <i class="fa fa-plus-square"></i>
+      {{ 'shared_filter_all' | translate }}
+    </strong>
+    <a role="button" class="tat-label" ng-repeat="label in ctrl.filterAsList.andLabel" ng-click="ctrl.removeFilter('andLabel', label)">
+      {{ label }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
+  <!-- hide labels -->
+  <span class="tat-filter-group" ng-if="ctrl.filterAsList.notLabel.length">
+    <strong class="exclusive" ng-click="ctrl.viewFilter('notLabel')">
+      <i class="fa fa-minus-square"></i>
+      {{ 'shared_filter_hide' | translate }}
+    </strong>
+    <a role="button" class="tat-label" ng-repeat="label in ctrl.filterAsList.notLabel" ng-click="ctrl.removeFilter('notLabel', label)">
+      {{ label }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
   <!-- usernames -->
   <span class="tat-filter-group" ng-if="ctrl.filterAsList.username.length">
-    <strong class="inclusive">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('username')">
       <i class="fa fa-user"></i>
     </strong>
     <a role="button" class="tat-tag" ng-repeat="username in ctrl.filterAsList.username" ng-click="ctrl.removeFilter('username', username)">
@@ -179,9 +169,19 @@
     </a>
   </span>
 
+  <span class="tat-filter-group" ng-if="ctrl.filter.text">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('text')">
+      <i class="fa fa-search"></i>
+    </strong>
+    <a role="button" class="tat-textlabel" ng-click="ctrl.removeFilter('text')">
+      {{ ctrl.filter.text }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
   <!-- message id -->
   <span class="tat-filter-group" ng-if="ctrl.filter.idMessage">
-    <strong class="inclusive">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('idMessage')">
       <i class="fa fa-envelope"></i> ID
     </strong>
     <a role="button" class="tat-tag" ng-click="ctrl.removeFilter('idMessage')">
