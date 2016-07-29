@@ -82,7 +82,7 @@
     </form>
   </div>
 
-  <span ng-show="ctrl.searching">
+  <span ng-show="ctrl.searching && !ctrl.data.isEmptySearch">
     <strong>Current search: </strong>
   </span>
 

@@ -24,7 +24,8 @@ angular.module('TatUi').component('messageFilterBar',
     self.data = {
       search: "",
       labels: [],
-      loadingAutocomplete: false
+      loadingAutocomplete: false,
+      isEmptySearch: true
     };
 
     self.filter = TatFilter.getCurrent();
@@ -40,7 +41,7 @@ angular.module('TatUi').component('messageFilterBar',
       });
     };
 
-    $scope.$on('filter-changed', function(ev, filter){
+    $scope.$on('filter-changed', function(ev, filter) {
       self.filter = filter;
       self.setFilterHelpers();
     });
@@ -79,6 +80,17 @@ angular.module('TatUi').component('messageFilterBar',
       }
       TatFilter.setFilters(self.filter).search();
       self.searching = false;
+      self.computeNbFilter();
+    };
+
+    self.computeNbFilter = function() {
+      self.data.isEmptySearch = true;
+      for(var f in self.filter) {
+        if (self.filter[f] && self.filter[f] !== undefined && self.filter[f] !== null) {
+          self.data.isEmptySearch = false;
+          return;
+        }
+      }
     };
 
     self.computeLabelsFromTopic = function () {
