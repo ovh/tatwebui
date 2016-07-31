@@ -57,16 +57,17 @@ angular.module('TatUi').component('messageFilterBar',
     self.addPrefix = function(prefix) {
       self.data.loadingAutocomplete = true;
       self.data.search = prefix + ":";
+      self.data.currentHelp = "shared_filter_help_" + prefix;
       angular.element('#msgFilterBar').focus();
     };
 
     var filterKeys = {
       "tag:": "tag",
-      "and-tag:": "andTag",
-      "not-tag:": "notTag",
+      "andTag:": "andTag",
+      "notTag:": "notTag",
       "label:": "label",
-      "and-label:": "andLabel",
-      "not-label:": "notLabel",
+      "andLabel:": "andLabel",
+      "notLabel:": "notLabel",
       "text:": "text",
       "username:": "username"
     };

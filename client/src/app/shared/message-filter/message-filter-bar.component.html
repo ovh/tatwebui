@@ -14,14 +14,14 @@
       </strong>
       <a role="button" class="tat-tag"><i>#</i>tag</a>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('and-tag')" uib-tooltip="{{ 'shared_filter_contains_all_tags' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('andTag')" uib-tooltip="{{ 'shared_filter_contains_all_tags' | translate }}">
       <strong class="inclusive" >
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_all' | translate }}
       </strong>
-      <a role="button" class="tat-tag"><i>#</i>and-tags</a>
+      <a role="button" class="tat-tag"><i>#</i>andTags</a>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('not-tag')" uib-tooltip="{{ 'shared_filter_hide_all_tags' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('notTag')" uib-tooltip="{{ 'shared_filter_hide_all_tags' | translate }}">
       <strong class="exclusive" >
         <i class="fa fa-minus-square"></i>
         {{ 'shared_filter_hide' | translate }}
@@ -36,14 +36,14 @@
       </strong>
       <a role="button" class="tat-label">label</a>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('and-label')" uib-tooltip="{{ 'shared_filter_contains_all_labels' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('andLabel')" uib-tooltip="{{ 'shared_filter_contains_all_labels' | translate }}">
       <strong class="inclusive" class="tat-label">
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_all' | translate }}
       </strong>
-      <a role="button" class="tat-label">and-labels</a>
+      <a role="button" class="tat-label">andLabels</a>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('not-label')" uib-tooltip="{{ 'shared_filter_hide_all_labels' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('notLabel')" uib-tooltip="{{ 'shared_filter_hide_all_labels' | translate }}">
       <strong class="exclusive" class="tat-label">
         <i class="fa fa-minus-square"></i>
         {{ 'shared_filter_hide' | translate }}
@@ -60,7 +60,13 @@
         <i class="fa fa-user"></i> Username
       </strong>
     </span>
-
+  </div>
+  <div class="row" ng-show="ctrl.searching">
+    <div class="alert alert-info" ng-show="ctrl.data.currentHelp">
+      {{ ctrl.data.currentHelp | translate }}
+    </div>
+  </div>
+  <div class="row" ng-show="ctrl.searching">
     <form>
       <div class="tat-msg-input">
         <div mass-autocomplete>

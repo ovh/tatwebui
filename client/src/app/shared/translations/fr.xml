@@ -130,4 +130,14 @@
   <translation id="shared_filter_usernames">Rerche par nom d'utilisateur</translation>
   <translation id="shared_filter_text">Terme à rechercher</translation>
   <translation id="shared_filter_search">Rechercher</translation>
+
+  <translation id="shared_filter_help_label">Filtre sur les labels avec la condition "OU". "label:LABEL_A,LABEL_B" recherche les messages contenant les labels LABEL_A et LABEL_B.</translation>
+  <translation id="shared_filter_help_andLabel">Filtre sur les labels avec la condition "ET". "andLabel:LABEL_A,LABEL_B" recherche les messages contenant les labels LABEL_A ET LABEL_B.</translation>
+  <translation id="shared_filter_help_notLabel">Filtre sur les labels by excluding some. "notLabel:LABEL_A,LABEL_B" recherche tous les messages exceptés ceux contenant les labels LABEL_A OU LABEL_B.</translation>
+  <translation id="shared_filter_help_tag">Filtre on tag avec la condition "OU". "tag:TAG_A,TAG_B" recherche les messages contenant les tags TAG_A ou TAG_B.</translation>
+  <translation id="shared_filter_help_andTag">Filtre on tag avec la condition "ET". "andTag:TAG_A,TAG_B" les messages contenant les tags recherche TAG_A et TAG_B.</translation>
+  <translation id="shared_filter_help_notTag">Filtre on tag by excluding some. "notTag:TAG_A,TAG_B" recherche tous les messages exceptés ceux contenant les tags TAG_A OU TAG_B.</translation>
+  <translation id="shared_filter_help_username">Filtre by message's author. "usrename:username_a,username_b" recherche les messages ayant pour auteurs username_a ou username_b .</translation>
+  <translation id="shared_filter_help_text">Filtre sur le texte des messages. Vous devriez utilise un recherche sur les labels ou les tags en même temps.</translation>
+
 </translations>

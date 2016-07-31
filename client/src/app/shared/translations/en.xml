@@ -130,4 +130,14 @@
   <translation id="shared_filter_usernames">Search by usernames</translation>
   <translation id="shared_filter_text">Search Text</translation>
   <translation id="shared_filter_search">Search</translation>
+
+  <translation id="shared_filter_help_label">Filter on label with OR condition. "label:LABEL_A,LABEL_B" will search LABEL_A OR LABEL_B.</translation>
+  <translation id="shared_filter_help_andLabel">Filter on label with AND condition. "andLabel:LABEL_A,LABEL_B" will search LABEL_A AND LABEL_B.</translation>
+  <translation id="shared_filter_help_notLabel">Filter on label by excluding some. "notLabel:LABEL_A,LABEL_B" will search all messages except those containing LABEL_A OR LABEL_B.</translation>
+  <translation id="shared_filter_help_tag">Filter on tag with OR condition. "tag:TAG_A,TAG_B" will search TAG_A OR TAG_B.</translation>
+  <translation id="shared_filter_help_andTag">Filter on tag with AND condition. "andTag:TAG_A,TAG_B" will search TAG_A AND TAG_B.</translation>
+  <translation id="shared_filter_help_notTag">Filter on tag by excluding some. "notTag:TAG_A,TAG_B" will search all messages except those containing TAG_A OR TAG_B.</translation>
+  <translation id="shared_filter_help_username">Filter by message's author. "usrename:username_a,username_b" will search messages with author username_a or username_b .</translation>
+  <translation id="shared_filter_help_text">Filter on text. You should use a tag or label criteria with it.</translation>
+
 </translations>
