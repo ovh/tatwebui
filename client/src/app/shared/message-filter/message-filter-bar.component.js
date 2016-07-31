@@ -23,6 +23,7 @@ angular.module('TatUi').component('messageFilterBar',
     var self = this;
     self.data = {
       search: "",
+      currentHelp: "",
       labels: [],
       loadingAutocomplete: false,
       isEmptySearch: true
@@ -74,7 +75,7 @@ angular.module('TatUi').component('messageFilterBar',
 
     self.filterSearch = function() {
       for (var k in filterKeys) {
-        var idx = self.data.search.toLowerCase().indexOf(k);
+        var idx = self.data.search.indexOf(k);
         if (idx === 0) {
           var ex = self.data.search.substring(idx+k.length, self.data.search.length);
           self.filter[filterKeys[k]] = ex;
@@ -161,10 +162,12 @@ angular.module('TatUi').component('messageFilterBar',
     };
     self.suggestAutocompleteSearch = function (term) {
       var ret = [];
-      if (self.data.search.indexOf("tag:") >=0) {
+      if (self.data.search.toLowerCase().indexOf("tag:") >=0) {
         ret = self.suggestTagsDelimited(term);
-      } else if (self.data.search.indexOf("label:") >=0) {
+      } else if (self.data.search.toLowerCase().indexOf("label:") >=0) {
         ret = self.suggestLabelsDelimited(term);
+      } else {
+        self.data.currentHelp = "";
       }
       self.data.loadingAutocomplete = false;
       return ret;
