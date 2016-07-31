@@ -47,7 +47,9 @@
         {{ 'master-cant-change-view' | translate }}
       </div>
 
-      <ui-select data-ng-if="ctrl.isMessagesView()" ng-show="ctrl.data.viewsEnabled" class="pull-right" style="width: 200px;top: 15px;" data-ng-model="ctrl.data.currentView" ng-click="ctrl.switchView($select.selected.route)" theme="bootstrap">
+      <ui-select data-ng-if="ctrl.isMessagesView()" ng-show="ctrl.data.viewsEnabled" class="pull-right"
+      style="width: 200px;top: 15px;" data-ng-model="ctrl.data.currentView"
+      ng-change="ctrl.switchView($select.selected.route)" theme="bootstrap">
         <ui-select-match placeholder="Select or search a view...">
           {{$select.selected.name}}
         </ui-select-match>
@@ -74,8 +76,7 @@
           <i class="fa fa-street-view"></i>
           <span class="badge">{{ ctrl.data.presences.length }}</span>
         </a>
-        <a role="button"
-          data-ng-click="ctrl.toggleTopicFavorite()">
+        <a role="button" data-ng-click="ctrl.toggleTopicFavorite()">
           <i class="fa"
             data-ng-class="{'fa-star-o':!ctrl.data.isFavoriteTopic, 'fa-star': ctrl.data.isFavoriteTopic}">
           </i>
