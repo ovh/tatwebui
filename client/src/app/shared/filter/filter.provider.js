@@ -56,14 +56,12 @@ angular.module('TatUi')
               $localStorage.filters[$stateParams.topic].idMessage = null;
               $location.search('idMessage', null);
               self.search();
-            }
-            else if (key == 'text') {
+            } else if (key == 'text') {
               self.currentFilters[$stateParams.topic].text = null;
               $localStorage.filters[$stateParams.topic].text = null;
               $location.search('text', null);
               self.search();
-            }
-            else if (fltr) {
+            } else if (fltr) {
               items = self.currentFilters[$stateParams.topic][key].split(',');
               index = items.indexOf(value);
               if (index > -1) items.splice(index, 1);
@@ -77,13 +75,19 @@ angular.module('TatUi')
           };
 
           self.applyFilters = function() {
+            var containsIdMsg = false;
+            if (self.currentFilters[$stateParams.topic].idMessage) {
+                containsIdMsg = true;
+            }
             self.eachFilter(function(k) {
               if (k !== "idMessage") {
                 $localStorage.filters[$stateParams.topic][k] = self.currentFilters[$stateParams.topic][k];
               } else {
                 $localStorage.filters[$stateParams.topic][k] = null;
               }
-              $location.search(k, self.currentFilters[$stateParams.topic][k]);
+              if (!containsIdMsg) {
+                $location.search(k, self.currentFilters[$stateParams.topic][k]);
+              }
             });
             return self;
           };
@@ -101,6 +105,10 @@ angular.module('TatUi')
             }
 
             var search = $location.search();
+            var containsIdMsg = false;
+            if (search.idMessage) {
+              containsIdMsg = true;
+            }
             self.eachFilter(function(k) {
               // First check in query string and propagate to localstorage if necessary
               if (search[k] && search[k] !== '') {
@@ -112,7 +120,7 @@ angular.module('TatUi')
               if ($localStorage.filters[$stateParams.topic][k]) {
                  if (k === "idMessage") {
                    self.currentFilters[$stateParams.topic][k] = search[k];
-                 } else {
+                 } else if (!containsIdMsg){
                    self.currentFilters[$stateParams.topic][k] = $localStorage.filters[$stateParams.topic][k];
                  }
               } else if (k === "idMessage") {

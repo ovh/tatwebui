@@ -126,11 +126,9 @@ angular.module('TatUi').component('header', {
     self.computeCurrent = function() {
       var p = Plugin.getPluginByRoute($state.current.name);
       if (p) {
-        console.log("Hop p1:",p);
         self.data.currentView = p;
         return;
       }
-      console.log("Hop p2:",$state.current);
       self.data.currentView = $state.current;
       return;
     };
