@@ -62,11 +62,6 @@
     </span>
   </div>
   <div class="row" ng-show="ctrl.searching">
-    <div class="alert alert-info" ng-show="ctrl.data.currentHelp">
-      {{ ctrl.data.currentHelp | translate }}
-    </div>
-  </div>
-  <div class="row" ng-show="ctrl.searching">
     <form>
       <div class="tat-msg-input">
         <div mass-autocomplete>
@@ -86,6 +81,11 @@
         </a>
       </div>
     </form>
+  </div>
+  <div class="row" ng-show="ctrl.searching">
+    <div class="alert alert-info" ng-show="ctrl.data.currentHelp">
+      {{ ctrl.data.currentHelp | translate }}
+    </div>
   </div>
 
   <span ng-show="ctrl.searching && !ctrl.data.isEmptySearch">
