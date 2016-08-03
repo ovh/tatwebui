@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "tatwebui-plugin-standardview": "git+https://github.com/ovh/tatwebui-plugin-standardview.git",
-    "tatwebui-plugin-notificationsview": "git+https://github.com/ovh/tatwebui-plugin-notificationsview.git"
+    "tatwebui-plugin-notificationsview": "git+https://github.com/ovh/tatwebui-plugin-notificationsview.git",
+    "tatwebui-plugin-releaseview": "git+https://github.com/ovh/tatwebui-plugin-releaseview.git",
+    "tatwebui-plugin-pastatview": "git+https://github.com/ovh/tatwebui-plugin-pastatview.git",
+    "tatwebui-plugin-monitoringview": "git+https://github.com/ovh/tatwebui-plugin-monitoringview.git"
   }
 }
