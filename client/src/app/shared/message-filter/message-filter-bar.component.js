@@ -26,7 +26,14 @@ angular.module('TatUi').component('messageFilterBar',
       currentHelp: "",
       labels: [],
       loadingAutocomplete: false,
-      isEmptySearch: true
+      isEmptySearch: true,
+      searchingDate: false,
+      dateOptions: {
+        startingDay: 1,
+        showWeeks: true,
+        maxDate: new Date(2040, 5, 22),
+        minDate: new Date(2015, 11, 22)
+      }
     };
 
     self.filter = TatFilter.getCurrent();
@@ -34,7 +41,7 @@ angular.module('TatUi').component('messageFilterBar',
 
     self.setFilterHelpers = function() {
       TatFilter.eachFilter(function(k) {
-        if (k == 'text') {
+        if (k === 'text' || k.indexOf("date") === 0) {
           self.filterAsList[k] = self.filter[k] ? self.filter[k]: '';
         } else {
           self.filterAsList[k] = self.filter[k] ? self.filter[k].split(','): [];
@@ -55,35 +62,39 @@ angular.module('TatUi').component('messageFilterBar',
       TatFilter.search();
     };
 
-    self.addPrefix = function(prefix) {
-      self.data.loadingAutocomplete = true;
-      self.data.search = prefix + ":";
+    // prefix = dateCreation or dateUpdate
+    self.dateSearchForm = function(prefix) {
+      self.data.searchingDate = true;
+      self.data.prefix = prefix;
+      self.data.search = "";
       self.data.currentHelp = "shared_filter_help_" + prefix;
-      angular.element('#msgFilterBar').focus();
     };
 
-    var filterKeys = {
-      "tag:": "tag",
-      "andTag:": "andTag",
-      "notTag:": "notTag",
-      "label:": "label",
-      "andLabel:": "andLabel",
-      "notLabel:": "notLabel",
-      "text:": "text",
-      "username:": "username"
+    self.addPrefix = function(prefix) {
+      self.data.prefix = prefix;
+      self.data.search = "";
+      self.data.currentHelp = "shared_filter_help_" + prefix;
+      angular.element('#msgFilterBar').focus();
+      self.data.searchingDate = false;
     };
 
     self.filterSearch = function() {
-      for (var k in filterKeys) {
-        var idx = self.data.search.indexOf(k);
-        if (idx === 0) {
-          var ex = self.data.search.substring(idx+k.length, self.data.search.length);
-          self.filter[filterKeys[k]] = ex;
-        }
+      if (self.data.prefix === "dateCreation") {
+        self.filter.dateMinCreation = moment(self.data.dateMinSearch).unix();
+        self.filter.dateMaxCreation = moment(self.data.dateMaxSearch).unix();
+      } else if (self.data.prefix === "dateUpdate") {
+        self.filter.dateMinUpdate = moment(self.data.dateMinSearch).unix();
+        self.filter.dateMaxUpdate = moment(self.data.dateMaxSearch).unix();
+      } else {
+        self.filter[self.data.prefix] = self.data.search;
       }
+
       TatFilter.setFilters(self.filter).search();
       self.searching = false;
+      self.data.searchingDate = false;
       self.computeNbFilter();
+      self.data.search = "";
+      self.data.prefix = "";
     };
 
     self.computeNbFilter = function() {
@@ -109,7 +120,7 @@ angular.module('TatUi').component('messageFilterBar',
         (!self.data.labels || self.data.labels.length < 1 || self.data.labels.length != self.topic.labels.length)) {
         self.computeLabelsFromTopic();
       }
-      var q = self.getTerm(term);
+      var q = term.toLowerCase().trim();
       var results = [];
       for (var i = 0; i < self.data.labels.length && results.length < 10; i++) {
         var labelText = self.data.labels[i];
@@ -124,7 +135,7 @@ angular.module('TatUi').component('messageFilterBar',
       if (!self.topic || !self.topic.tags) {
         return [];
       }
-      var q = self.getTerm(term);
+      var q = term.toLowerCase().trim();
       var results = [];
       for (var i = 0; i < self.topic.tags.length && results.length < 10; i++) {
         var tag = self.topic.tags[i];
@@ -135,16 +146,8 @@ angular.module('TatUi').component('messageFilterBar',
       return results;
     };
 
-    self.getTerm = function(term) {
-      var idx = term.indexOf(":");
-      return term.substring(idx+1, term.length).toLowerCase().trim();
-    };
-
     self.suggest = function (term, fnc) {
       var ix = term.lastIndexOf(',');
-      if (ix < 0) {
-        ix = term.lastIndexOf(':');
-      }
       var lhs = term.substring(0, ix + 1),
           rhs = term.substring(ix + 1),
           suggestions = fnc(rhs);
@@ -161,10 +164,11 @@ angular.module('TatUi').component('messageFilterBar',
       return self.suggest(term, self.suggestTags);
     };
     self.suggestAutocompleteSearch = function (term) {
+      self.data.loadingAutocomplete = true;
       var ret = [];
-      if (self.data.search.toLowerCase().indexOf("tag:") >=0) {
+      if (self.data.prefix.toLowerCase().indexOf("tag") >=0) {
         ret = self.suggestTagsDelimited(term);
-      } else if (self.data.search.toLowerCase().indexOf("label:") >=0) {
+      } else if (self.data.prefix.toLowerCase().indexOf("label") >=0) {
         ret = self.suggestLabelsDelimited(term);
       } else {
         self.data.currentHelp = "";
@@ -177,10 +181,39 @@ angular.module('TatUi').component('messageFilterBar',
       suggest: self.suggestAutocompleteSearch
     };
 
-    self.viewFilter = function(prefix) { // f = "tag", etc...
-      if (self.filter[prefix]) {
+    self.viewFilterDate = function(prefix) { // prefix = dateCreation or dateUpdate
+      self.searching = true;
+      self.data.searchingDate = true;
+      self.data.prefix = prefix;
+    };
+
+    self.viewFilter = function(prefix) { // prefix = "tag", etc...
+      if (prefix.indexOf("date") === 0) { // dateCreation, dateCreation, dateUpdate, dateUpdate
         self.searching = true;
-        self.data.search = prefix + ":" + self.filter[prefix];
+        self.data.searchingDate = true;
+        self.data.prefix = prefix;
+        self.data.search = "";
+
+        if (prefix === "dateCreation") {
+          if (self.filter.dateMinCreation) {
+            self.data.dateMinSearch = moment.unix(self.filter.dateMinCreation).toDate();
+          }
+          if (self.filter.dateMaxCreation) {
+            self.data.dateMaxSearch = moment.unix(self.filter.dateMaxCreation).toDate();
+          }
+        } else if (prefix === "dateUpdate") {
+          if (self.filter.dateMinUpdate) {
+            self.data.dateMinSearch = moment.unix(self.filter.dateMinUpdate).toDate();
+          }
+          if (self.filter.dateMaxUpdate) {
+            self.data.dateMaxSearch = moment.unix(self.filter.dateMaxUpdate).toDate();
+          }
+        }
+      } else if (self.filter[prefix]) {
+        self.searching = true;
+        self.data.searchingDate = false;
+        self.data.prefix = prefix;
+        self.data.search = self.filter[prefix];
       }
     };
 

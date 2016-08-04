@@ -22,6 +22,10 @@ angular.module('TatUi')
       'notTag',
       'text',
       'idMessage',
+      'dateMinCreation',
+      'dateMaxCreation',
+      'dateMinUpdate',
+      'dateMaxUpdate',
       'username'
     ];
 
@@ -40,6 +44,16 @@ angular.module('TatUi')
             for (var i = 0; i < self.FILTERS.length; i++) callback(self.FILTERS[i]);
           };
 
+          self.containsDateFilter = function() {
+            var k = ["dateMinCreation", "dateMaxCreation", "dateMinCreation", "dateMaxCreation"];
+            for (var i = 0; i < k.length; i++) {
+              if ($localStorage.filters[$stateParams.topic][k]) {
+                return true;
+              }
+            }
+            return false;
+          };
+
           self.sanitize = function(f) {
             // Removes spaces & duplicate (preserve order)
             return (typeof(f) === 'undefined' || f === null) ? null : f.replace(/\s+/g, '')
@@ -51,15 +65,12 @@ angular.module('TatUi')
           self.removeFilter = function(key, value) {
             var items, index, fltr;
             fltr = self.currentFilters[$stateParams.topic][key];
-            if (key == 'idMessage') {
-              self.currentFilters[$stateParams.topic].idMessage = null;
-              $localStorage.filters[$stateParams.topic].idMessage = null;
-              $location.search('idMessage', null);
-              self.search();
-            } else if (key == 'text') {
-              self.currentFilters[$stateParams.topic].text = null;
-              $localStorage.filters[$stateParams.topic].text = null;
-              $location.search('text', null);
+            if (key == 'idMessage' || key == 'text' ||
+                       key == 'dateMinCreation' || key == 'dateMaxCreation' || 
+                       key == 'dateMinUpdate' || key == 'dateMaxUpdate') {
+              self.currentFilters[$stateParams.topic][key] = null;
+              $localStorage.filters[$stateParams.topic][key] = null;
+              $location.search(key, null);
               self.search();
             } else if (fltr) {
               items = self.currentFilters[$stateParams.topic][key].split(',');
@@ -136,7 +147,9 @@ angular.module('TatUi')
             if (k == 'tag' && v) {
               v = v.replace('#', '');
             }
-            if (k !== 'text' && k !== 'idMessage') {
+            if (k !== 'text' && k !== 'idMessage' &&
+            k !== "dateMinCreation" && k !== "dateMaxCreation" &&
+            k !== "dateMinUpdate" && k !== "dateMaxUpdate") {
               self.currentFilters[$stateParams.topic][k] = self.sanitize(v);
             } else {
               self.currentFilters[$stateParams.topic][k] = (typeof(v) === 'string') ? v.replace(/(^\s+|\s+$)/g, ''): v;
@@ -175,6 +188,7 @@ angular.module('TatUi')
           FILTERS: self.FILTERS,
           removeFilter: self.removeFilter,
           getCurrent: self.getCurrentFilters,
+          containsDateFilter: self.containsDateFilter,
           setFilters: self.setFilters,
           eachFilter: self.eachFilter,
           search: self.search
