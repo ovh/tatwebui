@@ -18,6 +18,7 @@ angular.module('TatUi').component('header', {
     $translate,
     $stateParams,
     $localStorage,
+    $cookieStore,
     Authentication,
     appConfiguration,
     Flash,
@@ -234,6 +235,12 @@ angular.module('TatUi').component('header', {
 
       if (appConfiguration.backend && appConfiguration.backend.autologin === true) {
         self.data.displayLogout = false;
+      }
+
+      if (angular.isDefined($cookieStore.get("showSidebar"))) {
+        self.data.showHeader = $cookieStore.get("showSidebar");
+      } else {
+        self.data.showHeader = true;
       }
     };
 

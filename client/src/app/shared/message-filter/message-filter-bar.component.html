@@ -7,66 +7,69 @@
       <strong>Choose a criteria:</strong>
     </span>
 
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('tag')" uib-tooltip="{{ 'shared_filter_contains_tags' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('tag')" uib-tooltip="{{ 'shared_filter_contains_tags_tips' | translate }}">
       <strong class="inclusive" >
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_in' | translate }} <i>#</i>tag
       </strong>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('andTag')" uib-tooltip="{{ 'shared_filter_contains_all_tags' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('andTag')" uib-tooltip="{{ 'shared_filter_contains_all_tags_tips' | translate }}">
       <strong class="inclusive" >
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_all' | translate }} <i>#</i>tag
       </strong>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('notTag')" uib-tooltip="{{ 'shared_filter_hide_all_tags' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('notTag')" uib-tooltip="{{ 'shared_filter_hide_all_tags_tips' | translate }}">
       <strong class="exclusive" >
         <i class="fa fa-minus-square"></i>
         {{ 'shared_filter_hide' | translate }} <i>#</i>tag
       </strong>
     </span>
 
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('label')" uib-tooltip="{{ 'shared_filter_contains_labels' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('label')" uib-tooltip="{{ 'shared_filter_contains_labels_tips' | translate }}">
       <strong class="inclusive">
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_in' | translate }} label
       </strong>
 
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('andLabel')" uib-tooltip="{{ 'shared_filter_contains_all_labels' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('andLabel')" uib-tooltip="{{ 'shared_filter_contains_all_labels_tips' | translate }}">
       <strong class="inclusive" class="tat-label">
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_all' | translate }} label
       </strong>
 
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('notLabel')" uib-tooltip="{{ 'shared_filter_hide_all_labels' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('notLabel')" uib-tooltip="{{ 'shared_filter_hide_all_labels_tips' | translate }}">
       <strong class="exclusive" class="tat-label">
         <i class="fa fa-minus-square"></i>
         {{ 'shared_filter_hide' | translate }} label
       </strong>
 
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.dateSearchForm('dateCreation')" uib-tooltip="{{ 'shared_filter_date_creation' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.dateSearchForm('dateCreation')" uib-tooltip="{{ 'shared_filter_date_creation_tips' | translate }}">
       <strong class="inclusive" class="tat-textlabel">
-        <i class="fa fa-calendar"></i> date creation
+        <i class="fa fa-calendar"></i> {{ 'shared_filter_date_creation' | translate }}
       </strong>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.dateSearchForm('dateUpdate')" uib-tooltip="{{ 'shared_filter_date_update' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.dateSearchForm('dateUpdate')" uib-tooltip="{{ 'shared_filter_date_update_tips' | translate }}">
       <strong class="inclusive" class="tat-textlabel">
-        <i class="fa fa-calendar"></i> date update
+        <i class="fa fa-calendar"></i> {{ 'shared_filter_date_update' | translate }}
       </strong>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('username')" uib-tooltip="{{ 'shared_filter_usernames' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('username')" uib-tooltip="{{ 'shared_filter_usernames_tips' | translate }}">
       <strong class="inclusive" class="tat-textlabel">
-        <i class="fa fa-user"></i> username
+        <i class="fa fa-user"></i> {{ 'shared_filter_username' | translate }}
       </strong>
     </span>
-    <span class="tat-filter-group" ng-click="ctrl.addPrefix('text')" uib-tooltip="{{ 'shared_filter_text' | translate }}">
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('text')" uib-tooltip="{{ 'shared_filter_text_tips' | translate }}">
       <strong class="inclusive" class="tat-textlabel">
-        <i class="fa fa-font"></i> text
+        <i class="fa fa-font"></i> {{ 'shared_filter_text' | translate }}
       </strong>
     </span>
+    <a class="btn btn-default" ng-click="ctrl.searching=false">
+      <i class="fa fa-times"></i> {{ 'shared_common_cancel' | translate }}
+    </a>
   </div>
   <div class="row" ng-show="ctrl.searching">
     <form ng-show="ctrl.data.prefix">
@@ -84,7 +87,7 @@
         <i class="fa fa-search fa-spinner fa-pulse" ng-if="ctrl.data.loadingAutocomplete"></i>
       </div>
       <div ng-if="ctrl.data.searchingDate">
-        FROM:
+        {{ 'shared_filter_from' | translate }}
         <datetimepicker
           ng-model="ctrl.data.dateMinSearch"
           show-meridian="false"
@@ -95,7 +98,7 @@
           readonly-date="false"
           show-spinners="true"></datetimepicker>
 
-        TO:
+        {{ 'shared_filter_to' | translate }}
         <datetimepicker
           ng-model="ctrl.data.dateMaxSearch"
           show-meridian="false"
@@ -107,18 +110,16 @@
           show-spinners="true"></datetimepicker>
       </div>
 
-      <div class="btn-group">
+      <div class="row" style="margin-left:10px">
         <button type="submit" class="btn btn-primary" ng-click="ctrl.filterSearch()">
-            <i class="fa fa-search"></i>
+            <i class="fa fa-search"></i> {{ 'shared_filter_search' | translate }}
         </button>
-        <a class="btn btn-default" ng-click="ctrl.searching=false">
-          <i class="fa fa-times"></i>
-        </a>
       </div>
     </form>
   </div>
 
   <span ng-show="ctrl.searching && !ctrl.data.isEmptySearch">
+    <hr>
     <strong>Current search: </strong>
   </span>
 
