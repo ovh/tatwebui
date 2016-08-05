@@ -143,7 +143,7 @@
   <translation id="shared_filter_help_notTag">Filter on tag by excluding some. "TAG_A,TAG_B" will search all messages except those containing TAG_A OR TAG_B.</translation>
   <translation id="shared_filter_help_username">Filter by message's author. "username_a,username_b" will search messages with author username_a or username_b .</translation>
   <translation id="shared_filter_help_text">Filter on text. You should use a tag or label criteria with it.</translation>
-  <translation id="shared_filter_help_dateCreation">Filter on messages date creation</translation>
-  <translation id="shared_filter_help_dateUpdate">Filter on messages date update</translation>
+  <translation id="shared_filter_help_dateCreation">Filter on the creation date of messages</translation>
+  <translation id="shared_filter_help_dateUpdate">Filter on the update date of messages</translation>
 
 </translations>
