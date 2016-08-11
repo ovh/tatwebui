@@ -392,6 +392,14 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "TatUi.shared:messageLoad",
+      "shortName": "messageLoad",
+      "type": "directive",
+      "moduleName": "TatUi",
+      "keywords": "ae api directive shared tatui"
+    },
+    {
+      "section": "api",
       "id": "TatUi.shared:messageReply",
       "shortName": "messageReply",
       "type": "directive",

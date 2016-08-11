@@ -67,6 +67,10 @@ angular.module("TatUi").component("sidebar", {
       }
     };
 
+    $scope.$on("sidebar-toggle", function(e, meta) {
+        self.toggleSidebar();
+    });
+
     self.toggleSidebar = function() {
       self.data.showSidebar = !self.data.showSidebar;
       $cookieStore.put("showSidebar", self.data.showSidebar);
@@ -170,6 +174,13 @@ angular.module("TatUi").component("sidebar", {
           data.topics[i].topicType = topicType;
 
           if (topicType != "toSkip") {
+            if (!self.data.treeTopics[topicType]) {
+              self.data.treeTopics[topicType] = {
+                  title: topicType,
+                  topics : [],
+                  expand: true
+              };
+            }
             if (data.topicsMsgUnread && data.topicsMsgUnread[data.topics[i].topic]) {
               data.topics[i].unread = data.topicsMsgUnread[data.topics[i].topic];
             }
@@ -227,6 +238,13 @@ angular.module("TatUi").component("sidebar", {
           return "toSkip";
         }
         return "privateOthers";
+      } else {
+        var idx = topic.topic.indexOf("/", 2);
+        if (idx == -1) { // root topic
+          return "toSkip";
+        }
+        topic.nameDisplayed = topic.topic.substr(idx+1);
+        return topic.topic.substr(0, idx);
       }
     };
 
