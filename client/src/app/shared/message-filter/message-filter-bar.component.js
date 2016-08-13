@@ -10,6 +10,7 @@
 angular.module('TatUi').component('messageFilterBar',
 {
   bindings: {
+    disabledDetails: '=',
     searching: '=',
     topic: '='
   },
@@ -188,6 +189,9 @@ angular.module('TatUi').component('messageFilterBar',
     };
 
     self.viewFilter = function(prefix) { // prefix = "tag", etc...
+      if (self.disabledDetails === true) {
+        return;
+      }
       self.data.currentHelp = "shared_filter_help_" + prefix;
       if (prefix.indexOf("date") === 0) { // dateCreation, dateCreation, dateUpdate, dateUpdate
         self.searching = true;

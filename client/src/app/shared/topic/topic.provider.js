@@ -56,7 +56,7 @@ angular.module('TatUi').provider('TatTopic', function(appConfiguration) {
           }
           $rootScope.$broadcast("sidebar-change", self.data.topic.topic);
           if (callback) {
-            callback();
+            callback(self.data.topic);
           }
         }, function(err) {
           TatEngine.displayReturn(err);
