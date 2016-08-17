@@ -32,10 +32,38 @@ angular.module('TatUi')
             if (!message.labels) {
               message.labels = [];
             }
-            message.labels.push({
-              text: labelText,
-              color: labelColor
-            });
+            if (resp.message && resp.message.labels) {
+              message.labels = resp.message.labels;
+              message.dateUpdate = resp.message.dateUpdate;
+            }
+            if (cb) {
+              cb();
+            }
+          }, function(resp) {
+            TatEngine.displayReturn(resp);
+          });
+        };
+
+        // Request: {
+        // "idReference":"57b302fd2683910e061e185d",
+        // "action":"relabel",
+        // "labels":[{"text":"b1","color":"#EEEE"},{"text":"a2","color":"#EEEE"}],
+        // "options":["myLabel1"]}
+        self.reLabel = function(message, topicName, labels, labelsToRemove, cb) {
+          TatEngineMessageRsc.update({
+            'action': 'relabel',
+            'topic': topicName,
+            'idReference': message._id,
+            'labels': labels,
+            'options': labelsToRemove
+          }).$promise.then(function(resp) {
+            if (!message.labels) {
+              message.labels = [];
+            }
+            if (resp.message && resp.message.labels) {
+              message.labels = resp.message.labels;
+              message.dateUpdate = resp.message.dateUpdate;
+            }
             if (cb) {
               cb();
             }
@@ -45,7 +73,8 @@ angular.module('TatUi')
         };
 
         return {
-          addLabel: self.addLabel
+          addLabel: self.addLabel,
+          reLabel: self.reLabel
         };
       }
     };

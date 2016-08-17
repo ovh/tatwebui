@@ -17,10 +17,10 @@
     <span ng-if="ctrl.replyText.length > 0" class="tat-remaining-chars" ng-hide="!ctrl.createMessageFocus">
       <i> &nbsp; {{ 'shared_message_characters_left' | translate }}: {{ ctrl.topic.maxlength - ctrl.replyText.length }}</i>
     </span>
-    <button class="btn btn-default btn-xs" ng-click="ctrl.isReplying=false">
+    <button class="btn btn-default" ng-click="ctrl.isReplying=false">
       {{ 'shared_common_cancel' | translate }}
     </button>
-    <button class="btn btn-primary btn-xs" ng-click="ctrl.replyMessage(); $event.stopPropagation();">
+    <button class="btn btn-primary" ng-click="ctrl.replyMessage(); $event.stopPropagation();">
       {{ 'shared_message_reply' | translate }}
     </button>
   </div>
