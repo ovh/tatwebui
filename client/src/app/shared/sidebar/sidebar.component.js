@@ -16,6 +16,7 @@ angular.module("TatUi").component("sidebar", {
     $rootScope,
     $localStorage,
     $interval,
+    appConfiguration,
     TatEngine,
     TatEngineTopicsRsc,
     TatEngineUserRsc,
@@ -37,6 +38,9 @@ angular.module("TatUi").component("sidebar", {
       loading: true,
       showSidebar: true,
       isPresencesOpen: false,
+      isSettingsOpen: false,
+      displayLogout: true,
+      bottomMenu: [],
       username: Authentication.getIdentity().username,
       currentTopicName : "",
       filtertopic: "",
@@ -71,6 +75,11 @@ angular.module("TatUi").component("sidebar", {
         self.toggleSidebar();
     });
 
+    self.getUser = function(field) {
+      var identity = Authentication.getIdentity();
+      return identity[field] ? identity[field] : '';
+    };
+    
     self.toggleSidebar = function() {
       self.data.showSidebar = !self.data.showSidebar;
       $cookieStore.put("showSidebar", self.data.showSidebar);
@@ -98,6 +107,16 @@ angular.module("TatUi").component("sidebar", {
 
     self.init = function() {
       self.data.loading = true;
+
+      self.data.bottomMenu = [];
+      if (appConfiguration.links && appConfiguration.links.menu) {
+        self.data.bottomMenu = appConfiguration.links.menu;
+      }
+
+      if (appConfiguration.backend && appConfiguration.backend.autologin === true) {
+        self.data.displayLogout = false;
+      }
+
       if (angular.isDefined($cookieStore.get("showSidebar"))) {
         self.data.showSidebar = $cookieStore.get("showSidebar");
       } else {
@@ -274,7 +293,17 @@ angular.module("TatUi").component("sidebar", {
 
     this.togglePresences = function() {
       this.data.isPresencesOpen = !this.data.isPresencesOpen;
+      if (this.data.isPresencesOpen) {
+        this.data.isSettingsOpen = false;
+      }
       self.loadPresences(); // load here, and in topics list refresh
+    };
+
+    this.toggleSettings = function() {
+      this.data.isSettingsOpen = !this.data.isSettingsOpen;
+      if (this.data.isSettingsOpen) {
+        this.data.isPresencesOpen = false;
+      }
     };
 
     this.loadPresences = function() {

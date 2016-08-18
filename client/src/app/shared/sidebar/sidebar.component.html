@@ -21,6 +21,9 @@
           <i class="mode fa fa-commenting-o fa-2x"
               data-ng-class="{'modeselect': ctrl.data.mode == 'unread'}"
               uib-tooltip="{{'master-unread-topics' | translate}}" ng-click="ctrl.setMode('unread')"> </i>
+          <i class="mode fa fa-cogs fa-2x"
+              data-ng-class="{'modeselect': ctrl.data.mode == 'admin'}"
+              uib-tooltip="{{ 'master-settings' | translate }}" ng-click="ctrl.toggleSettings()"> </i>
       </span>
     </li>
     <li class="search-form" ng-if="ctrl.data.showSidebar">
@@ -35,7 +38,41 @@
     <li class="sidebar-section" ng-if="ctrl.data.loading">
       <i class="fa fa-spinner fa-spin fa-5x" style="margin-left: 70px;margin-top: 70px;"></i>
     </li>
-    <li class="sidebar-section" ng-repeat="ct in ctrl.data.treeTopics" ng-if="!ctrl.data.loading && !ctrl.data.isPresencesOpen">
+    <li class="sidebar-section" ng-if="!ctrl.data.loading && ctrl.data.isSettingsOpen && !ctrl.data.isPresencesOpen">
+      <span class="sidebar-section-title">
+        {{ 'master-settings' | translate }}
+      </span>
+      <ul class="sidebar-sublist">
+        <li class="sidebar-sublist-item">
+          <a ui-sref="user-profile" title="{{ 'master-profile' | translate }}">
+            {{ ctrl.getUser('fullname') | uppercase }}
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li class="sidebar-sublist-item">
+          <a ui-sref="users-list">{{ 'master-users' | translate }}</a>
+        </li>
+        <li class="sidebar-sublist-item">
+          <a ui-sref="groups-list">{{ 'master-groups' | translate }}</a>
+        </li>
+        <li class="sidebar-sublist-item">
+          <a ui-sref="topics-list">{{ 'master-topics' | translate }}</a>
+        </li>
+        <li class="divider"></li>
+        <li class="sidebar-sublist-item" data-ng-repeat="menuItem in ctrl.data.bottomMenu track by $index">
+          <a href="{{menuItem.url}}">
+            {{ menuItem.caption | translate}}
+          </a>
+        </li>
+        <li class="divider" ng-if="ctrl.data.displayLogout"></li>
+        <li class="sidebar-sublist-item" ng-if="ctrl.data.displayLogout">
+          <a ui-sref="user-logout">
+            {{ 'master-logout' | translate }}
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="sidebar-section" ng-repeat="ct in ctrl.data.treeTopics" ng-if="!ctrl.data.loading && !ctrl.data.isSettingsOpen && !ctrl.data.isPresencesOpen">
       <span class="sidebar-section-title" ng-click="ct.expand=!ct.expand">
         <span class="sidebar-section-active">{{ ct.title }}</span>
         <span ng-hide="ct.expand"><i class="fa fa-caret-down"></i></span>
@@ -53,7 +90,7 @@
         </li>
       </ul>
     </li>
-    <li class="sidebar-section tat-presences" ng-if="!ctrl.data.loading && ctrl.data.isPresencesOpen">
+    <li class="sidebar-section tat-presences" ng-if="!ctrl.data.loading && ctrl.data.isPresencesOpen && !ctrl.data.isSettingsOpen">
       <span class="sidebar-section-title">
         {{ 'master-presences' | translate }}
       </span>

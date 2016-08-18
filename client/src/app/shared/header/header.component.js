@@ -35,18 +35,11 @@ angular.module('TatUi').component('header', {
       showHeader: true,
       isPresencesOpen: false,
       viewsEnabled: false,
-      bottomMenu: [],
       isFavoriteTopic: false,
       isNotificationsOffTopic: false,
-      displayLogout: true,
       topic: {},
       views: [],
       currentView: {}
-    };
-
-    self.getUser = function(field) {
-      var identity = Authentication.getIdentity();
-      return identity[field] ? identity[field] : '';
     };
 
     self.togglePresences = function() {
@@ -222,19 +215,10 @@ angular.module('TatUi').component('header', {
       self.data.subTitle = "";
       self.data.topic = null;
 
-      self.data.bottomMenu = [];
-      if (appConfiguration.links && appConfiguration.links.menu) {
-        self.data.bottomMenu = appConfiguration.links.menu;
-      }
-
       self.computeCurrent();
 
       if (self.topic) {
         self.initNextForTopic();
-      }
-
-      if (appConfiguration.backend && appConfiguration.backend.autologin === true) {
-        self.data.displayLogout = false;
       }
 
       if (angular.isDefined($cookieStore.get("showSidebar"))) {

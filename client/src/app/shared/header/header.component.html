@@ -2,47 +2,6 @@
   <div class="col-xs-12">
 
     <div class="user pull-right">
-      <div class="item dropdown" uib-dropdown>
-        <a role="button" class="dropdown-toggle" title="{{ ctrl.getUser('fullname') }}" uib-dropdown-toggle>
-          <i class="fa fa-cogs"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-header">
-            <a ui-sref="user-profile" title="{{ 'master-profile' | translate }}">
-              {{ ctrl.getUser('fullname') | uppercase }}
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li class="link">
-            <a ui-sref="users-list">
-              {{ 'master-users' | translate }}
-            </a>
-          </li>
-          <li class="link">
-            <a ui-sref="groups-list">
-              {{ 'master-groups' | translate }}
-            </a>
-          </li>
-          <li class="link">
-            <a ui-sref="topics-list">
-              {{ 'master-topics' | translate }}
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li class="link" data-ng-repeat="menuItem in ctrl.data.bottomMenu track by $index">
-            <a href="{{menuItem.url}}">
-              {{ menuItem.caption | translate}}
-            </a>
-          </li>
-          <li class="divider" ng-if="ctrl.data.displayLogout"></li>
-          <li class="link" ng-if="ctrl.data.displayLogout">
-            <a ui-sref="user-logout">
-              {{ 'master-logout' | translate }}
-            </a>
-          </li>
-        </ul>
-      </div>
-
       <div  data-ng-if="ctrl.isMessagesView()" style="width: 200px;font-size: 14px;padding-top: 14px;" ng-hide="ctrl.data.viewsEnabled">
         {{ 'master-cant-change-view' | translate }}
       </div>
@@ -57,7 +16,6 @@
           <div ng-bind-html="v.name | highlight: $select.search"></div>
         </ui-select-choices>
       </ui-select>
-
     </div>
 
     <div class="tat-main-header">

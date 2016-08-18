@@ -10,13 +10,8 @@ angular.module('TatUi').controller('UserProfileCtrl', function(
   ) {
   'use strict';
 
-  TatEngineUsersRsc.list({
-    username: Identity.getIdentity().username,
-    withGroups: true
-  }).$promise.then(function(data) {
-    if (data.count == 1) {
-      $scope.user = data.users[0];
-    }
+  AuthenticationRsc.getInfo({}).$promise.then(function(data) {
+    $scope.user = data.user;
   }, function(err) {
     TatEngine.displayReturn(err);
   });
