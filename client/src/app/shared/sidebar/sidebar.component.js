@@ -79,7 +79,7 @@ angular.module("TatUi").component("sidebar", {
       var identity = Authentication.getIdentity();
       return identity[field] ? identity[field] : '';
     };
-    
+
     self.toggleSidebar = function() {
       self.data.showSidebar = !self.data.showSidebar;
       $cookieStore.put("showSidebar", self.data.showSidebar);
@@ -146,6 +146,7 @@ angular.module("TatUi").component("sidebar", {
         mode = "all";
       }
       self.data.mode = mode;
+      this.data.isSettingsOpen = false;
       $localStorage.sidebarMode = self.data.mode;
       self.data.loading = true;
 
@@ -301,6 +302,7 @@ angular.module("TatUi").component("sidebar", {
 
     this.toggleSettings = function() {
       this.data.isSettingsOpen = !this.data.isSettingsOpen;
+      this.data.mode = "settings";
       if (this.data.isSettingsOpen) {
         this.data.isPresencesOpen = false;
       }
