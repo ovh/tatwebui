@@ -41,7 +41,7 @@ angular.module('TatUi').provider('Linker', function() {
           }
         };
 
-        self.computeURLMessage = function($state, message, topic) {
+        self.computeURLMessage = function($state, message) {
           return $state.href($state.current.name, {topic: message.topic.substring(1), idMessage: message._id});
         };
 

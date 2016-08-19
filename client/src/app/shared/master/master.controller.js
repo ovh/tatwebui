@@ -31,6 +31,14 @@ angular.module('TatUi')
       return false;
     };
 
+    $scope.getBrightness = function(rgb) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(rgb);
+      return result ?
+        0.2126 * parseInt(result[1], 16) +
+        0.7152 * parseInt(result[2], 16) +
+        0.0722 * parseInt(result[3], 16) : 0;
+    };
+
     $scope.urlMessage = function(message) {
       return Linker.computeURLMessage($state, message);
     };
