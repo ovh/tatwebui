@@ -61,12 +61,12 @@ angular.module("TatUi").component("sidebar", {
         "privateDm": {
             title: "/DM",
             topics : [],
-            expand: true
+            expand: false
         },
         "privateOthers": {
             title: "/Others Users",
             topics : [],
-            expand: true
+            expand: false
         },
       }
     };
