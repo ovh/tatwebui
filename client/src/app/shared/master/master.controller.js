@@ -40,7 +40,7 @@ angular.module('TatUi')
     };
 
     $scope.urlMessage = function(message) {
-      return Linker.computeURLMessage($state, message);
+      return Linker.computeURLMessage(message);
     };
 
     $scope.setFilterMessage = function(e, message) {

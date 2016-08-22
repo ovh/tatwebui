@@ -41,8 +41,12 @@ angular.module('TatUi').provider('Linker', function() {
           }
         };
 
-        self.computeURLMessage = function($state, message) {
-          return $state.href($state.current.name, {topic: message.topic.substring(1), idMessage: message._id});
+        self.computeURLMessage = function(message) {
+          if (self.topics[message.topic]) {
+            return $state.href(self.topics[message.topic], {topic: message.topic.substring(1), idMessage: message._id});
+          } else {
+            return $state.href("standardview-list", {topic: message.topic.substring(1), idMessage: message._id});
+          }
         };
 
         self.getComputedURL = function(topicName) {
