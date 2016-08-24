@@ -15,18 +15,15 @@ angular.module('TatUi').component('header', {
     $scope,
     $rootScope,
     $state,
-    $translate,
     $stateParams,
     $localStorage,
     $cookieStore,
     Authentication,
-    appConfiguration,
-    Flash,
     Linker,
     Plugin,
     TatEngine,
     TatEngineUserRsc,
-    TatEngineTopicRsc
+    TatTopic
   ) {
     'use strict';
     var self = this;
@@ -134,22 +131,6 @@ angular.module('TatUi').component('header', {
       return false;
     };
 
-    self.canEditTopic = function(topic) {
-      if (!topic.topic) {
-        return;
-      }
-      if (self.isAdmin() || _.includes(topic.adminUsers,
-          Authentication.getIdentity().username) ||
-          (topic.topic.indexOf("/Private/" + Authentication.getIdentity().username) === 0 &&
-           topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") !== 0
-          )
-        ) {
-        // FIXME check group of user. _.includes($scope.topic.adminGroups, Authentication.getIdentity().groups)
-        return true;
-      }
-      return false;
-    };
-
     this.isPluginViewRoute = function(route) {
       for (var i = 0; i < self.data.views.length; i++) {
         if (self.data.views[i].route == route) {
@@ -161,6 +142,8 @@ angular.module('TatUi').component('header', {
 
     this.initNextForTopic = function() {
       self.data.topic = self.topic;
+      self.data = angular.extend(self.data, TatTopic.getDataTopic());
+      console.log("self.data:",self.data);
       self.data.subTitle = self.data.topic.topic.split('/');
       self.data.subTitle.shift(); // remove first "/"
 

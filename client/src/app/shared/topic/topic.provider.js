@@ -19,12 +19,40 @@ angular.module('TatUi').provider('TatTopic', function(appConfiguration) {
     isTopicDeletableAllMsg: false,
     isTopicUpdatableMsg: false,
     isTopicUpdatableAllMsg: false,
-    isTopicRw: true
+    isTopicRw: true,
+    isUserAdminOnTopic: false
   };
 
   return {
 
     $get: function($translate, $rootScope, TatEngineTopicRsc, Authentication, TatEngine) {
+
+      // return true if user is admin on topic (group admin or admin user)
+      self.isUserAdminOnTopic = function() {
+        if (Authentication.getIdentity().isAdmin === true) {
+          return true;
+        }
+        var userGroups = Authentication.getIdentity().groups;
+        if (userGroups && userGroups.length > 0 && self.data.topic.adminGroups && self.data.topic.adminGroups.length > 0) {
+          for (var i = 0; i < self.data.topic.adminGroups.length; i++) {
+            var groupTopic = self.data.topic.adminGroups[i];
+            for (var j = 0; j < userGroups.length; i++) {
+              var ugroup = userGroups[j];
+              if (ugroup === groupTopic) {
+                return true;
+              }
+            }
+          }
+        }
+
+        if (_.includes(self.data.topic.adminUsers, Authentication.getIdentity().username) ||
+          (self.data.topic.topic.indexOf("/Private/" + Authentication.getIdentity().username) === 0 &&
+            self.data.topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") !== 0)
+          ) {
+          return true;
+        }
+        return false;
+      };
 
       self.getDataTopic = function() {
           return self.data;
@@ -54,6 +82,7 @@ angular.module('TatUi').provider('TatTopic', function(appConfiguration) {
               Authentication.getIdentity().username) === 0) {
             self.data.isTopicDeletableMsg = true;
           }
+          self.data.isUserAdminOnTopic = self.isUserAdminOnTopic();
           $rootScope.$broadcast("sidebar-change", self.data.topic.topic);
           if (callback) {
             callback(self.data.topic);

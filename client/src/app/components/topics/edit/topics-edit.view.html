@@ -2,13 +2,13 @@
 
   <header></header>
 
-  <div class="tat-admin" data-ng-controller="TopicsEditCtrl">
+  <div class="tat-admin">
     <div class="row">
         <div class="col-lg-6">
             <div class="group-profile">
                 <div>
                     <label>{{ 'shared_common_name' | translate }}</label> : <span>
-                      <a data-ng-href="{{topic.url}}">{{topic.topic}}</a>
+                      <a ng-href="{{topic.url}}">{{topic.topic}}</a>
                     </span>
                 </div>
                 <div>
@@ -16,7 +16,7 @@
                 </div>
                 <div>
                   <a class="btn btn-primary" title="{{ 'master-add-subtopic' | translate }}"
-                    data-ng-if="isAdmin() || data.isAdminOnTopic"
+                    ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic"
                     ui-sref="topics-new({topicRoute:topic.topic})">
                     <i class="fa fa-plus"></i> {{ 'master-add-subtopic' | translate }}
                   </a>
@@ -26,58 +26,58 @@
     </div>
 
     <form role="form">
-      <div class="row" data-ng-if="topic._id">
+      <div class="row" ng-if="topic._id">
         <h4>{{ 'shared_common_parameters' | translate }}</h4>
         <div class="col-lg-6">
             <div class="form-group">
               <label for="maxlength">{{ 'components_topics_max_message_length' | translate }}</label>
-              <input type="number" class="form-control" id="maxlength" data-ng-model="topic.maxlength" min="10" data-ng-required="true">
+              <input type="number" class="form-control" id="maxlength" ng-model="topic.maxlength" min="10" ng-required="true">
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.canForceDate">
+                 <input type="checkbox" ng-model="topic.canForceDate">
                  {{ 'components_topics_can_force_date' | translate }}
                </label>
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.canUpdateMsg">
+                 <input type="checkbox" ng-model="topic.canUpdateMsg">
                  {{ 'components_topics_can_update_msg' | translate }}
                </label>
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.canDeleteMsg">
+                 <input type="checkbox" ng-model="topic.canDeleteMsg">
                  {{ 'components_topics_can_delete_msg' | translate }}
                </label>
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.canUpdateAllMsg">
+                 <input type="checkbox" ng-model="topic.canUpdateAllMsg">
                  {{ 'components_topics_can_update_all_msg' | translate }}
                </label>
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.canDeleteAllMsg">
+                 <input type="checkbox" ng-model="topic.canDeleteAllMsg">
                  {{ 'components_topics_can_delete_all_msg' | translate }}
                </label>
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.isROPublic">
+                 <input type="checkbox" ng-model="topic.isROPublic">
                  {{ 'components_topics_is_ro_public' | translate }}
                </label>
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.isAutoComputeTags">
+                 <input type="checkbox" ng-model="topic.isAutoComputeTags">
                  {{ 'components_topics_is_auto_compute_tags' | translate }}
                </label>
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" data-ng-model="topic.isAutoComputeLabels">
+                 <input type="checkbox" ng-model="topic.isAutoComputeLabels">
                  {{ 'components_topics_is_auto_compute_labels' | translate }}
                </label>
             </div>
@@ -91,26 +91,26 @@
           </div>
           <div ng-repeat="param in topic.parameters | filter:{key:'tatwebui.view'}" class="row colm">
             <div class="col-md-5">
-              <input type="text" class="form-control" data-ng-model="param.key">
+              <input type="text" class="form-control" ng-model="param.key">
             </div>
-            <div class="col-md-6" data-ng-show="!param.deleting">
-              <ui-select data-ng-model="param.value" theme="bootstrap">
+            <div class="col-md-6" ng-show="!param.deleting">
+              <ui-select ng-model="param.value" theme="bootstrap">
                 <ui-select-match placeholder="Select a view...">{{$select.selected.name}}</ui-select-match>
-                <ui-select-choices repeat="view.route as view in data.viewsPlugins | filter: $select.search">
+                <ui-select-choices repeat="view.route as view in ctrl.data.viewsPlugins | filter: $select.search">
                   <div>{{view.name}}</div>
                 </ui-select-choices>
               </ui-select>
             </div>
-            <div class="col-md-1">
-              <button data-ng-click="param.deleting=true" class="btn btn-default" data-ng-show="!param.deleting">
+            <div class="col-md-1" ng-if="ctrl.data.isUserAdminOnTopic">
+              <button ng-click="param.deleting=true" class="btn btn-default" ng-show="!param.deleting">
                 <i class="fa fa-trash"></i>
               </button>
-              <div data-ng-show="param.deleting">
-                  <button class="btn btn-danger" data-ng-click="removeParameter(param)">
+              <div ng-show="param.deleting">
+                  <button class="btn btn-danger" ng-click="ctrl.removeParameter(param)">
                       <i class="fa fa-trash"></i>
                       {{ 'shared_common_yes_i_confirm' | translate }}
                   </button>
-                  <button class="btn btn-default" data-ng-click="cancelDeleteParameter(param)">
+                  <button class="btn btn-default" ng-click="ctrl.cancelDeleteParameter(param)">
                       <i class="fa fa-ban"></i>
                       {{ 'shared_common_cancel' | translate }}
                   </button>
@@ -121,78 +121,78 @@
           <h5>{{'components_topics_others_parameters' | translate }}</h5>
           <div ng-repeat="param in topic.parameters | filter:{key:'!tatwebui.view'}" class="row colm">
             <div class="col-md-5">
-              <input type="text" class="form-control" data-ng-model="param.key">
+              <input type="text" class="form-control" ng-model="param.key">
             </div>
-            <div class="col-md-6" data-ng-show="!param.deleting">
-              <input type="text" class="form-control" data-ng-model="param.value">
+            <div class="col-md-6" ng-show="!param.deleting">
+              <input type="text" class="form-control" ng-model="param.value">
             </div>
-            <div class="col-md-1">
-              <button data-ng-click="param.deleting=true" class="btn btn-default" data-ng-show="!param.deleting">
+            <div class="col-md-1" ng-if="ctrl.data.isUserAdminOnTopic">
+              <button ng-click="param.deleting=true" class="btn btn-default" ng-show="!param.deleting">
                 <i class="fa fa-trash"></i>
               </button>
-              <div data-ng-show="param.deleting">
-                  <button class="btn btn-danger" data-ng-click="removeParameter(param)">
+              <div ng-show="param.deleting">
+                  <button class="btn btn-danger" ng-click="ctrl.removeParameter(param)">
                       <i class="fa fa-trash"></i>
                       {{ 'shared_common_yes_i_confirm' | translate }}
                   </button>
-                  <button class="btn btn-default" data-ng-click="cancelDeleteParameter(param)">
+                  <button class="btn btn-default" ng-click="ctrl.cancelDeleteParameter(param)">
                       <i class="fa fa-ban"></i>
                       {{ 'shared_common_cancel' | translate }}
                   </button>
               </div>
             </div>
           </div>
-          <button data-ng-click="newParameter()" class="btn btn-default">{{ 'components_topics_add_parameter' | translate }}</button>
+          <button ng-show="ctrl.data.isUserAdminOnTopic" ng-click="ctrl.newParameter()" class="btn btn-default">{{ 'components_topics_add_parameter' | translate }}</button>
         </div>
       </div>
       <div class="row">
-        <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-primary" data-ng-click="updateParam(false)">
+        <button ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic" type="submit" class="btn btn-primary" ng-click="ctrl.updateParam(false)">
           {{ 'shared_common_validate' | translate }}
         </button>
-        <button data-ng-if="isAdmin() || data.isAdminOnTopic" type="submit" class="btn btn-default" data-ng-click="updateParam(true)">
+        <button ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic" type="submit" class="btn btn-default" ng-click="ctrl.updateParam(true)">
           {{ 'shared_common_validate' | translate }} {{ 'shared_common_recursively' | translate }}
         </button>
       </div>
     </form>
 
-    <div class="row" data-ng-if="topic._id">
+    <div class="row" ng-if="topic._id">
       <h4>{{ 'shared_common_users' | translate }}</h4>
-      <div class="col-lg-6" data-ng-if="isAdmin() || data.isAdminOnTopic" >
-          <ui-select data-ng-model="user.selected" theme="bootstrap">
+      <div class="col-lg-6" ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic" >
+          <ui-select ng-model="ctrl.data.user.selected" theme="bootstrap">
             <ui-select-match placeholder="Select or search a user in the list...">{{$select.selected.username}}</ui-select-match>
-            <ui-select-choices repeat="item in users | filter: $select.search">
+            <ui-select-choices repeat="item in ctrl.data.users | filter: $select.search">
               <div>{{item.username}}</div>
             </ui-select-choices>
           </ui-select>
           <div class="btn-group-vertical" role="group" aria-label="...">
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  data-ng-disabled="!user.selected">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  ng-disabled="!ctrl.data.user.selected">
                 {{ 'components_topics_add_ro_user' | translate }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="addRoUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                <li><a role="button" data-ng-click="addRoUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRoUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRoUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!user.selected">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="!ctrl.data.user.selected">
                 {{ 'components_topics_add_rw_user' | translate }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="addRwUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                <li><a role="button" data-ng-click="addRwUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRwUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRwUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!user.selected">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="!ctrl.data.user.selected">
                 <i class="fa fa-user-md"></i> {{ 'components_topics_add_user_admin' | translate }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="addAdminUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                <li><a role="button" data-ng-click="addAdminUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addAdminUser(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addAdminUser(true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </div>
@@ -202,25 +202,25 @@
       <div class="col-lg-4">
         <b>{{ 'shared_common_read_only' | translate }} : </b>
         <ul>
-          <li data-ng-repeat="(k, v) in topic.roUsers">
+          <li ng-repeat="(k, v) in topic.roUsers">
             <a ui-sref="users-edit({username:v})">{{v}}</a>
-            <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRoUser=true" data-ng-hide="askRemoveRoUser">
+            <span ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic">
+              <button class="btn btn-xs btn-warning" ng-click="askRemoveRoUser=true" ng-hide="askRemoveRoUser">
                  <i class="fa fa-trash-o"></i>
               </button>
-              <button data-ng-click="askRemoveRoUser=false" data-ng-show="askRemoveRoUser"
+              <button ng-click="askRemoveRoUser=false" ng-show="askRemoveRoUser"
                         class="btn btn-xs btn-info">
                         {{ 'components_topics_dont_want_remove_group' | translate }}
                   <i class="fa fa-reply"></i>
               </button>
-              <div class="btn-group" role="group" data-ng-show="askRemoveRoUser">
+              <div class="btn-group" role="group" ng-show="askRemoveRoUser">
                 <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a role="button" data-ng-click="removeRoUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                  <li><a role="button" data-ng-click="removeRoUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRoUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRoUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
                 </ul>
               </div>
             </span>
@@ -230,25 +230,25 @@
       <div class="col-lg-4">
         <b>{{ 'shared_common_read_write' | translate }}: </b>
         <ul>
-          <li data-ng-repeat="(k, v) in topic.rwUsers">
+          <li ng-repeat="(k, v) in topic.rwUsers">
             <a ui-sref="users-edit({username:v})">{{v}}</a>
-            <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRwUser=true" data-ng-hide="askRemoveRwUser">
+            <span ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic">
+              <button class="btn btn-xs btn-warning" ng-click="askRemoveRwUser=true" ng-hide="askRemoveRwUser">
                  <i class="fa fa-trash-o"></i>
               </button>
-              <button data-ng-click="askRemoveRwUser=false" data-ng-show="askRemoveRwUser"
+              <button ng-click="askRemoveRwUser=false" ng-show="askRemoveRwUser"
                         class="btn btn-xs btn-info">
                         {{ 'components_topics_dont_want_remove_group' | translate }}
                   <i class="fa fa-reply"></i>
               </button>
-              <div class="btn-group" role="group" data-ng-show="askRemoveRwUser">
+              <div class="btn-group" role="group" ng-show="askRemoveRwUser">
                 <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a role="button" data-ng-click="removeRwUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                  <li><a role="button" data-ng-click="removeRwUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRwUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRwUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
                 </ul>
               </div>
             </span>
@@ -258,25 +258,25 @@
       <div class="col-lg-4">
         <b>{{ 'shared_common_administrators' | translate }} : </b>
         <ul>
-          <li data-ng-repeat="(k, v) in topic.adminUsers">
+          <li ng-repeat="(k, v) in topic.adminUsers">
             <a ui-sref="users-edit({username:v})">{{v}}</a>
-            <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdminUser=true" data-ng-hide="askRemoveAdminUser">
+            <span ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic">
+              <button class="btn btn-xs btn-warning" ng-click="askRemoveAdminUser=true" ng-hide="askRemoveAdminUser">
                  <i class="fa fa-trash-o"></i>
               </button>
-              <button data-ng-click="askRemoveAdminUser=false" data-ng-show="askRemoveAdminUser"
+              <button ng-click="askRemoveAdminUser=false" ng-show="askRemoveAdminUser"
                         class="btn btn-xs btn-info">
                         {{ 'components_topics_dont_want_remove_group' | translate }}
                   <i class="fa fa-reply"></i>
               </button>
-              <div class="btn-group" role="group" data-ng-show="askRemoveAdminUser">
+              <div class="btn-group" role="group" ng-show="askRemoveAdminUser">
                 <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a role="button" data-ng-click="removeAdminUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                  <li><a role="button" data-ng-click="removeAdminUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeAdminUser(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeAdminUser(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
                 </ul>
               </div>
             </span>
@@ -285,45 +285,45 @@
       </div>
     </div>
 
-    <div class="row" data-ng-if="topic._id">
+    <div class="row" ng-if="topic._id">
       <h4>{{ 'shared_common_groups' | translate }}</h4>
-      <div class="col-lg-6" data-ng-if="isAdmin() || data.isAdminOnTopic">
-        <ui-select data-ng-model="group.selected" theme="bootstrap">
+      <div class="col-lg-6" ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic">
+        <ui-select ng-model="ctrl.data.group.selected" theme="bootstrap">
             <ui-select-match placeholder="Select or search a group in the list...">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices repeat="item in groups | filter: $select.search">
+            <ui-select-choices repeat="item in ctrl.data.groups | filter: $select.search">
               <div>{{item.name}}</div>
             </ui-select-choices>
           </ui-select>
 
           <div class="btn-group-vertical" role="group" aria-label="...">
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!group.selected">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="!ctrl.data.group.selected">
                 {{ 'components_topics_add_ro_group' | translate }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="addRoGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                <li><a role="button" data-ng-click="addRoGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRoGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRoGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!group.selected">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="!ctrl.data.group.selected">
                 {{ 'components_topics_add_rw_group' | translate }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="addRwGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                <li><a role="button" data-ng-click="addRwGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRwGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addRwGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-ng-disabled="!group.selected">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="!ctrl.data.group.selected">
                 <i class="fa fa-user-md"></i> {{ 'components_topics_add_group_admin' | translate }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a role="button" data-ng-click="addAdminGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                <li><a role="button" data-ng-click="addAdminGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addAdminGroup(false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                <li><a role="button" ng-click="ctrl.addAdminGroup(true)">{{ 'shared_common_recursively' | translate }}</a></li>
               </ul>
             </div>
           </div>
@@ -333,25 +333,25 @@
       <div class="col-lg-4">
         <b>{{ 'shared_common_read_only' | translate }} : </b>
         <ul>
-          <li data-ng-repeat="(k, v) in topic.roGroups">
+          <li ng-repeat="(k, v) in topic.roGroups">
             <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
-            <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRoGroup=true" data-ng-hide="askRemoveRoGroup">
+            <span ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic">
+              <button class="btn btn-xs btn-warning" ng-click="askRemoveRoGroup=true" ng-hide="askRemoveRoGroup">
                  <i class="fa fa-trash-o"></i>
               </button>
-              <button data-ng-click="askRemoveRoGroup=false" data-ng-show="askRemoveRoGroup"
+              <button ng-click="askRemoveRoGroup=false" ng-show="askRemoveRoGroup"
                         class="btn btn-xs btn-info">
                         {{ 'components_topics_dont_want_remove_group' | translate }}
                   <i class="fa fa-reply"></i>
               </button>
-              <div class="btn-group" role="group" data-ng-show="askRemoveRoGroup">
+              <div class="btn-group" role="group" ng-show="askRemoveRoGroup">
                 <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a role="button" data-ng-click="removeRoGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                  <li><a role="button" data-ng-click="removeRoGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRoGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRoGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
                 </ul>
               </div>
             </span>
@@ -361,25 +361,25 @@
       <div class="col-lg-4">
         <b>{{ 'shared_common_read_write' | translate }} : </b>
         <ul>
-          <li data-ng-repeat="(k, v) in topic.rwGroups">
+          <li ng-repeat="(k, v) in topic.rwGroups">
             <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
-            <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveRwGroup=true" data-ng-hide="askRemoveRwGroup">
+            <span ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic">
+              <button class="btn btn-xs btn-warning" ng-click="askRemoveRwGroup=true" ng-hide="askRemoveRwGroup">
                  <i class="fa fa-trash-o"></i>
               </button>
-              <button data-ng-click="askRemoveRwGroup=false" data-ng-show="askRemoveRwGroup"
+              <button ng-click="askRemoveRwGroup=false" ng-show="askRemoveRwGroup"
                         class="btn btn-xs btn-info">
                         {{ 'components_topics_dont_want_remove_group' | translate }}
                   <i class="fa fa-reply"></i>
               </button>
-              <div class="btn-group" role="group" data-ng-show="askRemoveRwGroup">
+              <div class="btn-group" role="group" ng-show="askRemoveRwGroup">
                 <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a role="button" data-ng-click="removeRwGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                  <li><a role="button" data-ng-click="removeRwGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRwGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeRwGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
                 </ul>
               </div>
             </span>
@@ -389,25 +389,25 @@
       <div class="col-lg-4">
         <b>{{ 'shared_common_administrators' | translate }} : </b>
         <ul>
-          <li data-ng-repeat="(k, v) in topic.adminGroups">
+          <li ng-repeat="(k, v) in topic.adminGroups">
             <a ui-sref="groups-edit({groupName:v})">{{v}}</a>
-            <span data-ng-if="isAdmin() || data.isAdminOnTopic">
-              <button class="btn btn-xs btn-warning" data-ng-click="askRemoveAdminGroup=true" data-ng-hide="askRemoveAdminGroup">
+            <span ng-if="isAdmin() || ctrl.data.isUserAdminOnTopic">
+              <button class="btn btn-xs btn-warning" ng-click="askRemoveAdminGroup=true" ng-hide="askRemoveAdminGroup">
                  <i class="fa fa-trash-o"></i>
               </button>
-              <button data-ng-click="askRemoveAdminGroup=false" data-ng-show="askRemoveAdminGroup"
+              <button ng-click="askRemoveAdminGroup=false" ng-show="askRemoveAdminGroup"
                         class="btn btn-xs btn-info">
                         {{ 'components_topics_dont_want_remove_group' | translate }}
                   <i class="fa fa-reply"></i>
               </button>
-              <div class="btn-group" role="group" data-ng-show="askRemoveAdminGroup">
+              <div class="btn-group" role="group" ng-show="askRemoveAdminGroup">
                 <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ 'shared_common_yes_i_confirm' | translate }} <i class="fa fa-exclamation-triangle"></i>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a role="button" data-ng-click="removeAdminGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
-                  <li><a role="button" data-ng-click="removeAdminGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeAdminGroup(v, false)">{{ 'components_topics_only_topic' | translate }}</a></li>
+                  <li><a role="button" ng-click="ctrl.removeAdminGroup(v, true)">{{ 'shared_common_recursively' | translate }}</a></li>
                 </ul>
               </div>
             </span>
@@ -415,7 +415,7 @@
         </ul>
       </div>
     </div>
-    <div class="row" data-ng-if="isAdmin()">
+    <div class="row" ng-if="isAdmin()">
         <!-- FIXME <a ui-sref="presences-list({topic:topicItem.topic})"><i class="fa fa-eye"></i></a>-->
         <a href="/presences/list{{topic.topic}}"><i class="fa fa-eye"></i> Presence</a>
     </div>

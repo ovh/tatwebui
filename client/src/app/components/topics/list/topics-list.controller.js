@@ -9,15 +9,17 @@
  */
 angular.module('TatUi')
   .controller('TopicsListCtrl', function(
-    $scope,
     TatEngineTopicsRsc,
     TatEngineUserRsc,
     TatEngine,
     Linker,
-    Authentication) {
+    Authentication
+  ) {
     'use strict';
 
-    $scope.data = {
+    var self = this;
+
+    self.data = {
       filtertopic: "",
       getForTatAdmin: false,
       adminOfOneTopic: false,
@@ -31,37 +33,32 @@ angular.module('TatUi')
      * @methodOf TatUi.controller:TopicsListCtrl
      * @description initialize Topics List Page.
      */
-    $scope.init = function() {
-      var criteria = {
-        "topic": $scope.data.filtertopic,
-        "getNbMsgUnread": true,
-        "getForTatAdmin": $scope.data.getForTatAdmin
-      };
-      TatEngineTopicsRsc.list(criteria).$promise.then(function(data) {
-        if (Authentication.getIdentity().favoritesTopics) {
-          $scope.nextInit(data);
-        } else {
-          Authentication.refreshIdentity().then(
-            function(data) {
-              console.log("refreshing identity in topics list ok");
-              $scope.nextInit(data);
-            },
-            function(err) {
-              console.log("error while refreshing identity in topics list");
-            });
-        }
-      }, function(err) {
-        TatEngine.displayReturn(err);
-      });
+    self.init = function() {
+      Authentication.refreshIdentity().then(
+        function(data) {
+          var criteria = {
+            "topic": self.data.filtertopic,
+            "getNbMsgUnread": true,
+            "getForTatAdmin": self.data.getForTatAdmin
+          };
+          TatEngineTopicsRsc.list(criteria).$promise.then(function(data) {
+            self.nextInit(data);
+          }, function(err) {
+            TatEngine.displayReturn(err);
+          });
+        },
+        function(err) {
+          TatEngine.displayReturn(err);
+        });
     };
 
-    $scope.nextInit = function(data) {
+    self.nextInit = function(data) {
       var favoriteTopics = Authentication.getIdentity().favoritesTopics;
       var offNotificationsTopics = Authentication.getIdentity().offNotificationsTopics;
 
       for (var i = 0; i < data.topics.length; i++) {
-        if (!$scope.data.adminOfOneTopic && (data.topics[i].adminUsers || data.topics[i].adminGroups)) {
-          $scope.data.adminOfOneTopic = true;
+        if (!self.data.adminOfOneTopic && (data.topics[i].adminUsers || data.topics[i].adminGroups)) {
+          self.data.adminOfOneTopic = true;
         }
         data.topics[i].isFavoriteTopic = false;
         data.topics[i].url = Linker.computeURL(data.topics[i]);
@@ -86,12 +83,12 @@ angular.module('TatUi')
         self.addUnRead(data.topics[i], data.topicsMsgUnread);
       }
 
-      $scope.data.topics = data.topics;
-      $scope.data.count = data.count;
+      self.data.topics = data.topics;
+      self.data.count = data.count;
     };
 
-    $scope.greaterThan = function(prop) {
-      if ($scope.data.unreadOnly === true) {
+    self.greaterThan = function(prop) {
+      if (self.data.unreadOnly === true) {
         return function(item){
           return item[prop] > 0;
         };
@@ -104,20 +101,19 @@ angular.module('TatUi')
       }
     };
 
-    $scope.toggleAllNotificationsTopics = function(toEnable) {
+    self.toggleAllNotificationsTopics = function(toEnable) {
       if (toEnable === true) {
         TatEngineUserRsc.enableNotificationsAllTopics().$promise.then(function() {
-          $scope.init();
+          self.init();
         });
       } else {
         TatEngineUserRsc.disableNotificationsAllTopics().$promise.then(function() {
-          $scope.init();
+          self.init();
         });
       }
-
     };
 
-    $scope.toggleTopicFavorite = function(topic, isBatch) {
+    self.toggleTopicFavorite = function(topic, isBatch) {
       if (topic.isFavoriteTopic) {
         TatEngineUserRsc.removeFavoriteTopic({
           'topic': topic.topic
@@ -139,7 +135,7 @@ angular.module('TatUi')
       }
     };
 
-    $scope.toggleNotificationsTopic = function(topic, isBatch) {
+    self.toggleNotificationsTopic = function(topic, isBatch) {
       if (topic.isNotificationsOffTopic) {
         TatEngineUserRsc.enableNotificationsTopic({
           'topic': topic.topic
@@ -161,12 +157,12 @@ angular.module('TatUi')
       }
     };
 
-    $scope.topicsAdminMode = function(isAdminMode) {
-      $scope.data.getForTatAdmin = isAdminMode;
-      $scope.init();
+    self.topicsAdminMode = function(isAdminMode) {
+      self.data.getForTatAdmin = isAdminMode;
+      self.init();
     };
 
-    $scope.canView = function(topic) {
+    self.canView = function(topic) {
       if (topic.topic.indexOf("/Private/" + Authentication.getIdentity().username + "/DM") === 0) {
         return false;
       }
@@ -180,5 +176,5 @@ angular.module('TatUi')
         topic.rwGroups;
     };
 
-    $scope.init();
+    self.init();
   });

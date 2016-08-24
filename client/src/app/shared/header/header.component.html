@@ -45,7 +45,7 @@
             data-ng-class="{'fa-bell-o':!ctrl.data.isNotificationsOffTopic, 'fa-bell-slash': ctrl.data.isNotificationsOffTopic}">
           </i>
         </a>
-        <a title="{{ 'master-topic-configuration' | translate }}" data-ng-if="ctrl.canEditTopic(ctrl.data.topic)" ui-sref="topics-edit({topicRoute:ctrl.data.topic.topic})">
+        <a title="{{ 'master-topic-configuration' | translate }}" data-ng-if="ctrl.data.isUserAdminOnTopic" ui-sref="topics-edit({topicRoute:ctrl.data.topic.topic})">
           <i class="fa fa-pencil"></i>
         </a>
       </h1>
