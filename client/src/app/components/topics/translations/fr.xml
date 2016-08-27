@@ -15,6 +15,8 @@
   <translation id="components_topics_can_delete_msg">Les utilisateurs peuvent supprimer leurs propres messages ? Cocher si oui.</translation>
   <translation id="components_topics_can_update_all_msg">Les utilisateurs peuvent modifier tous les messages ? Cocher si oui.</translation>
   <translation id="components_topics_can_delete_all_msg">Les utilisateurs peuvent supprimer tous les messages ? Cocher si oui.</translation>
+  <translation id="components_topics_admin_can_update_all_msg">Les administrateurs peuvent modifier tous les messages ? Cocher si oui.</translation>
+  <translation id="components_topics_admin_can_delete_all_msg">Les administrateurs peuvent supprimer tous les messages ? Cocher si oui.</translation>
   <translation id="components_topics_is_ro_public">Un utilisateur non authentifié peut lire ce topic ? Cocher si oui.</translation>
   <translation id="components_topics_list_admin_mode">Lister tous les topics (Admin Mode)</translation>
   <translation id="components_topics_list_non_admin_mode">Lister que vos topics</translation>

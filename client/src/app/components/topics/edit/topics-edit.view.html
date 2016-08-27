@@ -65,6 +65,18 @@
             </div>
             <div class="checkbox">
                <label>
+                 <input type="checkbox" ng-model="topic.adminCanUpdateAllMsg">
+                 {{ 'components_topics_admin_can_update_all_msg' | translate }}
+               </label>
+            </div>
+            <div class="checkbox">
+               <label>
+                 <input type="checkbox" ng-model="topic.adminCanDeleteAllMsg">
+                 {{ 'components_topics_admin_can_delete_all_msg' | translate }}
+               </label>
+            </div>
+            <div class="checkbox">
+               <label>
                  <input type="checkbox" ng-model="topic.isROPublic">
                  {{ 'components_topics_is_ro_public' | translate }}
                </label>

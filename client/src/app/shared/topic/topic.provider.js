@@ -66,23 +66,31 @@ angular.module('TatUi').provider('TatTopic', function(appConfiguration) {
             Flash.create('danger', $translate.instant('topics_notopic'));
             return;
           }
+          var privateTopic = "/Private/" + Authentication.getIdentity().username;
           self.data.topic = data.topic;
           self.data.isTopicUpdatableMsg = self.data.topic.canUpdateMsg;
           self.data.isTopicDeletableMsg = self.data.topic.canDeleteMsg;
           self.data.isTopicUpdatableAllMsg = self.data.topic.canUpdateAllMsg;
           self.data.isTopicDeletableAllMsg = self.data.topic.canDeleteAllMsg;
-          if (self.data.topic.topic.indexOf("/Private/" +
-              Authentication.getIdentity().username + "/Tasks") === 0) {
+          self.data.isTopicAdminUpdatableAllMsg = self.data.topic.adminCanUpdateAllMsg;
+          self.data.isTopicAdminDeletableAllMsg = self.data.topic.adminCanDeleteAllMsg;
+          if (self.data.topic.topic.indexOf(privateTopic + "/Tasks") === 0) {
             self.data.isTopicTasks = true;
             self.data.isTopicDeletableMsg = true;
-          } else if (self.data.topic.topic.indexOf("/Private/" +
-              Authentication.getIdentity().username + "/DM/") === 0) {
+          } else if (self.data.topic.topic.indexOf(privateTopic + "/DM/") === 0) {
             self.data.isTopicDeletableMsg = false;
-          } else if (self.data.topic.topic.indexOf("/Private/" +
-              Authentication.getIdentity().username) === 0) {
+          } else if (self.data.topic.topic.indexOf(privateTopic) === 0) {
             self.data.isTopicDeletableMsg = true;
           }
           self.data.isUserAdminOnTopic = self.isUserAdminOnTopic();
+          if (self.data.isUserAdminOnTopic === true) {
+             if (self.data.topic.adminCanDeleteAllMsg === true) {
+               self.data.isTopicDeletableAllMsg = true;
+             }
+             if (self.data.topic.adminCanUpdateAllMsg === true) {
+               self.data.isTopicUpdatableAllMsg = true;
+             }
+          }
           $rootScope.$broadcast("sidebar-change", self.data.topic.topic);
           if (callback) {
             callback(self.data.topic);

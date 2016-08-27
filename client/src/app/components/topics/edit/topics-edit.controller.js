@@ -340,6 +340,8 @@ angular.module('TatUi')
         "canDeleteMsg": $scope.topic.canDeleteMsg,
         "canUpdateAllMsg": $scope.topic.canUpdateAllMsg,
         "canDeleteAllMsg": $scope.topic.canDeleteAllMsg,
+        "adminCanUpdateAllMsg": $scope.topic.adminCanUpdateAllMsg,
+        "adminCanDeleteAllMsg": $scope.topic.adminCanDeleteAllMsg,
         "isAutoComputeTags": $scope.topic.isAutoComputeTags,
         "isAutoComputeLabels": $scope.topic.isAutoComputeLabels,
         "isROPublic": $scope.topic.isROPublic,
