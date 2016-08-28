@@ -48,6 +48,11 @@ angular.module("TatUi").component("sidebar", {
       presences: {},
       previousMode: "",
       treeTopics: {
+        "public": {
+            title: "/Public",
+            topics : [],
+            expand: true
+        },
         "internal": {
             title: "/Internal",
             topics : [],
@@ -245,6 +250,8 @@ angular.module("TatUi").component("sidebar", {
         }
         return "privateDm";
       } else if (topic.topic === "/Private/" + self.data.username + "/DM") {
+        return "toSkip";
+      } else if (topic.topic === "/Private/" + self.data.username + "/Tasks") {
         return "toSkip";
       } else if (topic.topic.indexOf("/Private/" + self.data.username) === 0) {
         topic.nameDisplayed = topic.topic.substr(("/Private/" + self.data.username+"/").length);
