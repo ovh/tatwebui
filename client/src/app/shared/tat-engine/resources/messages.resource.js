@@ -43,8 +43,9 @@ angular.module('TatUi').service('TatEngineMessagesRsc', function($resource) {
 angular.module('TatUi').service('TatEngineMessageRsc', function($resource) {
   'use strict';
 
-  return $resource("tatengine/message/:idMessage:topic:cascade:idMessageToDelete", {
+  return $resource("tatengine/message/:topic:cascade:idMessageToDelete:fromTopic", {
     'topic': '@topic',
+    'fromTopic': '@fromTopic',
     'idMessage': '@idMessage',
     'cascade': '@cascade',
     'idMessageToDelete': '@idMessageToDelete'
