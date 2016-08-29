@@ -24,7 +24,7 @@ angular.module('TatUi')
         self.addLabel = function(message, topicName, labelText, labelColor, cb) {
           TatEngineMessageRsc.update({
             'action': 'label',
-            'topic': topicName,
+            'topic': topicName.indexOf("/") === 0 ? topicName.substr(1) : topicName,
             'idReference': message._id,
             'text': labelText,
             'option': labelColor
@@ -52,7 +52,7 @@ angular.module('TatUi')
         self.reLabel = function(message, topicName, labels, labelsToRemove, cb) {
           TatEngineMessageRsc.update({
             'action': 'relabel',
-            'topic': topicName,
+            'topic': topicName.indexOf("/") === 0 ? topicName.substr(1) : topicName,
             'idReference': message._id,
             'labels': labels,
             'options': labelsToRemove
