@@ -48,7 +48,7 @@ angular.module("TatUi").component("sidebar", {
       presences: {},
       previousMode: "",
       treeTopics: {
-        "public": {
+        "/Public": {
             title: "/Public",
             topics : [],
             expand: true
