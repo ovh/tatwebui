@@ -143,7 +143,6 @@ angular.module('TatUi').component('header', {
     this.initNextForTopic = function() {
       self.data.topic = self.topic;
       self.data = angular.extend(self.data, TatTopic.getDataTopic());
-      console.log("self.data:",self.data);
       self.data.subTitle = self.data.topic.topic.split('/');
       self.data.subTitle.shift(); // remove first "/"
 

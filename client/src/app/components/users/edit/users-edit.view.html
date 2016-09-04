@@ -12,7 +12,7 @@
                 <div>
                     <label>{{ 'components_user_username' | translate }}</label><span>{{user.username}}</span>
                 </div>
-                <div>
+                <div data-ng-if="isAdmin()">
                     <label>{{ 'components_user_email' | translate }}</label><span>{{user.email}}</span>
                 </div>
                 <div data-ng-if="isAdmin()">
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" data-ng-if="isAdmin()">
       <div class="btn-group-vertical" role="group" aria-label="...">
         <div class="btn-group" role="group">
           <button class="btn btn-default" data-ng-click="askArchiveUser=true" data-ng-hide="askArchiveUser || askConvertSystemUser || askConvertAdminUser || askRenameUser || askUpdateUser">
@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" data-ng-if="isAdmin()">
       <h4>{{ 'shared_common_groups' | translate }}</h4>
       <div class="col-lg-6">
           <ui-select data-ng-model="group.selected" theme="bootstrap">
@@ -136,7 +136,7 @@
           </button>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-if="isAdmin()">
       <div class="col-lg-6">
         <b>{{ 'components_user_groups' | translate }} : </b>
         <ul>
