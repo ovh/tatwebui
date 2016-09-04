@@ -3,9 +3,9 @@
   <translation id="components_topics_add_ro_user">Add user to Read Only topic</translation>
   <translation id="components_topics_add_rw_user">Add user to Read Write topic</translation>
   <translation id="components_topics_add_user_admin">Add user to admins on this topic</translation>
-  <translation id="components_topics_add_ro_gropu">Add group to Read Only topic</translation>
-  <translation id="components_topics_add_rw_gropu">Add group to Read Write topic</translation>
-  <translation id="components_topics_add_gropu_admin">Add group to admins on this topic</translation>
+  <translation id="components_topics_add_ro_group">Add group to Read Only topic</translation>
+  <translation id="components_topics_add_rw_group">Add group to Read Write topic</translation>
+  <translation id="components_topics_add_group_admin">Add group to admins on this topic</translation>
   <translation id="components_topics_dont_want_remove_topic">No, I don't want to remove user from this topic.</translation>
   <translation id="components_topics_dont_want_remove_group">No, I don't want to remove group from this topic.</translation>
   <translation id="components_topics_only_topic">Only on this topic</translation>
