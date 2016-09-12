@@ -194,29 +194,31 @@ angular.module("TatUi").component("sidebar", {
         for (var typeTopic in self.data.treeTopics) {
           self.data.treeTopics[typeTopic].topics = [];
         }
-        for (var i = 0; i < data.topics.length; i++) {
-          var topicType = self.computeTypeTopic(data.topics[i]);
-          data.topics[i].topicType = topicType;
+        if (data.topics) {
+          for (var i = 0; i < data.topics.length; i++) {
+            var topicType = self.computeTypeTopic(data.topics[i]);
+            data.topics[i].topicType = topicType;
 
-          if (topicType != "toSkip") {
-            if (!self.data.treeTopics[topicType]) {
-              self.data.treeTopics[topicType] = {
-                  title: topicType,
-                  topics : [],
-                  expand: true
-              };
-            }
-            if (data.topicsMsgUnread && data.topicsMsgUnread[data.topics[i].topic]) {
-              data.topics[i].unread = data.topicsMsgUnread[data.topics[i].topic];
-            }
-            if (self.data.mode === "unread") {
-              if (data.topics[i].unread && data.topics[i].unread > 0) {
-                  self.data.treeTopics[topicType].topics.push(data.topics[i]);
+            if (topicType != "toSkip") {
+              if (!self.data.treeTopics[topicType]) {
+                self.data.treeTopics[topicType] = {
+                    title: topicType,
+                    topics : [],
+                    expand: true
+                };
               }
-            } else if (self.data.mode === "history") {
-              ttopics[data.topics[i].topic] = data.topics[i];
-            } else {
-              self.data.treeTopics[topicType].topics.push(data.topics[i]);
+              if (data.topicsMsgUnread && data.topicsMsgUnread[data.topics[i].topic]) {
+                data.topics[i].unread = data.topicsMsgUnread[data.topics[i].topic];
+              }
+              if (self.data.mode === "unread") {
+                if (data.topics[i].unread && data.topics[i].unread > 0) {
+                    self.data.treeTopics[topicType].topics.push(data.topics[i]);
+                }
+              } else if (self.data.mode === "history") {
+                ttopics[data.topics[i].topic] = data.topics[i];
+              } else {
+                self.data.treeTopics[topicType].topics.push(data.topics[i]);
+              }
             }
           }
         }

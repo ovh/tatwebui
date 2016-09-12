@@ -26,7 +26,7 @@ angular.module('TatUi')
     };
 
     var filterGroup = { name: $stateParams.groupName };
-    
+
     var _self = this;
     this.init = function() {
       TatEngineGroupsRsc.list(filterGroup).$promise.then(function(data) {
@@ -43,12 +43,13 @@ angular.module('TatUi')
               TatEngine.displayReturn(err);
             });
           }
+        } else {
+            TatEngine.displayReturn({"error": "You have no access to this group in edit mode"});
         }
       }, function(err) {
         TatEngine.displayReturn(err);
       });
     };
-
 
     this.initRequest = function(username) {
       return {

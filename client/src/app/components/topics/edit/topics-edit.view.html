@@ -77,12 +77,6 @@
             </div>
             <div class="checkbox">
                <label>
-                 <input type="checkbox" ng-model="topic.isROPublic">
-                 {{ 'components_topics_is_ro_public' | translate }}
-               </label>
-            </div>
-            <div class="checkbox">
-               <label>
                  <input type="checkbox" ng-model="topic.isAutoComputeTags">
                  {{ 'components_topics_is_auto_compute_tags' | translate }}
                </label>
@@ -427,9 +421,6 @@
         </ul>
       </div>
     </div>
-    <div class="row" ng-if="isAdmin()">
-        <!-- FIXME <a ui-sref="presences-list({topic:topicItem.topic})"><i class="fa fa-eye"></i></a>-->
-        <a href="/presences/list{{topic.topic}}"><i class="fa fa-eye"></i> Presence</a>
-    </div>
+    <br><br><br><br>
   </div>
 </div>

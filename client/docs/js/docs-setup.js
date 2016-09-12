@@ -91,7 +91,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "TatUi",
       "shortDescription": "Edit Topic controller",
-      "keywords": "action add addadmingroup addadminuser addrogroup addrouser addrwgroup addrwuser admin api apply authentication body candeleteallmsg candeletemsg candforcedate canupdateallmsg canupdatemsg checkparametersview controller defaultview edit false function group groupname init initialize initrequestgroup initrequestuser isautocomputelabels isautocomputetags isropublic maxlength parameters read recursive remove removeadmingroup removeadminuser removed removerogroup removerouser removerwgroup removerwuser request restrictedview selected sub-topic tatengine tatenginegroupsrsc tatenginetopicrsc tatenginetopicsrsc tatengineusersrsc tatui topic true update updateparam user username write"
+      "keywords": "action add addadmingroup addadminuser addrogroup addrouser addrwgroup addrwuser admin api apply authentication body candeleteallmsg candeletemsg candforcedate canupdateallmsg canupdatemsg checkparametersview controller defaultview edit false function group groupname init initialize initrequestgroup initrequestuser isautocomputelabels isautocomputetags maxlength parameters read recursive remove removeadmingroup removeadminuser removed removerogroup removerouser removerwgroup removerwuser request restrictedview selected sub-topic tatengine tatenginegroupsrsc tatenginetopicrsc tatenginetopicsrsc tatengineusersrsc tatui topic true update updateparam user username write"
     },
     {
       "section": "api",
