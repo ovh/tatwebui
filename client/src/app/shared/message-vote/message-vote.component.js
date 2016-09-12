@@ -65,7 +65,7 @@ angular.module('TatUi').component('messageVote',
       self.voterUPDisabled = true;
       var action = self.hasVoterUP(self.message) ? 'unvoteup' : 'voteup';
       TatEngineMessageRsc.update({
-        'topic': self.message.topic,
+        'topic': self.message.topic.substring(1),
         'idReference': self.message._id,
         'action': action
       }).$promise.then(function(resp) {
@@ -91,7 +91,7 @@ angular.module('TatUi').component('messageVote',
       self.voterDownDisabled = true;
       var action = self.hasVoterDown(self.message) ? 'unvotedown' : 'votedown';
       TatEngineMessageRsc.update({
-        'topic': self.message.topic,
+        'topic': self.message.topic.substring(1),
         'idReference': self.message._id,
         'action': action
       }).$promise.then(function(resp) {
