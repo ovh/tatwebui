@@ -137,6 +137,9 @@ module.exports = function(grunt) {
     },
 
     jshint: {
+      options: {
+        reporterOutput: ""
+      },
       dev: [
         '<%= project.app%>/**/*.js',
         'Gruntfile.js'
