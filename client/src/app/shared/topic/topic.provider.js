@@ -36,7 +36,7 @@ angular.module('TatUi').provider('TatTopic', function(appConfiguration) {
         if (userGroups && userGroups.length > 0 && self.data.topic.adminGroups && self.data.topic.adminGroups.length > 0) {
           for (var i = 0; i < self.data.topic.adminGroups.length; i++) {
             var groupTopic = self.data.topic.adminGroups[i];
-            for (var j = 0; j < userGroups.length; i++) {
+            for (var j = 0; j < userGroups.length; j++) {
               var ugroup = userGroups[j];
               if (ugroup === groupTopic) {
                 return true;
