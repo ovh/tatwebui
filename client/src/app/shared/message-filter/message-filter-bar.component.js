@@ -17,12 +17,17 @@ angular.module('TatUi').component('messageFilterBar',
   controllerAs: 'ctrl',
   controller: function(
     $scope,
+    TatEngine,
+    TatEngineTopicRsc,
     TatFilter
   ) {
     'use strict';
 
     var self = this;
     self.data = {
+      title: "",
+      saving: false,
+      typeHooks: ["tathook-webhook", "tathook-kafka", "tathook-xmpp", "tathook-xmpp-out", "tathook-xmpp-in"],
       search: "",
       currentHelp: "",
       labels: [],
@@ -34,7 +39,8 @@ angular.module('TatUi').component('messageFilterBar',
         showWeeks: true,
         maxDate: new Date(2040, 5, 22),
         minDate: new Date(2015, 11, 22)
-      }
+      },
+      topic: self.topic
     };
 
     self.filter = TatFilter.getCurrent();
@@ -79,7 +85,7 @@ angular.module('TatUi').component('messageFilterBar',
       self.data.searchingDate = false;
     };
 
-    self.filterSearch = function() {
+    self.filterSearch = function(addOnly) {
       if (self.data.prefix === "dateCreation") {
         self.filter.dateMinCreation = moment(self.data.dateMinSearch).unix();
         self.filter.dateMaxCreation = moment(self.data.dateMaxSearch).unix();
@@ -91,11 +97,94 @@ angular.module('TatUi').component('messageFilterBar',
       }
 
       TatFilter.setFilters(self.filter).search();
-      self.searching = false;
-      self.data.searchingDate = false;
+      if (addOnly !== true) {
+        self.searching = false;
+        self.data.searchingDate = false;
+      }
+      self.data.prefix = "";
       self.computeNbFilter();
       self.data.search = "";
+    };
+
+    self.filterSaveCurrent = function() {
+      TatEngineTopicRsc.addFilter({
+        topic: self.topic.topic,
+        title: self.data.title,
+      	criteria: {
+          label: self.filter.label,
+          notLabel: self.filter.notLabel,
+          andLabel: self.filter.andLabel,
+          tag: self.filter.tag,
+          notTag: self.filter.notTag,
+          andTag: self.filter.andTag,
+          username: self.filter.username,
+          onlyMsgRoot: self.filter.onlyMsgRoot
+        }
+      }).$promise.then(function(data) {
+        self.data.saving = false;
+        self.refreshTopic();
+        TatEngine.displayReturn(data);
+      }, function(err) {
+        TatEngine.displayReturn(err);
+      });
+    };
+
+    self.filterUpdate = function(f) {
+      TatEngineTopicRsc.updateFilter({
+        _id: f._id,
+        topic: self.topic.topic,
+        title: self.data.title,
+      	criteria: f.criteria,
+      	hooks: f.hooks
+      }).$promise.then(function(data) {
+        self.refreshTopic();
+        TatEngine.displayReturn(data);
+      }, function(err) {
+        TatEngine.displayReturn(err);
+      });
+    };
+
+    self.filterDelete = function(f) {
+      TatEngineTopicRsc.removeFilter({
+        _id: f._id,
+        topic: self.topic.topic
+      }).$promise.then(function(data) {
+        self.refreshTopic();
+        TatEngine.displayReturn(data);
+      }, function(err) {
+        TatEngine.displayReturn(err);
+      });
+    };
+
+    self.addHook = function(f) {
+      if (!f.hooks) {
+        f.hooks = [];
+      }
+      f.hooks.push({
+        _id: new Date(),
+        type: "tathook-xmpp-out",
+        destination: "youconf@conference.jabber.domain.net",
+        enabled: false
+      });
+    };
+
+    self.refreshTopic = function() {
+      TatEngineTopicRsc.oneTopic({
+        action: self.topic.topic.substring(1)
+      }).$promise.then(function(data) {
+        self.topic = data.topic;
+        self.data.topic = data.topic;
+      }, function(err) {
+        TatEngine.displayReturn(err);
+      });
+    };
+
+    self.applyFilter = function(f) {
+      TatFilter.setFilters(f.criteria).search();
+      self.searching = false;
       self.data.prefix = "";
+      self.computeNbFilter();
+      self.data.search = "";
     };
 
     self.computeNbFilter = function() {

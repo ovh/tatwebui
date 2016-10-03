@@ -141,6 +141,17 @@
   <translation id="shared_filter_text">texte</translation>
   <translation id="shared_filter_from">Depuis:</translation>
   <translation id="shared_filter_to">Jusqu'à:</translation>
+  <translation id="shared_filter_add">Ajouter</translation>
+  <translation id="shared_filter_save">Sauvegarder</translation>
+  <translation id="shared_filter_delete">Supprimer</translation>
+  <translation id="shared_filter_enable">Actif</translation>
+  <translation id="shared_filter_only_root">Message Parent seulement</translation>
+  <translation id="shared_filter_type">Type</translation>
+  <translation id="shared_filter_destination">Desination</translation>
+  <translation id="shared_filter_add_hook">Add a hook</translation>
+  <translation id="shared_filter_title">Titre du filtre</translation>
+  <translation id="shared_filter_edit">Editer le filtre</translation>
+  <translation id="shared_filter_apply">Appliquer le fitre</translation>
 
   <translation id="shared_filter_help_label">Filtre sur les labels avec la condition "OU". "LABEL_A,LABEL_B" recherche les messages contenant les labels LABEL_A et LABEL_B.</translation>
   <translation id="shared_filter_help_andLabel">Filtre sur les labels avec la condition "ET". "LABEL_A,LABEL_B" recherche les messages contenant les labels LABEL_A ET LABEL_B.</translation>

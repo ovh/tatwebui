@@ -327,6 +327,57 @@ angular.module('TatUi').service('TatEngineTopicRsc', function($resource) {
 
     /**
      * @ngdoc function
+     * @name addFilter
+     * @methodOf TatUi.resource:TatEngineTopicRsc
+     * @restMethod PUT
+     * @description
+     *
+     * @return {object} Promise
+     */
+    addFilter: {
+      method: 'PUT',
+      isArray: false,
+      params: {
+        action: 'add/filter'
+      }
+    },
+
+    /**
+     * @ngdoc function
+     * @name removeFilter
+     * @methodOf TatUi.resource:TatEngineTopicRsc
+     * @restMethod PUT
+     * @description
+     *
+     * @return {object} Promise
+     */
+    removeFilter: {
+      method: 'PUT',
+      isArray: false,
+      params: {
+        action: 'remove/filter'
+      }
+    },
+
+    /**
+     * @ngdoc function
+     * @name updateFilter
+     * @methodOf TatUi.resource:TatEngineTopicRsc
+     * @restMethod PUT
+     * @description
+     *
+     * @return {object} Promise
+     */
+    updateFilter: {
+      method: 'PUT',
+      isArray: false,
+      params: {
+        action: 'update/filter'
+      }
+    },
+
+    /**
+     * @ngdoc function
      * @name truncate
      * @methodOf TatUi.resource:TatEngineTopicRsc
      * @restMethod PUT

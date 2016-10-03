@@ -31,21 +31,18 @@
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_in' | translate }} label
       </strong>
-
     </span>
     <span class="tat-filter-group" ng-click="ctrl.addPrefix('andLabel')" uib-tooltip="{{ 'shared_filter_contains_all_labels_tips' | translate }}">
       <strong class="inclusive" class="tat-label">
         <i class="fa fa-plus-square"></i>
         {{ 'shared_filter_all' | translate }} label
       </strong>
-
     </span>
     <span class="tat-filter-group" ng-click="ctrl.addPrefix('notLabel')" uib-tooltip="{{ 'shared_filter_hide_all_labels_tips' | translate }}">
       <strong class="exclusive" class="tat-label">
         <i class="fa fa-minus-square"></i>
         {{ 'shared_filter_hide' | translate }} label
       </strong>
-
     </span>
     <span class="tat-filter-group" ng-click="ctrl.dateSearchForm('dateCreation')" uib-tooltip="{{ 'shared_filter_date_creation_tips' | translate }}">
       <strong class="inclusive" class="tat-textlabel">
@@ -111,7 +108,10 @@
       </div>
 
       <div class="row" style="margin-left:10px">
-        <button type="submit" class="btn btn-primary" ng-click="ctrl.filterSearch()">
+        <button type="submit" class="btn btn-primary" ng-click="ctrl.filterSearch(true)">
+            <i class="fa fa-plus"></i> {{ 'shared_filter_add' | translate }}
+        </button>
+        <button type="submit" class="btn btn-primary" ng-click="ctrl.filterSearch(false)">
             <i class="fa fa-search"></i> {{ 'shared_filter_search' | translate }}
         </button>
       </div>
@@ -270,4 +270,185 @@
       <i class="fa fa-times"></i>
     </a>
   </span>
+
+  <span ng-show="ctrl.searching">
+    <button ng-hide="ctrl.data.saving || ctrl.data.isEmptySearch" title="{{ 'shared_filter_save' | translate }}" type="submit" class="btn btn-primary" ng-click="ctrl.data.saving=!ctrl.data.saving">
+      <i class="fa fa-save"></i>
+    </button>
+
+    <span ng-show="ctrl.data.saving">
+      <div class="col-md-3">
+        {{ 'shared_filter_title' | translate }}
+        <input type="text" ng-model="ctrl.data.title" class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary" ng-click="ctrl.filterSaveCurrent()">
+            <i class="fa fa-search"></i> {{ 'shared_filter_save' | translate }}
+        </button>
+        <button type="button" class="btn btn-default" ng-click="ctrl.data.saving=false">
+            <i class="fa fa-times"></i> {{ 'shared_common_cancel' | translate }}
+        </button>
+      </div>
+    </span>
+  </span>
+
+  <div ng-show="ctrl.searching">
+    <hr>
+    <strong>Your Filters: </strong>
+    <span ng-hide="ctrl.data.topic.filters.length > 0" class="label label-info">You have not filter recorded yet</span>
+
+    <div class="row" ng-show="!f.edit" ng-repeat="f in ctrl.data.topic.filters track by f._id">
+      <div class="row">
+        <span class="tat-filter-group">{{f.title}}</span>
+          <!-- in tags -->
+        <span class="tat-filter-group" ng-if="f.criteria.tag.length">
+          <strong class="inclusive" >
+            <i class="fa fa-plus-square"></i>
+            {{ 'shared_filter_in' | translate }}
+          </strong>
+          <a role="button" class="tat-tag">
+            <i>#</i>{{ f.criteria.tag }}
+          </a>
+        </span>
+
+        <!-- all tags -->
+        <span class="tat-filter-group" ng-if="f.criteria.andTag.length">
+          <strong class="inclusive" >
+            <i class="fa fa-plus-square"></i>
+            {{ 'shared_filter_all' | translate }}
+          </strong>
+          <a role="button" class="tat-tag">
+            <i>#</i>{{ f.criteria.andTag }}
+          </a>
+        </span>
+
+        <!-- hide tags -->
+        <span class="tat-filter-group" ng-if="f.criteria.notTag.length">
+          <strong class="inclusive" >
+            <i class="fa fa-minus-square"></i>
+            {{ 'shared_filter_hide' | translate }}
+          </strong>
+          <a role="button" class="tat-tag">
+            <i>#</i>{{ f.criteria.notTag }}
+          </a>
+        </span>
+
+        <!-- in labels -->
+        <span class="tat-filter-group" ng-if="f.criteria.label.length">
+          <strong class="inclusive" >
+            <i class="fa fa-plus-square"></i>
+            {{ 'shared_filter_in' | translate }}
+          </strong>
+          <a role="button" class="tat-label">
+            {{ f.criteria.label }}
+          </a>
+        </span>
+
+        <!-- and labels -->
+        <span class="tat-filter-group" ng-if="f.criteria.andLabel.length">
+          <strong class="inclusive" >
+            <i class="fa fa-plus-square"></i>
+            {{ 'shared_filter_all' | translate }}
+          </strong>
+          <a role="button" class="tat-label">
+            {{ f.criteria.andLabel }}
+          </a>
+        </span>
+
+        <!-- hide labels -->
+        <span class="tat-filter-group" ng-if="f.criteria.notLabel.length">
+          <strong class="exclusive" >
+            <i class="fa fa-minus-square"></i>
+            {{ 'shared_filter_hide' | translate }}
+          </strong>
+          <a role="button" class="tat-label">
+            {{ f.criteria.notLabel }}
+          </a>
+        </span>
+
+        <!-- usernames -->
+        <span class="tat-filter-group" ng-if="f.criteria.username.length">
+          <strong class="inclusive" >
+            <i class="fa fa-user"></i>
+          </strong>
+          <a role="button" class="tat-tag">
+            {{ f.criteria.username }}
+          </a>
+        </span>
+
+        <span class="tat-filter-group">
+          <label>
+            <input type="checkbox" ng-model="f.criteria.onlyMsgRoot" disabled="true"/>
+            {{ 'shared_filter_only_root' | translate }}
+          </label>
+        </span>
+        <span>
+          <button type="button" class="btn btn-default" ng-click="f.edit=true">
+            <i class="fa fa-edit"></i> {{ 'shared_filter_edit' | translate }}
+          </button>
+          <button type="button" class="btn btn-default" ng-click="ctrl.applyFilter(f)">
+            <i class="fa fa-check"></i> {{ 'shared_filter_apply' | translate }}
+          </button>
+        </span>
+      </div>
+      <hr>
+    </div>
+
+    <div class="row" ng-show="f.edit" ng-repeat="f in ctrl.data.topic.filters track by f._id">
+      <div class="row">
+        <div class="col-md-1"><input type="text" ng-model="f.title" class="form-control" /></div>
+        <div class="col-md-1">{{ 'shared_filter_in' | translate }} label <input type="text" ng-model="f.criteria.label" class="form-control" /></div>
+        <div class="col-md-1">{{ 'shared_filter_hide' | translate }} label<input type="text" ng-model="f.criteria.notLabel" class="form-control" /></div>
+        <div class="col-md-1">{{ 'shared_filter_all' | translate }} label<input type="text" ng-model="f.criteria.andLabel" class="form-control" /></div>
+        <div class="col-md-1">{{ 'shared_filter_in' | translate }} <i>#</i>tag<input type="text" ng-model="f.criteria.tag" class="form-control" /></div>
+        <div class="col-md-1">{{ 'shared_filter_hide' | translate }} <i>#</i>tag<input type="text" ng-model="f.criteria.notTag" class="form-control" /></div>
+        <div class="col-md-1">{{ 'shared_filter_all' | translate }} <i>#</i>tag<input type="text" ng-model="f.criteria.andTag" class="form-control" /></div>
+        <div class="col-md-2">{{ 'shared_filter_username' | translate }} <input type="text" ng-model="f.criteria.username" class="form-control" /></div>
+        <div class="col-md-3">
+          <label>
+            <input type="checkbox" ng-model="f.criteria.onlyMsgRoot" />
+            {{ 'shared_filter_only_root' | translate }}
+          </label>
+        </div>
+      </div>
+      <div class="row" ng-repeat="h in f.hooks track by h._id">
+        <div class="col-md-3">
+          {{ 'shared_filter_type' | translate }}
+          <ui-select data-ng-model="h.type" theme="bootstrap">
+            <ui-select-match placeholder="Select or search a type in the list...">{{$select.selected}}</ui-select-match>
+            <ui-select-choices repeat="item in ctrl.data.typeHooks | filter: $select.search">
+              <div>{{item}}</div>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+        <div class="col-md-4">
+          {{ 'shared_filter_destination' | translate }}
+          <input type="text" ng-model="h.destination" class="form-control" />
+        </div>
+        <div class="checkbox col-md-1">
+           <label>
+             <input type="checkbox" ng-model="h.enabled">
+             {{ 'shared_filter_enable' | translate }}
+           </label>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-default" ng-click="ctrl.addHook(f)">
+          <i class="fa fa-plus"></i> {{ 'shared_filter_add_hook' | translate }}
+        </button>
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-primary" ng-click="ctrl.filterUpdate(f)">
+          <i class="fa fa-save"></i> {{ 'shared_filter_save' | translate }}
+        </button>
+        <button type="button" class="btn btn-danger" ng-click="ctrl.filterDelete(f)">
+          <i class="fa fa-trash"></i> {{ 'shared_filter_delete' | translate }}
+        </button>
+        <button type="button" class="btn btn-default" ng-click="f.edit=false">
+          <i class="fa fa-times"></i> {{ 'shared_common_cancel' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>
