@@ -120,7 +120,7 @@ angular.module('TatUi').component('messageFilterBar',
           notTag: self.filter.notTag,
           andTag: self.filter.andTag,
           username: self.filter.username,
-          onlyMsgRoot: self.filter.onlyMsgRoot ? "true" : "false"
+          onlyMsgRoot: self.filter.onlyMsgRoot
         }
       }).$promise.then(function(data) {
         self.data.saving = false;
@@ -132,15 +132,10 @@ angular.module('TatUi').component('messageFilterBar',
     };
 
     self.filterUpdate = function(f) {
-      if (f.criteria.onlyMsgRoot) {
-        f.criteria.onlyMsgRoot = "true";
-      } else {
-        f.criteria.onlyMsgRoot = "false";
-      }
       TatEngineTopicRsc.updateFilter({
         _id: f._id,
         topic: self.topic.topic,
-        title: self.data.title,
+        title: f.title,
       	criteria: f.criteria,
       	hooks: f.hooks
       }).$promise.then(function(data) {
