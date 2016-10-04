@@ -17,6 +17,7 @@ angular.module('TatUi').component('messageFilterBar',
   controllerAs: 'ctrl',
   controller: function(
     $scope,
+    Authentication,
     TatEngine,
     TatEngineTopicRsc,
     TatFilter
@@ -27,6 +28,7 @@ angular.module('TatUi').component('messageFilterBar',
     self.data = {
       title: "",
       saving: false,
+      filterEdit: false,
       typeHooks: ["tathook-webhook", "tathook-xmpp-out"],
       search: "",
       currentHelp: "",
@@ -142,6 +144,7 @@ angular.module('TatUi').component('messageFilterBar',
       	hooks: f.hooks
       }).$promise.then(function(data) {
         self.refreshTopic();
+        self.data.filterEdit = false;
         TatEngine.displayReturn(data);
       }, function(err) {
         TatEngine.displayReturn(err);
@@ -153,6 +156,7 @@ angular.module('TatUi').component('messageFilterBar',
         _id: f._id,
         topic: self.topic.topic
       }).$promise.then(function(data) {
+        self.data.filterEdit = false;
         self.refreshTopic();
         TatEngine.displayReturn(data);
       }, function(err) {
@@ -164,11 +168,16 @@ angular.module('TatUi').component('messageFilterBar',
       if (!f.hooks) {
         f.hooks = [];
       }
+
+      var domain = "domain.net";
+      if (appConfiguration && appConfiguration.xmpp && appConfiguration.xmpp.domain !== "") {
+        domain = appConfiguration.xmpp.domain;
+      }
       f.hooks.push({
         _id: new Date(),
         type: "tathook-xmpp-out",
-        destination: "youconf@conference.jabber.domain.net",
-        enabled: false
+        destination: Authentication.getIdentity().username + "@" + domain,
+        enabled: true
       });
     };
 
@@ -177,7 +186,6 @@ angular.module('TatUi').component('messageFilterBar',
         action: self.topic.topic.substring(1)
       }).$promise.then(function(data) {
         self.topic = data.topic;
-        self.data.topic = data.topic;
       }, function(err) {
         TatEngine.displayReturn(err);
       });

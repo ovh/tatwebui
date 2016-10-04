@@ -5,6 +5,11 @@
     "port": 8001,
     "autologin": false
   },
+  {
+    "xmpp": {
+      "domain": "domain.net"
+    }
+  },
   "help": {
     "signup": [ "HELP_SIGNUP" ]
   },

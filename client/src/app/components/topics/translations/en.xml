@@ -24,6 +24,9 @@
   <translation id="components_topics_others_parameters">Others</translation>
   <translation id="components_topics_views_parameters">Views</translation>
   <translation id="components_topics_add_parameter">Add a parameter</translation>
+  <translation id="components_topics_add_parameter_xmpp">Add a XMPP Full Sync with a conference</translation>
+  <translation id="components_topics_add_parameter_xmpp_in">Add a XMPP In with a conference</translation>
+  <translation id="components_topics_add_parameter_xmpp_out">Add a XMPP Out with a conference</translation>
   <translation id="components_topics_tatwebui_view_restricted">force a view on this topic, users can't choose another view</translation>
   <translation id="components_topics_tatwebui_view_default">set a default view on this topic, users can choose another view</translation>
   <translation id="components_topics_presences">Presences</translation>

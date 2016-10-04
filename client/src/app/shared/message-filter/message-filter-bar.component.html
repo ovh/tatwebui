@@ -297,7 +297,7 @@
     <strong>Your Filters: </strong>
     <span ng-hide="ctrl.topic.filters.length > 0" class="label label-info">You have not filter recorded yet</span>
 
-    <div class="row" ng-show="!filterEdit" ng-repeat="f in ctrl.topic.filters track by f._id">
+    <div class="row" ng-hide="ctrl.data.filterEdit" ng-repeat="f in ctrl.topic.filters track by f._id">
       <div class="row">
         <span>{{f.title}}</span>
           <!-- in tags -->
@@ -383,7 +383,7 @@
           </label>
         </span>
         <span>
-          <button type="button" title="{{ 'shared_filter_edit' | translate }}" class="btn btn-default" ng-click="filterEdit=true;f.edit=true">
+          <button type="button" title="{{ 'shared_filter_edit' | translate }}" class="btn btn-default" ng-click="ctrl.data.filterEdit=true;f.edit=true">
             <i class="fa fa-edit"></i>
           </button>
           <button type="button" class="btn btn-default" ng-click="ctrl.applyFilter(f)">
@@ -444,7 +444,7 @@
         <button type="button" class="btn btn-danger" ng-click="ctrl.filterDelete(f)">
           <i class="fa fa-trash"></i> {{ 'shared_filter_delete' | translate }}
         </button>
-        <button type="button" class="btn btn-default" ng-click="filterEdit=false;f.edit=false">
+        <button type="button" class="btn btn-default" ng-click="ctrl.data.filterEdit=false;f.edit=false">
           <i class="fa fa-times"></i> {{ 'shared_common_cancel' | translate }}
         </button>
       </div>

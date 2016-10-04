@@ -15,6 +15,7 @@
 angular.module('TatUi')
   .controller('TopicsEditCtrl', function($scope,
     $stateParams,
+    appConfiguration,
     Authentication,
     TatEngineUsersRsc,
     TatEngineGroupsRsc,
@@ -357,6 +358,17 @@ angular.module('TatUi')
       $scope.topic.parameters.push({
         key: 'key',
         value: 'value'
+      });
+    };
+
+    self.newParameterXmpp = function(mode) {
+      var domain = "domain.net";
+      if (appConfiguration && appConfiguration.xmpp && appConfiguration.xmpp.domain !== "") {
+        domain = appConfiguration.xmpp.domain;
+      }
+      $scope.topic.parameters.push({
+        key: 'tathook'+mode,
+        value: 'your-conference@'+domain
       });
     };
 

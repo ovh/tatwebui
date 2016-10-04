@@ -149,6 +149,9 @@
             </div>
           </div>
           <button ng-show="ctrl.data.isUserAdminOnTopic" ng-click="ctrl.newParameter()" class="btn btn-default">{{ 'components_topics_add_parameter' | translate }}</button>
+          <button ng-show="ctrl.data.isUserAdminOnTopic" ng-click="ctrl.newParameterXmpp('')" class="btn btn-default">{{ 'components_topics_add_parameter_xmpp' | translate }}</button>
+          <button ng-show="ctrl.data.isUserAdminOnTopic" ng-click="ctrl.newParameterXmpp('-in')" class="btn btn-default">{{ 'components_topics_add_parameter_xmpp_in' | translate }}</button>
+          <button ng-show="ctrl.data.isUserAdminOnTopic" ng-click="ctrl.newParameterXmpp('-out')" class="btn btn-default">{{ 'components_topics_add_parameter_xmpp_out' | translate }}</button>
         </div>
       </div>
       <div class="row">
