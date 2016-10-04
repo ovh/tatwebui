@@ -367,7 +367,7 @@ angular.module('TatUi')
         domain = appConfiguration.xmpp.domain;
       }
       $scope.topic.parameters.push({
-        key: 'tathook'+mode,
+        key: 'tathook-xmpp'+mode,
         value: 'your-conference@'+domain
       });
     };
