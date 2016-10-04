@@ -295,11 +295,11 @@
   <div ng-show="ctrl.searching">
     <hr>
     <strong>Your Filters: </strong>
-    <span ng-hide="ctrl.data.topic.filters.length > 0" class="label label-info">You have not filter recorded yet</span>
+    <span ng-hide="ctrl.topic.filters.length > 0" class="label label-info">You have not filter recorded yet</span>
 
-    <div class="row" ng-show="!f.edit" ng-repeat="f in ctrl.data.topic.filters track by f._id">
+    <div class="row" ng-show="!filterEdit" ng-repeat="f in ctrl.topic.filters track by f._id">
       <div class="row">
-        <span class="tat-filter-group">{{f.title}}</span>
+        <span>{{f.title}}</span>
           <!-- in tags -->
         <span class="tat-filter-group" ng-if="f.criteria.tag.length">
           <strong class="inclusive" >
@@ -376,15 +376,15 @@
           </a>
         </span>
 
-        <span class="tat-filter-group">
+        <span>
           <label>
             <input type="checkbox" ng-model="f.criteria.onlyMsgRoot" disabled="true"/>
             {{ 'shared_filter_only_root' | translate }}
           </label>
         </span>
         <span>
-          <button type="button" class="btn btn-default" ng-click="f.edit=true">
-            <i class="fa fa-edit"></i> {{ 'shared_filter_edit' | translate }}
+          <button type="button" title="{{ 'shared_filter_edit' | translate }}" class="btn btn-default" ng-click="filterEdit=true;f.edit=true">
+            <i class="fa fa-edit"></i>
           </button>
           <button type="button" class="btn btn-default" ng-click="ctrl.applyFilter(f)">
             <i class="fa fa-check"></i> {{ 'shared_filter_apply' | translate }}
@@ -394,9 +394,9 @@
       <hr>
     </div>
 
-    <div class="row" ng-show="f.edit" ng-repeat="f in ctrl.data.topic.filters track by f._id">
+    <div class="row" ng-show="f.edit" ng-repeat="f in ctrl.topic.filters track by f._id">
       <div class="row">
-        <div class="col-md-1"><input type="text" ng-model="f.title" class="form-control" /></div>
+        <div class="col-md-1">{{ 'shared_filter_title' | translate }} <input type="text" ng-model="f.title" class="form-control" /></div>
         <div class="col-md-1">{{ 'shared_filter_in' | translate }} label <input type="text" ng-model="f.criteria.label" class="form-control" /></div>
         <div class="col-md-1">{{ 'shared_filter_hide' | translate }} label<input type="text" ng-model="f.criteria.notLabel" class="form-control" /></div>
         <div class="col-md-1">{{ 'shared_filter_all' | translate }} label<input type="text" ng-model="f.criteria.andLabel" class="form-control" /></div>
@@ -444,7 +444,7 @@
         <button type="button" class="btn btn-danger" ng-click="ctrl.filterDelete(f)">
           <i class="fa fa-trash"></i> {{ 'shared_filter_delete' | translate }}
         </button>
-        <button type="button" class="btn btn-default" ng-click="f.edit=false">
+        <button type="button" class="btn btn-default" ng-click="filterEdit=false;f.edit=false">
           <i class="fa fa-times"></i> {{ 'shared_common_cancel' | translate }}
         </button>
       </div>

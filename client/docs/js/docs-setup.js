@@ -334,7 +334,7 @@ NG_DOCS={
       "type": "resource",
       "moduleName": "TatUi",
       "shortDescription": "",
-      "keywords": "addadmingroup addadminuser addparameter addrogroup addrouser addrwgroup addrwuser api create function onetopic post promise removeadmingroup removeadminuser removeparameter removerogroup removerouser removerwgroup removerwuser resource return tatui truncate updateparam"
+      "keywords": "addadmingroup addadminuser addfilter addparameter addrogroup addrouser addrwgroup addrwuser api create function onetopic post promise removeadmingroup removeadminuser removefilter removeparameter removerogroup removerouser removerwgroup removerwuser resource return tatui truncate updatefilter updateparam"
     },
     {
       "section": "api",

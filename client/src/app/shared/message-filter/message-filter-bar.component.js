@@ -39,8 +39,7 @@ angular.module('TatUi').component('messageFilterBar',
         showWeeks: true,
         maxDate: new Date(2040, 5, 22),
         minDate: new Date(2015, 11, 22)
-      },
-      topic: self.topic
+      }
     };
 
     self.filter = TatFilter.getCurrent();
@@ -118,7 +117,7 @@ angular.module('TatUi').component('messageFilterBar',
           notTag: self.filter.notTag,
           andTag: self.filter.andTag,
           username: self.filter.username,
-          onlyMsgRoot: self.filter.onlyMsgRoot
+          onlyMsgRoot: self.filter.onlyMsgRoot ? "true" : "false"
         }
       }).$promise.then(function(data) {
         self.data.saving = false;
@@ -130,6 +129,11 @@ angular.module('TatUi').component('messageFilterBar',
     };
 
     self.filterUpdate = function(f) {
+      if (f.criteria.onlyMsgRoot) {
+        f.criteria.onlyMsgRoot = "true";
+      } else {
+        f.criteria.onlyMsgRoot = "false";
+      }
       TatEngineTopicRsc.updateFilter({
         _id: f._id,
         topic: self.topic.topic,
