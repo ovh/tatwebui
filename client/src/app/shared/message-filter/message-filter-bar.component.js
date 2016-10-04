@@ -17,6 +17,7 @@ angular.module('TatUi').component('messageFilterBar',
   controllerAs: 'ctrl',
   controller: function(
     $scope,
+    appConfiguration,
     Authentication,
     TatEngine,
     TatEngineTopicRsc,

@@ -368,7 +368,7 @@ angular.module('TatUi')
       }
       $scope.topic.parameters.push({
         key: 'tathook-xmpp'+mode,
-        value: 'your-conference@'+domain
+        value: 'your-conference@conference.'+domain
       });
     };
 
