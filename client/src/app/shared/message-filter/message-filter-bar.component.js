@@ -27,7 +27,7 @@ angular.module('TatUi').component('messageFilterBar',
     self.data = {
       title: "",
       saving: false,
-      typeHooks: ["tathook-webhook", "tathook-kafka", "tathook-xmpp", "tathook-xmpp-out", "tathook-xmpp-in"],
+      typeHooks: ["tathook-webhook", "tathook-xmpp", "tathook-xmpp-out", "tathook-xmpp-in"],
       search: "",
       currentHelp: "",
       labels: [],
