@@ -24,6 +24,9 @@
   <translation id="components_topics_others_parameters">Autres paramètres</translation>
   <translation id="components_topics_views_parameters">Vues</translation>
   <translation id="components_topics_add_parameter">Ajouter un paramètre</translation>
+  <translation id="components_topics_add_parameter_xmpp">Ajouter une synchronisation complète avec une conférence XMPP.</translation>
+  <translation id="components_topics_add_parameter_xmpp_in">Ajouter une synchronisation XMPP vers Tat</translation>
+  <translation id="components_topics_add_parameter_xmpp_out">Ajouter une synchronisation Tat vers XMPP</translation>
   <translation id="components_topics_tatwebui_view_restricted">force une vue sur ce topic, les utilisateurs ne peuvent pas en choisir une autre.</translation>
   <translation id="components_topics_tatwebui_view_default">positionne une vue par défaut sur ce topic, les utilisateurs peuvent en choisir une autre.</translation>
   <translation id="components_topics_presences">Présences</translation>
