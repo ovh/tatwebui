@@ -31,6 +31,7 @@ angular.module('TatUi').component('messageFilterBar',
       saving: false,
       filterEdit: false,
       typeHooks: ["tathook-webhook", "tathook-xmpp-out"],
+      typeActions: ["all","create","update","reply","like","unlike","label","unlabel","voteup","votedown","unvoteup","unvotedown","relabel","concat","move","task","untask"],
       search: "",
       currentHelp: "",
       labels: [],
@@ -173,6 +174,8 @@ angular.module('TatUi').component('messageFilterBar',
         _id: new Date(),
         type: "tathook-xmpp-out",
         destination: Authentication.getIdentity().username + "@" + domain,
+        item: "message",
+        action: "all",
         enabled: true
       });
     };

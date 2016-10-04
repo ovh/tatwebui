@@ -425,6 +425,15 @@
           {{ 'shared_filter_destination' | translate }}
           <input type="text" ng-model="h.destination" class="form-control" />
         </div>
+        <div class="col-md-3">
+          Action
+          <ui-select data-ng-model="h.action" theme="bootstrap">
+            <ui-select-match placeholder="Select or search an action in the list...">{{$select.selected}}</ui-select-match>
+            <ui-select-choices repeat="item in ctrl.data.typeActions | filter: $select.search">
+              <div>{{item}}</div>
+            </ui-select-choices>
+          </ui-select>
+        </div>
         <div class="checkbox col-md-1">
            <label>
              <input type="checkbox" ng-model="h.enabled">
