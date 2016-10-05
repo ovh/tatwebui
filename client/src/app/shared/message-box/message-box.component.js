@@ -25,6 +25,7 @@ angular.module('TatUi').component('messageBox', {
     TatEngineMessageRsc,
     TatEngine,
     TatMessage,
+    TatFilter,
     $sce,
     $translate
   ) {
@@ -101,6 +102,10 @@ angular.module('TatUi').component('messageBox', {
       _.remove(self.defaultLabels, function(n) {
         return n.text === labelText;
       });
+    };
+
+    self.applyFilter = function(f) {
+      TatFilter.setFilters(f.criteria).search();
     };
 
     /**

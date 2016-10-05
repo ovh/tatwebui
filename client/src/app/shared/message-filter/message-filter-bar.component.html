@@ -294,8 +294,7 @@
 
   <div ng-show="ctrl.searching">
     <hr>
-    <strong>Your Filters: </strong>
-    <span ng-hide="ctrl.topic.filters.length > 0" class="label label-info">You have not filter recorded yet</span>
+    <strong ng-show="ctrl.topic.filters.length > 0">{{ 'shared_filter_your_filters' | translate }}</strong>
 
     <div class="row" ng-hide="ctrl.data.filterEdit" ng-repeat="f in ctrl.topic.filters track by f._id">
       <div class="row">

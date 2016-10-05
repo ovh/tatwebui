@@ -28,12 +28,28 @@
         <i class="fa fa-edit"></i>
       </div>
 
-      <a class="btn btn-default" ng-click="ctrl.filterDialog.visible=!ctrl.filterDialog.visible" ng-class="{'open': ctrl.filterDialog.visible}">
-        <i class="fa fa-filter"></i>
-      </a>
-      <a ng-hide="ctrl.btnExpand===false" class="btn btn-default" title="Toggle display replies" ng-click="ctrl.expandReplies = !ctrl.expandReplies" ng-class="{'open': ctrl.expandReplies}">
-        <i ng-class="ctrl.expandReplies ? 'fa fa-compress': 'fa fa-expand'"></i>
-      </a>
+
+      <!-- Split button -->
+      <div class="btn-group">
+        <button type="button" class="btn btn-default" ng-click="ctrl.filterDialog.visible=!ctrl.filterDialog.visible" ng-class="{'open': ctrl.filterDialog.visible}">
+          <i class="fa fa-filter"></i>
+        </button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li ng-repeat="f in ctrl.topic.filters">
+            <a ng-click="ctrl.applyFilter(f)">{{f.title}}</a>
+          </li>
+          <li ng-show="ctrl.topic.filters.length == 0"><a href="#">{{ 'shared_filter_no_filter_saved' | translate }}</a></li>
+        </ul>
+
+        <a ng-hide="ctrl.btnExpand===false" class="btn btn-default" title="Toggle display replies" ng-click="ctrl.expandReplies = !ctrl.expandReplies" ng-class="{'open': ctrl.expandReplies}">
+          <i ng-class="ctrl.expandReplies ? 'fa fa-compress': 'fa fa-expand'"></i>
+        </a>
+      </div>
+
     </div>
   </form>
   <div ng-if="ctrl.defaultLabels && ctrl.currentMessage.length > 0">

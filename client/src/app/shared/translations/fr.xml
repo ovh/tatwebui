@@ -152,6 +152,8 @@
   <translation id="shared_filter_title">Titre du filtre</translation>
   <translation id="shared_filter_edit">Editer le filtre</translation>
   <translation id="shared_filter_apply">Appliquer le fitre</translation>
+  <translation id="shared_filter_no_filter_saved">Aucun filtre enregistré</translation>
+  <translation id="shared_filter_your_filters">Vos filtres:</translation>
 
   <translation id="shared_filter_help_label">Filtre sur les labels avec la condition "OU". "LABEL_A,LABEL_B" recherche les messages contenant les labels LABEL_A et LABEL_B.</translation>
   <translation id="shared_filter_help_andLabel">Filtre sur les labels avec la condition "ET". "LABEL_A,LABEL_B" recherche les messages contenant les labels LABEL_A ET LABEL_B.</translation>

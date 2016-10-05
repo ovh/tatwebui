@@ -152,6 +152,8 @@
   <translation id="shared_filter_title">Filter Title</translation>
   <translation id="shared_filter_edit">Edit Filter</translation>
   <translation id="shared_filter_apply">Apply Filter</translation>
+  <translation id="shared_filter_no_filter_saved">No Filter Saved</translation>
+  <translation id="shared_filter_your_filters">Your filters:</translation>
 
   <translation id="shared_filter_help_label">Filter on label with OR condition. "LABEL_A,LABEL_B" will search LABEL_A OR LABEL_B.</translation>
   <translation id="shared_filter_help_andLabel">Filter on label with AND condition. "LABEL_A,LABEL_B" will search LABEL_A AND LABEL_B.</translation>
