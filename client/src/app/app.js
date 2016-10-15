@@ -25,7 +25,7 @@ angular.module('TatUi', [
     'MassAutoComplete',
     'chart.js', // let users to dev a view with chartjs
     'highcharts-ng', // let users to dev a view with hightcharts
-    'angular-dialgauge', // let users to dev a dashing view
+    'angular-chartist',
     'Tek.progressBar',
     'ngclipboard'
   ])

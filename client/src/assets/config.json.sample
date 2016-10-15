@@ -34,6 +34,9 @@
     ]
   },
   "viewconfigs": {
+    "cdsview": {
+      "cdsui": "http://url-cds-ui"
+    },
     "standardview-list": {
       "filters": {
         "placeholder": {

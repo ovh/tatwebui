@@ -34,9 +34,9 @@
         "angular-spectrum-colorpicker": "1.4.5",
         "angular-bootstrap-colorpicker": "3.0.18",
         "angular-component": "git+https://github.com/toddmotto/angular-component.git",
+        "angular-chartist.js": "3.3.13",
         "angular-chart.js": "0.8.8",
         "highcharts-ng": "0.0.11",
-        "angular-dialgauge": "0.1.5",
         "angular-tek-progress-bar": "0.2.0",
         "prism": "1.4.1",
         "ngclipboard": "1.1.1"
