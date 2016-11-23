@@ -4,6 +4,9 @@
     "tatwebui-plugin-notificationsview": "git+https://github.com/ovh/tatwebui-plugin-notificationsview.git",
     "tatwebui-plugin-releaseview": "git+https://github.com/ovh/tatwebui-plugin-releaseview.git",
     "tatwebui-plugin-pastatview": "git+https://github.com/ovh/tatwebui-plugin-pastatview.git",
+    "tatwebui-plugin-dashingview": "git+https://github.com/ovh/tatwebui-plugin-dashingview.git",
+    "tatwebui-plugin-dashingview": "git+https://github.com/ovh/tatwebui-plugin-dashingview.git",
+    "tatwebui-plugin-cdsview": "git+https://github.com/ovh/tatwebui-plugin-cdsview.git",
     "tatwebui-plugin-monitoringview": "git+https://github.com/ovh/tatwebui-plugin-monitoringview.git"
   }
 }
