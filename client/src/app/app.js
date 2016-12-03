@@ -109,7 +109,7 @@ angular.module('TatUi', [
 
   // manage route change
   $translate.refresh();
-  $rootScope.$on("$stateChangeStart", function(event, routeOption) {
+  $rootScope.$on("$stateChangeStart", function(event, routeOption, toParams) {
     $translatePartialLoader.addPart('shared');
     if (routeOption.translations) {
       // load translation parts
@@ -134,6 +134,8 @@ angular.module('TatUi', [
     $translate.refresh();
     if (!routeOption.acl_bypass && !Authentication.isConnected()) {
       event.preventDefault();
+      routeOption.params = toParams;
+      $rootScope.previous = routeOption;
       $state.go('user-login');
     }
   });

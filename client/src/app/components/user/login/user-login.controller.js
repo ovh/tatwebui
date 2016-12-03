@@ -11,7 +11,7 @@
  *
  */
 angular.module('TatUi').controller('UserLoginCtrl', function($scope,
-  $state, Authentication, appConfiguration) {
+  $rootScope, $state, Authentication, appConfiguration) {
   'use strict';
 
   $scope.user = {};
@@ -51,12 +51,16 @@ angular.module('TatUi').controller('UserLoginCtrl', function($scope,
   $scope.connect = function() {
     Authentication.connect($scope.user).then(function() {
       if ($scope.user && $scope.user.username && $scope.user.username !== '') {
-        $state.go("standardview-list", {
-          topic: 'Private/' + $scope.user.username
-        }, {
-          inherit: false,
-          reload: false
-        });
+        if ($rootScope.previous && $rootScope.previous.name && $rootScope.previous.name !== "") {
+          $state.go( $rootScope.previous.name, $rootScope.previous.params );
+        } else {
+          $state.go("standardview-list", {
+            topic: 'Private/' + $scope.user.username
+          }, {
+            inherit: false,
+            reload: false
+          });
+        }
       } else {
         $state.go('index');
       }
@@ -69,5 +73,7 @@ angular.module('TatUi').controller('UserLoginCtrl', function($scope,
   if (appConfiguration && appConfiguration.backend && appConfiguration.backend.autologin === true) {
     $scope.connect();
   }
+
+
 
 });
