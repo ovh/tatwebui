@@ -11,8 +11,7 @@
       }
     }, options);
     this.app = options.app;
-    this.publicFolder = require('path').normalize(this.options.basePath +
-      '/' + this.options.public.folder);
+    this.publicFolder = require('path').normalize(this.options.basePath + '/' + this.options.public.folder);
     this.HttpInfo = require('./../http-info.js');
   };
 
@@ -22,7 +21,7 @@
      * Express Middleware to serve files
      * @param {Object}   req  request
      * @param {Object}   res  resource
-     * @param {function} next next treatment 
+     * @param {function} next next treatment
      */
     middleware: function() {
       var app = this.app;
@@ -33,9 +32,7 @@
         switch (info.getHttpMethod()) {
           case 'GET':
             var requestedPath = info.getFullPath();
-            var requestedUrl = ((req.url) && (req.url.length > 1) ? req
-              .url : '/' + _self.options.public.default).replace(
-              /\.\./g, '').replace(/\?.*/, '');
+            var requestedUrl = ((req.url) && (req.url.length > 1) ? req.url : '/' + _self.options.public.default).replace(/\.\./g, '').replace(/\?.*/, '');
             var filename = _self.publicFolder + requestedUrl;
             // check if a specific file was requested
             app.logger('Check for file', req.url);

@@ -16,6 +16,10 @@
     res.send('tatwebui ping OK');
   });
 
+  app.get('/version', function(req, res) {
+    res.send('tatwebui ' + config.version); 
+  });
+
   app.get('/mon/status', function(req, res) {
     res.send('tatwebui monitoring ok');
   });
