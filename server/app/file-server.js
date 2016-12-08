@@ -12,6 +12,14 @@
     res.send('tatwebui is alive');
   });
 
+  app.get('/ping', function(req, res) {
+    res.send('tatwebui ping OK');
+  });
+
+  app.get('/mon/status', function(req, res) {
+    res.send('tatwebui monitoring ok');
+  });
+
   // Filesystem
   app.use(new(require('./middlewares/filesystem-middleware.js'))({
     basePath: __dirname + '/..',
