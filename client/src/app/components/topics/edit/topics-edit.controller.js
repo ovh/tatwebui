@@ -329,13 +329,14 @@ angular.module('TatUi')
      * @name updateParam
      * @methodOf TatUi.controller:TopicsEditCtrl
      * @param {bool} recursive If true, apply action on all sub-topic
-     * @description Update Topic Parameters : maxlength, candForceDate, canUpdateMsg, canDeleteMsg, canUpdateAllMsg, canDeleteAllMsg, isAutoComputeTags, isAutoComputeLabels
+     * @description Update Topic Parameters : maxlength, maxreplies, candForceDate, canUpdateMsg, canDeleteMsg, canUpdateAllMsg, canDeleteAllMsg, isAutoComputeTags, isAutoComputeLabels
      */
     self.updateParam = function(recursive) {
       TatEngineTopicRsc.updateParam({
         "topic": $scope.topic.topic,
         "recursive": recursive,
         "maxlength": $scope.topic.maxlength,
+        "maxreplies": $scope.topic.maxreplies,
         "canForceDate": $scope.topic.canForceDate,
         "canUpdateMsg": $scope.topic.canUpdateMsg,
         "canDeleteMsg": $scope.topic.canDeleteMsg,

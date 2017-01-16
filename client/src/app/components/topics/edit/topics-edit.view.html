@@ -87,6 +87,10 @@
                  {{ 'components_topics_is_auto_compute_labels' | translate }}
                </label>
             </div>
+            <div class="form-group">
+              <label for="maxlength">{{ 'components_topics_max_message_replies' | translate }}</label>
+              <input type="number" class="form-control" id="maxreplies" ng-model="topic.maxreplies" min="1" ng-required="true">
+            </div>
         </div>
         <div class="col-lg-6">
           <h5>{{'components_topics_views_parameters' | translate }}</h5>

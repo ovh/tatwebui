@@ -21,6 +21,7 @@
   <translation id="components_topics_list_non_admin_mode">Lister que vos topics</translation>
   <translation id="components_topics_list_admin_mode_info">Admin mode : liste de tous les topics, sauf les topics /Private/*</translation>
   <translation id="components_topics_max_message_length">Taille maximum des messages</translation>
+  <translation id="components_topics_max_message_replies">Nombre de réponses maximum sur un message</translation>
   <translation id="components_topics_others_parameters">Autres paramètres</translation>
   <translation id="components_topics_views_parameters">Vues</translation>
   <translation id="components_topics_add_parameter">Ajouter un paramètre</translation>
