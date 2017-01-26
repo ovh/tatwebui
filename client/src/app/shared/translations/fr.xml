@@ -130,6 +130,7 @@
   <translation id="shared_filter_hide_all_tags_tips">Cacher tous les tags. "TAG_A,TAG_B"</translation>
   <translation id="shared_filter_usernames_tips">Rerche par nom d'utilisateur</translation>
   <translation id="shared_filter_text_tips">Terme à rechercher</translation>
+  <translation id="shared_filter_sort_by_tips">Trier par</translation>
   <translation id="shared_filter_search">Rechercher</translation>
   <translation id="shared_filter_date_min_creation">date creation: min</translation>
   <translation id="shared_filter_date_max_creation">date creation: max</translation>
@@ -139,6 +140,7 @@
   <translation id="shared_filter_date_update">date de mise à jour</translation>
   <translation id="shared_filter_username">nom d'utilisateur</translation>
   <translation id="shared_filter_text">texte</translation>
+  <translation id="shared_filter_sort_by">tri</translation>
   <translation id="shared_filter_from">Depuis:</translation>
   <translation id="shared_filter_to">Jusqu'à:</translation>
   <translation id="shared_filter_add">Ajouter</translation>
@@ -165,5 +167,6 @@
   <translation id="shared_filter_help_text">Filtre sur le texte des messages. Vous devriez utiliser une recherche sur les labels ou les tags en même temps.</translation>
   <translation id="shared_filter_help_dateCreation">Filter sur les dates de créations des messages</translation>
   <translation id="shared_filter_help_dateUpdate">Filter sur les dates de mise à jour des messages</translation>
+  <translation id="shared_filter_help_sortBy">Trier sur les paramètres des messages. Pour rechercher de manière décroissante, ajouter le caractère '-' devant votre champ. Par exemple, -dateCreation ou text ou -nbLikes ...</translation>
 
 </translations>
