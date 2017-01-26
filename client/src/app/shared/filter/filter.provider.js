@@ -26,7 +26,8 @@ angular.module('TatUi')
       'dateMaxCreation',
       'dateMinUpdate',
       'dateMaxUpdate',
-      'username'
+      'username',
+      'sortBy'
     ];
 
     self.options = {};
@@ -65,7 +66,7 @@ angular.module('TatUi')
           self.removeFilter = function(key, value) {
             var items, index, fltr;
             fltr = self.currentFilters[$stateParams.topic][key];
-            if (key == 'idMessage' || key == 'text' ||
+            if (key == 'idMessage' || key == 'text' || key == 'sortBy' ||
                        key == 'dateMinCreation' || key == 'dateMaxCreation' || 
                        key == 'dateMinUpdate' || key == 'dateMaxUpdate') {
               self.currentFilters[$stateParams.topic][key] = null;
@@ -147,7 +148,7 @@ angular.module('TatUi')
             if (k == 'tag' && v) {
               v = v.replace('#', '');
             }
-            if (k !== 'text' && k !== 'idMessage' &&
+            if (k !== 'text' && k !== 'idMessage' && k !== 'sortBy' &&
             k !== "dateMinCreation" && k !== "dateMaxCreation" &&
             k !== "dateMinUpdate" && k !== "dateMaxUpdate") {
               self.currentFilters[$stateParams.topic][k] = self.sanitize(v);
