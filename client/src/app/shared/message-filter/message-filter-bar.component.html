@@ -64,6 +64,11 @@
         <i class="fa fa-font"></i> {{ 'shared_filter_text' | translate }}
       </strong>
     </span>
+    <span class="tat-filter-group" ng-click="ctrl.addPrefix('sortBy')" uib-tooltip="{{ 'shared_filter_sort_by_tips' | translate }}">
+      <strong class="inclusive" class="tat-textlabel">
+        <i class="fa fa-font"></i> {{ 'shared_filter_sort_by' | translate }}
+      </strong>
+    </span>
     <a class="btn btn-default" ng-click="ctrl.searching=false">
       <i class="fa fa-times"></i> {{ 'shared_common_cancel' | translate }}
     </a>
@@ -260,6 +265,16 @@
     </a>
   </span>
 
+  <span class="tat-filter-group" ng-if="ctrl.filter.sortBy">
+    <strong class="inclusive" ng-click="ctrl.viewFilter('sortBy')">
+      <i class="fa fa-search"></i>
+    </strong>
+    <a role="button" class="tat-textlabel" ng-click="ctrl.removeFilter('sortBy')">
+      {{ ctrl.filter.sortBy }}
+      <i class="fa fa-times"></i>
+    </a>
+  </span>
+
   <!-- message id -->
   <span class="tat-filter-group" ng-if="ctrl.filter.idMessage">
     <strong class="inclusive" ng-click="ctrl.viewFilter('idMessage')">
@@ -403,6 +418,7 @@
         <div class="col-md-1">{{ 'shared_filter_hide' | translate }} <i>#</i>tag<input type="text" ng-model="f.criteria.notTag" class="form-control" /></div>
         <div class="col-md-1">{{ 'shared_filter_all' | translate }} <i>#</i>tag<input type="text" ng-model="f.criteria.andTag" class="form-control" /></div>
         <div class="col-md-2">{{ 'shared_filter_username' | translate }} <input type="text" ng-model="f.criteria.username" class="form-control" /></div>
+        <div class="col-md-2">{{ 'shared_filter_sort_by' | translate }} <input type="text" ng-model="f.criteria.sortBy" class="form-control" /></div>
         <div class="col-md-3">
           <label>
             <input type="checkbox" ng-model="f.criteria.onlyMsgRoot" />
