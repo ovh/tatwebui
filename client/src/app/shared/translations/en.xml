@@ -130,6 +130,7 @@
   <translation id="shared_filter_hide_all_tags_tips">Hide all tags. "TAG_A,TAG_B"</translation>
   <translation id="shared_filter_usernames_tips">Search by usernames</translation>
   <translation id="shared_filter_text_tips">Search Text</translation>
+  <translation id="shared_filter_sort_by_tips">Sort By</translation>
   <translation id="shared_filter_search">Search</translation>
   <translation id="shared_filter_date_min_creation">date min creation</translation>
   <translation id="shared_filter_date_max_creation">date max creation</translation>
@@ -139,6 +140,7 @@
   <translation id="shared_filter_date_update">date update</translation>
   <translation id="shared_filter_username">username</translation>
   <translation id="shared_filter_text">text</translation>
+  <translation id="shared_filter_sort_by">sort</translation>
   <translation id="shared_filter_from">From:</translation>
   <translation id="shared_filter_to">To:</translation>
   <translation id="shared_filter_add">Add</translation>
@@ -165,5 +167,6 @@
   <translation id="shared_filter_help_text">Filter on text. You should use a tag or label criteria with it.</translation>
   <translation id="shared_filter_help_dateCreation">Filter on the creation date of messages</translation>
   <translation id="shared_filter_help_dateUpdate">Filter on the update date of messages</translation>
+  <translation id="shared_filter_help_sortby">Sort on fields of message. To make a descending sort you have to put '-' before your field. For example, -dateCreation, text or -nbLikes...</translation>
 
 </translations>

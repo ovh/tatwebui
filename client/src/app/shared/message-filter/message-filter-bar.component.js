@@ -121,7 +121,8 @@ angular.module('TatUi').component('messageFilterBar',
           notTag: self.filter.notTag,
           andTag: self.filter.andTag,
           username: self.filter.username,
-          onlyMsgRoot: self.filter.onlyMsgRoot
+          onlyMsgRoot: self.filter.onlyMsgRoot,
+          sortBy: self.filter.sortBy
         }
       }).$promise.then(function(data) {
         self.data.saving = false;
