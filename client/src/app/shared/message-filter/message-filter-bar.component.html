@@ -66,7 +66,7 @@
     </span>
     <span class="tat-filter-group" ng-click="ctrl.addPrefix('sortBy')" uib-tooltip="{{ 'shared_filter_sort_by_tips' | translate }}">
       <strong class="inclusive" class="tat-textlabel">
-        <i class="fa fa-font"></i> {{ 'shared_filter_sort_by' | translate }}
+        <i class="fa fa-sort-amount-desc"></i> {{ 'shared_filter_sort_by' | translate }}
       </strong>
     </span>
     <a class="btn btn-default" ng-click="ctrl.searching=false">
@@ -267,7 +267,7 @@
 
   <span class="tat-filter-group" ng-if="ctrl.filter.sortBy">
     <strong class="inclusive" ng-click="ctrl.viewFilter('sortBy')">
-      <i class="fa fa-search"></i>
+      <i class="fa fa-sort-amount-desc"></i>
     </strong>
     <a role="button" class="tat-textlabel" ng-click="ctrl.removeFilter('sortBy')">
       {{ ctrl.filter.sortBy }}

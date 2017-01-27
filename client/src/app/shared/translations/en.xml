@@ -167,6 +167,6 @@
   <translation id="shared_filter_help_text">Filter on text. You should use a tag or label criteria with it.</translation>
   <translation id="shared_filter_help_dateCreation">Filter on the creation date of messages</translation>
   <translation id="shared_filter_help_dateUpdate">Filter on the update date of messages</translation>
-  <translation id="shared_filter_help_sortby">Sort on fields of message. To make a descending sort you have to put '-' before your field. For example, -dateCreation, text or -nbLikes...</translation>
+  <translation id="shared_filter_help_sortBy">Sort on fields of message. To make a descending sort you have to put '-' before your field. For example, -dateCreation, text or -nbLikes...</translation>
 
 </translations>
