@@ -45,6 +45,22 @@ angular.module('TatUi')
             for (var i = 0; i < self.FILTERS.length; i++) callback(self.FILTERS[i]);
           };
 
+          self.sortMessages = function(msgs) {
+            msgs.sort(function(a, b) {
+              var att = self.currentFilters[$stateParams.topic].sortBy;
+              if (!att || att === "") {
+                att = "dateCreation";
+              }
+              if (a[att] > b[att]) {
+                return -1;
+              }
+              if (a[att] < b[att]) {
+                return 1;
+              }
+              return 0;
+            });
+          };
+
           self.containsDateFilter = function() {
             var k = ["dateMinCreation", "dateMaxCreation", "dateMinCreation", "dateMaxCreation"];
             for (var i = 0; i < k.length; i++) {
@@ -192,6 +208,7 @@ angular.module('TatUi')
           containsDateFilter: self.containsDateFilter,
           setFilters: self.setFilters,
           eachFilter: self.eachFilter,
+          sortMessages: self.sortMessages,
           search: self.search
         };
       }
