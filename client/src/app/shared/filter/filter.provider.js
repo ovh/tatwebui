@@ -46,16 +46,24 @@ angular.module('TatUi')
           };
 
           self.sortMessages = function(msgs) {
+            if (!msgs) {
+              return;
+            }
             msgs.sort(function(a, b) {
               var att = self.currentFilters[$stateParams.topic].sortBy;
               if (!att || att === "") {
-                att = "dateCreation";
+                att = "-dateCreation";
+              }
+              var coef = -1;
+              if (att.indexOf("-") === 0) {
+                att = att.substring(1);
+                coef = 1;
               }
               if (a[att] > b[att]) {
-                return -1;
+                return -1 * coef;
               }
               if (a[att] < b[att]) {
-                return 1;
+                return 1 * coef;
               }
               return 0;
             });
