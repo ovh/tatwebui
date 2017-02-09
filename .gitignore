@@ -1,22 +1,40 @@
-node_modules
-.tmp
-.idea
-bower_components
-dist
-.dist
-build
-.build
-*.orig
-*.un~
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
 npm-debug.log
-config.json
-config.json.dev
-config.json.dev.2
-config.json.prod
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
 .DS_Store
-bower.json
-custom.plugin.tpl.json
-config.json.prod
-client/src/index.html
-*.un~
-*.swp
+Thumbs.db

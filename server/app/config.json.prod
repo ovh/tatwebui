@@ -1,9 +1,0 @@
-{
-  "version": "1.0.0",
-  "filesystem": {
-      "listen_port": FILESYSTEM_LISTEN_PORT
-  },
-  "process": {
-    "nb_forks": "PROCESS_NB_FORKS"
-  }
-}
