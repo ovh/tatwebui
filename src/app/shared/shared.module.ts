@@ -2,9 +2,11 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {ToastService} from './toast/toast.service';
+import {NgSemanticModule} from 'ng-semantic/ng-semantic';
+import {TranslateModule} from 'ng2-translate';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule ],
+  imports: [ CommonModule, FormsModule, NgSemanticModule, ReactiveFormsModule, TranslateModule ],
   declarations: [
   ],
   providers: [
@@ -15,7 +17,9 @@ import {ToastService} from './toast/toast.service';
   exports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    NgSemanticModule,
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class SharedModule {

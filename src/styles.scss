@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+$darkblue: #507095;
+
+html, body {
+  margin: 0;
+  height: 100%;
+
+  #page-wrapper {
+    height: 100%;
+
+    #content-wrapper {
+      height: 100%;
+    }
+  }
+
+
+}
