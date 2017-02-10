@@ -23,3 +23,11 @@ export class Contact {
   username: string;
   fullname: string;
 }
+
+
+export class SignUpRequest {
+  username: string;
+  fullname: string;
+  email: string;
+  callback: string;
+}

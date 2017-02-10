@@ -10,7 +10,7 @@
         {{ 'user_login_title' | translate }}
       </h3>
       <div class="ui bottom attached segment">
-        <form class="ui form" (ngSubmit)="signIn()" #loginForm="ngForm">
+        <form class="ui form" (ngSubmit)="logIN()" #loginForm="ngForm">
           <div class="field">
             <label>{{ 'user_username' | translate }}</label>
             <input type="text" [(ngModel)]="user.username" name="username">
@@ -20,13 +20,14 @@
             <input type="password" [(ngModel)]="user.password" name="password">
           </div>
 
-
-          <button class="ui button teal " type="button" (click)="navigateToSignUp()">{{ 'account_btn_signup' | translate}}
-          </button>
-          <button class="ui button teal " type="button" (click)="navigateToPassword()">{{ 'account_btn_password' | translate }}
-          </button>
-            <button id="loginButton" class="ui button green right floated" type="submit">{{ 'account_login_btn_connect' | translate }}</button>
-
+          <div class="button field">
+            <div class="floatLeft">
+              <a [routerLink]="['/user','signup']">{{ 'user_btn_create' | translate}}</a><br/>
+              <a >{{ 'user_btn_reset' | translate }}
+              </a>
+            </div>
+            <button id="loginButton" class="ui button green right floated" type="submit">{{ 'user_btn_connection' | translate }}</button>
+          </div>
         </form>
       </div>
     </div>

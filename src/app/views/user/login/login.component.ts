@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from '../../../model/user.model';
+import {AuthentificationStore} from '../../../service/auth/authentification.store';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.html',
-    styleUrls: ['./login.scss']
+  selector: 'app-login',
+  templateUrl: './login.html',
+  styleUrls: ['./login.scss']
 })
-export class LoginComponent implements OnInit {
+export class UserLoginComponent {
 
-    user = new User();
+  user = new User();
 
-    constructor() { }
+  constructor(_authStore: AuthentificationStore) {
+  }
 
-    ngOnInit() { }
+  logIN(): void {
+      if (this.user.username && this.user.password) {
+
+      }
+  }
 
 }

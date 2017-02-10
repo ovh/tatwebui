@@ -1,11 +1,13 @@
 import {userRouting} from './user.routing';
 import {NgModule} from '@angular/core';
-import {LoginComponent} from './login/login.component';
+import {UserLoginComponent} from './login/login.component';
 import {SharedModule} from '../../shared/shared.module';
+import {UserSignUPComponent} from './signup/signup.component';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    UserLoginComponent,
+    UserSignUPComponent
   ],
   imports: [
     SharedModule,

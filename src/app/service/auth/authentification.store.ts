@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs/Rx';
 import {User} from '../../model/user.model';
+import {UserService} from '../user/user.service';
 
 
 @Injectable()
@@ -63,7 +64,7 @@ export class AuthentificationStore {
    * @param user User data to save in localstorage
    * @param session  Indicate if user.token is a session token or not
    */
-  addUser(user: User, session: boolean): void {
+  addUser(user: User): void {
     localStorage.setItem(this.localStorageUserKey, JSON.stringify(user));
     this._connectedUser.next(user);
   }

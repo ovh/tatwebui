@@ -5,6 +5,7 @@ import {ToastService} from '../shared/toast/toast.service';
 import {AuthentificationStore} from './auth/authentification.store';
 import {HttpService} from './http.service';
 import {CanActivateAuthRoute} from './auth/canActivateAuthRoute';
+import {UserService} from './user/user.service';
 
 @NgModule({})
 export class ServicesModule {
@@ -14,7 +15,13 @@ export class ServicesModule {
       ngModule: ServicesModule,
       providers: [
         AuthentificationStore,
-        CanActivateAuthRoute
+        CanActivateAuthRoute,
+        UserService,
+        {
+          provide: Http,
+          useFactory: (httpFactory),
+          deps: [XHRBackend, RequestOptions, ToastService, AuthentificationStore, Router]
+        }
       ]
     };
   }

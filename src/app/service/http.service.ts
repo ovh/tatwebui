@@ -50,7 +50,7 @@ export class HttpService extends Http {
       if (err.status === 0) {
         this._toast.error('API Unreachable', '');
       } else {
-        this._toast.error(err.statusText, JSON.parse(err._body).message);
+        this._toast.error(err.statusText, JSON.parse(err._body).error);
       }
       if (err.status === 401) {
         this._authStore.removeUser();
