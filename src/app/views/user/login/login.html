@@ -23,7 +23,7 @@
           <div class="button field">
             <div class="floatLeft">
               <a [routerLink]="['/user','signup']">{{ 'user_btn_create' | translate}}</a><br/>
-              <a >{{ 'user_btn_reset' | translate }}
+              <a [routerLink]="['/user', 'password']">{{ 'user_btn_reset' | translate }}
               </a>
             </div>
             <button id="loginButton" class="ui button green right floated" type="submit">{{ 'user_btn_connection' | translate }}</button>

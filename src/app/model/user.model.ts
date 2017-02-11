@@ -31,3 +31,20 @@ export class SignUpRequest {
   email: string;
   callback: string;
 }
+
+export class ResetPasswordRequest {
+  username: string;
+  email: string;
+  callback: string;
+}
+
+export class VerifyResponse {
+  message: string;
+  username: string;
+  password: string;
+  url: string;
+}
+
+export class InfoResponse {
+  info: string;
+}
