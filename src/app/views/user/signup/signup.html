@@ -1,0 +1,43 @@
+<div class="signup">
+  <img class="ui centered image"
+       src="assets/img/tat.svg"
+       height="300px"
+       width="300px"/>
+
+  <div class="ui two column centered grid">
+    <div class="column" *ngIf="!showMessage">
+      <h3 class="ui top block attached header">
+        {{ 'user_signup_title' | translate }}
+      </h3>
+      <div class="ui bottom attached segment">
+        <form class="ui form" (ngSubmit)="signUP()" #signupForm="ngForm">
+          <div class="field">
+            <label>{{ 'user_username' | translate }}</label>
+            <input type="text" [(ngModel)]="user.username" name="username">
+          </div>
+          <div class="field">
+            <label>{{ 'user_fullname' | translate }}</label>
+            <input type="text" [(ngModel)]="user.fullname" name="fullname">
+          </div>
+          <div class="field">
+            <label>{{ 'user_email' | translate }}</label>
+            <input type="email" [(ngModel)]="user.email" name="email">
+          </div>
+
+          <div class="button field">
+            <div class="floatLeft">
+              <a [routerLink]="['/user','login']">{{ 'user_btn_connection' | translate}}</a><br/>
+              <a [routerLink]="['/user', 'password']">{{ 'user_btn_reset' | translate }}</a>
+            </div>
+            <button id="signupButton" class="ui button green right floated" type="submit">{{ 'user_btn_create' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="column" *ngIf="showMessage">
+      <div class="ui info message">
+        {{ reponseMessage }}
+      </div>
+    </div>
+  </div>
+</div>

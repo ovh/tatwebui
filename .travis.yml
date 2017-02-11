@@ -1,10 +1,7 @@
 language: node_js
 node_js:
-    - '0.12'
+    - '7.5'
 before_script:
-  - npm install -g bower
-  - npm install -g grunt-cli
-install:
-   - make copy-samples
+  - npm install -g @angular/cli
 script:
-   - make release
+   - ng build -prod --aot

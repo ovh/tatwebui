@@ -1,0 +1,25 @@
+<div class="verify">
+  <img class="ui centered image"
+       src="assets/img/tat.svg"
+       height="300px"
+       width="300px"/>
+  <div class="ui two column centered grid">
+    <div class="column" *ngIf="!showErrorMessage && userVerified['username']">
+      <h3 class="ui top block attached header">
+        {{ 'user_verify_title' | translate }}
+      </h3>
+      <div class="ui bottom attached segment">
+        <div class="ui info message">
+          <div>{{ 'user_username' | translate }}{{ ' : ' }}{{userVerified['username']}}</div>
+          <div>{{ 'user_password' | translate }}{{ ' : ' }}{{userVerified['password']}}</div>
+        </div>
+        <button id="verifyButton" class="ui button green" type="button" (click)="signIn()">{{ 'user_btn_connection' | translate }}</button>
+      </div>
+    </div>
+    <div class="column" *ngIf="showErrorMessage">
+      <div class="ui error message">
+        {{ 'user_verify_error' | translate }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "user_btn_connection" : "Se connecter",
+  "user_btn_create" : "Créer un compte",
+  "user_btn_reset" : "Réinitialiser le mot de passe",
+  "user_email" : "Adresse email",
+  "user_fullname" : "Nom complet",
+  "user_login_title" : "Se connecter à TAT",
+  "user_password" : "Mot de passe",
+  "user_password_title" : "Réinitialisation du mot de passe",
+  "user_signup_title" : "Création d'un compte",
+  "user_verify_error" : "Erreur lors de la vérification. Merci de réinitiliser votre mot de passe à nouveau",
+  "user_verify_title" : "Récupération du mot de passe",
+  "user_username" : "Nom d'utilisateur"
+}

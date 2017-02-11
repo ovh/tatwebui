@@ -1,0 +1,22 @@
+@import '../../../../styles';
+
+.verify {
+  background-color: $darkblue;
+  height: 100%;
+
+  img {
+    text-align: center;
+  }
+
+  .button.field {
+    min-height: 30px;
+  }
+
+  .floatLeft {
+    float:left;
+  }
+
+  .ui.message {
+    word-wrap: break-word;
+  }
+}
