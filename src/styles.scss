@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 $darkblue: #507095;
 
+$sidebarWith: 250px;
+
 html, body {
   margin: 0;
   height: 100%;
@@ -8,8 +10,20 @@ html, body {
   #page-wrapper {
     height: 100%;
 
+    #sidebar-wrapper {
+      height: 100%;
+      width: $sidebarWith;
+      float:left;
+      width: 75px;
+    }
+
+    #sidebar-wrapper.open {
+      width: 250px;
+    }
+
     #content-wrapper {
       height: 100%;
+      float: left;
     }
   }
 
