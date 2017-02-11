@@ -6,11 +6,13 @@ import {NgSemanticModule} from 'ng-semantic/ng-semantic';
 import {TranslateModule} from 'ng2-translate';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {SidebarService} from './sidebar/sidebar.service';
+import {TopicListComponent} from './topic/list/topic.list.component';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, NgSemanticModule, ReactiveFormsModule, TranslateModule ],
   declarations: [
-    SidebarComponent
+    SidebarComponent,
+    TopicListComponent
   ],
   providers: [
     SidebarService,
@@ -24,6 +26,7 @@ import {SidebarService} from './sidebar/sidebar.service';
     NgSemanticModule,
     ReactiveFormsModule,
     SidebarComponent,
+    TopicListComponent,
     TranslateModule
   ]
 })

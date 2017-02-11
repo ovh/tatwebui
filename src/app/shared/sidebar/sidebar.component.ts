@@ -9,8 +9,12 @@ import {Subscription} from 'rxjs/Rx';
 })
 export class SidebarComponent {
 
-  constructor(private _sidebarService: SidebarService) {
+  currentState: boolean;
 
+  constructor(public _sidebarService: SidebarService) {
+    this._sidebarService.listen().subscribe(s => {
+      this.currentState = s;
+    });
   }
 
   toggleSidebar(): void {

@@ -26,4 +26,8 @@ export class SidebarService {
     this._sidebarStatus.next(!currentStatus);
   }
 
+  state(): boolean {
+    return this._sidebarStatus.getValue();
+  }
+
 }
