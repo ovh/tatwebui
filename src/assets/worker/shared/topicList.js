@@ -2,14 +2,12 @@ importScripts('../common.js');
 
 var workerStarted = false;
 var ports = [];
-var filter = {};
 
 onconnect = function (e) {
   if(!e.ports || e.ports.length === 0) {
     return;
   }
   // Register worker + give it an ID
-
 
   ports.push(e.ports[0]);
   var id = ports.length;
@@ -22,7 +20,7 @@ onconnect = function (e) {
     // Run worker
     if(!workerStarted) {
       workerStarted = true;
-      loadMessages(e.data.user, e.data.api);
+      loadTopics(e.data.user, e.data.api);
     }
   };
 };
@@ -32,7 +30,7 @@ onconnect = function (e) {
  * @param user
  * @param api
  */
-function loadMessages(user, api) {
+function loadTopics(user, api) {
   if(user && api) {
     callAPI(user, api);
     setInterval(function () {
