@@ -7,6 +7,7 @@ import {TranslateModule} from 'ng2-translate';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {SidebarService} from './sidebar/sidebar.service';
 import {TopicListComponent} from './topic/list/topic.list.component';
+import {SidebarTopicService} from './sidebar/sidebar.topic.service';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, NgSemanticModule, ReactiveFormsModule, TranslateModule ],
@@ -16,6 +17,7 @@ import {TopicListComponent} from './topic/list/topic.list.component';
   ],
   providers: [
     SidebarService,
+    SidebarTopicService,
     ToastService
   ],
   schemas: [

@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="let t of topics">
-    <div>{{t.topic}}</div>
+    <a (click)="changeTopic(t.topic)">{{t.topic}}</a>
   </li>
 </ul>

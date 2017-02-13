@@ -2,15 +2,13 @@ importScripts('../common.js');
 
 var workerStarted = false;
 var ports = [];
-var filter = {};
+var topic;
 
 onconnect = function (e) {
   if(!e.ports || e.ports.length === 0) {
     return;
   }
   // Register worker + give it an ID
-
-
   ports.push(e.ports[0]);
   var id = ports.length;
 
@@ -19,6 +17,10 @@ onconnect = function (e) {
 
   // Receive msg
   e.ports[0].onmessage = function (e) {
+    if (e.data.filter) {
+      topic = e.data.filter.topic;
+    }
+
     // Run worker
     if(!workerStarted) {
       workerStarted = true;
@@ -42,7 +44,9 @@ function loadMessages(user, api) {
 }
 
 function callAPI(user, api) {
-  httpCallSharedWorker('/topics', api, user, postCall);
+  if (topic) {
+	  httpCallSharedWorker('/messages' + topic, api, user, postCall);
+  }
 }
 
 function postCall(response) {

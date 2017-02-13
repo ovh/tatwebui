@@ -3,6 +3,7 @@ import {TatWorker} from '../../worker/worker';
 import {environment} from '../../../../environments/environment';
 import {AuthentificationStore} from '../../../service/auth/authentification.store';
 import {Topic, TopicListResponse} from '../../../model/topic.model';
+import {SidebarTopicService} from '../../sidebar/sidebar.topic.service';
 
 @Component({
   selector: 'app-topic-list',
@@ -11,14 +12,20 @@ import {Topic, TopicListResponse} from '../../../model/topic.model';
 })
 export class TopicListComponent implements OnInit {
 
+  currentTopic: string;
+
   topicWorker: TatWorker;
   topics: Array<Topic>;
 
   // Allow angular update from work started outside angular context
   zone: NgZone;
 
-  constructor(private _authStore: AuthentificationStore) {
+  constructor(private _authStore: AuthentificationStore, private _sidebarTopicService: SidebarTopicService) {
     this.zone = new NgZone({enableLongStackTrace: false});
+    this.currentTopic = this._sidebarTopicService.getTopic();
+    this._sidebarTopicService.listen().subscribe(t => {
+      this.currentTopic = t;
+    });
   }
 
   ngOnInit() {
@@ -32,6 +39,12 @@ export class TopicListComponent implements OnInit {
         });
       }
     });
+  }
+
+  changeTopic(topic: string): void {
+    if (this.currentTopic !== topic) {
+      this._sidebarTopicService.change(topic);
+    }
   }
 
 }
