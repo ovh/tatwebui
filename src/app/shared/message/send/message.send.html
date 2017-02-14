@@ -1,0 +1,14 @@
+<div class="ui form" *ngIf="topic">
+    <form>
+        <div class="inline fields">
+            <div class="fifteen wide field">
+                <input type="text" placeholder="{{ 'message_send_label' | translate }}" [(ngModel)]="messageText" name="message">
+            </div>
+            <div class="one wide field">
+                <button class="ui icon green button" type="button" (click)="sendMessage()">
+                    <i class="send icon"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

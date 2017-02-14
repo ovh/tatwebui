@@ -5,19 +5,17 @@ import {ToastService} from './toast/toast.service';
 import {NgSemanticModule} from 'ng-semantic/ng-semantic';
 import {TranslateModule} from 'ng2-translate';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {SidebarService} from './sidebar/sidebar.service';
 import {TopicListComponent} from './topic/list/topic.list.component';
-import {SidebarTopicService} from './sidebar/sidebar.topic.service';
+import {MessageSendComponent} from './message/send/message.send.component';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, NgSemanticModule, ReactiveFormsModule, TranslateModule ],
   declarations: [
+    MessageSendComponent,
     SidebarComponent,
     TopicListComponent
   ],
   providers: [
-    SidebarService,
-    SidebarTopicService,
     ToastService
   ],
   schemas: [
@@ -25,6 +23,7 @@ import {SidebarTopicService} from './sidebar/sidebar.topic.service';
   exports: [
     CommonModule,
     FormsModule,
+    MessageSendComponent,
     NgSemanticModule,
     ReactiveFormsModule,
     SidebarComponent,

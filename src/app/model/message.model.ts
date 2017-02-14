@@ -45,3 +45,21 @@ export class Author {
   fullname: string;
 }
 
+export class MessageRequest {
+  _id: string;
+  text: string;
+  option: string;
+  topic: string;
+  idReference: string;
+  startTagReference: string;
+  startLabelReference: string;
+  tagReference: string;
+  labelReference: string;
+  onlyRootReference: string;
+  action: string;
+  dateCreation: number;
+  labels: Array<Label>;
+  options: Array<string>;
+  replies: Array<string>;
+  messages: Array<MessageRequest>;
+}

@@ -1,1 +1,6 @@
-Message
+<ul>
+    <li *ngFor="let m of messages">
+        {{m.text}}
+    </li>
+</ul>
+<app-message-send [topic]="topic"></app-message-send>

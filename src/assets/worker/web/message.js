@@ -1,13 +1,13 @@
 importScripts('../common.js');
 
 onmessage = function (e) {
-  loadTopics(e.data.user, e.data.api);
+  loadMessages(e.data.user, e.data.api, e.data.filter);
 };
 
-function loadTopics (user, api) {
+function loadMessages (user, api, filter) {
   if (user && api) {
     setInterval(function () {
-      var url = '/topics';
+      var url = '/topics' + filter.topic;
       postMessage(httpCall(url, api, user));
     }, 2000);
   }

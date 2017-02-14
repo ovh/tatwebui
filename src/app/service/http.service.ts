@@ -73,8 +73,8 @@ export class HttpService extends Http {
     // ADD user AUTH
     const user = this._authStore.getUser();
     if (user != null) {
-      options.headers.append('Tat-username', user.username);
-      options.headers.append('Tat-password', user.password);
+      options.headers.append('Tat_Username', user.username);
+      options.headers.append('Tat_Password', user.password);
     }
     return options;
   }

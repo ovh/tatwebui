@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
-import {SidebarService} from './shared/sidebar/sidebar.service';
 import {Subscription} from 'rxjs/Rx';
+import {SidebarService} from './service/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-root',

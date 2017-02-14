@@ -3,7 +3,7 @@ import {TatWorker} from '../../worker/worker';
 import {environment} from '../../../../environments/environment';
 import {AuthentificationStore} from '../../../service/auth/authentification.store';
 import {Topic, TopicListResponse} from '../../../model/topic.model';
-import {SidebarTopicService} from '../../sidebar/sidebar.topic.service';
+import {TopicService} from '../../../service/topic/topic.service';
 
 @Component({
   selector: 'app-topic-list',
@@ -12,7 +12,7 @@ import {SidebarTopicService} from '../../sidebar/sidebar.topic.service';
 })
 export class TopicListComponent implements OnInit {
 
-  currentTopic: string;
+  currentTopic: Topic;
 
   topicWorker: TatWorker;
   topics: Array<Topic>;
@@ -20,10 +20,10 @@ export class TopicListComponent implements OnInit {
   // Allow angular update from work started outside angular context
   zone: NgZone;
 
-  constructor(private _authStore: AuthentificationStore, private _sidebarTopicService: SidebarTopicService) {
+  constructor(private _authStore: AuthentificationStore, private _topicService: TopicService) {
     this.zone = new NgZone({enableLongStackTrace: false});
-    this.currentTopic = this._sidebarTopicService.getTopic();
-    this._sidebarTopicService.listen().subscribe(t => {
+    this.currentTopic = this._topicService.getTopic();
+    this._topicService.listen().subscribe(t => {
       this.currentTopic = t;
     });
   }
@@ -41,9 +41,9 @@ export class TopicListComponent implements OnInit {
     });
   }
 
-  changeTopic(topic: string): void {
-    if (this.currentTopic !== topic) {
-      this._sidebarTopicService.change(topic);
+  changeTopic(topic: Topic): void {
+    if (!this.currentTopic || this.currentTopic._id !== topic._id) {
+      this._topicService.change(topic);
     }
   }
 

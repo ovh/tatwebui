@@ -6,6 +6,9 @@ import {AuthentificationStore} from './auth/authentification.store';
 import {HttpService} from './http.service';
 import {CanActivateAuthRoute} from './auth/canActivateAuthRoute';
 import {UserService} from './user/user.service';
+import {TopicService} from './topic/topic.service';
+import {MessageSendService} from './message/message.send.service';
+import {SidebarService} from './sidebar/sidebar.service';
 
 @NgModule({})
 export class ServicesModule {
@@ -16,6 +19,9 @@ export class ServicesModule {
       providers: [
         AuthentificationStore,
         CanActivateAuthRoute,
+        MessageSendService,
+        SidebarService,
+        TopicService,
         UserService,
         {
           provide: Http,
@@ -29,7 +35,7 @@ export class ServicesModule {
   constructor(@Optional() @SkipSelf() parentModule: ServicesModule) {
     if (parentModule) {
       throw new Error(
-        'ServicesModule is already loaded. Import it in the AppModule only');
+          'ServicesModule is already loaded. Import it in the AppModule only');
     }
   }
 }
@@ -42,5 +48,9 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
 export {
   AuthentificationStore,
   CanActivateAuthRoute,
-  Http
+  Http,
+  MessageSendService,
+  SidebarService,
+  TopicService,
+  UserService
 }
