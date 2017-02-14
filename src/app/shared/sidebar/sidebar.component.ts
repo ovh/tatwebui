@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SidebarService} from './sidebar.service';
-import {AuthentificationStore} from '../../service/auth/authentification.store';
-import {SidebarTopicService} from './sidebar.topic.service';
+import {Component} from '@angular/core';
+import {SidebarService} from '../../service/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +10,7 @@ export class SidebarComponent {
 
   currentState: boolean;
 
-  constructor(public _sidebarService: SidebarService, private _authStore: AuthentificationStore) {
+  constructor(public _sidebarService: SidebarService) {
     this._sidebarService.listen().subscribe(s => {
       this.currentState = s;
     });
