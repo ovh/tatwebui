@@ -2,6 +2,8 @@
   "message_send_label" : "Message à envoyer",
   "message_sent" : "Message envoyé.",
 
+  "topics_no" : "Aucun topic",
+
   "user_btn_connection" : "Se connecter",
   "user_btn_create" : "Créer un compte",
   "user_btn_reset" : "Réinitialiser le mot de passe",

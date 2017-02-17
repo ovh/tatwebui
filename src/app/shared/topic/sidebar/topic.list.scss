@@ -1,0 +1,42 @@
+@import '../../../../styles';
+
+.title {
+  color: #545454;
+  display: block;
+  font-size: 1.25rem;
+  letter-spacing: 4px;
+  margin: 8px 0px 0px;
+  padding: 8px 0;
+  text-align: center;
+  text-indent: 0px;
+  text-shadow: 1px 1px 1px #000000;
+  text-transform: uppercase;
+  width: 250px;
+}
+
+ul.list {
+  width: 100%;
+  list-style: none;
+  padding-left: 0px;
+  li {
+    color: white;
+    padding-left: 10px;
+    a {
+      cursor: pointer;
+      color: inherit;
+    }
+    a:hover {
+
+    }
+  }
+
+  li:hover, li.active{
+    background-color: $darkblueHover;
+    border-left:2px solid orange;
+  }
+  li.no:hover {
+    background-color: unset;
+    border: none;
+  }
+}
+

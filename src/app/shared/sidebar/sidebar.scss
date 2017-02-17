@@ -3,4 +3,22 @@
 #sidebar {
   background-color: $darkblue;
   height: 100%;
+
+  .section {
+    font-size: 2rem;
+    text-align: center;
+
+    i {
+      font-size: 1.5rem;
+      color: grey;
+    }
+
+    i.active {
+      color: orange;
+    }
+
+    i:hover {
+      color: $darkblueHover;
+    }
+  }
 }

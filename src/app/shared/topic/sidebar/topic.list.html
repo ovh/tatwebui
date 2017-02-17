@@ -1,0 +1,19 @@
+<div class="title">/Public</div>
+
+<ul class="list">
+  <li *ngFor="let t of topicsPublic">
+    <a (click)="changeTopic(t)">{{t.topic}}</a>
+  </li>
+  <li *ngIf="!topicsPublic || topicsPublic.length === 0" class="no">
+    {{ 'topics_no' | translate }}
+  </li>
+</ul>
+<div class="title">/Private</div>
+<ul class="list">
+  <li *ngFor="let t of topicsPrivate" [class.active]="t.topic === currentTopic?.topic">
+    <a (click)="changeTopic(t)">{{t.topic}}</a>
+  </li>
+  <li *ngIf="!topicsPrivate || topicsPrivate.length === 0" class="no">
+    {{ 'topics_no' | translate }}
+  </li>
+</ul>

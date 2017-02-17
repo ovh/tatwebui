@@ -5,6 +5,11 @@
        width="150"
        (click)="toggleSidebar()"/>
   <ng-container *ngIf="currentState">
+    <div class="section">
+      <i class="star icon" [class.active]="topicFilter === 'favoris'" (click)="topicFilter = 'favoris'"> </i>
+      <i class="list icon" [class.active]="topicFilter === 'all'" (click)="topicFilter = 'all'"> </i>
+      <i class="cogs icon" [class.active]="topicFilter === 'settings'" (click)="topicFilter = 'settings'"> </i>
+    </div>
     <app-topic-list></app-topic-list>
   </ng-container>
 </div>
