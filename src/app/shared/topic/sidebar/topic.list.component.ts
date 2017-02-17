@@ -15,7 +15,8 @@ export class TopicListComponent implements OnInit {
   currentTopic: Topic;
 
   topicWorker: TatWorker;
-  topics: Array<Topic>;
+  topicsPublic: Array<Topic>;
+  topicsPrivate: Array<Topic>;
 
   // Allow angular update from work started outside angular context
   zone: NgZone;
@@ -35,7 +36,17 @@ export class TopicListComponent implements OnInit {
       if (msg.data && !msg.worker_id) {
         this.zone.run(() => {
           let response: TopicListResponse = JSON.parse(msg.data);
-          this.topics = response.topics;
+          if (response.topics && response.topics.length > 0) {
+            this.topicsPrivate = new Array<Topic>();
+            this.topicsPublic = new Array<Topic>();
+            response.topics.forEach(t => {
+              if (t.topic.indexOf('/Public') === 0) {
+                this.topicsPublic.push(t);
+              } else if (t.topic.indexOf('/Private') === 0) {
+                this.topicsPrivate.push(t);
+              }
+            });
+          }
         });
       }
     });

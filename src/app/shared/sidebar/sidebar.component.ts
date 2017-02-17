@@ -9,6 +9,7 @@ import {SidebarService} from '../../service/sidebar/sidebar.service';
 export class SidebarComponent {
 
   currentState: boolean;
+  topicFilter = 'all';
 
   constructor(public _sidebarService: SidebarService) {
     this._sidebarService.listen().subscribe(s => {
