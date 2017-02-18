@@ -1,0 +1,16 @@
+<div class="message">
+    <div class="content">
+        <div class="ui grid">
+            <div class="fifteen wide column">
+                {{message.text}}
+            </div>
+            <div class="one wide vertical center column">
+                <i class="user icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="extra">
+        {{message.author.fullname}}
+        {{getDateUpdate() | amTimeAgo:true}}
+    </div>
+</div>

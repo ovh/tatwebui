@@ -1,6 +1,10 @@
-<ul>
-    <li *ngFor="let m of messages">
-        {{m.text}}
-    </li>
-</ul>
-<app-message-send [topic]="topic"></app-message-send>
+<div class="messagesView" *ngIf="!loadingMessage">
+    <div class="sender">
+        <app-message-send [topic]="topic"></app-message-send>
+    </div>
+    <div class="list">
+        <app-message-list [messages]="messages"></app-message-list>
+    </div>
+
+</div>
+<div class="ui active big text loader" *ngIf="loadingMessage">Loading messages...</div>

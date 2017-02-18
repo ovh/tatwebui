@@ -10,12 +10,14 @@ import {TopicService} from '../../service/topic/topic.service';
 
 @Component({
     selector: 'app-messages',
-    templateUrl: 'message.html'
+    templateUrl: './message.html',
+    styleUrls: ['./message.scss']
+
 })
 export class MessageComponent implements OnInit, OnDestroy {
 
     // List of displayed messagges
-    messages: Array<Message>;
+    messages: Array<Message> = new Array<Message>();
 
     topic: Topic;
 
@@ -23,17 +25,19 @@ export class MessageComponent implements OnInit, OnDestroy {
     messageFilter: MessageFilter = new MessageFilter();
     msgWorker: TatWorker;
 
+    loadingMessage = false;
+
     zone: NgZone;
 
     constructor(private _authStore: AuthentificationStore, private _topicService: TopicService) {
         this.zone = new NgZone({enableLongStackTrace: false});
         this._topicService.listen().subscribe(t => {
             if (t) {
-                this.topic = t;
-                if (this.messageFilter.topic !== t.topic) {
-                    this.messageFilter.topic = t.topic;
+                if (!this.topic || this.topic.topic !== t.topic) {
+                    this.topic = t;
+                    this.loadingMessage = true;
                     if (this.msgWorker) {
-                        this.msgWorker.updateWorker('subscribe', this.getWorkerMsg());
+                        this.msgWorker.start(this.getWorkerMsg());
                     }
                 }
             }
@@ -47,13 +51,16 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.msgWorker = new TatWorker('assets/worker/shared/message.js', 'assets/worker/web/message.js');
+        this.msgWorker = new TatWorker('assets/worker/web/message.js');
         this.msgWorker.start(this.getWorkerMsg());
         this.messageSubscription = this.msgWorker.response().subscribe(msg => {
-            if (msg && msg.data) {
+            if (msg) {
                 this.zone.run(() => {
-                    let msgList: MessageListResponse = JSON.parse(msg.data);
-                    this.messages = msgList.messages;
+                    let msgList: MessageListResponse = JSON.parse(msg);
+                    if (msgList.messages.length === 0 || msgList.messages[0].topic === this.topic.topic) {
+                        this.messages.unshift(...msgList.messages);
+                        this.loadingMessage = false;
+                    }
                 });
             }
         });
@@ -61,7 +68,8 @@ export class MessageComponent implements OnInit, OnDestroy {
 
 
     getWorkerMsg(): any {
-        return {user: this._authStore.getUser(), api: environment.apiURL, filter: this.messageFilter};
+        let topic = this.topic?this.topic.topic:'';
+        return {user: this._authStore.getUser(), api: environment.apiURL, topic: topic, filter: this.messageFilter};
     }
 
 }

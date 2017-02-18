@@ -1,0 +1,5 @@
+<ul *ngIf="messages">
+    <li *ngFor="let m of messages">
+        <app-message-single [message]="m"></app-message-single>
+    </li>
+</ul>
