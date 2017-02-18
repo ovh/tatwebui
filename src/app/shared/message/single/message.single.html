@@ -2,10 +2,10 @@
     <div class="content">
         <div class="ui grid">
             <div class="fifteen wide column">
-                {{message.text}}
+                <div [innerHTML]="transform(message.text)"></div>
             </div>
             <div class="one wide vertical center column">
-                <i class="user icon"></i>
+
             </div>
         </div>
     </div>

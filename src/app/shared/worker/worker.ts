@@ -11,8 +11,8 @@ export class TatWorker {
     this.webWorkerScript = webWorkerScript;
   }
 
-  response(): Observable<string> {
-    return new Observable<string>(fn => this._response.subscribe(fn));
+  response(): Observable<any> {
+    return new Observable<any>(fn => this._response.subscribe(fn));
   }
 
   /**

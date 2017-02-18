@@ -56,11 +56,8 @@ export class MessageComponent implements OnInit, OnDestroy {
         this.messageSubscription = this.msgWorker.response().subscribe(msg => {
             if (msg) {
                 this.zone.run(() => {
-                    let msgList: MessageListResponse = JSON.parse(msg);
-                    if (msgList.messages.length === 0 || msgList.messages[0].topic === this.topic.topic) {
-                        this.messages.unshift(...msgList.messages);
-                        this.loadingMessage = false;
-                    }
+                    this.messages.unshift(...(<MessageListResponse>msg).messages);
+                    this.loadingMessage = false;
                 });
             }
         });
@@ -68,7 +65,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
 
     getWorkerMsg(): any {
-        let topic = this.topic?this.topic.topic:'';
+        let topic = this.topic ? this.topic.topic : '';
         return {user: this._authStore.getUser(), api: environment.apiURL, topic: topic, filter: this.messageFilter};
     }
 

@@ -1,5 +1,6 @@
 <ul *ngIf="messages">
     <li *ngFor="let m of messages">
         <app-message-single [message]="m"></app-message-single>
+        <div class="ui divider"></div>
     </li>
 </ul>

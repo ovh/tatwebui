@@ -4,7 +4,7 @@ import {environment} from '../../../../environments/environment';
 import {AuthentificationStore} from '../../../service/auth/authentification.store';
 import {Topic, TopicListResponse} from '../../../model/topic.model';
 import {TopicService} from '../../../service/topic/topic.service';
-import {Subscription} from 'rxjs';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-topic-list',

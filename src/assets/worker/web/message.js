@@ -19,21 +19,22 @@ function loadMessages(user, api, filter, topic) {
 					} else {
 						url += '&';
 					}
+
 					url += k + '=' + filter[k];
 				}
 			}
 			if (!filter['dateMinUpdate'] && filterDateUpdate != 0) {
 				url += '&dateMinUpdate='+ filterDateUpdate;
 			}
-			if (!filter['skip'] && filterDateUpdate != 0) {
-				url += '&skip=' + 1;
-			}
 			var response = httpCall(url, api, user);
-			postMessage(response);
 
+			// Parse response
 			var jsonResponse = JSON.parse(response);
+
+			// Update date Update
 			var maxUpdate = 0;
 			if (jsonResponse.messages && jsonResponse.messages.length > 0) {
+				jsonResponse.messages.splice(jsonResponse.messages.length -1, 1);
 				jsonResponse.messages.forEach(function (m) {
 					if (m.dateUpdate > maxUpdate) {
 						maxUpdate = m.dateUpdate;
@@ -42,6 +43,9 @@ function loadMessages(user, api, filter, topic) {
 			}
 			if (maxUpdate != 0) {
 				filterDateUpdate =maxUpdate;
+			}
+			if (jsonResponse.messages && jsonResponse.messages.length > 0) {
+				postMessage(jsonResponse);
 			}
 		}, 2000);
 	}
