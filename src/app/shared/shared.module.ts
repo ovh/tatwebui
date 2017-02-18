@@ -7,11 +7,16 @@ import {TranslateModule} from 'ng2-translate';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {TopicListComponent} from './topic/sidebar/topic.list.component';
 import {MessageSendComponent} from './message/send/message.send.component';
+import {MessageListComponent} from './message/list/message.list.component';
+import {MessageSingleComponent} from './message/single/message.single.component';
+import {MomentModule} from 'angular2-moment';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, NgSemanticModule, ReactiveFormsModule, TranslateModule ],
+  imports: [ MomentModule, CommonModule, FormsModule, NgSemanticModule, ReactiveFormsModule, TranslateModule ],
   declarations: [
     MessageSendComponent,
+    MessageListComponent,
+    MessageSingleComponent,
     SidebarComponent,
     TopicListComponent
   ],
@@ -24,7 +29,9 @@ import {MessageSendComponent} from './message/send/message.send.component';
   exports: [
     CommonModule,
     FormsModule,
+    MessageListComponent,
     MessageSendComponent,
+    MessageSingleComponent,
     NgSemanticModule,
     ReactiveFormsModule,
     SidebarComponent,

@@ -1,16 +1,17 @@
-import {Component, OnInit, NgZone} from '@angular/core';
+import {Component, OnInit, NgZone, OnDestroy} from '@angular/core';
 import {TatWorker} from '../../worker/worker';
 import {environment} from '../../../../environments/environment';
 import {AuthentificationStore} from '../../../service/auth/authentification.store';
 import {Topic, TopicListResponse} from '../../../model/topic.model';
 import {TopicService} from '../../../service/topic/topic.service';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-topic-list',
   templateUrl: './topic.list.html',
   styleUrls: ['./topic.list.scss']
 })
-export class TopicListComponent implements OnInit {
+export class TopicListComponent implements OnInit, OnDestroy {
 
   currentTopic: Topic;
 
@@ -20,6 +21,7 @@ export class TopicListComponent implements OnInit {
 
   // Allow angular update from work started outside angular context
   zone: NgZone;
+  workerSubscription: Subscription;
 
   constructor(private _authStore: AuthentificationStore, private _topicService: TopicService) {
     this.zone = new NgZone({enableLongStackTrace: false});
@@ -30,12 +32,13 @@ export class TopicListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.topicWorker = new TatWorker('assets/worker/shared/topicList.js', 'assets/worker/shared/topicList.js');
+
+    this.topicWorker = new TatWorker('assets/worker/web/topicList.js');
     this.topicWorker.start({user: this._authStore.getUser(), api: environment.apiURL});
-    this.topicWorker.response().subscribe( msg => {
-      if (msg.data && !msg.worker_id) {
+    this.workerSubscription = this.topicWorker.response().subscribe( msg => {
+      if (msg) {
         this.zone.run(() => {
-          let response: TopicListResponse = JSON.parse(msg.data);
+          let response: TopicListResponse = JSON.parse(msg);
           if (response.topics && response.topics.length > 0) {
             this.topicsPrivate = new Array<Topic>();
             this.topicsPublic = new Array<Topic>();
@@ -50,6 +53,12 @@ export class TopicListComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.workerSubscription) {
+      this.workerSubscription.unsubscribe();
+    }
   }
 
   changeTopic(topic: Topic): void {

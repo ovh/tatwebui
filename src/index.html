@@ -9,6 +9,8 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <div class="ui active massive text loader" *ngIf="loadingMessage">TAT is loading...</div>
+  </app-root>
 </body>
 </html>

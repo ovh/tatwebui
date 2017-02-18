@@ -7,7 +7,7 @@
 
   <!-- End Sidebar -->
 
-  <div id="content-wrapper">
+  <div id="content-wrapper" [class.open]="!openedSidebar">
     <toaster-container></toaster-container>
     <router-outlet></router-outlet>
   </div>

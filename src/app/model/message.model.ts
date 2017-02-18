@@ -10,7 +10,6 @@ export class MessageListResponse {
 }
 
 export class MessageFilter {
-  topic: string;
   onlyMsgRoot = true;
   lastMinUpdate: number;
   treeView = 'notree';

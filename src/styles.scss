@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
 $darkblue: #161D23;
 
 $darkblueHover: #2F3E4B;
+$messageBackground: #fbfbfb;
 
-$sidebarWith: 250px;
+$sidebarCloseWidth: 75px;
+$sidebarOpenWidth: 250px;
 
 html, body {
   margin: 0;
@@ -14,20 +17,39 @@ html, body {
 
     #sidebar-wrapper {
       height: 100%;
-      width: $sidebarWith;
       float:left;
-      width: 75px;
+      width: $sidebarCloseWidth;
     }
 
     #sidebar-wrapper.open {
-      width: 250px;
+      width: $sidebarOpenWidth;
     }
 
     #content-wrapper {
       height: 100%;
+      padding-left: $sidebarOpenWidth;
+      background-color: $messageBackground;
+    }
+
+    #content-wrapper.open {
+      padding-left: $sidebarCloseWidth;
     }
   }
 }
 body {
   margin-top: -14px;
+}
+
+
+.messageTag {
+  background-color: #E4F9F9;
+  border-radius: 3px;
+  border: 1px solid #7B9DB4;
+  color: #545454;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 2px 2px;
+  text-indent: 0px;
+  text-transform: uppercase;
 }
