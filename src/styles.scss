@@ -53,3 +53,16 @@ body {
   text-indent: 0px;
   text-transform: uppercase;
 }
+
+.pointing {
+  cursor: pointer;
+}
+
+
+// Semantic hack
+.wide.sixteen {
+  width: 100% !important;
+}
+.wide.nine {
+  width: 50% !important;
+}

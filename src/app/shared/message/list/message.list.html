@@ -1,6 +1,26 @@
-<ul *ngIf="messages">
-    <li *ngFor="let m of messages">
-        <app-message-single [message]="m"></app-message-single>
-        <div class="ui divider"></div>
-    </li>
-</ul>
+<div class="ui grid">
+    <div class="wide column" [class.sixteen]="!selectedMessage || !canHaveReplies" [class.nine]="selectedMessage && canHaveReplies">
+        <ul *ngIf="messages">
+            <li *ngFor="let m of messages">
+                <div class="ui grid">
+                    <div class="fifteen wide column">
+                        <div class="list">
+                            <app-message-single [message]="m"></app-message-single>
+                        </div>
+                    </div>
+                    <div class="one wide column" *ngIf="canHaveReplies">
+                        <i class="pointing angle right icon" (click)="select(m)" *ngIf="!selectedMessage || m._id !== selectedMessage._id"></i>
+                        <i class="pointing angle left icon" (click)="unselect()" *ngIf="selectedMessage && m._id === selectedMessage._id"></i>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="seven wide column" *ngIf="selectedMessage && canHaveReplies">
+        <div class="reply">
+            <app-message-send [topic]="topic" [msgRoot]="selectedMessage"></app-message-send>
+            <app-message-list [topic]="topic" [messages]="replies" [canHaveReplies]="false"></app-message-list>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,6 @@
 <div class="message">
     <div class="content">
-        <div class="ui grid">
-            <div class="fifteen wide column">
-                <div [innerHTML]="transform(message.text)"></div>
-            </div>
-            <div class="one wide vertical center column">
-
-            </div>
-        </div>
+        <div [innerHTML]="transform(message.text)"></div>
     </div>
     <div class="extra">
         {{message.author.fullname}}

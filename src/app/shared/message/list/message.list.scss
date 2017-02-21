@@ -2,6 +2,17 @@ ul {
   list-style: none;
   padding: 10px 15px 10px 15px;
 
+  .angle.icon {
+    vertical-align: middle;
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 15px;
+  }
+
+  .reply {
+    padding-right: 10px;
+  }
+
   .ui.divider {
     margin-top: 0px;
   }

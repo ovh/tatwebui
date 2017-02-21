@@ -16,6 +16,7 @@ function loadMessages(user, api, filter, topic) {
 				if(filter.hasOwnProperty(k)) {
 					if(!first) {
 						url += '?';
+						first = true;
 					} else {
 						url += '&';
 					}
@@ -30,22 +31,27 @@ function loadMessages(user, api, filter, topic) {
 
 			// Parse response
 			var jsonResponse = JSON.parse(response);
-
-			// Update date Update
-			var maxUpdate = 0;
-			if (jsonResponse.messages && jsonResponse.messages.length > 0) {
-				jsonResponse.messages.splice(jsonResponse.messages.length -1, 1);
-				jsonResponse.messages.forEach(function (m) {
-					if (m.dateUpdate > maxUpdate) {
-						maxUpdate = m.dateUpdate;
+			if (jsonResponse) {
+				// Update date Update
+				var maxUpdate = 0;
+				if (jsonResponse.messages && jsonResponse.messages.length > 0) {
+					if (filterDateUpdate !== 0) {
+						jsonResponse.messages.splice(jsonResponse.messages.length-1, 1);
 					}
-				});
-			}
-			if (maxUpdate != 0) {
-				filterDateUpdate =maxUpdate;
-			}
-			if (jsonResponse.messages && jsonResponse.messages.length > 0) {
-				postMessage(jsonResponse);
+					jsonResponse.messages.forEach(function (m) {
+						if (m.dateUpdate > maxUpdate) {
+							maxUpdate = m.dateUpdate;
+						}
+					});
+				}
+				if (maxUpdate != 0) {
+					filterDateUpdate =maxUpdate;
+				}
+				console.log(url);
+				console.log(jsonResponse.messages, jsonResponse.messages.length);
+				if (jsonResponse.messages && jsonResponse.messages.length > 0) {
+					postMessage(jsonResponse);
+				}
 			}
 		}, 2000);
 	}
