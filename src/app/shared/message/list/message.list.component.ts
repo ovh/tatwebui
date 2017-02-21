@@ -64,5 +64,4 @@ export class MessageListComponent implements OnInit, OnDestroy {
     unselect(): void {
         delete this.selectedMessage;
     }
-
 }
