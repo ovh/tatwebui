@@ -23,7 +23,7 @@ export class TatWorker {
     if (!this.webWorker) {
       this.webWorker = new Worker(this.webWorkerScript);
       this.webWorker.onmessage = ((e) => {
-        if (e.data && e.data !== 'null') {
+        if (e.data && e.data !== 'null' && e.data !== '') {
           this._response.next(e.data);
         }
       });

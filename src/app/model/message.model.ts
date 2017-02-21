@@ -13,7 +13,7 @@ export class MessageFilter {
   onlyMsgRoot = true;
   lastMinUpdate: number;
   treeView = 'notree';
-
+  inReplyOfIDRoot: string;
 }
 
 export class Message {

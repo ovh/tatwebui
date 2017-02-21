@@ -2,9 +2,6 @@
     <div class="sender">
         <app-message-send [topic]="topic"></app-message-send>
     </div>
-    <div class="list">
-        <app-message-list [messages]="messages"></app-message-list>
-    </div>
-
+    <app-message-list [messages]="messages" [topic]="topic"></app-message-list>
 </div>
 <div class="ui active big text loader" *ngIf="loadingMessage">Loading messages...</div>

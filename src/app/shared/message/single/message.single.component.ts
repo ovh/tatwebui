@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Message} from '../../../model/message.model';
 
 @Component({
@@ -27,7 +27,6 @@ export class MessageSingleComponent implements OnInit {
 
     replaceHashtag(value: string): string {
         let hashTagIndex = value.indexOf(' #') ;
-        console.log(hashTagIndex);
         if (hashTagIndex === -1) {
             return value;
         }
