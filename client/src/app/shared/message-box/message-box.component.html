@@ -14,10 +14,6 @@
       </div>
     </div>
 
-    <div ng-if="ctrl.currentMessage.length > 0" class="tat-remaining-chars" ng-hide="!ctrl.createMessageFocus">
-      <i>{{ 'shared_message_characters_left' | translate }}: {{ ctrl.topic.maxlength - ctrl.currentMessage.length }}</i>
-    </div>
-
     <div class="btn-group">
 
       <a class="btn btn-default" ng-show="ctrl.isCompact && ctrl.showBox" ng-click="ctrl.showBox=false">
@@ -27,7 +23,6 @@
           data-ng-click="ctrl.showBox = true" uib-tooltip="{{ctrl.tooltipBtnCompact}}">
         <i class="fa fa-edit"></i>
       </div>
-
 
       <!-- Split button -->
       <div class="btn-group">
@@ -52,6 +47,11 @@
 
     </div>
   </form>
+
+  <div ng-if="ctrl.currentMessage.length > 0" class="tat-remaining-chars" ng-hide="!ctrl.createMessageFocus && ctrl.filterDialog.visible">
+      <i>{{ 'shared_message_characters_left' | translate }}: {{ ctrl.topic.maxlength - ctrl.currentMessage.length }}</i>
+  </div>
+
   <div ng-if="ctrl.defaultLabels && ctrl.currentMessage.length > 0">
   {{ 'shared_messages_labels_add' | translate }}
     <span
