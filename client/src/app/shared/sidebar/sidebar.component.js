@@ -79,6 +79,9 @@ angular.module("TatUi").component("sidebar", {
     $scope.$on("sidebar-toggle", function(e, meta) {
         self.toggleSidebar();
     });
+    $scope.$on("sidebar-hide", function(e, meta) {
+        self.hideSidebar();
+    });
 
     self.getUser = function(field) {
       var identity = Authentication.getIdentity();
@@ -87,6 +90,12 @@ angular.module("TatUi").component("sidebar", {
 
     self.toggleSidebar = function() {
       self.data.showSidebar = !self.data.showSidebar;
+      $cookieStore.put("showSidebar", self.data.showSidebar);
+      $rootScope.$broadcast("showSidebar", self.data.showSidebar);
+    };
+
+    self.hideSidebar = function() {
+      self.data.showSidebar = false;
       $cookieStore.put("showSidebar", self.data.showSidebar);
       $rootScope.$broadcast("showSidebar", self.data.showSidebar);
     };
