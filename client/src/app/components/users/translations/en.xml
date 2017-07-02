@@ -16,8 +16,6 @@
   <translation id="components_users_dont_want_convert_admin">No, I don't want to grant user as admin</translation>
   <translation id="components_users_dont_want_rename">No, I don't want to rename user</translation>
   <translation id="components_users_dont_want_update">No, I don't want to update user</translation>
-  <translation id="components_users_with_write_notifications">with the right to write on Notifications Topics of users</translation>
-  <translation id="components_users_without_write_notifications">without the right to write on Notifications Topics of users</translation>
   <translation id="components_users_new_username">New Username</translation>
   <translation id="components_users_new_fullname">New Fullname</translation>
   <translation id="components_users_new_email">New Email</translation>

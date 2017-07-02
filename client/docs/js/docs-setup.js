@@ -145,7 +145,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "TatUi",
       "shortDescription": "User Edit Controller",
-      "keywords": "add adduseringroup admin api archive archiveuser canwritenotifications controller convert convertadminuser converted convertsystemuser current edit email engine fullname function grant group groupname groups init initialize initrequest json notifications provider remove removeuserfromgroup rename renameuser request resource rights system tat tatengine tatenginegrouprsc tatenginegroupsrsc tatengineuserrsc tatengineusersrsc tatui topic update updateuser user username users writes"
+      "keywords": "add adduseringroup admin api archive archiveuser controller convert convertadminuser convertsystemuser current edit email engine fullname function grant group groupname groups init initialize initrequest json provider remove removeuserfromgroup rename renameuser request resource rights system tat tatengine tatenginegrouprsc tatenginegroupsrsc tatengineuserrsc tatengineusersrsc tatui update updateuser user username users"
     },
     {
       "section": "api",

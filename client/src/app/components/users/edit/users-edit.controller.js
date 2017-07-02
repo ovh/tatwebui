@@ -24,7 +24,7 @@ angular.module('TatUi')
     /**
      * @ngdoc function
      * @name init
-     * @methodOf TatUi.controller:UsersEditCtrl 
+     * @methodOf TatUi.controller:UsersEditCtrl
      * @description Initialize User Edit page
      */
     this.init = function() {
@@ -120,13 +120,11 @@ angular.module('TatUi')
      * @ngdoc function
      * @name convertSystemUser
      * @methodOf TatUi.controller:UsersEditCtrl
-     * @param {bool} canWriteNotifications Converted user can writes on Notifications Topic
      * @description Convert a user to a system user
      */
-    $scope.convertSystemUser = function(canWriteNotifications) {
+    $scope.convertSystemUser = function() {
       TatEngineUserRsc.convert({
-        'username': $scope.user.username,
-        'canWriteNotifications': canWriteNotifications
+        'username': $scope.user.username
       }).$promise.then(function(data) {
         _self.init();
       }, function(err) {
