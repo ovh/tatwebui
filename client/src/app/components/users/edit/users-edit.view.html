@@ -49,16 +49,9 @@
                     {{ 'components_users_dont_want_convert_system' | translate}}
               <i class="fa fa-reply"></i>
           </button>
-          <button data-ng-click="convertSystemUser(true);" data-ng-show="askConvertSystemUser"
+          <button data-ng-click="convertSystemUser();" data-ng-show="askConvertSystemUser"
                     class="btn btn-warning">
               {{ 'shared_common_yes_i_confirm' | translate}}
-              {{ 'components_users_with_write_notifications' | translate}}
-              <i class="fa fa-exclamation-triangle"></i>
-          </button>
-          <button data-ng-click="convertSystemUser(false);" data-ng-show="askConvertSystemUser"
-                    class="btn btn-warning">
-              {{ 'shared_common_yes_i_confirm' | translate}}
-              {{ 'components_users_without_write_notifications' | translate}}
               <i class="fa fa-exclamation-triangle"></i>
           </button>
 
