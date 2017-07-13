@@ -1,6 +1,75 @@
-#!/bin/sh
+#!/bin/bash
 
 cd /tat/dist
+
+if [ ! -z $WRITE_CONFIG ]; then
+
+echo "--------"
+echo "prepare public/assets/config.json.prod..."
+
+cat <<EOF > public/assets/config.json.prod
+{
+  "backend": {
+    "scheme": "BACKEND_SCHEME",
+    "host": "BACKEND_HOST",
+    "port": BACKEND_PORT,
+    "autologin": BACKEND_AUTOLOGIN
+  },
+  "releaseview": {
+    "tracker": "RELEASEVIEW_TRACKER",
+    "keyword": "RELEASEVIEW_KEYWORD"
+  },
+  "help" : {
+    "signup" : [
+      "HELP_SIGNUP"
+    ]
+  },
+  "links" : {
+    "home" : [
+      {
+        "caption": "LINK_HOME_LABEL_1",
+        "url": "LINK_HOME_URL_1"
+      },
+      {
+        "caption": "LINK_HOME_LABEL_2",
+        "url": "LINK_HOME_URL_2"
+      }
+    ],
+    "menu" : [
+      {
+        "caption": "LINK_MENU_LABEL_1",
+        "url": "LINK_MENU_URL_1"
+      },
+      {
+        "caption": "LINK_MENU_LABEL_2",
+        "url": "LINK_MENU_URL_2"
+      },
+      {
+        "caption": "LINK_MENU_LABEL_3",
+        "url": "LINK_MENU_URL_3"
+      }
+    ]
+  },
+  "viewconfigs": {
+    "standardview-list": {
+      "filters": {
+        "placeholder": {
+          "text": "text",
+          "label": "open,doing",
+          "andLabel": "open,doing",
+          "notLabel": "done"
+        }
+      }
+    }
+  }
+}
+
+EOF
+
+echo "public/assets/config.json.prod:"
+cat public/assets/config.json.prod
+echo "--------"
+fi;
 
 cp app/config.json.prod app/config.json
 cp public/assets/config.json.prod public/assets/config.json
