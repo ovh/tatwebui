@@ -24,7 +24,7 @@ angular.module('TatUi').service('TatEngineUsersRsc', function($resource) {
       method: 'GET',
       isArray: false,
       params: {
-        limit: 1000
+        limit: 2000
       }
     }
   });
