@@ -6,7 +6,7 @@ angular.module('TatUi').directive('dashingCssParser', ['$document', '$sanitize',
             dashingCssParser : '<'
         },
         link: function (scope, element, attrs) {
-            var domStyleElement;
+            var domStyleElement = null;
             var currentDashingCssParserValue = null;
 
             /**
@@ -90,10 +90,27 @@ angular.module('TatUi').directive('dashingCssParser', ['$document', '$sanitize',
 
                 if (elementCompleteStyle.length > 0) {
                     // IF : Some custom styles have been set, inject them
+
+                    // Remove potential default styles if custom styles are found
+                    if (element.hasClass('btn-danger')) {
+                        element.removeClass('btn-danger');
+                    } else if (element.hasClass('btn-success')) {
+                        element.removeClass('btn-success');
+                    } else if (element.hasClass('btn-warning')) {
+                        element.removeClass('btn-warning');
+                    }
+
                     domStyleElement = computeCustomCssStyle(elementCompleteStyle, domStyleElement);
                 } else {
                     // ELSE : Legacy support
                     // No custom styles have been set, set element's class
+
+                    // Remove potential previous custom styles when no more styles are found
+                    if (domStyleElement) {
+                        domStyleElement.remove();
+                        domStyleElement = null;
+                    }
+
                     computeDefaultCssStyle(elementCssClass);
                 }
             };
@@ -213,20 +230,17 @@ angular.module('TatUi').directive('dashingCssParser', ['$document', '$sanitize',
             var computeCustomCssStyle = function (elementCompleteStyle, domStyleElement) {
                 var headTag = $document.find('head');
                 var completeStyleString = '';
-                var oldDomStyleElement = domStyleElement;
 
                 for (var i = 0; i < elementCompleteStyle.length; i++) {
                     completeStyleString += elementCompleteStyle[i];
                 }
 
-                domStyleElement = angular.element('<style type="text/css"></style>');
-                domStyleElement.text(completeStyleString);
-
-                if (!oldDomStyleElement) {
+                if (!domStyleElement) {
+                    domStyleElement = angular.element('<style type="text/css"></style>');
+                    domStyleElement.text(completeStyleString);
                     headTag.append(domStyleElement);
                 } else {
-                    headTag.append(domStyleElement);
-                    oldDomStyleElement.remove();
+                    domStyleElement.text(completeStyleString);
                 }
 
                 return domStyleElement;
@@ -269,6 +283,7 @@ angular.module('TatUi').directive('dashingCssParser', ['$document', '$sanitize',
             scope.$on('$destroy', function() {
                 if (domStyleElement) {
                     domStyleElement.remove();
+                    domStyleElement = null;
                 }
                 deregisterDashingListener();
             });
