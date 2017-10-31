@@ -229,11 +229,7 @@ angular.module('TatUi').directive('dashingCssParser', ['$document', '$sanitize',
              */
             var computeCustomCssStyle = function (elementCompleteStyle, domStyleElement) {
                 var headTag = $document.find('head');
-                var completeStyleString = '';
-
-                for (var i = 0; i < elementCompleteStyle.length; i++) {
-                    completeStyleString += elementCompleteStyle[i];
-                }
+                var completeStyleString = elementCompleteStyle.join('');
 
                 if (!domStyleElement) {
                     domStyleElement = angular.element('<style type="text/css"></style>');
