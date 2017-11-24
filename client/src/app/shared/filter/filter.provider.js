@@ -145,21 +145,28 @@ angular.module('TatUi')
             if (search.idMessage) {
               containsIdMsg = true;
             }
+            var emptySearch = angular.equals(search, {});
             self.eachFilter(function(k) {
-              // First check in query string and propagate to localstorage if necessary
-              if (search[k] && search[k] !== '') {
-                if (k !== "idMessage") {
-                  $localStorage.filters[$stateParams.topic][k] = search[k];
+              if (!containsIdMsg) {
+                // If the query does not contain idMessage, then check for filters
+                if (!emptySearch) {
+                  // If search parameters are found, just use search parameters and do not use local storage
+                  // Check in query string to update current filters
+                  if (search[k] && search[k] !== '') {
+                    self.currentFilters[$stateParams.topic][k] = search[k];
+                  }
+                } else {
+                  // If search parameters are not found, just use local storage and do not use search parameters
+                  // Pull filters from local storage if they exist
+                  if ($localStorage.filters[$stateParams.topic][k]) {
+                    self.currentFilters[$stateParams.topic][k] = $localStorage.filters[$stateParams.topic][k];
+                  }
                 }
               }
-              // Then pull filter from localstorage if they exists
-              if ($localStorage.filters[$stateParams.topic][k]) {
-                 if (k === "idMessage") {
-                   self.currentFilters[$stateParams.topic][k] = search[k];
-                 } else if (!containsIdMsg){
-                   self.currentFilters[$stateParams.topic][k] = $localStorage.filters[$stateParams.topic][k];
-                 }
-              } else if (k === "idMessage") {
+              // Apply special treatment on idMessage because idMessage will never be added in the block above:
+              // If idMessage is present in the query then we do not go through the block above
+              // And if we just search the local storage idMessage will always be null because it is never added to the local storage
+              if (k === "idMessage") {
                 self.currentFilters[$stateParams.topic][k] = search[k];
               }
             });
