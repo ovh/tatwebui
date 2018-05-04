@@ -28,6 +28,7 @@
         "lodash": "4.9.0",
         "angular-moment": "0.10.3",
         "moment": "2.12.0",
+        "moment-timezone": "0.5.16",
         "ngInfiniteScroll": "1.2.1",
         "lesshat": "3.0.2",
         "spectrum": "1.7.0",
