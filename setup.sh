@@ -89,9 +89,19 @@ if [ ! -z $BACKEND_SCHEME ]; then
   sed -i "s#BACKEND_SCHEME#$BACKEND_SCHEME#" public/assets/config.json
 fi;
 
+if [ ! -z $AGILE_MT_URL ]; then
+  echo "replace AGILE_MT_URL with $AGILE_MT_URL";
+  sed -i "s#AGILE_MT_URL#$AGILE_MT_URL#" public/assets/config.json
+fi;
+
 if [ ! -z $RUN_MT_URL ]; then
   echo "replace RUN_MT_URL with $RUN_MT_URL";
   sed -i "s#RUN_MT_URL#$RUN_MT_URL#" public/assets/config.json
+fi;
+
+if [ ! -z $RUN_OPSGENIE_URL ]; then
+  echo "replace RUN_OPSGENIE_URL with $RUN_OPSGENIE_URL";
+  sed -i "s#RUN_OPSGENIE_URL#$RUN_OPSGENIE_URL#" public/assets/config.json
 fi;
 
 if [ ! -z $RUNVIEW_TOPIC_ALERTS ]; then
