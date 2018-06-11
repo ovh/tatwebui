@@ -99,6 +99,11 @@ if [ ! -z $RUN_MT_URL ]; then
   sed -i "s#RUN_MT_URL#$RUN_MT_URL#" public/assets/config.json
 fi;
 
+if [ ! -z $RUN_REQJIRA_URL ]; then
+  echo "replace RUN_REQJIRA_URL with $RUN_REQJIRA_URL";
+  sed -i "s#RUN_REQJIRA_URL#$RUN_REQJIRA_URL#" public/assets/config.json
+fi;
+
 if [ ! -z $RUN_OPSGENIE_URL ]; then
   echo "replace RUN_OPSGENIE_URL with $RUN_OPSGENIE_URL";
   sed -i "s#RUN_OPSGENIE_URL#$RUN_OPSGENIE_URL#" public/assets/config.json
