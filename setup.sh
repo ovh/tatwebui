@@ -134,6 +134,21 @@ if [ ! -z $RELEASEVIEW_KEYWORD ]; then
   sed -i "s#RELEASEVIEW_KEYWORD#$RELEASEVIEW_KEYWORD#" public/assets/config.json
 fi;
 
+if [ ! -z $CDSVIEW_CDS_UI_URL ]; then
+  echo "replace CDSVIEW_CDS_UI_URL with $CDSVIEW_CDS_UI_URL";
+  sed -i "s#CDSVIEW_CDS_UI_URL#$CDSVIEW_CDS_UI_URL#" public/assets/config.json
+fi;
+
+if [ ! -z $ONCALLVIEW_ONCALL_URL ]; then
+  echo "replace ONCALLVIEW_ONCALL_URL with $ONCALLVIEW_ONCALL_URL";
+  sed -i "s#ONCALLVIEW_ONCALL_URL#$ONCALLVIEW_ONCALL_URL#" public/assets/config.json
+fi;
+
+if [ ! -z $STATUSVIEW_STATUS_URL ]; then
+  echo "replace STATUSVIEW_STATUS_URL with $STATUSVIEW_STATUS_URL";
+  sed -i "s#STATUSVIEW_STATUS_URL#$STATUSVIEW_STATUS_URL#" public/assets/config.json
+fi;
+
 if [ ! -z $BACKEND_HOST ]; then
   echo "replace BACKEND_HOST with $BACKEND_HOST";
   sed -i "s#BACKEND_HOST#$BACKEND_HOST#" public/assets/config.json
@@ -202,6 +217,11 @@ fi;
 if [ ! -z $HELP_SIGNUP ]; then
   echo "replace HELP_SIGNUP with $HELP_SIGNUP";
   sed -i "s#HELP_SIGNUP#$HELP_SIGNUP#" public/assets/config.json
+fi;
+
+if [ ! -z $XMPP_DOMAIN ]; then
+  echo "replace XMPP_DOMAIN with $XMPP_DOMAIN";
+  sed -i "s#XMPP_DOMAIN#$XMPP_DOMAIN#" public/assets/config.json
 fi;
 
 echo "#########"
