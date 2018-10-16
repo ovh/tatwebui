@@ -41,7 +41,8 @@
         "highcharts-ng": "0.0.11",
         "angular-tek-progress-bar": "0.2.0",
         "prism": "1.4.1",
-        "ngclipboard": "1.1.1"
+        "ngclipboard": "1.1.1",
+        "ng-tags-input": "3.2.0"
     },
     "devDependencies": {
         "angular-mocks": "1.5.3"
