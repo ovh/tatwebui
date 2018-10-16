@@ -27,7 +27,8 @@ angular.module('TatUi', [
     'highcharts-ng', // let users to dev a view with hightcharts
     'angular-chartist',
     'Tek.progressBar',
-    'ngclipboard'
+    'ngclipboard',
+    'ngTagsInput'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     'use strict';
