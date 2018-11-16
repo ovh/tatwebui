@@ -13,6 +13,7 @@ config.json
 config.json.dev
 config.json.dev.2
 config.json.prod
+config.*.json
 .DS_Store
 bower.json
 custom.plugin.tpl.json
