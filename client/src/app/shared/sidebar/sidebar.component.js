@@ -16,6 +16,7 @@ angular.module("TatUi").component("sidebar", {
     $rootScope,
     $localStorage,
     $interval,
+    $q,
     appConfiguration,
     TatEngine,
     TatEngineTopicsRsc,
@@ -195,55 +196,85 @@ angular.module("TatUi").component("sidebar", {
     };
 
     self.getTopicList = function() {
+      // Get the total number of topics by just requesting one topic and getting the "count" attribute
       TatEngineTopicsRsc.list({
         getNbMsgUnread: !self.data.isFirstCall,
-        onlyFavorites: self.data.mode === "favorites"
-      }).$promise.then(function(data) {
-        var ttopics = {};
-        for (var typeTopic in self.data.treeTopics) {
-          self.data.treeTopics[typeTopic].topics = [];
-        }
-        if (data.topics) {
-          for (var i = 0; i < data.topics.length; i++) {
-            var topicType = self.computeTypeTopic(data.topics[i]);
-            data.topics[i].topicType = topicType;
+        onlyFavorites: self.data.mode === "favorites",
+        skip: 0,
+        limit: 1
+      }).$promise.then(function(dataCount) {
+        var promisesTopicsListArray = [];
+        var limit = 250;
 
-            if (topicType != "toSkip") {
-              if (!self.data.treeTopics[topicType]) {
-                self.data.treeTopics[topicType] = {
-                    title: topicType,
-                    topics : [],
-                    expand: true
-                };
-              }
-              if (data.topicsMsgUnread && data.topicsMsgUnread[data.topics[i].topic]) {
-                data.topics[i].unread = data.topicsMsgUnread[data.topics[i].topic];
-              }
-              if (self.data.mode === "unread") {
-                if (data.topics[i].unread && data.topics[i].unread > 0) {
+        // Get all the topics by batch of "limit" and store all the promises in an array
+        for (var i = 0; i < dataCount.count; i+=limit) {
+          promisesTopicsListArray.push(
+            TatEngineTopicsRsc.list({
+              getNbMsgUnread: !self.data.isFirstCall,
+              onlyFavorites: self.data.mode === "favorites",
+              skip: i,
+              limit: limit
+            }).$promise
+          );
+        }
+
+        // Resolve all the topics list promises at once
+        $q.all(promisesTopicsListArray).then(function(dataTopicsArray) {
+          var ttopics = {};
+          for (var typeTopic in self.data.treeTopics) {
+            self.data.treeTopics[typeTopic].topics = [];
+          }
+
+          // Get every batch of topics in the resolved array and process batch by batch
+          for (var dataIndex = 0; dataIndex < dataTopicsArray.length; dataIndex++) {
+            var data = dataTopicsArray[dataIndex];
+            if (data.topics) {
+              for (var i = 0; i < data.topics.length; i++) {
+                var topicType = self.computeTypeTopic(data.topics[i]);
+                data.topics[i].topicType = topicType;
+
+                if (topicType != "toSkip") {
+                  if (!self.data.treeTopics[topicType]) {
+                    self.data.treeTopics[topicType] = {
+                      title: topicType,
+                      topics : [],
+                      expand: true
+                    };
+                  }
+                  if (data.topicsMsgUnread && data.topicsMsgUnread[data.topics[i].topic]) {
+                    data.topics[i].unread = data.topicsMsgUnread[data.topics[i].topic];
+                  }
+                  if (self.data.mode === "unread") {
+                    if (data.topics[i].unread && data.topics[i].unread > 0) {
+                      self.data.treeTopics[topicType].topics.push(data.topics[i]);
+                    }
+                  } else if (self.data.mode === "history") {
+                    ttopics[data.topics[i].topic] = data.topics[i];
+                  } else {
                     self.data.treeTopics[topicType].topics.push(data.topics[i]);
+                  }
                 }
-              } else if (self.data.mode === "history") {
-                ttopics[data.topics[i].topic] = data.topics[i];
-              } else {
-                self.data.treeTopics[topicType].topics.push(data.topics[i]);
               }
             }
           }
-        }
 
-        if (self.data.mode === "history") {
-          for (var p in self.data.presences) {
-            var t = ttopics[self.data.presences[p].topic];
-            if (t && t.topicType) { // check if not skipped
-              self.data.treeTopics[t.topicType].topics.push(t);
+          if (self.data.mode === "history") {
+            for (var p in self.data.presences) {
+              var t = ttopics[self.data.presences[p].topic];
+              if (t && t.topicType) { // check if not skipped
+                self.data.treeTopics[t.topicType].topics.push(t);
+              }
             }
           }
-        }
-        self.data.loading = false;
+
+          self.data.loading = false;
+        }, function(err) {
+          TatEngine.displayReturn(err);
+        });
       }, function(err) {
         TatEngine.displayReturn(err);
       });
+
       self.data.isFirstCall = false;
     };
 
