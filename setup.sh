@@ -15,10 +15,12 @@ cat <<EOF > public/assets/config.json.prod
     "port": BACKEND_PORT,
     "autologin": BACKEND_AUTOLOGIN
   },
-  "releaseview": {
-    "tracker": "RELEASEVIEW_TRACKER",
-    "keyword": "RELEASEVIEW_KEYWORD"
-  },
+  "releaseview": [
+    {
+      "tracker": "RELEASEVIEW_TRACKER_0",
+      "keyword": "RELEASEVIEW_KEYWORD_0"
+    }
+  ],
   "help" : {
     "signup" : [
       "HELP_SIGNUP"
@@ -124,14 +126,24 @@ if [ ! -z $UAT_US_URL ]; then
   sed -i "s#UAT_US_URL#$UAT_US_URL#" public/assets/config.json
 fi;
 
-if [ ! -z $RELEASEVIEW_TRACKER ]; then
-  echo "replace RELEASEVIEW_TRACKER with $RELEASEVIEW_TRACKER";
-  sed -i "s#RELEASEVIEW_TRACKER#$RELEASEVIEW_TRACKER#" public/assets/config.json
+if [ ! -z $RELEASEVIEW_TRACKER_0 ]; then
+  echo "replace RELEASEVIEW_TRACKER_0 with $RELEASEVIEW_TRACKER_0";
+  sed -i "s#RELEASEVIEW_TRACKER_0#$RELEASEVIEW_TRACKER_0#" public/assets/config.json
 fi;
 
-if [ ! -z $RELEASEVIEW_KEYWORD ]; then
-  echo "replace RELEASEVIEW_KEYWORD with $RELEASEVIEW_KEYWORD";
-  sed -i "s#RELEASEVIEW_KEYWORD#$RELEASEVIEW_KEYWORD#" public/assets/config.json
+if [ ! -z $RELEASEVIEW_KEYWORD_0 ]; then
+  echo "replace RELEASEVIEW_KEYWORD_0 with $RELEASEVIEW_KEYWORD_0";
+  sed -i "s#RELEASEVIEW_KEYWORD_0#$RELEASEVIEW_KEYWORD_0#" public/assets/config.json
+fi;
+
+if [ ! -z $RELEASEVIEW_TRACKER_1 ]; then
+  echo "replace RELEASEVIEW_TRACKER_1 with $RELEASEVIEW_TRACKER_1";
+  sed -i "s#RELEASEVIEW_TRACKER_1#$RELEASEVIEW_TRACKER_1#" public/assets/config.json
+fi;
+
+if [ ! -z $RELEASEVIEW_KEYWORD_1 ]; then
+  echo "replace RELEASEVIEW_KEYWORD_1 with $RELEASEVIEW_KEYWORD_1";
+  sed -i "s#RELEASEVIEW_KEYWORD_1#$RELEASEVIEW_KEYWORD_1#" public/assets/config.json
 fi;
 
 if [ ! -z $CDSVIEW_CDS_UI_URL ]; then

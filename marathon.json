@@ -38,8 +38,8 @@
     "RUNVIEW_TOPIC_ALERTS": "{{.runview_topic_alerts}}",
     "RUNVIEW_TAT2SHINKEN_URL": "{{.runview_tat2shinken_url}}",
     "UAT_US_URL": "{{.uat_us_url}}",
-    "RELEASEVIEW_TRACKER": "{{.releaseview_tracker}}",
-    "RELEASEVIEW_KEYWORD": "{{.releaseview_keyword}}"
+    "RELEASEVIEW_TRACKER_0": "{{.releaseview_tracker}}",
+    "RELEASEVIEW_KEYWORD_0": "{{.releaseview_keyword}}"
   },
   "healthChecks": [
     {
