@@ -5,6 +5,7 @@ module.exports = function(grunt) {
   'use strict';
 
   var path = require('path');
+  var serveStatic = require('serve-static');
 
   // Load Grunt tasks declared in the package.json file
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -12,7 +13,7 @@ module.exports = function(grunt) {
   grunt.loadTasks('./tasks');
 
   var returnIndex = function(connect) {
-    return connect.static('index.html');
+    return serveStatic('index.html');
   };
 
   var project = {
@@ -45,13 +46,13 @@ module.exports = function(grunt) {
         middleware: function(connect, options) {
           var modRewrite = require('connect-modrewrite');
           var middlewares = [
+            require('connect-livereload')(),
             modRewrite([
               '^[\\w\\/:\\=\\-?]*\\.?[\\w\\/:\\-\\=?&,]{6,}$ /index.html [L]'
-            ]),
-            require('grunt-contrib-livereload/lib/utils').livereloadSnippet
+            ])
           ];
           options.base.forEach(function(base) {
-            middlewares.push(connect.static(base));
+            middlewares.push(serveStatic(base));
           });
 
           return middlewares;
@@ -107,7 +108,7 @@ module.exports = function(grunt) {
           expand: true,
           flatten: false,
           cwd: '<%= project.bower%>',
-          src: ['**/translations/*.xml'],
+          src: ['**/**/translations/*.xml'],
           dest: '<%= project.build%>/assets/app/plugins',
           filter: 'isFile'
         }]
