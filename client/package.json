@@ -31,7 +31,7 @@
     "grunt-injector": "^1.1.0",
     "grunt-ng-annotate": "2.0.1",
     "grunt-ng-constant": "2.0.1",
-    "grunt-ngdocs": "git+https://github.com/maximecaruchet/grunt-ngdocs.git",
+    "grunt-ngdocs": "git+https://github.com/landru29/grunt-ngdocs.git",
     "grunt-usemin": "3.1.1",
     "grunt-wiredep": "3.0.0",
     "lodash": "^4.17.11",
