@@ -6,7 +6,6 @@
     "tatwebui-plugin-pastatview": "git+https://github.com/ovh/tatwebui-plugin-pastatview.git",
     "tatwebui-plugin-dashingview": "git+https://github.com/ovh/tatwebui-plugin-dashingview.git",
     "tatwebui-plugin-dashingview": "git+https://github.com/ovh/tatwebui-plugin-dashingview.git",
-    "tatwebui-plugin-cdsview": "git+https://github.com/ovh/tatwebui-plugin-cdsview.git",
     "tatwebui-plugin-monitoringview": "git+https://github.com/ovh/tatwebui-plugin-monitoringview.git"
   }
 }

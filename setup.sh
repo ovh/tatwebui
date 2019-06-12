@@ -146,11 +146,6 @@ if [ ! -z $RELEASEVIEW_KEYWORD_1 ]; then
   sed -i "s#RELEASEVIEW_KEYWORD_1#$RELEASEVIEW_KEYWORD_1#" public/assets/config.json
 fi;
 
-if [ ! -z $CDSVIEW_CDS_UI_URL ]; then
-  echo "replace CDSVIEW_CDS_UI_URL with $CDSVIEW_CDS_UI_URL";
-  sed -i "s#CDSVIEW_CDS_UI_URL#$CDSVIEW_CDS_UI_URL#" public/assets/config.json
-fi;
-
 if [ ! -z $ONCALLVIEW_ONCALL_URL ]; then
   echo "replace ONCALLVIEW_ONCALL_URL with $ONCALLVIEW_ONCALL_URL";
   sed -i "s#ONCALLVIEW_ONCALL_URL#$ONCALLVIEW_ONCALL_URL#" public/assets/config.json
