@@ -35,8 +35,8 @@
     "grunt-ngdocs": "git+https://github.com/landru29/grunt-ngdocs.git",
     "grunt-usemin": "3.1.1",
     "grunt-wiredep": "3.0.0",
-    "lodash": "^4.17.11",
-    "marked": "^0.6.2",
+    "lodash": "^4.17.15",
+    "marked": "^0.7.0",
     "matchdep": "^2.0.0",
     "moment": "^2.24.0",
     "serve-static": "^1.13.2"
