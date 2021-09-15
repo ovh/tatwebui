@@ -25,7 +25,7 @@ release: $(INSTALL_DEP)
 	$(GRUNT)
 
 install:
-	$(NPM) install && ${MAKE_INDEX} && $(MAKE_BOWER) && $(BOWER) install
+	$(NPM) install --legacy-peer-deps && ${MAKE_INDEX} && $(MAKE_BOWER) && $(BOWER) install
 
 bower:
 	$(MAKE_BOWER) && $(BOWER) install
