@@ -32,7 +32,7 @@
         "ngInfiniteScroll": "1.2.1",
         "lesshat": "3.0.2",
         "spectrum": "1.7.0",
-        "angular-spectrum-colorpicker": "1.4.5",
+        "angular-spectrum-colorpicker": "maximecaruchet/angular-spectrum-colorpicker#1.4.5",
         "angular-bootstrap-colorpicker": "3.0.18",
         "angular-component": "git+https://github.com/toddmotto/angular-component.git",
         "angular-chartist.js": "3.3.13",
